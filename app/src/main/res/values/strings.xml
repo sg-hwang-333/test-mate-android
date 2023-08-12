@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">testmateLoginPage</string>
+    <string name="login">로그인</string>
+    <string name="alarm">알림</string>
+    <string name="alarm_test_message">내일 국어 시험이 있어요</string>
+    <string name="alarm_new_message">새로운 버전 업데이트가 있어요</string>
+    <string name="date">2023.06.14</string>
+</resources>
