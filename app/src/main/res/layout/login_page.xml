@@ -14,10 +14,6 @@
         android:paddingTop="26.5dp"
         android:paddingBottom="26.5dp"
         android:paddingLeft="12dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/page"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,6 +24,10 @@
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/page"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -49,6 +49,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"/>
             <EditText
+                android:id="@+id/edit_email"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:hint="이메일을 입력해주세요"
@@ -76,6 +77,7 @@
                 android:src="@drawable/pass_icon"/>
 
             <EditText
+                android:id="@+id/edit_pw"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -90,7 +92,7 @@
                 android:gravity="center|right"
                 android:paddingRight="20dp">
                 <ImageButton
-                    android:id="@+id/password_btn"
+                    android:id="@+id/visible_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -101,6 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/maintain_btn"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -113,12 +116,14 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/warning_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="이메일 또는 비밀번호가 일치하지 않습니다"
             android:textColor="@color/red"/>
 
         <android.widget.Button
+            android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login"
@@ -136,6 +141,7 @@
             android:gravity="center"
             android:layout_marginTop="20dp">
             <TextView
+                android:id="@+id/find_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="비밀번호 찾기"
