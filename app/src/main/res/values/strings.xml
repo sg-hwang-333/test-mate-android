@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">testmateLoginPage</string>
     <string name="login">로그인</string>
     <string name="alarm">알림</string>
     <string name="alarm_test_message">내일 국어 시험이 있어요</string>
