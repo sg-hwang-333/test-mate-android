@@ -5,60 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
+        android:paddingLeft="12dp"
         android:paddingTop="26.5dp"
-        android:paddingBottom="26.5dp"
-        android:paddingLeft="12dp">
+        android:paddingBottom="26.5dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
             android:text="@string/login"
             android:textColor="@color/black"
-            android:gravity="center"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            android:textStyle="bold" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/page"/>
+            android:src="@drawable/page" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:orientation="vertical">
+        android:paddingRight="24dp">
+
         <!--아이디 입력-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/border_layout">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/email_icon"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"/>
+            android:background="@drawable/border_layout"
+            android:layout_marginBottom="8dp">
             <EditText
                 android:id="@+id/edit_email"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableLeft="@drawable/email_icon"
+                android:drawablePadding="8dp"
                 android:hint="이메일을 입력해주세요"
                 android:paddingLeft="15dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:background="@null"
-                /><!--android:drawableLeft="@drawable/email_Icon"-->
+                android:textSize="14dp" />
         </LinearLayout>
+
 
         <!--비밀번호 입력-->
 
@@ -68,21 +68,16 @@
             android:background="@drawable/border_layout"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="21dp"
-                android:layout_marginRight="2dp"
-                android:src="@drawable/pass_icon"/>
-
             <EditText
                 android:id="@+id/edit_pw"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:drawableLeft="@drawable/pass_icon"
+                android:drawablePadding="8dp"
                 android:hint="비밀번호를 입력해주세요"
                 android:inputType="textPassword"
+                android:textSize="14dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"/>
@@ -99,72 +94,61 @@
                     android:src="@drawable/invisible_icon"/>
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/maintain_btn"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:button="@drawable/checkbox_custom"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="로그인 유지하기"
-                android:textColor="@color/black"/>
-        </LinearLayout>
 
         <TextView
             android:id="@+id/warning_message"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="이메일 또는 비밀번호가 일치하지 않습니다"
-            android:textColor="@color/red"/>
+            android:textColor="@color/red" />
 
         <android.widget.Button
             android:id="@+id/login_btn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border_button"
+            android:padding="18dp"
             android:text="@string/login"
             android:textColor="@color/white"
-            android:padding="18dp"
-            android:background="@drawable/border_button"
-            android:textSize="18dp"
-            android:layout_marginTop="20dp"
-            style="?android:attr/borderlessButtonStyle"
-            />
+            android:textSize="18dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
             <TextView
                 android:id="@+id/find_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호 찾기"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:text="비밀번호 찾기" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center|bottom"
-            android:paddingBottom="50dp"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:gravity="center|bottom"
+            android:orientation="horizontal"
+            android:paddingBottom="50dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="아직 회원이 아니신가요?"
                 android:layout_marginRight="10dp"
-                />
+                android:text="아직 회원이 아니신가요?" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="회원가입"
-                android:textColor="@color/common"/>
+                android:textColor="@color/common" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
