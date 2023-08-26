@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/page"/>
+            android:src="@drawable/before_btn"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/border_layout"
+        android:background="@drawable/bg_white_view"
         android:padding="16dp"
         android:gravity="center"
         android:layout_marginTop="8dp"
@@ -74,7 +74,7 @@
             <android.widget.Button
                 android:layout_width="55dp"
                 android:layout_height="35dp"
-                android:background="@drawable/border_button"
+                android:background="@drawable/bg_green_view"
                 android:text="확인하기"
                 android:textSize="10dp"
                 android:textColor="@color/white"
@@ -96,7 +96,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/border_layout"
+        android:background="@drawable/bg_white_view"
         android:padding="16dp"
         android:gravity="center"
         android:layout_marginTop="8dp"
@@ -129,7 +129,7 @@
             <android.widget.Button
                 android:layout_width="55dp"
                 android:layout_height="35dp"
-                android:background="@drawable/border_button"
+                android:background="@drawable/bg_green_view"
                 android:text="확인하기"
                 android:textSize="10dp"
                 android:textColor="@color/white"
@@ -141,7 +141,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/border_layout"
+        android:background="@drawable/bg_white_view"
         android:padding="16dp"
         android:gravity="center"
         android:layout_marginTop="8dp"
@@ -174,7 +174,7 @@
             <android.widget.Button
                 android:layout_width="55dp"
                 android:layout_height="35dp"
-                android:background="@drawable/border_button"
+                android:background="@drawable/bg_green_view"
                 android:text="확인하기"
                 android:textSize="10dp"
                 android:textColor="@color/white"
@@ -186,7 +186,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/border_layout"
+        android:background="@drawable/bg_white_view"
         android:padding="16dp"
         android:gravity="left|center"
         android:layout_marginTop="8dp"
