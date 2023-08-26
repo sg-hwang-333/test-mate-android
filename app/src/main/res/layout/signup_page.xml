@@ -108,7 +108,7 @@
         android:paddingEnd="20dp"
         android:background="@drawable/editborder"/>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/join"
         android:layout_width="match_parent"
         android:layout_height="52dp"
@@ -116,6 +116,6 @@
         android:layout_marginTop="32dp"
         android:text="@string/join"
         android:textColor="#ffffff"
-        android:textSize="16sp"></Button>
+        android:textSize="16sp"></android.widget.Button>
 
 </LinearLayout>
