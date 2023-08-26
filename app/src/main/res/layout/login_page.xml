@@ -29,7 +29,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/page" />
+            android:src="@drawable/before_btn" />
     </RelativeLayout>
 
     <LinearLayout
@@ -43,7 +43,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_layout"
+            android:background="@drawable/bg_white_view"
             android:layout_marginBottom="8dp">
             <EditText
                 android:id="@+id/edit_email"
@@ -65,7 +65,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_layout"
+            android:background="@drawable/bg_white_view"
             android:orientation="horizontal">
 
             <EditText
@@ -110,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/border_button"
+            android:background="@drawable/bg_green_view"
             android:padding="18dp"
             android:text="@string/login"
             android:textColor="@color/white"

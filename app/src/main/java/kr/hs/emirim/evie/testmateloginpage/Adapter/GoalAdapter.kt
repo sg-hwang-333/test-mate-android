@@ -21,6 +21,7 @@ class GoalAdapter :
 
     private var todoList: List<GoalModel> = listOf()
 
+    // 스켈레톤
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.task_layout, parent, false)
