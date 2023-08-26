@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.start_page)
+        setContentView(R.layout.splash_page)
         supportActionBar?.hide() // Android 앱의 액션바(작업 표시줄)를 숨기는 코드
 
         val i = Intent(this, LoginActivity::class.java)
