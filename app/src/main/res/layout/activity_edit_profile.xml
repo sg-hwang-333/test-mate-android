@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="26.5dp"
+        android:paddingBottom="26.5dp"
+        android:paddingLeft="25dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_profile"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/before_btn"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_weight="1"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:paddingBottom="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/circle_iv"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/profile"/>
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ion_edit" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:textSize="@dimen/R14"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:background="@drawable/bg_white_view"
+                        android:hint="@string/name_hint"
+                        android:textSize="@dimen/R14"
+                        android:paddingLeft="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"/>
+
+                    <TextView
+                        android:layout_marginTop="16dp"
+                        android:textSize="@dimen/R14"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:background="@drawable/bg_white_view"
+                        android:hint="@string/email_hint"
+                        android:textSize="@dimen/R14"
+                        android:paddingLeft="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"/>
+
+                    <TextView
+                        android:layout_marginTop="16dp"
+                        android:textSize="@dimen/R14"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/grade_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginTop="60dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:outlineProvider="none"
+                        android:textSize="@dimen/M16"
+                        android:textColor="@color/white"
+                        android:text="@string/save"
+                        android:background="@drawable/bg_green_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:outlineProvider="none"
+                        android:textSize="@dimen/M16"
+                        android:textColor="@color/black.300"
+                        android:text="@string/cancle"
+                        android:background="@drawable/bg_white_view"
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="55dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
