@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <ImageView
+        android:layout_width="204dp"
+        android:layout_height="205dp"
+        android:src="@drawable/book"
+        android:scaleType="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="195dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시험 어렵지 않아요"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:textColor="#000000"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시험에 대해서 어떻게 대비하는지 \n내가 무엇을 보완해야하는지 도와드릴게요"
+        android:textSize="14dp"
+        android:textColor="#000000"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dot1"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        />
+    <Button
+        android:id="@+id/next1"
+        android:layout_width="312dp"
+        android:layout_height="52dp"
+        android:background="@drawable/joinbackground"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center"
+        android:text="@string/next"
+        android:textColor="#ffffff"
+        android:textSize="16sp"></Button>
+
+
+
+
+
+</LinearLayout>
