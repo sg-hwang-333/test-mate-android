@@ -38,7 +38,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginBottom="8dp"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/border_layout"
@@ -81,7 +81,7 @@
                 android:layout_gravity="right"
                 style="?android:attr/borderlessButtonStyle"/>
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -216,39 +216,44 @@
 
 
     <LinearLayout
-        android:elevation="10dp"
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+        <LinearLayout
+            android:elevation="10dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/home_on" />
-        <ImageButton
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/note_off" />
-        <ImageButton
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/goal_off" />
-        <ImageButton
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/cal_off" />
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/home_on" />
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/note_off" />
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/goal_off" />
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/cal_off" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

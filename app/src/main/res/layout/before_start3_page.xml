@@ -39,7 +39,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
         />
-    <Button
+    <android.widget.Button
         android:id="@+id/next1"
         android:layout_width="312dp"
         android:layout_height="52dp"
@@ -48,7 +48,7 @@
         android:layout_gravity="center"
         android:text="@string/start"
         android:textColor="#ffffff"
-        android:textSize="16sp"></Button>
+        android:textSize="16sp"></android.widget.Button>
 
 
 

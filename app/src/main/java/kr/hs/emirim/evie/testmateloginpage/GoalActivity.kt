@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kr.hs.emirim.evie.testmateloginpage.Adapter.GoalAdapter
 
 class GoalActivity : AppCompatActivity() {
 
     private lateinit var goalRecycleView : RecyclerView
     lateinit var adapter : GoalAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
