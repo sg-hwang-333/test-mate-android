@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="24dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingBottom="20dp"
+    android:layout_width="312dp"
+    android:layout_height="186dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_marginBottom="8dp"
+        android:text="@string/check"
+        android:textSize="@dimen/M20"
+        android:textColor="@color/black.800"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="@string/checkSub"
+        android:textSize="@dimen/R14"
+        android:textColor="@color/black.300"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="@string/cancle"
+            android:textColor="@color/red_1"
+            android:textSize="@dimen/M16"
+            android:background="@drawable/border_delete_view"
+            android:layout_width="62dp"
+            android:layout_height="36dp"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Wrong_answer_note"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!--  header   -->
+    <include
+        android:id="@+id/toolbar_title"
+        layout="@layout/header" />
+
+
+    <!--   scrollview   -->
+    <ScrollView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_title">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_margin="15dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.widget.Button
+                android:background="@color/white"
+                android:outlineProvider="none"
+                android:text="국어"
+                android:textSize="@dimen/M16"
+                android:textColor="@color/green.500"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--  spinner  -->
+        <LinearLayout
+            android:background="@drawable/dialog_radius"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="8dp"
+            android:padding="20dp"
+            android:background="@drawable/radius"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="1학기 국어 중간고사"
+                android:fontFamily="@font/notosanskr_medium"
+                android:textSize="@dimen/R10"
+                android:textColor="@color/black.400"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="1.(물음) 이 이야기의 내용과 일치하는 사실은?"
+                android:textSize="@dimen/R14"
+                android:fontFamily="@font/notosanskr_regular"
+                android:textColor="@color/black.700"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <android.widget.Button
+                android:layout_gravity="right"
+                android:layout_width="40dp"
+                android:layout_height="26dp"
+                android:text="@string/reason_mistake"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_green_view"
+                android:textSize="@dimen/M13"
+                android:gravity="center"
+                style="?android:attr/borderlessButtonStyle"/>
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/problem_ex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.widget.Button
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="@string/add"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_green_view"
+                android:fontFamily="@font/notosanskr_medium"
+                android:textSize="@dimen/M16"
+                style="?android:attr/borderlessButtonStyle" />
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+
+    <!--navbar-->
+    <LinearLayout
+        android:elevation="10dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <ImageButton
+            android:background="@android:color/transparent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/home_off" />
+        <ImageButton
+            android:background="@android:color/transparent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/note_on" />
+        <ImageButton
+            android:background="@android:color/transparent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/goal_off" />
+        <ImageButton
+            android:background="@android:color/transparent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/cal_off" />
+
+    </LinearLayout>
+</LinearLayout>
