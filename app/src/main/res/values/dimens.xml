@@ -1,0 +1,16 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="B24">24dp</dimen>
+
+    <dimen name="M12">12dp</dimen>
+    <dimen name="M13">13dp</dimen>
+    <dimen name="M14">14dp</dimen>
+    <dimen name="M16">16dp</dimen>
+    <dimen name="M18">18dp</dimen>
+    <dimen name="M20">20dp</dimen>
+
+    <dimen name="R20">20dp</dimen>
+    <dimen name="R10">10dp</dimen>
+    <dimen name="R14">14dp</dimen>
+</resources>

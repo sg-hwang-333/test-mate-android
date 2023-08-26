@@ -13,4 +13,112 @@
     <string name="age">학년번호</string>
     <string name="next">다음</string>
     <string name="start">시작하기</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="app_name">시험메이트</string>
+    <string name="reason_timeout">시간 부족</string>
+
+    <!--    홈 -->
+
+    <string name="kor">국어</string>
+    <string name="eng">영어</string>
+    <string name="math">수학</string>
+    <string name="home">기가</string>
+
+    <string name="top1">TOP 1</string>
+    <string name="top2">TOP 2</string>
+    <string name="top3">TOP 3</string>
+
+    <!--    문의사항 -->
+    <string name="inquiry">문의사항</string>
+    <string name="title">제목</string>
+    <string name="title_hint">제목을 입력해 주세요</string>
+    <string name="content">문의내용</string>
+    <string name="content_hint">문의내용을 입력해 주세요</string>
+    <string name="photo">사진</string>
+    <string name="write_complete">작성 완료</string>
+
+    <!--    이용안내 -->
+    <string name="use_information">이용안내</string>
+    <string name="info_1">시험메이트란?</string>
+    <string name="info_1_1">시험메이트는 학생들의 자기주도 학습을 위해 개발된 \'시험지분석 공부법\'을 토대로 한 학습 어플입니다</string>
+
+    <string name="info_2">시험메이트 사용방법</string>
+    <string name="info_2_1">1. 시험정보(일정, 난이도, 지난 시험 점수)를 과목정보에 입력한 후 학습을 시작합니다</string>
+    <string name="info_2_2">2. 과목별 자신의 학습목표를 세우며 자기주도 학습을 실천합니다</string>
+    <string name="info_2_3">3. 지난 시험이나 문제에서의 실수를 바로잡기 위해 오답노트를 작성합니다 </string>
+    <string name="info_2_4">4. 수시로 학습목표와 오답노트를 확인하며 자신의 학습을 점검하며 학습합니다</string>
+
+    <string name="info_3">기능설명</string>
+    <string name="info_3_1">메인페이지</string>
+    <string name="info_3_1_1">선택한 과목에 대해 사용자가 입력한 정보의 통계가 나옵니다. 문제가 잘 나오는 곳, 오답실수, 공부 외 실패요소등을 확인할 수 있습니다</string>
+    <string name="info_3_2">오답노트</string>
+    <string name="info_3_2_1">과목별 오답노트를 확인하고  오답노트를 정리하여 자신이 자주 틀리던 문제 유형, 약점을 보완해나갈 수 있습니다</string>
+    <string name="info_3_3">학습목표</string>
+    <string name="info_3_3_1">체크리스트 방식으로 스스로 과목별 목표를 설정하고 실천해 나가며 학습의 중요도, 목적, 계획의 중요성을 인지할 수 있습니다</string>
+    <string name="info_3_4">캘린더</string>
+    <string name="info_3_4_1">시험일정을 기록하여 현재 자신이 어디까지 학습을 진행해야하는지, 학습 진도를 확인할 수 있습니다</string>
+    <string name="info_3_5">알림</string>
+    <string name="info_3_5_1">시험일정에 관한 알림과 새로운 버전 업데이트에 대한 소식을 얻을 수 있습니다</string>
+    <string name="info_3_6">메뉴</string>
+    <string name="info_3_6_1">사용자 프로필 수정과 알림설정과 로그아웃, 계정삭제, 이용안내, 버전 정보, 문의사항과 같은 \'시험메이트\'에 관한 정보를 얻을 수 있습니다</string>
+
+
+    <!--    프로필 수정 -->
+    <string name="edit_profile">프로필 수정</string>
+    <!--    <string name="name">이름</string>-->
+    <string name="name_hint">이름을 입력해 주세요</string>
+    <!--    <string name="email">이메일</string> -->
+    <string name="email_hint">이메일을 입력해 주세요</string>
+    <string name="grade_info">학년정보</string>
+
+    <!--    캘린더 -->
+    <string name="sun">일</string>
+    <string name="mon">월</string>
+    <string name="tus">화</string>
+    <string name="wen">수</string>
+    <string name="thu">목</string>
+    <string name="fri">금</string>
+    <string name="sat">토</string>
+
+
+    <string-array name="custom_months">
+        <item>1월</item>
+        <item>2월</item>
+        <item>3월</item>
+        <item>4월</item>
+        <item>5월</item>
+        <item>6월</item>
+        <item>7월</item>
+        <item>8월</item>
+        <item>9월</item>
+        <item>10월</item>
+        <item>11월</item>
+        <item>12월</item>
+    </string-array>
+
+
+    <!--  오답노트  -->
+
+    <string name="gradeItem1">중학교 1학년</string>
+    <string name="gradeItem2">중학교 2학년</string>
+    <string name="gradeItem3">중학교 3학년</string>
+
+    <string name="gradeItem4">고등학교 1학년</string>
+    <string name="gradeItem5">고등학교 2학년</string>
+    <string name="gradeItem6">고등학교 3학년</string>
+
+
+    <!--    delete check -->
+    <string name="check">정말 삭제하시겠습니까?</string>
+    <string name="checkSub">한번 삭제하신 정보는 복구할 수 없습니다\n정말 삭제하시겠습니까?</string>
+
+
 </resources>
