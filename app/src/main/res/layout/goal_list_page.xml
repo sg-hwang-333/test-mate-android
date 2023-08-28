@@ -56,7 +56,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
 
         <LinearLayout
@@ -69,33 +70,33 @@
             android:paddingRight="24dp">
 
             <!-- 목표 박스 -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:background="@drawable/bg_white_view"
-                android:padding="15dp">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:background="@drawable/bg_white_view"-->
+<!--                android:padding="15dp">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:layout_centerVertical="true"
-                    android:text="자신의 학습 목표를 새로 생성하세요"
-                    android:textColor="#2C2C2C"
-                    android:textSize="14dp" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:includeFontPadding="false"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:text="자신의 학습 목표를 새로 생성하세요"-->
+<!--                    android:textColor="#2C2C2C"-->
+<!--                    android:textSize="14dp" />-->
 
 
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/maintain_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@null"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:button="@drawable/checkbox_custom" />
+<!--                <androidx.appcompat.widget.AppCompatCheckBox-->
+<!--                    android:id="@+id/maintain_btn"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@null"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:button="@drawable/checkbox_custom" />-->
 
-            </RelativeLayout> <!-- 목표 박스 -->
+<!--            </RelativeLayout> &lt;!&ndash; 목표 박스 &ndash;&gt;-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/goalRecyclerView"
@@ -116,6 +117,7 @@
                 android:textSize="16dp" />
 
         </LinearLayout>
+
         <!-- 탭 -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -159,4 +161,27 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottomSheetDashBoardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_hideable="true"
+        app:behavior_draggable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:text="bottomSheet Dialog"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
