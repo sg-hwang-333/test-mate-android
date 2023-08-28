@@ -51,7 +51,9 @@ class GoalListActivity : AppCompatActivity() {
 
         val modifyButton: Button = findViewById(R.id.buttonModify)
         modifyButton.setOnClickListener {
-            list.add(Goal(8, "이름이름이름", true))
+            btnModifyOnClick()
+
+
         }
 
         val listView = findViewById<RecyclerView>(R.id.goalRecyclerView)
@@ -66,8 +68,7 @@ class GoalListActivity : AppCompatActivity() {
     }
 
     private fun btnModifyOnClick() {
-        val intent = Intent(this, AddGoalActivity::class.java)
-        startActivityForResult(intent, newGoalActivityRequestCode)
+        goalsListViewModel.insertGoal()
     }
 
 }
