@@ -11,32 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 
-//class MusicListAdapter(val data: List<Goal>) : RecyclerView.Adapter<MusicListAdapter.ItemViewHolder>() {
-//    class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {}
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-//        val view = LayoutInflater
-//            .from(parent.context)
-//            .inflate(viewType, parent, false)
-//        // viewType : Layout id
-//        // parent : ViewGroup
-//        return ItemViewHolder(view)
-//    }
-//
-//    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-//        val item = data[position]
-//        val textView = holder.view.findViewById<TextView>(R.id.goal_description)
-//        textView.text = item.description
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return data.size
-//    }
-//
-//    override fun getItemViewType(position: Int): Int {
-//        return R.layout.goal_layout
-//    }
-//}
 
 class GoalsAdapter(private val onClick: (Goal) -> Unit) :
     ListAdapter<Goal, GoalsAdapter.GoalViewHolder>(GoalDiffCallback) {
@@ -85,3 +59,30 @@ object GoalDiffCallback : DiffUtil.ItemCallback<Goal>() {
         return oldItem.id == newItem.id
     }
 }
+
+//class MusicListAdapter(val data: List<Goal>) : RecyclerView.Adapter<MusicListAdapter.ItemViewHolder>() {
+//    class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {}
+//
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+//        val view = LayoutInflater
+//            .from(parent.context)
+//            .inflate(viewType, parent, false)
+//        // viewType : Layout id
+//        // parent : ViewGroup
+//        return ItemViewHolder(view)
+//    }
+//
+//    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+//        val item = data[position]
+//        val textView = holder.view.findViewById<TextView>(R.id.goal_description)
+//        textView.text = item.description
+//    }
+//
+//    override fun getItemCount(): Int {
+//        return data.size
+//    }
+//
+//    override fun getItemViewType(position: Int): Int {
+//        return R.layout.goal_layout
+//    }
+//}

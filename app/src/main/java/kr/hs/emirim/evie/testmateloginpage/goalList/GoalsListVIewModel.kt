@@ -11,11 +11,11 @@ class GoalsListViewModel(val dataSource: DataSource) : ViewModel() {
 
     val goalsLiveData = dataSource.getGoalList()
 
-    fun insertGoal(description: String, checked: Boolean) {
+    fun insertGoal() {
         val newGoal = Goal(
             Random.nextLong(),
-            description,
-            checked
+            "새로운 목표",
+            false
         )
 
         dataSource.addGoal(newGoal)

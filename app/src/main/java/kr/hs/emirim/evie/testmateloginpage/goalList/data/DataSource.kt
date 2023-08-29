@@ -8,6 +8,8 @@ class DataSource(resources: Resources) {
     private val initialGoalList = getInitialGoals()
     private val goalsLiveData = MutableLiveData(initialGoalList)
 
+
+
     fun addGoal(goal: Goal) {
         // TODO: api 연동해서 DB 에 저장해야 함
         val currentList = goalsLiveData.value
