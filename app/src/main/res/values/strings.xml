@@ -23,6 +23,13 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="app_name">시험메이트</string>
+    <string name="user_name">김미림님</string>
+
+    <string name="add">추가하기</string>
+    <string name="save">저장</string>
+    <string name="cancle">취소</string>
+
+    <string name="reason_mistake">실수</string>
     <string name="reason_timeout">시간 부족</string>
 
     <!--    홈 -->
@@ -35,6 +42,11 @@
     <string name="top1">TOP 1</string>
     <string name="top2">TOP 2</string>
     <string name="top3">TOP 3</string>
+
+    <string name="miss_1">너무 긴장했어요</string>
+    <string name="miss_2">전날에 잠을 푹 자지 못했어요</string>
+    <string name="miss_3">답안지 마킹을 실수했어요</string>
+    <string name="miss_4">채점하고 멘탈이 깨져서 집중을 못했어요</string>
 
     <!--    문의사항 -->
     <string name="inquiry">문의사항</string>
@@ -120,5 +132,6 @@
     <string name="check">정말 삭제하시겠습니까?</string>
     <string name="checkSub">한번 삭제하신 정보는 복구할 수 없습니다\n정말 삭제하시겠습니까?</string>
 
-
+    <!-- 학습목표 -->
+    <string name="goalTitle">학습목표 제목</string>
 </resources>

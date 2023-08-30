@@ -8,16 +8,15 @@ class DataSource(resources: Resources) {
     private val initialGoalList = getInitialGoals()
     private val goalsLiveData = MutableLiveData(initialGoalList)
 
-
-
     fun addGoal(goal: Goal) {
+        goal.id += 1
         // TODO: api 연동해서 DB 에 저장해야 함
         val currentList = goalsLiveData.value
         if (currentList == null) {
             goalsLiveData.postValue(listOf(goal))
         } else {
             val updatedList = currentList.toMutableList()
-            updatedList.add(goal)
+            updatedList.add(goal) // 뒤에 나오도록  - 앞으로 나오도록 add(0, goal)
             goalsLiveData.postValue(updatedList)
         }
     }
@@ -53,29 +52,29 @@ class DataSource(resources: Resources) {
     private fun getInitialGoals() = listOf(
         Goal(
             id = 1,
-            description = "각 시의 화자의 태도 정확히 분석하기",
-            checked = true,
-        ),
-        Goal(
-            id = 2,
-            description = "기본적인 문학 용어들 파악하기",
-            checked = false,
-        ),
-        Goal(
-            id = 3,
-            description = "독서량을 늘려서 읽는 속도 향상시키기",
-            checked = false,
-        ),
-        Goal(
-            id = 4,
-            description = "나눠주신 자료 문제 분석하기",
-            checked = false,
-        ),
-        Goal(
-            id = 5,
-            description = "작품에 대한 사전정보 암기하기",
-            checked = false,
-        )
+            description = "'추가하기' 버튼을 눌러 목표를 추가하세요",
+            checked = true,)
+//        ),
+//        Goal(
+//            id = 2,
+//            description = "기본적인 문학 용어들 파악하기",
+//            checked = false,
+//        ),
+//        Goal(
+//            id = 3,
+//            description = "독서량을 늘려서 읽는 속도 향상시키기",
+//            checked = false,
+//        ),
+//        Goal(
+//            id = 4,
+//            description = "나눠주신 자료 문제 분석하기",
+//            checked = false,
+//        ),
+//        Goal(
+//            id = 5,
+//            description = "작품에 대한 사전정보 암기하기",
+//            checked = false,
+//        )
     )
     companion object {
         private var INSTANCE: DataSource? = null

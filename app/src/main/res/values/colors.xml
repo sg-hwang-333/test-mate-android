@@ -27,5 +27,7 @@
     <color name="red_1">#FF483E</color>
     <color name="blue_1">#2489E7</color>
 
+    <color name="black.200_1">#E1E1E1</color>
+
     <color name="bookBgColor">#FFC364</color>
 </resources>
