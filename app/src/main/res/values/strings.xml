@@ -132,5 +132,6 @@
     <string name="check">정말 삭제하시겠습니까?</string>
     <string name="checkSub">한번 삭제하신 정보는 복구할 수 없습니다\n정말 삭제하시겠습니까?</string>
 
-
+    <!-- 학습목표 -->
+    <string name="goalTitle">학습목표 제목</string>
 </resources>
