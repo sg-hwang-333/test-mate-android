@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
             android:layout_centerVertical="true"
-            android:text="각 시의 화자의 태조 정확히 분석하기"
             android:textColor="@color/common"
             android:textSize="14dp" />
 

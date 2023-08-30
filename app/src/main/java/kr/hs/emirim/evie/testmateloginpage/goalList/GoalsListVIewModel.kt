@@ -20,6 +20,11 @@ class GoalsListViewModel(val dataSource: DataSource) : ViewModel() {
 
         dataSource.addGoal(newGoal)
     }
+
+    fun getGoalCount(): Int {
+        val goalList = goalsLiveData.value
+        return goalList?.size ?: 0
+    }
 }
 
 class GoalsListViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
