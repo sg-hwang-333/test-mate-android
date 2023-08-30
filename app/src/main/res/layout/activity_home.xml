@@ -173,6 +173,59 @@
                         android:layout_height="45dp"/>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/black.800"
+                        android:layout_marginTop="60dp"
+                        android:text="오답실수"
+                        android:textSize="@dimen/M18"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:textColor="@color/black.300"
+                        android:text="해당 이유로 문제를 많이 틀렸어요!"
+                        android:textSize="@dimen/R14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:textColor="@color/black.800"
+                    android:layout_marginTop="60dp"
+                    android:text="공부 외 실패요소"
+                    android:textSize="@dimen/M18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="26dp"
+                    android:textColor="@color/black.300"
+                    android:text="해당 요소를 고치면 성적을 올릴 수 있어요!"
+                    android:textSize="@dimen/R14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <android.widget.Button
+                    android:paddingLeft="16dp"
+                    android:gravity="left|center"
+                    android:textSize="@dimen/R14"
+                    android:text="@string/miss_1"
+                    android:textColor="@color/green.500"
+                    android:background="@drawable/popup_btn_round"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
             </LinearLayout>
 
         </LinearLayout>
