@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="222dp"
+        android:layout_height="222dp"
+        android:src="@drawable/hand"
+        android:scaleType="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="178dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="스스로 학습할 수 있어요"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:textColor="#000000"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="여러분들이 스스로 학습할 수 있도록\n시험메이트가 옆에서 도와드릴게요"
+        android:textSize="14dp"
+        android:textColor="#000000"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dot3"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        />
+    <android.widget.Button
+        android:id="@+id/next1"
+        android:layout_width="312dp"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_green_view"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center"
+        android:text="@string/start"
+        android:textColor="#ffffff"
+        android:textSize="16sp"></android.widget.Button>
+
+
+
+
+
+</LinearLayout>

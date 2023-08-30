@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -38,14 +39,22 @@ class GoalListActivity : AppCompatActivity() {
         bottomSheetDialog.setContentView(bottomSheetView)
 
 
-        goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
-        goalEditBtn.setOnClickListener {
-            //pw.requestFocus() // TODO : 객체의 edittext로 Focus이동
-        }
-
         val goalsAdapter = GoalsAdapter { goal -> adapterOnClick(goal) }
         val recyclerView: RecyclerView = findViewById(R.id.goalRecyclerView)
         recyclerView.adapter = goalsAdapter
+
+        goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
+        goalEditBtn.setOnClickListener {
+            findViewById<EditText>(R.id.goal_description).requestFocus()
+            findViewById<EditText>(R.id.goal_description).setFocusable(true);
+            // TODO : 객체의 edittext로 Focus이동
+        }
+
+        goalDeleteBtn = bottomSheetView.findViewById<Button>(R.id.bsv_delete_btn)
+        goalDeleteBtn.setOnClickListener {
+            goalsAdapter.removeGoal()
+        }
+
 
         goalsListViewModel.goalsLiveData.observe(this, {
             it?.let {
