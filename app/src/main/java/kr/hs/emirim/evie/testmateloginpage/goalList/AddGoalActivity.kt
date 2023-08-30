@@ -17,15 +17,16 @@ class AddGoalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        findViewById<Button>(R.id.buttonModify).setOnClickListener {
-            addGoal()
-        }
+//        findViewById<Button>(R.id.buttonModify).setOnClickListener {
+//            addGoal()
+//        }
 
         addGoalDescription = findViewById(R.id.goal_description)
 
     }
 
     private fun addGoal() {
+        // 목표 받음
         val description = addGoalDescription.text.toString()
     }
 }

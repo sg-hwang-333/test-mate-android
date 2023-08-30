@@ -1,22 +1,21 @@
 package kr.hs.emirim.evie.testmateloginpage.goalList
 
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.appcompat.widget.AppCompatCheckBox
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import org.w3c.dom.Text
 
 class GoalListActivity : AppCompatActivity() {
+
+    lateinit var goalEditBtn : android.widget.Button
+    lateinit var goalDeleteBtn : android.widget.Button
 
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -34,8 +33,15 @@ class GoalListActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         bottomSheetView = layoutInflater.inflate(R.layout.goal_bottom_sheet, null)
+
         bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(bottomSheetView)
+
+
+        goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
+        goalEditBtn.setOnClickListener {
+            //pw.requestFocus() // TODO : 객체의 edittext로 Focus이동
+        }
 
         val goalsAdapter = GoalsAdapter { goal -> adapterOnClick(goal) }
         val recyclerView: RecyclerView = findViewById(R.id.goalRecyclerView)
@@ -47,13 +53,11 @@ class GoalListActivity : AppCompatActivity() {
             }
         })
 
-        val list = mutableListOf<Goal>()
+//        val list = mutableListOf<Goal>()
 
         val modifyButton: Button = findViewById(R.id.buttonModify)
         modifyButton.setOnClickListener {
             btnModifyOnClick()
-
-
         }
 
         val listView = findViewById<RecyclerView>(R.id.goalRecyclerView)
@@ -64,6 +68,7 @@ class GoalListActivity : AppCompatActivity() {
     }
 
     private fun adapterOnClick(goal: Goal) {
+        bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText(goal.description.toString())
         bottomSheetDialog.show()
     }
 
