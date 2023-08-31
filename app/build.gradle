@@ -16,6 +16,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.3'
+    }
 
     buildTypes {
         release {

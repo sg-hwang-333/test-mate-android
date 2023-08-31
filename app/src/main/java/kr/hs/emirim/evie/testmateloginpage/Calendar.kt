@@ -2,7 +2,7 @@ package com.example.myapplication
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.R
+import kr.hs.emirim.evie.testmateloginpage.R
 
 class Calendar : AppCompatActivity() {
 
