@@ -10,20 +10,21 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.R
+
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 import org.w3c.dom.Text
 
 class GoalListActivity : AppCompatActivity() {
 
+    private lateinit var bottomSheetView: View
+    private lateinit var bottomSheetDialog: BottomSheetDialog
     lateinit var goalEditBtn : android.widget.Button
     lateinit var goalDeleteBtn : android.widget.Button
 
-    private lateinit var bottomSheetView: View
-    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var btnAddGoal : android.widget.Button
 
-    private lateinit var btnModify : android.widget.Button
+    private var clickedGoal: Goal? = null
 
-    private val newGoalActivityRequestCode = 1
     private val goalsListViewModel by viewModels<GoalsListViewModel> {
         GoalsListViewModelFactory(this)
     }
@@ -34,7 +35,6 @@ class GoalListActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         bottomSheetView = layoutInflater.inflate(R.layout.goal_bottom_sheet, null)
-
         bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(bottomSheetView)
 
@@ -43,24 +43,38 @@ class GoalListActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.goalRecyclerView)
         recyclerView.adapter = goalsAdapter
 
-        goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
-        goalEditBtn.setOnClickListener {
-            findViewById<EditText>(R.id.goal_description).requestFocus()
-            findViewById<EditText>(R.id.goal_description).setFocusable(true);
-            // TODO : 객체의 edittext로 Focus이동
-        }
+
+//        goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
+//        goalEditBtn.setOnClickListener {
+//            goalDescription.isFocusable = true
+//            goalDescription.isFocusableInTouchMode = true
+//            goalDescription.requestFocus()
+//        }
+
 
         goalDeleteBtn = bottomSheetView.findViewById<Button>(R.id.bsv_delete_btn)
         goalDeleteBtn.setOnClickListener {
-            goalsAdapter.removeGoal()
+//            goalsAdapter.removeGoal()
+//            goalsListViewModel.deleteGoal(goal)
+            bottomSheetDialog.dismiss()
         }
 
+//        val rootView: View = findViewById(android.R.id.content)
+//        rootView.setOnTouchListener { _, _ ->
+//            .clearFocus()
+//            goalDescription.isFocusable = false
+//            goalDescription.isFocusableInTouchMode = false
+//            false // 터치 이벤트를 소비하지 않고 전달
+//        }
 
-        goalsListViewModel.goalsLiveData.observe(this, {
-            it?.let {
-                goalsAdapter.submitList(it as MutableList<Goal>)
+
+        goalsListViewModel.goalsLiveData.observe( // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
+            this,
+        ) {
+            it?.let { // goalsLiveData의 값이 null이 아닐 때 중괄호 코드 실행
+                goalsAdapter.submitList(it as MutableList<Goal>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
             }
-        })
+        }
 
 //        val list = mutableListOf<Goal>()
 
@@ -77,7 +91,16 @@ class GoalListActivity : AppCompatActivity() {
     }
 
     private fun adapterOnClick(goal: Goal) {
-        bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText(goal.description.toString())
+        clickedGoal = goal
+
+        val goalDescription = findViewById<EditText>(R.id.goal_description)
+
+        // TODO : goal(현재 클릭된)에 focus가도록
+        if(goal.description != null)bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText(goal.description.toString())
+        else bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText("목표를 수정하세요")
+
+
+
         bottomSheetDialog.show()
     }
 

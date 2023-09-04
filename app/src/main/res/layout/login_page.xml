@@ -26,10 +26,7 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/before_btn" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -95,9 +92,10 @@
             </LinearLayout>
         </LinearLayout>
 
+        <!-- TODO : 틀리면 visible-->
         <TextView
             android:id="@+id/warning_message"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
