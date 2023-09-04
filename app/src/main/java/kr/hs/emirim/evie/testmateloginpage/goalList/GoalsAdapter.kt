@@ -3,23 +3,29 @@ package kr.hs.emirim.evie.testmateloginpage.goalList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.R
+
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 
 
 class GoalsAdapter(private val onClick: (Goal) -> Unit) :
     ListAdapter<Goal, GoalsAdapter.GoalViewHolder>(GoalDiffCallback) {
 
-    class GoalViewHolder(itemView: View, val onClick: (Goal) -> Unit) :
+    inner class GoalViewHolder(itemView: View, val onClick: (Goal) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
-        private val goalTextView: TextView = itemView.findViewById(R.id.goal_description)
-        private val goalCheckBox: AppCompatCheckBox = itemView.findViewById(R.id.goal_checked)
-        private var currentGoal: Goal? = null
+        val goalEditText: EditText = itemView.findViewById(R.id.goal_description)
+        val goalCheckBox: AppCompatCheckBox = itemView.findViewById(R.id.goal_checked)
+        var currentGoal: Goal? = null
+
+        private lateinit var goalEditBtn: Button
 
         init {
             itemView.setOnClickListener {
@@ -27,13 +33,26 @@ class GoalsAdapter(private val onClick: (Goal) -> Unit) :
                     onClick(it)
                 }
             }
+
+//            val bottomSheetView = LayoutInflater.from(itemView.context)
+//                .inflate(R.layout.goal_bottom_sheet, null)
+//            val bottomSheetDialog = BottomSheetDialog(itemView.context)
+//            bottomSheetDialog.setContentView(bottomSheetView)
+//            val goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
+//
+//            goalEditBtn.setOnClickListener {
+//                bottomSheetDialog.dismiss()
+//                goalEditText.isFocusable = true
+//                goalEditText.isFocusableInTouchMode = true
+//                goalEditText.requestFocus()
+//            }
         }
 
         /* Bind flower name and image. */
         fun bind(goal: Goal) {
             currentGoal = goal
 
-            goalTextView.text = goal.description
+            goalEditText.setText(goal.description)
             goalCheckBox.isChecked = goal.checked
         }
     }
@@ -59,30 +78,3 @@ object GoalDiffCallback : DiffUtil.ItemCallback<Goal>() {
         return oldItem.id == newItem.id
     }
 }
-
-//class MusicListAdapter(val data: List<Goal>) : RecyclerView.Adapter<MusicListAdapter.ItemViewHolder>() {
-//    class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {}
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-//        val view = LayoutInflater
-//            .from(parent.context)
-//            .inflate(viewType, parent, false)
-//        // viewType : Layout id
-//        // parent : ViewGroup
-//        return ItemViewHolder(view)
-//    }
-//
-//    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-//        val item = data[position]
-//        val textView = holder.view.findViewById<TextView>(R.id.goal_description)
-//        textView.text = item.description
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return data.size
-//    }
-//
-//    override fun getItemViewType(position: Int): Int {
-//        return R.layout.goal_layout
-//    }
-//}

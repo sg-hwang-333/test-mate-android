@@ -3,9 +3,11 @@ package kr.hs.emirim.evie.testmateloginpage.goalList
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import kotlin.random.Random
+
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.DataSource
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
-import kotlin.random.Random
+
 
 class GoalsListViewModel(val dataSource: DataSource) : ViewModel() {
 
@@ -14,11 +16,15 @@ class GoalsListViewModel(val dataSource: DataSource) : ViewModel() {
     fun insertGoal() {
         val newGoal = Goal(
             Random.nextLong(),
-            "새로운 목표",
+            null,
             false
         )
 
         dataSource.addGoal(newGoal)
+    }
+
+    fun deleteGoal(goal : Goal) {
+        dataSource.removeGoal(goal)
     }
 
     fun getGoalCount(): Int {

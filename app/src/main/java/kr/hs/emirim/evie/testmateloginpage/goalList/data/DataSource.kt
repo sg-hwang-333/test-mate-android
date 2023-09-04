@@ -9,15 +9,15 @@ class DataSource(resources: Resources) {
     private val goalsLiveData = MutableLiveData(initialGoalList)
 
     fun addGoal(goal: Goal) {
-        goal.id += 1
+//        goal.id += 1
         // TODO: api 연동해서 DB 에 저장해야 함
         val currentList = goalsLiveData.value
         if (currentList == null) {
             goalsLiveData.postValue(listOf(goal))
         } else {
-            val updatedList = currentList.toMutableList()
+            val updatedList = currentList.toMutableList() // 불변형 리스트로 변경
             updatedList.add(goal) // 뒤에 나오도록  - 앞으로 나오도록 add(0, goal)
-            goalsLiveData.postValue(updatedList)
+            goalsLiveData.postValue(updatedList) // 관찰자에게 변경 사항 전달
         }
     }
 
@@ -32,10 +32,10 @@ class DataSource(resources: Resources) {
     }
 
     /* Returns flower given an ID. */
-    fun getGoalForId(id: Long): Goal? {
-        val flowers = goalsLiveData.value
-        if (flowers != null) {
-            return flowers.firstOrNull { flower -> flower.id == id }
+    fun getGoalForId(id: Long): Goal? {  // 특정 ID에 해당하는 목표 데이터를 가져올
+        val goals = goalsLiveData.value
+        if (goals != null) {
+            return goals.firstOrNull { goal -> goal.id == id }
         }
         /*
         goalsLiveData.value?.let { flowers ->
@@ -52,7 +52,7 @@ class DataSource(resources: Resources) {
     private fun getInitialGoals() = listOf(
         Goal(
             id = 1,
-            description = "'추가하기' 버튼을 눌러 목표를 추가하세요",
+            description = null,
             checked = true,)
 //        ),
 //        Goal(
@@ -76,7 +76,7 @@ class DataSource(resources: Resources) {
 //            checked = false,
 //        )
     )
-    companion object {
+    companion object { // 데이터를 관리하고 제공하는 데 사용되는 클래스의 인스턴스를 만들지 않고도 호출하게 함
         private var INSTANCE: DataSource? = null
 
         fun getDataSource(resources: Resources): DataSource {
