@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,294 +22,28 @@
             android:paddingLeft="24dp"
             android:paddingRight="20dp">
 
-            <!-- 수정2 -->
-            <RelativeLayout
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_round"
-                android:padding="15dp">
+                android:layout_weight="1"
+                android:scrollbars="none">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/goalMainRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:nestedScrollingEnabled="true"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-<!--                    <ImageView-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="80dp"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:background="@drawable/subject1" />-->
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:text="기가"
-                            android:textColor="@color/black"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:text="고등학교 1학년 기말고사"
-                            android:textColor="#6D6D6D"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="12dp"
-                            android:background="@drawable/rectangle_round_1"
-                            android:includeFontPadding="false"
-                            android:padding="7dp"
-                            android:text="진행사항 1/5"
-                            android:textColor="@color/white"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/goal_page" />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rectangle_round"
-                android:padding="15dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="80dp"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:background="@drawable/subject1" />-->
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:text="기가"
-                            android:textColor="@color/black"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:text="고등학교 1학년 기말고사"
-                            android:textColor="#6D6D6D"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/rectangle_round_1"
-                            android:includeFontPadding="false"
-                            android:padding="7dp"
-                            android:text="진행사항 1/5"
-                            android:textColor="@color/white"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/goal_page" />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rectangle_round"
-                android:padding="15dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="80dp"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:background="@drawable/subject1" />-->
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:text="기가"
-                            android:textColor="@color/black"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:text="고등학교 1학년 기말고사"
-                            android:textColor="#6D6D6D"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/rectangle_round_1"
-                            android:includeFontPadding="false"
-                            android:padding="7dp"
-                            android:text="진행사항 1/5"
-                            android:textColor="@color/white"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/goal_page" />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rectangle_round"
-                android:padding="15dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="80dp"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:background="@drawable/subject1" />-->
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:text="기가"
-                            android:textColor="@color/black"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:text="고등학교 1학년 기말고사"
-                            android:textColor="#6D6D6D"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/rectangle_round_1"
-                            android:includeFontPadding="false"
-                            android:padding="7dp"
-                            android:text="진행사항 1/5"
-                            android:textColor="@color/white"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/goal_page" />
-            </RelativeLayout>
-
+            </ScrollView>
 
         </LinearLayout>
 
     </LinearLayout>
 
+
+    <!-- nav bar -->
     <LinearLayout
         android:elevation="10dp"
         android:background="@color/white"
@@ -317,37 +52,34 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/nav_home"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="10dp"
             android:src="@drawable/home_off" />
-
-        <ImageView
+        <ImageButton
+            android:id="@+id/nav_wrong"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="10dp"
             android:src="@drawable/note_off" />
-
-        <ImageView
+        <ImageButton
+            android:id="@+id/nav_goal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/goal_off" />
-
-        <ImageView
+            android:src="@drawable/goal_on" />
+        <ImageButton
+            android:id="@+id/nav_cal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/cal_off" />
+            android:src="@drawable/cal_off"/>
 
     </LinearLayout>
 </RelativeLayout>
