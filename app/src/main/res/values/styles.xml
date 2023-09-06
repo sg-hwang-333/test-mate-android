@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">#37D864</item> <!-- 텍스트 색상을 원하는 색상으로 변경 -->
+    </style>
+</resources>
