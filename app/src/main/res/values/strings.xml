@@ -14,6 +14,8 @@
     <string name="next">다음</string>
     <string name="start">시작하기</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -90,6 +92,9 @@
     <!--    <string name="email">이메일</string> -->
     <string name="email_hint">이메일을 입력해 주세요</string>
     <string name="grade_info">학년정보</string>
+
+    <!--  오답노트  -->
+    <string name="wrong_answer">오답노트</string>
 
     <!--    캘린더 -->
     <string name="sun">일</string>
