@@ -1,24 +1,17 @@
 package kr.hs.emirim.evie.testmateloginpage.goalList
 
-import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatCheckBox
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textview.MaterialTextView
 import kr.hs.emirim.evie.testmateloginpage.R
-
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 
 
@@ -39,35 +32,28 @@ class GoalsAdapter(private val onClick: (Goal) -> Unit) :
                     onClick(it)
                 }
             }
-
-//            goalEditText.setOnKeyListener(View.OnKeyListener { v, keyCode, event -> //Enter key Action
-//                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-//                    //키패드 내리기
-//                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-//                    imm.hideSoftInputFromWindow(goalEditText.windowToken, 0)
-//
-//                    //처리
-//                    return@OnKeyListener true
-//                }
-//                false
-//            })
-
-
-
         }
 
-        /* Bind flower name and image. */
+        /* UI에 정보 바인딩(넣는 메서드) */
         fun bind(goal: Goal) {
             currentGoal = goal
 
             goalEditText.setText(goal.description)
             goalCheckBox.isChecked = goal.checked
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalViewHolder {
+//        val layoutResId = if (viewType == 1) {
+//            R.layout.goal_layout_checked // goalCheckBox가 true인 경우에는 다른 레이아웃 사용
+//        } else {
+//            R.layout.goal_layout // 그 외에는 기존 레이아웃 사용
+//        }
+
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.goal_layout, parent, false)
+
         return GoalViewHolder(view, onClick)
     }
 
@@ -75,6 +61,16 @@ class GoalsAdapter(private val onClick: (Goal) -> Unit) :
         val goal = getItem(position)
         holder.bind(goal)
     }
+
+//    override fun getItemViewType(position: Int): Int {
+//        val goal = getItem(position)
+//        return if (goal.checked) {
+//            1 // goalCheckBox가 true인 경우
+//        } else {
+//            0 // 그 외의 경우
+//        }
+//    }
+
 }
 
 object GoalDiffCallback : DiffUtil.ItemCallback<Goal>() {

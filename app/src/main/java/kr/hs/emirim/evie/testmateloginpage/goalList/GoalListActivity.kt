@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.KeyEvent
+import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -14,6 +14,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import com.example.myapplication.Wrong_answer_note
@@ -42,6 +43,12 @@ class GoalListActivity : AppCompatActivity() {
         setContentView(R.layout.goal_list_page)
         supportActionBar?.hide()
 
+//        Handler().postDelayed(Runnable { // 스플래시 화면 종료 후 가이드 페이지로 이동
+//            val intent = Intent(this@MainActivity, GoalMainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }, 3000)
+
 
 
         bottomSheetView = layoutInflater.inflate(R.layout.goal_bottom_sheet, null)
@@ -53,7 +60,9 @@ class GoalListActivity : AppCompatActivity() {
         recyclerView.adapter = goalsAdapter
 
         // TODO : must not be null 에러 고치기, 탭 바 설정
-//        var goalEditText : EditText = recyclerView.findViewById(R.id.goal_description)
+        var goalEditText : EditText = recyclerView.findViewById(R.id.goal_description)
+        var goalChecked : AppCompatCheckBox = recyclerView.findViewById(R.id.goal_checked)
+
 
 //        goalEditText!!.setOnKeyListener(View.OnKeyListener { v, keyCode, event -> //Enter key Action
 //            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
