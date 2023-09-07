@@ -1,12 +1,18 @@
 package kr.hs.emirim.evie.testmateloginpage.goalList
 
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -34,18 +40,20 @@ class GoalsAdapter(private val onClick: (Goal) -> Unit) :
                 }
             }
 
-//            val bottomSheetView = LayoutInflater.from(itemView.context)
-//                .inflate(R.layout.goal_bottom_sheet, null)
-//            val bottomSheetDialog = BottomSheetDialog(itemView.context)
-//            bottomSheetDialog.setContentView(bottomSheetView)
-//            val goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
+//            goalEditText.setOnKeyListener(View.OnKeyListener { v, keyCode, event -> //Enter key Action
+//                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+//                    //키패드 내리기
+//                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//                    imm.hideSoftInputFromWindow(goalEditText.windowToken, 0)
 //
-//            goalEditBtn.setOnClickListener {
-//                bottomSheetDialog.dismiss()
-//                goalEditText.isFocusable = true
-//                goalEditText.isFocusableInTouchMode = true
-//                goalEditText.requestFocus()
-//            }
+//                    //처리
+//                    return@OnKeyListener true
+//                }
+//                false
+//            })
+
+
+
         }
 
         /* Bind flower name and image. */

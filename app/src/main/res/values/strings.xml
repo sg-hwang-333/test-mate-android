@@ -30,9 +30,12 @@
     <string name="add">추가하기</string>
     <string name="save">저장</string>
     <string name="cancle">취소</string>
+    <string name="edit">수정</string>
+    <string name="delete">삭제</string>
 
     <string name="reason_mistake">실수</string>
     <string name="reason_timeout">시간 부족</string>
+    <string name="reason_lackconcept">개념 부족</string>
 
     <!--    홈 -->
 
@@ -95,6 +98,10 @@
 
     <!--  오답노트  -->
     <string name="wrong_answer">오답노트</string>
+    <string name="scope_1">자료</string>
+    <string name="scope_2">교과서</string>
+    <string name="scope_3">참고서</string>
+    <string name="scope_4">문제집</string>
 
     <!--    캘린더 -->
     <string name="sun">일</string>
