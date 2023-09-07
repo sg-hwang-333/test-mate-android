@@ -16,6 +16,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_page)
+        supportActionBar?.hide()
 
 
         imageButton = findViewById(R.id.visible_btn)
