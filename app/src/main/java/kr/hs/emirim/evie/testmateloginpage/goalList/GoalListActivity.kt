@@ -43,13 +43,11 @@ class GoalListActivity : AppCompatActivity() {
         setContentView(R.layout.goal_list_page)
         supportActionBar?.hide()
 
-//        Handler().postDelayed(Runnable { // 스플래시 화면 종료 후 가이드 페이지로 이동
+        //        Handler().postDelayed(Runnable { // 스플래시 화면 종료 후 가이드 페이지로 이동
 //            val intent = Intent(this@MainActivity, GoalMainActivity::class.java)
 //            startActivity(intent)
 //            finish()
 //        }, 3000)
-
-
 
         bottomSheetView = layoutInflater.inflate(R.layout.goal_bottom_sheet, null)
         bottomSheetDialog = BottomSheetDialog(this)
@@ -88,7 +86,7 @@ class GoalListActivity : AppCompatActivity() {
         goalDeleteBtn = bottomSheetView.findViewById<Button>(R.id.bsv_delete_btn)
         goalDeleteBtn.setOnClickListener {
 //            goalsAdapter.removeGoal()
-//            goalsListViewModel.deleteGoal(goal)
+//            goalsListViewModel.removeGoal(goal)
             bottomSheetDialog.dismiss()
         }
 

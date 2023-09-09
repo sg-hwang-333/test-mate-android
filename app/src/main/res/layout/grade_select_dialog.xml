@@ -18,7 +18,9 @@
             android:fontFamily="@font/notosanskr_medium"
             android:textSize="@dimen/M18"
             android:layout_weight="1"
-            android:text="필터"
+            android:text="학년정보"
+            android:textColor="#000"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageButton
@@ -88,8 +90,6 @@
                 android:background="@drawable/bg_white_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
-
 
     </LinearLayout>
     </ScrollView>
