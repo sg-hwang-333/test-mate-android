@@ -15,19 +15,18 @@
             android:name=".GuideActivity1"
             android:exported="false" />
         <activity
-            android:name=".GoalListActivity"
+            android:name=".goalList.GoalListActivity"
             android:exported="false" />
         <activity
             android:name=".GoalMainActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_sign_up"
-            android:theme="@style/Theme.TestmateLoginPage.NoActionBar" />
-        <activity
-            android:name=".GoalActivity"
-            android:exported="false" />
+            android:theme="@style/Theme.TestmateLoginPage.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true">

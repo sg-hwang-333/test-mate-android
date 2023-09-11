@@ -111,6 +111,7 @@
             android:layout_height="wrap_content">
 
             <android.widget.Button
+                android:id="@+id/addBtn"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
@@ -118,8 +119,7 @@
                 android:textColor="@color/white"
                 android:background="@drawable/bg_green_view"
                 android:fontFamily="@font/notosanskr_medium"
-                android:textSize="@dimen/M16"
-                style="?android:attr/borderlessButtonStyle" />
+                android:textSize="@dimen/M16"/>
         </LinearLayout>
 
     </LinearLayout>
