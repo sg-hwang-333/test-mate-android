@@ -58,8 +58,8 @@ class GoalListActivity : AppCompatActivity() {
         recyclerView.adapter = goalsAdapter
 
         // TODO : must not be null 에러 고치기, 탭 바 설정
-        var goalEditText : EditText = recyclerView.findViewById(R.id.goal_description)
-        var goalChecked : AppCompatCheckBox = recyclerView.findViewById(R.id.goal_checked)
+//        var goalEditText : EditText = recyclerView.findViewById(R.id.goal_description)
+//        var goalChecked : AppCompatCheckBox = recyclerView.findViewById(R.id.goal_checked)
 
 
 //        goalEditText!!.setOnKeyListener(View.OnKeyListener { v, keyCode, event -> //Enter key Action
@@ -84,11 +84,7 @@ class GoalListActivity : AppCompatActivity() {
 
 
         goalDeleteBtn = bottomSheetView.findViewById<Button>(R.id.bsv_delete_btn)
-        goalDeleteBtn.setOnClickListener {
-//            goalsAdapter.removeGoal()
-//            goalsListViewModel.removeGoal(goal)
-            bottomSheetDialog.dismiss()
-        }
+
 
 //        val rootView: View = findViewById(android.R.id.content)
 //        rootView.setOnTouchListener { _, _ ->
@@ -173,9 +169,13 @@ class GoalListActivity : AppCompatActivity() {
         if(goal.description != null)bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText(goal.description.toString())
         else bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText("목표를 수정하세요")
 
-
-
         bottomSheetDialog.show()
+
+        goalDeleteBtn.setOnClickListener {
+//            goalsAdapter.removeGoal()
+            goalsListViewModel.removeGoal(goal)
+            bottomSheetDialog.dismiss()
+        }
     }
 
     private fun btnModifyOnClick() {
