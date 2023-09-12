@@ -23,7 +23,7 @@ class GoalsListViewModel(val dataSource: DataSource) : ViewModel() {
         dataSource.addGoal(newGoal)
     }
 
-    fun deleteGoal(goal : Goal) {
+    fun removeGoal(goal : Goal) {
         dataSource.removeGoal(goal)
     }
 
