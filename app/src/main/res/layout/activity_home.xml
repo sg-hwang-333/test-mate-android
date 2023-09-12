@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="@color/white"
+<LinearLayout android:background="@color/white"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <ScrollView
         android:layout_weight="1"
         android:scrollbars="none"
@@ -42,36 +42,22 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:background="@drawable/bg_book_image"
-                            android:backgroundTint="@color/bookBgColor"
-                            android:src="@drawable/book_red"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_marginRight="12dp"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/subjectRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="true"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-                        <android.widget.Button
-                            android:layout_gravity="left"
-                            android:layout_margin="4dp"
-                            android:layout_width="35dp"
-                            android:layout_height="24dp"
-                            android:text="@string/kor"
-                            android:textColor="@color/white"
-                            android:background="@drawable/bg_green_view"
-                            android:textSize="@dimen/M13"
-                            android:gravity="center"
-                            style="?android:attr/borderlessButtonStyle"/>
-                    </FrameLayout>
-
-                    <ImageView
+                    <ImageButton
                         android:src="@drawable/add_image"
                         android:background="@drawable/bg_book_image"
                         android:layout_width="80dp"
