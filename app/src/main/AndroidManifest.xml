@@ -28,11 +28,11 @@
 
 
         <activity
-            android:name=".GoalMainActivity"
+            android:name=".GoalMainListActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.TestmateLoginPage.NoActionBar" >
 
@@ -46,11 +46,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false"
-            tools:ignore="DuplicateActivity">
+<!--        <activity-->
+<!--            android:name=".LoginActivity"-->
+<!--            android:exported="false"-->
+<!--            tools:ignore="DuplicateActivity">-->
 
-        </activity>
+<!--        </activity>-->
     </application>
 </manifest>
