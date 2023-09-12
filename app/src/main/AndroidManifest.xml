@@ -19,9 +19,14 @@
             android:exported="false" />
         <activity
             android:name=".goalList.GoalListActivity"
-            android:exported="false">
+            android:exported="false" />
 
-        </activity>
+        <activity
+            android:name=".goalList.GoalListActivity"
+            android:exported="false"
+            tools:ignore="DuplicateActivity" />
+
+
         <activity
             android:name=".GoalMainActivity"
             android:exported="false" />
@@ -29,8 +34,12 @@
             android:name=".SignUpActivity"
             android:exported="true"
             android:label="@string/title_activity_sign_up"
-            android:theme="@style/Theme.TestmateLoginPage.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:theme="@style/Theme.TestmateLoginPage.NoActionBar" >
+
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +48,8 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="false">
+            android:exported="false"
+            tools:ignore="DuplicateActivity">
 
         </activity>
     </application>

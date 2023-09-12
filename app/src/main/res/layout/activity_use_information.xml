@@ -6,37 +6,42 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="26.5dp"
-        android:paddingBottom="26.5dp"
-        android:paddingLeft="25dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/use_information"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/before_btn"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
-
     <ScrollView
         android:scrollbars="none"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="26.5dp"
+                android:paddingBottom="26.5dp"
+                android:paddingLeft="25dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/use_information"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/before_btn"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
+        <LinearLayout
+
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
             android:layout_marginTop="40dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -201,7 +206,6 @@
                 android:breakStrategy="simple"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-
-
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
