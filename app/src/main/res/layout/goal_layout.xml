@@ -27,7 +27,8 @@
             android:textColor="#2C2C2C"
             android:background="@null"
             android:hint="목표를 클릭해 수정, 삭제할 수 있습니다"
-            android:textSize="14dp" />
+            android:textSize="14dp"
+            android:singleLine="true"/>
 
 
         <androidx.appcompat.widget.AppCompatCheckBox
