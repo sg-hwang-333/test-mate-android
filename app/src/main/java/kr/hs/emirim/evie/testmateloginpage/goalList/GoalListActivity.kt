@@ -18,7 +18,7 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kr.hs.emirim.evie.testmateloginpage.GoalMainActivity
+import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 
@@ -125,12 +125,12 @@ class GoalListActivity : AppCompatActivity() {
 //            startActivity(intent)
 //        }
         navWrong.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note::class.java)
+//            val intent = Intent(this, Wrong_answer_note::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
         navGoal.setOnClickListener {
-            val intent = Intent(this, GoalMainActivity::class.java)
+            val intent = Intent(this, GoalMainListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }

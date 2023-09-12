@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import kr.hs.emirim.evie.testmateloginpage.GoalMainActivity
+import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 
 class Calendar : AppCompatActivity() {
@@ -25,12 +25,12 @@ class Calendar : AppCompatActivity() {
 //            startActivity(intent)
 //        }
         navWrong.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note::class.java)
+//            val intent = Intent(this, Wrong_answer_note::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
         navGoal.setOnClickListener {
-            val intent = Intent(this, GoalMainActivity::class.java)
+            val intent = Intent(this, GoalMainListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
