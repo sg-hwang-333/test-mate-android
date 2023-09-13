@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
+import kr.hs.emirim.evie.testmateloginpage.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 
@@ -120,10 +121,11 @@ class GoalListActivity : AppCompatActivity() {
         var navGoal : ImageButton = findViewById(R.id.nav_goal)
         var navCal : ImageButton = findViewById(R.id.nav_cal)
 
-//        navHome.setOnClickListener {
-//            val intent = Intent(this, HomeActivity::class.java)
-//            startActivity(intent)
-//        }
+        navHome.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent)
+        }
         navWrong.setOnClickListener {
 //            val intent = Intent(this, Wrong_answer_note::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
