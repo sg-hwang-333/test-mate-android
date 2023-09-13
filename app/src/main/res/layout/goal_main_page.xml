@@ -45,31 +45,36 @@
     </LinearLayout>
     <!--navbar-->
     <LinearLayout
-        android:elevation="10dp"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:elevation="10dp"
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/nav_home"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/home_on" />
+            android:src="@drawable/home_off" />
         <ImageButton
+            android:id="@+id/nav_wrong"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/note_off" />
         <ImageButton
+            android:id="@+id/nav_goal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/goal_off" />
+            android:src="@drawable/goal_on" />
         <ImageButton
+            android:id="@+id/nav_cal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
