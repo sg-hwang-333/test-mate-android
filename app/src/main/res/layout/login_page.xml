@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -50,10 +50,12 @@
                 android:drawableLeft="@drawable/email_icon"
                 android:drawablePadding="8dp"
                 android:hint="이메일을 입력해주세요"
+                android:text="s2220@e-mirim.hs.kr"
                 android:paddingLeft="15dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:singleLine="true"/>
         </LinearLayout>
 
 
@@ -73,11 +75,13 @@
                 android:drawableLeft="@drawable/pass_icon"
                 android:drawablePadding="8dp"
                 android:hint="비밀번호를 입력해주세요"
+                android:text="12345678"
                 android:inputType="textPassword"
                 android:textSize="14dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="20dp"/>
+                android:paddingBottom="20dp"
+                android:singleLine="true"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -99,7 +103,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="이메일 또는 비밀번호가 일치하지 않습니다"
+            android:layout_marginLeft="5dp"
+            android:text="이메일 또는 비밀번호가 일치하지 않습니다."
             android:textColor="@color/red" />
 
         <android.widget.Button
