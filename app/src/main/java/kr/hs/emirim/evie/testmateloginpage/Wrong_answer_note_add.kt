@@ -30,7 +30,7 @@ class Wrong_answer_note_add : AppCompatActivity() {
             startActivity(intent)
         }
         navGoal.setOnClickListener {
-            val intent = Intent(this, GoalMainActivity::class.java)
+            val intent = Intent(this, GoalMainListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
