@@ -14,7 +14,7 @@ class SubjectsListVIewModel(val dataSource: DataSource) : ViewModel() {
     val subjectsLiveData = dataSource.getSubjectList()
 
 //    val image = dataSource.getRandomFlowerImageAsset()
-    fun insertSubject(subjectName:String) {
+    fun insertSubject(subjectName : String?) {
         val newSubject = Subject(
             Random.nextLong(),
             subjectName,
@@ -32,9 +32,15 @@ class SubjectsListVIewModel(val dataSource: DataSource) : ViewModel() {
         val subjectList = subjectsLiveData.value
         return subjectList?.size ?: 0
     }
+
+    companion object {
+        fun insertSubject(subjectName: String?) {
+
+        }
+    }
 }
 
-class GoalsListViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+class SubjectsListViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SubjectsListVIewModel::class.java)) {
