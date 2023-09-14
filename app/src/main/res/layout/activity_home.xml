@@ -57,6 +57,7 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                     <ImageButton
+                        android:id="@+id/addSubjectBtn"
                         android:src="@drawable/add_image"
                         android:background="@drawable/bg_book_image"
                         android:layout_width="80dp"
