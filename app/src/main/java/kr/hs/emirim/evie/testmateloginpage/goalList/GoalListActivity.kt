@@ -25,8 +25,6 @@ import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 class GoalListActivity : AppCompatActivity() {
-
-    lateinit var beforeBtn : ImageView
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
     lateinit var goalEditBtn : android.widget.Button
@@ -46,7 +44,7 @@ class GoalListActivity : AppCompatActivity() {
         setContentView(R.layout.goal_list_page)
         supportActionBar?.hide()
 
-        beforeBtn = findViewById(R.id.before)
+        var beforeBtn = findViewById<ImageView>(R.id.before)
 
         beforeBtn.setOnClickListener{
             onBackPressed();
