@@ -37,7 +37,7 @@ class Calendar : AppCompatActivity() {
             startActivity(intent)
         }
         navGoal.setOnClickListener {
-            val intent = Intent(this, GoalListActivity::class.java)
+            val intent = Intent(this, GoalMainListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }

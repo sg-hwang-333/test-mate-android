@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
+import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
@@ -79,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         navGoal.setOnClickListener {
-            val intent = Intent(this, GoalListActivity::class.java)
+            val intent = Intent(this, GoalMainListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
