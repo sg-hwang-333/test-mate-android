@@ -63,7 +63,7 @@ class HomeActivity : AppCompatActivity() {
 
         addSubjectBtn.setOnClickListener {
             val intent = Intent(this@HomeActivity, AddSubjectActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
 
