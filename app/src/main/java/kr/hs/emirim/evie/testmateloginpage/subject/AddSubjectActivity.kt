@@ -35,6 +35,14 @@ class AddSubjectActivity : AppCompatActivity() {
     private fun addSubject() {
         val resultIntent = Intent()
 
+//        if (addSubjectName.text.isNullOrEmpty()) {
+//            setResult(Activity.RESULT_CANCELED, resultIntent)
+//        } else {
+//            val name = addSubjectName.text.toString()
+//            resultIntent.putExtra(SUBJECT_NAME, name)
+//            setResult(Activity.RESULT_OK, resultIntent)
+//        }
+//        finish()
         if (addSubjectName.text.isNullOrEmpty()) {
             setResult(Activity.RESULT_CANCELED, resultIntent)
         } else {

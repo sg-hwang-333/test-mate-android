@@ -33,6 +33,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"/>
                 <ImageView
+                    android:id="@+id/backBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/before_btn"
@@ -71,34 +72,82 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:text="@string/info_2_1"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/R14"
-                android:textColor="@color/black.400"
-                android:breakStrategy="simple"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="@string/info_2_2"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_gravity="top"
+                    android:text="1. "
+                    android:textSize="@dimen/R14"
+                    android:layout_width="20dp"
+                    android:textColor="@color/black.400"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="@string/info_2_1"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/R14"
+                    android:textColor="@color/black.400"
+                    android:breakStrategy="simple"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/R14"
-                android:textColor="@color/black.400"
-                android:breakStrategy="simple"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="@string/info_2_3"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_gravity="top"
+                    android:text="2. "
+                    android:textSize="@dimen/R14"
+                    android:layout_width="20dp"
+                    android:textColor="@color/black.400"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="@string/info_2_2"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/R14"
+                    android:textColor="@color/black.400"
+                    android:breakStrategy="simple"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/R14"
-                android:textColor="@color/black.400"
-                android:breakStrategy="simple"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="@string/info_2_4"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_gravity="top"
+                    android:text="3. "
+                    android:textSize="@dimen/R14"
+                    android:layout_width="20dp"
+                    android:textColor="@color/black.400"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="@string/info_2_3"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/R14"
+                    android:textColor="@color/black.400"
+                    android:breakStrategy="simple"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/R14"
-                android:textColor="@color/black.400"
-                android:breakStrategy="simple"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_gravity="top"
+                    android:text="4. "
+                    android:textSize="@dimen/R14"
+                    android:layout_width="20dp"
+                    android:textColor="@color/black.400"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="@string/info_2_4"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/R14"
+                    android:textColor="@color/black.400"
+                    android:breakStrategy="simple"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
 
 

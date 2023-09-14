@@ -135,6 +135,7 @@
         tools:ignore="MissingConstraints">
 
         <ImageButton
+            android:id="@+id/navHome"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -147,12 +148,14 @@
             android:layout_weight="1"
             android:src="@drawable/note_on" />
         <ImageButton
+            android:id="@+id/navGoal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/goal_off" />
         <ImageButton
+            android:id="@+id/navCal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

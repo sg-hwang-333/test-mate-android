@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -16,12 +15,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
-import kr.hs.emirim.evie.testmateloginpage.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 

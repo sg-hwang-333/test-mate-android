@@ -1,13 +1,11 @@
-package kr.hs.emirim.evie.testmateloginpage
+package kr.hs.emirim.evie.testmateloginpage.home
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
@@ -15,11 +13,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
-import kr.hs.emirim.evie.testmateloginpage.goalList.GoalsListViewModel
-import kr.hs.emirim.evie.testmateloginpage.goalList.GoalsListViewModelFactory
-import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
 import kr.hs.emirim.evie.testmateloginpage.subject.SUBJECT_NAME
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectHomeAdapter
@@ -31,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var navHome : ImageButton
     lateinit var navGoal : ImageButton
     lateinit var navCal : ImageButton
+
     lateinit var navWrong : ImageButton
 
     lateinit var addSubjectBtn : ImageButton
@@ -38,8 +35,7 @@ class HomeActivity : AppCompatActivity() {
     private val SubjectsListVIewModel by viewModels<SubjectsListVIewModel> {
         SubjectsListViewModelFactory(this)
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+   override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         supportActionBar?.hide()
@@ -67,7 +63,6 @@ class HomeActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
-
         navHome = findViewById(R.id.nav_home)
         navWrong = findViewById(R.id.nav_wrong)
         navGoal = findViewById(R.id.nav_goal)

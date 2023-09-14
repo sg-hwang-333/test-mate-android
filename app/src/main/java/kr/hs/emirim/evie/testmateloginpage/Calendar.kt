@@ -6,26 +6,24 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 
 class Calendar : AppCompatActivity() {
 
+    lateinit var navHome : ImageButton
+    lateinit var navWrong : ImageButton
+    lateinit var navGoal : ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
 
-        // navgation
-        var navHome : ImageButton = findViewById(R.id.nav_home)
-        var navWrong : ImageButton = findViewById(R.id.nav_wrong)
-        var navGoal : ImageButton = findViewById(R.id.nav_goal)
-        var navCal : ImageButton = findViewById(R.id.nav_cal)
+        navHome = findViewById(R.id.nav_home)
+        navGoal = findViewById(R.id.nav_goal)
+        navWrong = findViewById(R.id.nav_wrong)
 
-//        navHome.setOnClickListener {
-//            val intent = Intent(this, HomeActivity::class.java)
-//            startActivity(intent)
-//        }
-        navWrong.setOnClickListener {
-//            val intent = Intent(this, Wrong_answer_note::class.java)
+        navHome.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
@@ -34,8 +32,8 @@ class Calendar : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
-        navCal.setOnClickListener {
-            val intent = Intent(this, Calendar::class.java)
+        navWrong.setOnClickListener {
+            val intent = Intent(this, Wrong_answer_note::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
