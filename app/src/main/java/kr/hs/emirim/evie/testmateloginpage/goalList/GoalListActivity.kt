@@ -20,7 +20,9 @@ import com.example.myapplication.Calendar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 class GoalListActivity : AppCompatActivity() {
 
@@ -128,12 +130,12 @@ class GoalListActivity : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-//            val intent = Intent(this, Wrong_answer_note::class.java)
+            val intent = Intent(this, Wrong_answer_note::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
         navGoal.setOnClickListener {
-            val intent = Intent(this, GoalListActivity::class.java)
+            val intent = Intent(this, GoalMainListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
