@@ -95,16 +95,16 @@ class HomeActivity : AppCompatActivity() {
         // TODO : 과목별 화면으로 이동
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-
-        /* Inserts flower into viewModel. */
-        if (resultCode == Activity.RESULT_OK) {
-            intentData?.let { data ->
-                val subjectName = data.getStringExtra(SUBJECT_NAME)
-
-                SubjectsListVIewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
-            }
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, intentData)
+//
+//        /* Inserts flower into viewModel. */
+//        if (resultCode == Activity.RESULT_OK) {
+//            intentData?.let { data ->
+//                val subjectName = data.getStringExtra(SUBJECT_NAME)
+//
+//                SubjectsListVIewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
+//            }
+//        }
+//    }
 }
