@@ -14,6 +14,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
+import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalSubjectTabAdapter
 import kr.hs.emirim.evie.testmateloginpage.subject.SUBJECT_NAME
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectHomeAdapter
