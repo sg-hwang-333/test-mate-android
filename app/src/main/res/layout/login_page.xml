@@ -64,34 +64,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_view"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/edit_pw"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:drawableLeft="@drawable/pass_icon"
-                android:drawablePadding="8dp"
-                android:hint="비밀번호를 입력해주세요"
-                android:text="12345678"
-                android:inputType="textPassword"
-                android:textSize="14dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:singleLine="true"/>
+            android:background="@drawable/bg_white_view">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/edit_pw"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/pass_icon"
+                    android:drawablePadding="8dp"
+                    android:hint="비밀번호를 입력해주세요"
+                    android:text="12345678"
+                    android:inputType="textPassword"
+                    android:textSize="14dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:singleLine="true"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center|right"
-                android:paddingRight="20dp">
+                android:gravity="right|center_vertical">
                 <ImageButton
                     android:id="@+id/visible_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:layout_toRightOf="@id/edit_pw"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
                     android:src="@drawable/invisible_icon"/>
             </LinearLayout>
         </LinearLayout>
