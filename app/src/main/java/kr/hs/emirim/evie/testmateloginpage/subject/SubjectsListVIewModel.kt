@@ -32,12 +32,6 @@ class SubjectsListVIewModel(val dataSource: DataSource) : ViewModel() {
         val subjectList = subjectsLiveData.value
         return subjectList?.size ?: 0
     }
-
-    companion object {
-        fun insertSubject(subjectName: String?) {
-
-        }
-    }
 }
 
 class SubjectsListViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

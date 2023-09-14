@@ -1,5 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage.goalList
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -11,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +27,7 @@ import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 
 class GoalListActivity : AppCompatActivity() {
 
+    lateinit var beforeBtn : ImageView
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
     lateinit var goalEditBtn : android.widget.Button
@@ -38,16 +41,17 @@ class GoalListActivity : AppCompatActivity() {
         GoalsListViewModelFactory(this)
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.goal_list_page)
         supportActionBar?.hide()
 
-        //        Handler().postDelayed(Runnable { // 스플래시 화면 종료 후 가이드 페이지로 이동
-//            val intent = Intent(this@MainActivity, GoalMainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }, 3000)
+        beforeBtn = findViewById(R.id.before)
+
+        beforeBtn.setOnClickListener{
+            onBackPressed();
+        }
 
         bottomSheetView = layoutInflater.inflate(R.layout.goal_bottom_sheet, null)
         bottomSheetDialog = BottomSheetDialog(this)
@@ -82,7 +86,7 @@ class GoalListActivity : AppCompatActivity() {
 //            goalDescription.requestFocus()
 //        }
 
-
+        goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
         goalDeleteBtn = bottomSheetView.findViewById<Button>(R.id.bsv_delete_btn)
 
 
@@ -171,6 +175,10 @@ class GoalListActivity : AppCompatActivity() {
         else bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText("목표를 수정하세요")
 
         bottomSheetDialog.show()
+
+        goalEditBtn.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
 
         goalDeleteBtn.setOnClickListener {
 //            goalsAdapter.removeGoal()

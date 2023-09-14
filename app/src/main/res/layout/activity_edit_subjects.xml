@@ -23,12 +23,13 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
-<!--        <androidx.appcompat.widget.AppCompatImageButton-->
-<!--            android:layout_gravity="center"-->
-<!--            android:background="@color/white"-->
-<!--            android:src="@drawable/cancel"-->
-<!--            android:layout_width="24dp"-->
-<!--            android:layout_height="24dp"/>-->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/finish_edit_subject"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:src="@drawable/cancel"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
     </LinearLayout>
 
     <TextView
@@ -74,7 +75,7 @@
             android:orientation="vertical"
             android:columnCount="2"
             android:rowCount="3"
-            android:paddingLeft="50dp"
+            android:paddingLeft="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageButton

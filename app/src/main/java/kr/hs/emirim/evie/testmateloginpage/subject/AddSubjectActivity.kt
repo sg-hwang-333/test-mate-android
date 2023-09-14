@@ -13,12 +13,18 @@ const val SUBJECT_NAME = "새로운 과목"
 
 class AddSubjectActivity : AppCompatActivity() {
     private lateinit var addSubjectName: TextInputEditText
+    lateinit var finishBtn : androidx.appcompat.widget.AppCompatImageButton
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_subjects) //  TODO : 과목 추가 화면
         supportActionBar?.hide()
+
+        finishBtn = findViewById(R.id.finish_edit_subject)
+        finishBtn.setOnClickListener{
+            finish()
+        }
 
         findViewById<Button>(R.id.subjectConfirmBtn).setOnClickListener {
             finish()
