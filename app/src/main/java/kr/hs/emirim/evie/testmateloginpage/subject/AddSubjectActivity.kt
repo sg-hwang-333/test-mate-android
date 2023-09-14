@@ -1,5 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage.subject
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -8,19 +9,27 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import kr.hs.emirim.evie.testmateloginpage.R
 
-const val SUBJECT_NAME = "새로운 목표"
+const val SUBJECT_NAME = "새로운 과목"
 
 class AddSubjectActivity : AppCompatActivity() {
     private lateinit var addSubjectName: TextInputEditText
+    lateinit var finishBtn : androidx.appcompat.widget.AppCompatImageButton
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.add_flower_layout) //  TODO : 과목 추가 화면
-//
-//        findViewById<Button>(R.id.done_button).setOnClickListener {
-//           addFlower()
-//        }
-//        addSubjectName = findViewById(R.id.add_flower_name)
+        setContentView(R.layout.activity_edit_subjects) //  TODO : 과목 추가 화면
+        supportActionBar?.hide()
+
+        finishBtn = findViewById(R.id.finish_edit_subject)
+        finishBtn.setOnClickListener{
+            finish()
+        }
+
+        findViewById<Button>(R.id.subjectConfirmBtn).setOnClickListener {
+            finish()
+        }
+//        addSubjectName = findViewById(R.id.subjectName)
     }
 
     private fun addSubject() {
@@ -34,5 +43,13 @@ class AddSubjectActivity : AppCompatActivity() {
 //            setResult(Activity.RESULT_OK, resultIntent)
 //        }
 //        finish()
+        if (addSubjectName.text.isNullOrEmpty()) {
+            setResult(Activity.RESULT_CANCELED, resultIntent)
+        } else {
+            val name = addSubjectName.text.toString()
+            resultIntent.putExtra(SUBJECT_NAME, name)
+            setResult(Activity.RESULT_OK, resultIntent)
+        }
+        finish()
     }
 }

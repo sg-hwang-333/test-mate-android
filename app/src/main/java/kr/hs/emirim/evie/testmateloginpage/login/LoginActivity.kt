@@ -1,5 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage.login
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.GsonBuilder
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.SignUpActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,9 +26,11 @@ class LoginActivity : AppCompatActivity() {
     lateinit var editEmail : EditText
     private var isImageVisible = false
     lateinit var checkUser : TextView
+    lateinit var signupBtn : TextView
 
     lateinit var submitBtn : android.widget.Button
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_page)
@@ -90,6 +94,13 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             })
+        }
+
+        signupBtn = findViewById(R.id.signup_btn)
+        signupBtn.setOnClickListener {
+            val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent)
         }
     }
 }

@@ -3,11 +3,11 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="32dp"
     android:paddingBottom="24dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="312dp"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         <TextView
             android:layout_gravity="center"
             android:text="과목 편집"
-            android:textSize="@dimen/M18"
+            android:textSize="20dp"
             android:textColor="@color/black.800"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -24,6 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/finish_edit_subject"
             android:layout_gravity="center"
             android:background="@color/white"
             android:src="@drawable/cancel"
@@ -39,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
+        android:id="@+id/subjectName"
         android:layout_marginTop="4dp"
         android:background="@drawable/bg_white_view"
         android:hint="과목이름을 입력해 주세요"
@@ -48,7 +50,8 @@
         android:paddingLeft="16dp"
         android:paddingTop="13dp"
         android:layout_width="match_parent"
-        android:layout_height="46dp"/>
+        android:layout_height="46dp"
+        android:singleLine="true"/>
     <TextView
         android:layout_marginBottom="8dp"
         android:layout_marginTop="20dp"
@@ -72,6 +75,7 @@
             android:orientation="vertical"
             android:columnCount="2"
             android:rowCount="3"
+            android:paddingLeft="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageButton
@@ -131,6 +135,7 @@
             android:layout_width="0dp"
             android:layout_height="42dp"/>
         <android.widget.Button
+            android:id="@+id/subjectDeleteBtn"
             android:layout_marginRight="8dp"
             android:layout_width="70dp"
             android:layout_height="42dp"
@@ -142,6 +147,7 @@
             android:stateListAnimator="@null"/>
 
         <android.widget.Button
+            android:id="@+id/subjectConfirmBtn"
             android:layout_width="70dp"
             android:layout_height="42dp"
             android:text="확인"
