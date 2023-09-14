@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import com.example.myapplication.Calendar
-import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 class GoalMainListActivity : AppCompatActivity() {
     lateinit var navHome : ImageButton

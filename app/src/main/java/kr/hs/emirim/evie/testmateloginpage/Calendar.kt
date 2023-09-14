@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
-import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 class Calendar : AppCompatActivity() {
 

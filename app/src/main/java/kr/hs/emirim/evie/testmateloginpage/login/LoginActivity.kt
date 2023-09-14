@@ -10,7 +10,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.GsonBuilder
-import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import retrofit2.Call
 import retrofit2.Callback
