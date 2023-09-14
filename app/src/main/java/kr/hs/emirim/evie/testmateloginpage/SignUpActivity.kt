@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 
 class SignUpActivity : AppCompatActivity() {

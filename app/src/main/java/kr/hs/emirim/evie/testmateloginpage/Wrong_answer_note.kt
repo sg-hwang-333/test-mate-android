@@ -6,12 +6,15 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Calendar
+import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
+import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 class Wrong_answer_note : AppCompatActivity() {
 
     lateinit var addPage : Button
 
     lateinit var navHome : ImageButton
+    lateinit var navWrong : ImageButton
     lateinit var navGoal : ImageButton
     lateinit var navCal : ImageButton
 
@@ -27,6 +30,7 @@ class Wrong_answer_note : AppCompatActivity() {
         }
 
         navHome = findViewById(R.id.nav_home)
+        navWrong = findViewById(R.id.nav_wrong)
         navGoal = findViewById(R.id.nav_goal)
         navCal = findViewById(R.id.nav_cal)
 
@@ -35,8 +39,13 @@ class Wrong_answer_note : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
+        navWrong.setOnClickListener {
+            val intent = Intent(this, Wrong_answer_note::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent)
+        }
         navGoal.setOnClickListener {
-            val intent = Intent(this, GoalMainListActivity::class.java)
+            val intent = Intent(this, GoalListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
