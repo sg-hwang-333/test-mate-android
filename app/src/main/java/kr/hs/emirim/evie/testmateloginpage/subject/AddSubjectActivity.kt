@@ -26,7 +26,7 @@ class AddSubjectActivity : AppCompatActivity() {
     private fun addSubject() {
         val resultIntent = Intent()
 
-        if (addSubjectName.text.isNullOrEmpty()) {
+//        if (addSubjectName.text.isNullOrEmpty()) {
 //            setResult(Activity.RESULT_CANCELED, resultIntent)
 //        } else {
 //            val name = addSubjectName.text.toString()
@@ -34,5 +34,5 @@ class AddSubjectActivity : AppCompatActivity() {
 //            setResult(Activity.RESULT_OK, resultIntent)
 //        }
 //        finish()
-//    }
+    }
 }

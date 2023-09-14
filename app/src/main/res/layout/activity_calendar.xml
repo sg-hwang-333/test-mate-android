@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Calendar">
+    android:orientation="vertical">
 
     <!--  header   -->
     <include
@@ -109,36 +108,37 @@
 
     <!--navbar-->
     <LinearLayout
-        android:elevation="10dp"
-        android:background="@color/white"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageButton
+        android:id="@+id/nav_home"
+        android:background="@android:color/transparent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/home_off" />
-        <ImageButton
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/note_off" />
-        <ImageButton
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/goal_off" />
-        <ImageButton
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/cal_on" />
+        android:layout_weight="1"
+        android:src="@drawable/home_off" />
+    <ImageButton
+        android:id="@+id/nav_wrong"
+        android:background="@android:color/transparent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/note_off" />
+    <ImageButton
+        android:id="@+id/nav_goal"
+        android:background="@android:color/transparent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/goal_off" />
+    <ImageButton
+        android:id="@+id/nav_cal"
+        android:background="@android:color/transparent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/cal_on"/>
 
     </LinearLayout>
 

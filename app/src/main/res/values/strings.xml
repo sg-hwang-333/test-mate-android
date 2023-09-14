@@ -68,10 +68,10 @@
     <string name="info_1_1">시험메이트는 학생들의 자기주도 학습을 위해 개발된 \'시험지분석 공부법\'을 토대로 한 학습 어플입니다</string>
 
     <string name="info_2">시험메이트 사용방법</string>
-    <string name="info_2_1">1. 시험정보(일정, 난이도, 지난 시험 점수)를 과목정보에 입력한 후 학습을 시작합니다</string>
-    <string name="info_2_2">2. 과목별 자신의 학습목표를 세우며 자기주도 학습을 실천합니다</string>
-    <string name="info_2_3">3. 지난 시험이나 문제에서의 실수를 바로잡기 위해 오답노트를 작성합니다 </string>
-    <string name="info_2_4">4. 수시로 학습목표와 오답노트를 확인하며 자신의 학습을 점검하며 학습합니다</string>
+    <string name="info_2_1">시험정보(일정, 난이도, 지난 시험 점수)를 과목정보에 입력한 후 학습을 시작합니다</string>
+    <string name="info_2_2">과목별 자신의 학습목표를 세우며 자기주도 학습을 실천합니다</string>
+    <string name="info_2_3">지난 시험이나 문제에서의 실수를 바로잡기 위해 오답노트를 작성합니다 </string>
+    <string name="info_2_4">수시로 학습목표와 오답노트를 확인하며 자신의 학습을 점검하며 학습합니다</string>
 
     <string name="info_3">기능설명</string>
     <string name="info_3_1">메인페이지</string>

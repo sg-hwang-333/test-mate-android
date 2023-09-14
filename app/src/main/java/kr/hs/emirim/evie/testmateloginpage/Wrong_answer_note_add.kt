@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Calendar
+import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 class Wrong_answer_note_add : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -16,17 +17,11 @@ class Wrong_answer_note_add : AppCompatActivity() {
 
 // navgation
         var navHome : ImageButton = findViewById(R.id.nav_home)
-        var navWrong : ImageButton = findViewById(R.id.nav_wrong)
         var navGoal : ImageButton = findViewById(R.id.nav_goal)
         var navCal : ImageButton = findViewById(R.id.nav_cal)
 
         navHome.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-        }
-        navWrong.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
         navGoal.setOnClickListener {

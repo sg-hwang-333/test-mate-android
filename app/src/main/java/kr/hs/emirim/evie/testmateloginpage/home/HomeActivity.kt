@@ -1,26 +1,23 @@
-package kr.hs.emirim.evie.testmateloginpage
+package kr.hs.emirim.evie.testmateloginpage.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageButton
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Calendar
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import kr.hs.emirim.evie.testmateloginpage.goalList.GoalsListViewModel
-import kr.hs.emirim.evie.testmateloginpage.goalList.GoalsListViewModelFactory
-import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
+import kr.hs.emirim.evie.testmateloginpage.R
 
 class HomeActivity : AppCompatActivity() {
     lateinit var navHome : ImageButton
     lateinit var navGoal : ImageButton
     lateinit var navCal : ImageButton
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         supportActionBar?.hide()
+
+
 
         navHome = findViewById(R.id.nav_home)
         navGoal = findViewById(R.id.nav_goal)
