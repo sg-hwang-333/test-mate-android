@@ -25,8 +25,9 @@
 
     <LinearLayout
         android:layout_weight="1"
-        android:layout_margin="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="24dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp">
@@ -37,11 +38,19 @@
             android:layout_height="wrap_content">
 
             <android.widget.Button
-                android:background="@color/white"
+                android:background="@drawable/bottom_border"
                 android:outlineProvider="none"
                 android:text="국어"
                 android:textSize="@dimen/M16"
                 android:textColor="@color/green.500"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+            <android.widget.Button
+                android:background="@color/white"
+                android:outlineProvider="none"
+                android:text="수학"
+                android:textSize="@dimen/M16"
+                android:textColor="@color/black.300"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -49,7 +58,7 @@
         <!--  spinner  -->
         <LinearLayout
             android:background="@drawable/dialog_radius"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
@@ -64,7 +73,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
             android:padding="20dp"
             android:background="@drawable/radius"
