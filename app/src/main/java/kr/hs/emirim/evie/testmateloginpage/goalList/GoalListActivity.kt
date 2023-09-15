@@ -20,11 +20,11 @@ import com.example.myapplication.Calendar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 class GoalListActivity : AppCompatActivity() {
-
-    lateinit var beforeBtn : ImageView
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
     lateinit var goalEditBtn : android.widget.Button
@@ -44,7 +44,7 @@ class GoalListActivity : AppCompatActivity() {
         setContentView(R.layout.goal_list_page)
         supportActionBar?.hide()
 
-        beforeBtn = findViewById(R.id.before)
+        var beforeBtn = findViewById<ImageView>(R.id.before)
 
         beforeBtn.setOnClickListener{
             onBackPressed();
@@ -128,12 +128,12 @@ class GoalListActivity : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-//            val intent = Intent(this, Wrong_answer_note::class.java)
+            val intent = Intent(this, Wrong_answer_note::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
         navGoal.setOnClickListener {
-            val intent = Intent(this, GoalListActivity::class.java)
+            val intent = Intent(this, GoalMainListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
@@ -145,22 +145,22 @@ class GoalListActivity : AppCompatActivity() {
 
     }
 
-    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action === MotionEvent.ACTION_DOWN) {
-            val v = currentFocus
-            if (v is EditText) {
-                val outRect = Rect()
-                v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    v.clearFocus()
-                    val imm: InputMethodManager =
-                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
-                }
-            }
-        }
-        return super.dispatchTouchEvent(event)
-    }
+//    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+//        if (event?.action === MotionEvent.ACTION_DOWN) {
+//            val v = currentFocus
+//            if (v is EditText) {
+//                val outRect = Rect()
+//                v.getGlobalVisibleRect(outRect)
+//                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+//                    v.clearFocus()
+//                    val imm: InputMethodManager =
+//                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
+//                }
+//            }
+//        }
+//        return super.dispatchTouchEvent(event)
+//    }
 
     private fun adapterOnClick(goal: Goal) {
         clickedGoal = goal

@@ -24,6 +24,7 @@ import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 
 class GoalMainListActivity : AppCompatActivity() {
     lateinit var navHome : ImageButton
+    lateinit var navWrong : ImageButton
     lateinit var navGoal : ImageButton
     lateinit var navCal : ImageButton
 
@@ -54,11 +55,17 @@ class GoalMainListActivity : AppCompatActivity() {
         listView.setHasFixedSize(true)
 
         navHome = findViewById(R.id.nav_home)
+        navWrong = findViewById(R.id.nav_wrong)
         navGoal = findViewById(R.id.nav_goal)
         navCal = findViewById(R.id.nav_cal)
 
         navHome.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent)
+        }
+        navWrong.setOnClickListener {
+            val intent = Intent(this, Wrong_answer_note::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }

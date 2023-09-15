@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
+import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
@@ -79,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         navGoal.setOnClickListener {
-            val intent = Intent(this, GoalListActivity::class.java)
+            val intent = Intent(this, GoalMainListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
@@ -94,16 +95,16 @@ class HomeActivity : AppCompatActivity() {
         // TODO : 과목별 화면으로 이동
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-
-        /* Inserts flower into viewModel. */
-        if (resultCode == Activity.RESULT_OK) {
-            intentData?.let { data ->
-                val subjectName = data.getStringExtra(SUBJECT_NAME)
-
-                SubjectsListVIewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
-            }
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, intentData)
+//
+//        /* Inserts flower into viewModel. */
+//        if (resultCode == Activity.RESULT_OK) {
+//            intentData?.let { data ->
+//                val subjectName = data.getStringExtra(SUBJECT_NAME)
+//
+//                SubjectsListVIewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
+//            }
+//        }
+//    }
 }
