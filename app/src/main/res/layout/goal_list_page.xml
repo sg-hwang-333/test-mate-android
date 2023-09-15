@@ -79,7 +79,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/goalRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="330dp"
+                    android:layout_height="300dp"
                     android:nestedScrollingEnabled="true"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -87,7 +87,7 @@
                     android:id="@+id/buttonModify"
                     android:layout_width="match_parent"
                     android:layout_height="57dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/rectangle_round_1"
                     android:includeFontPadding="false"
                     android:text="추가하기"
