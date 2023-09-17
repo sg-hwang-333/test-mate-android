@@ -10,10 +10,10 @@ android {
     defaultConfig {
         applicationId "kr.hs.emirim.evie.testmateloginpage"
         minSdk 24
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
-        targetSdkVersion 32
+        targetSdk 34
+        versionCode 4
+        versionName "4"
+        targetSdkVersion 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
