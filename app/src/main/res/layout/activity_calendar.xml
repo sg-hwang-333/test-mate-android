@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -20,89 +19,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical">
-        <TextView
-            android:layout_marginTop="27dp"
-            android:text="2023년 6월"
-            android:textSize="@dimen/B24"
+
+        <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+            android:id="@+id/calendar_custom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:layout_marginTop="45dp"
-            android:id="@+id/calendar_header"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <!-- 달력의 요일 섹션 구성 -->
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:textColor="@color/red_1"
-                android:textSize="@dimen/M12"
-                android:text="@string/sun"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/M12"
-                android:text="@string/mon"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/M12"
-                android:text="@string/tus"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/M12"
-                android:text="@string/wen"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/M12"
-                android:text="@string/thu"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/M12"
-                android:text="@string/fri"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:textColor="@color/blue_1"
-                android:textSize="@dimen/M12"
-                android:text="@string/sat"/>
-
-
-        </LinearLayout>
-
-        <!-- 달력의 일자 섹션 구성 -->
-        <GridView
-            android:id="@+id/calendar_grid"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:numColumns="7"/>
 
     </LinearLayout>
 
