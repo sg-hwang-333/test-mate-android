@@ -1,9 +1,13 @@
 package kr.hs.emirim.evie.testmateloginpage.home
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.ImageButton
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +34,9 @@ class HomeActivity : AppCompatActivity() {
 
     lateinit var addSubjectBtn : ImageButton
 
+    lateinit var userGrade : TextView
+    lateinit var spinner: Spinner
+
     private val newSubjectActivityRequestCode = 1
     private val subjectsListViewModel by viewModels<SubjectsListViewModel> {
         SubjectsListViewModelFactory(this)
@@ -43,6 +50,22 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         supportActionBar?.hide()
+
+        val pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
+        val grade = pre.getString("usergrade", "고등학교 2학년 ") // 기본값 설정
+
+       val facilityList = arrayOf("선택하세요")
+
+        spinner = findViewById(R.id.spinner)
+
+       val facilityListWithUserGrade = mutableListOf(*facilityList, grade)
+       val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, facilityListWithUserGrade)
+// 스피너에 어댑터 설정
+       spinner.adapter = adapter
+
+
+        userGrade = findViewById<TextView>(R.id.userGrade)
+        userGrade.text = grade+"국어"
 
         addSubjectBtn = findViewById(R.id.addSubjectBtn)
         val subjectsAdapter = SubjectHomeAdapter { subject -> adapterOnClick(subject) } // TODO
