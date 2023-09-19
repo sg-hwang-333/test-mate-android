@@ -62,7 +62,92 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/userGrade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="고등학교 1학년 국어"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black.800"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:background="@drawable/bg_white_view">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/score_graph"
+                    android:scaleType="fitCenter"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp">
+                    <TextView
+                        android:id="@+id/dday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="D-30"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black.800"/>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/edit_info"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/dday"
+                        android:background="@null"
+                        android:layout_marginLeft="8sp"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:layout_marginTop="5dp">
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="난이도"
+                        android:textSize="14sp"
+                        android:textColor="@color/black.600"/>
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:rating="4"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/text"
+                        android:layout_marginLeft="5sp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right">
+                        <TextView
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp"
+                            android:background="@drawable/bg_light_green_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="목표점수 95점"
+                            android:textColor="#30B255"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_marginRight="20dp"
