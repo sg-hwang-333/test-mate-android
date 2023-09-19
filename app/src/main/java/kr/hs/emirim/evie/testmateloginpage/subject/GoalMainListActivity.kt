@@ -1,6 +1,5 @@
-package kr.hs.emirim.evie.testmateloginpage.goalmain
+package kr.hs.emirim.evie.testmateloginpage.subject
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -17,9 +16,6 @@ import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
-import kr.hs.emirim.evie.testmateloginpage.subject.SUBJECT_NAME
-import kr.hs.emirim.evie.testmateloginpage.subject.SubjectsListViewModel
-import kr.hs.emirim.evie.testmateloginpage.subject.SubjectsListViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 
 class GoalMainListActivity : AppCompatActivity() {
@@ -29,7 +25,7 @@ class GoalMainListActivity : AppCompatActivity() {
     lateinit var navCal : ImageButton
 
     private val goalMainSubjectsViewModel by viewModels<GoalMainSubjectsViewModel> {
-        SubjectsListViewModelFactory(this)
+        GoalMainViewModelFactory(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,17 +98,17 @@ class GoalMainListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-
-        /* Inserts flower into viewModel. */
-        if (resultCode == Activity.RESULT_OK) {
-            intentData?.let { data ->
-                val subjectName = data.getStringExtra(SUBJECT_NAME)
-
-                goalMainSubjectsViewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
-            }
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, intentData)
+//
+//        /* Inserts flower into viewModel. */
+//        if (resultCode == Activity.RESULT_OK) {
+//            intentData?.let { data ->
+//                val subjectName = data.getStringExtra(SUBJECT_NAME) // t
+//
+//                goalMainSubjectsViewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
+//            }
+//        }
+//    }
 
 }

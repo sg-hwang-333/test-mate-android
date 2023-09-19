@@ -1,4 +1,4 @@
-package kr.hs.emirim.evie.testmateloginpage.goalmain
+package kr.hs.emirim.evie.testmateloginpage.subject
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -34,7 +34,7 @@ class GoalMainSubjectsViewModel(val dataSource: DataSource) : ViewModel() {
     }
 }
 
-class SubjectsListViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+class GoalMainViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(GoalMainSubjectsViewModel::class.java)) {
