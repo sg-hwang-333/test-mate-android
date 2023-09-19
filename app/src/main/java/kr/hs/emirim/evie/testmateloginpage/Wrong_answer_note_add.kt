@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Calendar
-import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
+import kr.hs.emirim.evie.testmateloginpage.goalmain.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 class Wrong_answer_note_add : AppCompatActivity() {
