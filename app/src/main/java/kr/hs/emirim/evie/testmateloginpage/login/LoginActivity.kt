@@ -10,9 +10,10 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.GsonBuilder
+import kr.hs.emirim.evie.testmateloginpage.LoginResponse
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.SignUpActivity
+import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,13 +38,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login_page)
         supportActionBar?.hide()
 
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-
         var retrofit = Retrofit.Builder()
             .baseUrl("http://3.36.171.123:8086")
-//            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
