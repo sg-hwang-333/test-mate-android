@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import kr.hs.emirim.evie.testmateloginpage.goalmain.GoalMainListActivity
+import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
