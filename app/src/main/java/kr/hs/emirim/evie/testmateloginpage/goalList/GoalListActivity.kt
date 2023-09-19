@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kr.hs.emirim.evie.testmateloginpage.goalmain.GoalMainListActivity
+import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
@@ -59,18 +59,6 @@ class GoalListActivity : AppCompatActivity() {
 //        var goalChecked : AppCompatCheckBox = recyclerView.findViewById(R.id.goal_checked)
 
 
-//        goalEditText!!.setOnKeyListener(View.OnKeyListener { v, keyCode, event -> //Enter key Action
-//            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-//                //키패드 내리기
-//                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-//                imm.hideSoftInputFromWindow(goalEditText!!.getWindowToken(), 0)
-//
-//                //처리
-//                return@OnKeyListener true
-//            }
-//            false
-//        })
-
 
 //        goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
 //        goalEditBtn.setOnClickListener {
@@ -81,15 +69,6 @@ class GoalListActivity : AppCompatActivity() {
 
         goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
         goalDeleteBtn = bottomSheetView.findViewById<Button>(R.id.bsv_delete_btn)
-
-
-//        val rootView: View = findViewById(android.R.id.content)
-//        rootView.setOnTouchListener { _, _ ->
-//            .clearFocus()
-//            goalDescription.isFocusable = false
-//            goalDescription.isFocusableInTouchMode = false
-//            false // 터치 이벤트를 소비하지 않고 전달
-//        }
 
 
         goalsListViewModel.goalsLiveData.observe(
