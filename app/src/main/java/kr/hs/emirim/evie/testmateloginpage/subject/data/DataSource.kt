@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class DataSource(resources: Resources) {
-//    private val initialFlowerList = flowerList(resources)
-    private val subjectsLiveData = MutableLiveData(getInitialSubjects())
+    private val initialFlowerList = getInitialSubjects()
+    private val subjectsLiveData = MutableLiveData(initialFlowerList)
 
     fun addSubject(subject: Subject) {
         // TODO: api 연동해서 DB 에 저장해야 함
@@ -30,20 +30,6 @@ class DataSource(resources: Resources) {
         }
     }
 
-    /* Returns flower given an ID. */
-//    fun getGoalForId(id: Long): Subject? {  // 특정 ID에 해당하는 목표 데이터를 가져올
-//        val goals = goalsLiveData.value
-//        if (goals != null) {
-//            return goals.firstOrNull { subject -> subject.id == id }
-//        }
-//        /*
-//        goalsLiveData.value?.let { flowers ->
-//            return flowers.firstOrNull{ it.id == id}
-//        }
-//        */
-//        return null
-//    }
-
     fun getSubjectList(): LiveData<List<Subject>> {
         return subjectsLiveData
     }
@@ -52,31 +38,22 @@ class DataSource(resources: Resources) {
         Subject(
             id = 1,
             name = "국어",
-            ),
-        Subject(
-            id = 2,
-            name = "수학",
-        )
-//        ),
-//        Goal(
+            )
+//        Subject(
 //            id = 2,
-//            description = "기본적인 문학 용어들 파악하기",
-//            checked = false,
+//            name = "수학",
 //        ),
-//        Goal(
+//        Subject(
 //            id = 3,
-//            description = "독서량을 늘려서 읽는 속도 향상시키기",
-//            checked = false,
+//            name = "과학",
 //        ),
-//        Goal(
+//        Subject(
 //            id = 4,
-//            description = "나눠주신 자료 문제 분석하기",
-//            checked = false,
+//            name = "역사",
 //        ),
-//        Goal(
+//        Subject(
 //            id = 5,
-//            description = "작품에 대한 사전정보 암기하기",
-//            checked = false,
+//            name = "자바",
 //        )
     )
     companion object { // 데이터를 관리하고 제공하는 데 사용되는 클래스의 인스턴스를 만들지 않고도 호출하게 함

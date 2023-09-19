@@ -1,4 +1,4 @@
-package kr.hs.emirim.evie.testmateloginpage.goalmain
+package kr.hs.emirim.evie.testmateloginpage.subject
 
 import android.view.LayoutInflater
 import android.view.View

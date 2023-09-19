@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
+import kr.hs.emirim.evie.testmateloginpage.login.LoginActivity
 
 
 class SignUpActivity : AppCompatActivity() {
@@ -46,7 +47,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         btnJoin.setOnClickListener{
-            val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
+            val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }

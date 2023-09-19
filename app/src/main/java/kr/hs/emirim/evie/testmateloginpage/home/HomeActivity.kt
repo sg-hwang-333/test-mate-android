@@ -9,9 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
-import kr.hs.emirim.evie.testmateloginpage.goalmain.GoalMainListActivity
+import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
+import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainSubjectsViewModel
+import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
 import kr.hs.emirim.evie.testmateloginpage.subject.SUBJECT_NAME
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectHomeAdapter
@@ -32,6 +34,11 @@ class HomeActivity : AppCompatActivity() {
     private val subjectsListViewModel by viewModels<SubjectsListViewModel> {
         SubjectsListViewModelFactory(this)
     }
+
+    private val goalMainSubjectsViewModel by viewModels<GoalMainSubjectsViewModel> {
+        GoalMainViewModelFactory(this)
+    }
+
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -47,11 +54,11 @@ class HomeActivity : AppCompatActivity() {
         subjectsListViewModel.subjectsLiveData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this,
-        ) {
+         {
             it?.let { // goalsLiveData의 값이 null이 아닐 때 중괄호 코드 실행
                 subjectsAdapter.submitList(it as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
             }
-        }
+        })
 
         addSubjectBtn.setOnClickListener {
             val intent = Intent(this@HomeActivity, AddSubjectActivity::class.java)
@@ -99,6 +106,7 @@ class HomeActivity : AppCompatActivity() {
                val subjectName = data.getStringExtra(SUBJECT_NAME)
 
                subjectsListViewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
+               goalMainSubjectsViewModel.insertSubject(subjectName)
            }
        }
    }
