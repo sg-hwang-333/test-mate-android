@@ -1,51 +1,37 @@
-package kr.hs.emirim.evie.testmateloginpage.subject.data
+package kr.hs.emirim.evie.testmateloginpage.goalmain.data
 
 import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 
 class DataSource(resources: Resources) {
-//    private val initialFlowerList = flowerList(resources)
-    private val subjectsLiveData = MutableLiveData(getInitialSubjects())
+    private val goalSubjectsLiveData = MutableLiveData(getInitialSubjects())
 
     fun addSubject(subject: Subject) {
         // TODO: api 연동해서 DB 에 저장해야 함
-        val currentList = subjectsLiveData.value
+        val currentList = goalSubjectsLiveData.value
         if (currentList == null) {
-            subjectsLiveData.postValue(listOf(subject))
+            goalSubjectsLiveData.postValue(listOf(subject))
         } else {
             val updatedList = currentList.toMutableList() // 불변형 리스트로 변경
             updatedList.add(subject) // 뒤에 나오도록  - 앞으로 나오도록 add(0, goal)
-            subjectsLiveData.postValue(updatedList) // 관찰자에게 변경 사항 전달
+            goalSubjectsLiveData.postValue(updatedList) // 관찰자에게 변경 사항 전달
         }
     }
 
     fun removeSubject(subject: Subject) {
         // TODO: api 연동해서 DB 에 저장해야 함
-        val currentList = subjectsLiveData.value
+        val currentList = goalSubjectsLiveData.value
         if (currentList != null) {
             val updatedList = currentList.toMutableList()
             updatedList.remove(subject)
-            subjectsLiveData.postValue(updatedList)
+            goalSubjectsLiveData.postValue(updatedList)
         }
     }
 
-    /* Returns flower given an ID. */
-//    fun getGoalForId(id: Long): Subject? {  // 특정 ID에 해당하는 목표 데이터를 가져올
-//        val goals = goalsLiveData.value
-//        if (goals != null) {
-//            return goals.firstOrNull { subject -> subject.id == id }
-//        }
-//        /*
-//        goalsLiveData.value?.let { flowers ->
-//            return flowers.firstOrNull{ it.id == id}
-//        }
-//        */
-//        return null
-//    }
-
     fun getSubjectList(): LiveData<List<Subject>> {
-        return subjectsLiveData
+        return goalSubjectsLiveData
     }
 
     private fun getInitialSubjects() = listOf(
@@ -56,6 +42,10 @@ class DataSource(resources: Resources) {
         Subject(
             id = 2,
             name = "수학",
+        ),
+        Subject(
+            id = 3,
+            name = "과학",
         )
 //        ),
 //        Goal(

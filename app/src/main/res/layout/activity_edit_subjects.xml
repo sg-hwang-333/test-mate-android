@@ -52,7 +52,9 @@
         android:paddingTop="13dp"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:singleLine="true"/>
+        android:inputType="text"
+        android:maxLines="1"
+        android:imeOptions="actionDone"/>
     <TextView
         android:layout_marginBottom="8dp"
         android:layout_marginTop="20dp"

@@ -9,7 +9,7 @@ import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 import kotlin.random.Random
 
 
-class SubjectsListVIewModel(val dataSource: DataSource) : ViewModel() {
+class SubjectsListViewModel(val dataSource: DataSource) : ViewModel() {
 
     val subjectsLiveData = dataSource.getSubjectList()
 
@@ -37,9 +37,9 @@ class SubjectsListVIewModel(val dataSource: DataSource) : ViewModel() {
 class SubjectsListViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(SubjectsListVIewModel::class.java)) {
+        if (modelClass.isAssignableFrom(SubjectsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return SubjectsListVIewModel(
+            return SubjectsListViewModel(
                 dataSource = DataSource.getDataSource(context.resources)
             ) as T
         }

@@ -1,17 +1,13 @@
-package kr.hs.emirim.evie.testmateloginpage.subject
+package kr.hs.emirim.evie.testmateloginpage.goalmain
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 
 
@@ -40,14 +36,14 @@ class GoalSubjectTabAdapter(private val onClick: (Subject) -> Unit) :
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalSubjectTabAdapter.GoalSubjectTabHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalSubjectTabHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.goal_main_layout, parent, false)
 
         return GoalSubjectTabHolder(view, onClick)
     }
 
-    override fun onBindViewHolder(holder: GoalSubjectTabAdapter.GoalSubjectTabHolder, position: Int) {
+    override fun onBindViewHolder(holder: GoalSubjectTabHolder, position: Int) {
         val subject = getItem(position)
         holder.bind(subject)
     }

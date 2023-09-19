@@ -1,13 +1,9 @@
 package kr.hs.emirim.evie.testmateloginpage.goalList
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -18,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kr.hs.emirim.evie.testmateloginpage.GoalMainListActivity
+import kr.hs.emirim.evie.testmateloginpage.goalmain.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal

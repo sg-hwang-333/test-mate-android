@@ -37,7 +37,6 @@ class GoalsAdapter(private val onClick: (Goal) -> Unit) :
         /* UI에 정보 바인딩(넣는 메서드) */
         fun bind(goal: Goal) {
             currentGoal = goal
-
             goalEditText.setText(goal.description)
             goalCheckBox.isChecked = goal.checked
         }
@@ -58,8 +57,7 @@ class GoalsAdapter(private val onClick: (Goal) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: GoalViewHolder, position: Int) {
-        val goal = getItem(position)
-        holder.bind(goal)
+        holder.bind(getItem(position)) // getItem(position) : 현재 아이템
     }
 
 //    override fun getItemViewType(position: Int): Int {

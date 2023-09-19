@@ -43,12 +43,6 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectHomeHolder {
-//        val layoutResId = if (viewType == 1) {
-//            R.layout.goal_layout_checked // goalCheckBox가 true인 경우에는 다른 레이아웃 사용
-//        } else {
-//            R.layout.goal_layout // 그 외에는 기존 레이아웃 사용
-//        }
-
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.home_subject_layout, parent, false)
 

@@ -29,7 +29,7 @@
             android:exported="true"/>
 
         <activity
-            android:name=".GoalMainListActivity"
+            android:name=".goalmain.GoalMainListActivity"
             android:exported="true" />
         <activity
             android:name=".SignUpActivity"

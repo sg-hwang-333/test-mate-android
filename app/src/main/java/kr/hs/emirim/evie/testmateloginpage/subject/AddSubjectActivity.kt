@@ -47,17 +47,4 @@ class AddSubjectActivity : AppCompatActivity() {
         }
         finish()
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-
-        /* Inserts flower into viewModel. */
-//        if (resultCode == Activity.RESULT_OK) {
-//            intentData?.let { data ->
-//                val subjectName = data.getStringExtra(SUBJECT_NAME)
-//
-//                SubjectsListVIewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
-//            }
-//        }
-    }
 }
