@@ -3,6 +3,7 @@ package kr.hs.emirim.evie.testmateloginpage
 import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
@@ -18,7 +19,9 @@ class SignUpActivity : AppCompatActivity() {
     lateinit var btnGradeDialog : android.widget.Button
     lateinit var beforeBtn : ImageView
 
-    var arrGrade = arrayOf<String>("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
+    lateinit var pre : SharedPreferences
+
+    var arrGrade = arrayOf<String>("중학교 1학년 ", "중학교 2학년 ", "중학교 3학년 ", "고등학교 1학년 ", "고등학교 2학년 ", "고등학교 3학년 ")
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +36,17 @@ class SignUpActivity : AppCompatActivity() {
             onBackPressed();
         }
 
+        pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
+        val editor = pre.edit()
+
         btnGradeDialog.setOnClickListener {
             var dlg = AlertDialog.Builder(this@SignUpActivity, android.R.style.Theme_DeviceDefault_Light_Dialog_Alert)
             dlg.setTitle("학년정보")
             dlg.setItems(arrGrade) {dialog, index ->
                 btnGradeDialog.text = arrGrade[index]
+                editor.putString("usergrade", arrGrade[index])
+                editor.apply()
+//                getPreferences()
             }
             dlg.setNegativeButton("닫기") { dialog, which ->
                 // 버튼 클릭 이벤트 처리 코드
@@ -52,6 +61,9 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+    fun getPreferences() {
+        val userGrade = pre.getString("usergrade", "고등학교 2학년 ")
     }
 
 }
