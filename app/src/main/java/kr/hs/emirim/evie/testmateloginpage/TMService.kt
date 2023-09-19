@@ -1,9 +1,8 @@
-package kr.hs.emirim.evie.testmateloginpage.login
+package kr.hs.emirim.evie.testmateloginpage
 
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
+import retrofit2.http.DELETE
 import retrofit2.http.POST
 
 //interface LoginService {
@@ -25,7 +24,13 @@ import retrofit2.http.POST
 
 
 data class LoginResponse(val message: String)
+
+data class GoalListResponse(val message : String)
+
 interface TMService {
     @POST("/api/login")
     fun requestLogin(@Body loginData: Map<String, String>) : Call<LoginResponse>
+
+    @DELETE("/goal/delete")
+    fun requestGoalDelete(@Body goalListData : Map<String, Long>) : Call<GoalListResponse>
 }
