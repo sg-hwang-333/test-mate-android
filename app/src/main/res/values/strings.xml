@@ -26,12 +26,16 @@
 
     <string name="app_name">시험메이트</string>
     <string name="user_name">김미림님</string>
+    <string name="user_email">mirim@e-mirim.hs.kr</string>
 
     <string name="add">추가하기</string>
     <string name="save">저장</string>
     <string name="cancle">취소</string>
     <string name="edit">수정</string>
     <string name="delete">삭제</string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
 
     <string name="reason_mistake">실수</string>
     <string name="reason_timeout">시간 부족</string>

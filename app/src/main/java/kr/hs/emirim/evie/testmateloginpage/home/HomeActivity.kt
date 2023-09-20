@@ -9,7 +9,10 @@ import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
@@ -39,6 +42,8 @@ class HomeActivity : AppCompatActivity() {
     lateinit var userGrade : TextView
     lateinit var spinner: Spinner
 
+    lateinit var toggle: ImageButton
+
     private val newSubjectActivityRequestCode = 1
     private val subjectsListViewModel by viewModels<SubjectsListViewModel> {
         SubjectsListViewModelFactory(this)
@@ -49,12 +54,20 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private lateinit var binding : ActivityHomeBinding
+    private lateinit var drawerLayout: DrawerLayout
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
        val view = binding.root
         setContentView(view)
         supportActionBar?.hide()
+
+//       toggle = findViewById(R.id.toggle)
+//       drawerLayout = findViewById(R.id.drawer_layout)
+//       toggle.setOnClickListener {
+//           drawerLayout.openDrawer(GravityCompat.START)
+//
+//       }
 
         val pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
         val grade = pre.getString("usergrade", "고등학교 2학년 ") // 기본값 설정
