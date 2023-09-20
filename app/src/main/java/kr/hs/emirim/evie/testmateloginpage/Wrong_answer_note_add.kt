@@ -3,14 +3,19 @@ package kr.hs.emirim.evie.testmateloginpage
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.myapplication.Calendar
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 class Wrong_answer_note_add : AppCompatActivity() {
+
+    lateinit var addBtn : android.widget.Button
 
     lateinit var navHome : ImageButton
     lateinit var navWrong : ImageButton
@@ -22,9 +27,16 @@ class Wrong_answer_note_add : AppCompatActivity() {
         setContentView(R.layout.activity_wrong_answer_note_add)
 
         var beforeBtn = findViewById<ImageView>(R.id.before)
+//        var WrongList = findViewById<LinearLayout>(R.id.wrong)
 
         beforeBtn.setOnClickListener{
             onBackPressed();
+        }
+
+        addBtn = findViewById(R.id.addBtn)
+        addBtn.setOnClickListener {
+//            WrongList.visibility = View.VISIBLE
+            onBackPressed()
         }
 
 // navgation

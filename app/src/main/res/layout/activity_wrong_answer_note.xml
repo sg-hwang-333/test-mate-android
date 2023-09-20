@@ -53,26 +53,36 @@
                 android:textColor="@color/black.300"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content" />
+            <android.widget.Button
+                android:background="@color/white"
+                android:outlineProvider="none"
+                android:text="영어"
+                android:textSize="@dimen/M16"
+                android:textColor="@color/black.300"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <!--  spinner  -->
         <LinearLayout
+            android:layout_marginLeft="20dp"
             android:background="@drawable/dialog_radius"
-            android:layout_marginTop="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
+            android:layout_marginTop="24dp"
+            android:layout_width="173dp"
+            android:layout_height="36dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinnerWrong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/wrong"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
             android:padding="20dp"
