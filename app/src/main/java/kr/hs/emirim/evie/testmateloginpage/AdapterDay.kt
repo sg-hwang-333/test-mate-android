@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.databinding.ListItemDayBinding
+import java.util.Calendar
 import java.util.Date
 
 class AdapterDay(private val tempMonth: Int, private val dayList: MutableList<Date>) :
@@ -31,16 +32,25 @@ class AdapterDay(private val tempMonth: Int, private val dayList: MutableList<Da
 
         binding.itemDayText.text = date.date.toString()
 
-        binding.itemDayText.setTextColor(
-            when (position % 7) {
-                0 -> Color.RED
-                6 -> Color.BLUE
-                else -> Color.BLACK
-            }
-        )
+        val today = Calendar.getInstance()
+        if (today.get(Calendar.YEAR) == date.year &&
+            today.get(Calendar.MONTH) == date.month &&
+            today.get(Calendar.DAY_OF_MONTH) == date.date) {
+            binding.itemDayText.setTextColor(Color.WHITE)
+            binding.itemDayText.setBackgroundResource(R.drawable.today_background)
+        } else {
+            // 다른 날짜의 스타일 설정
+            binding.itemDayText.setTextColor(
+                when (position % 7) {
+                    0 -> Color.RED
+                    6 -> Color.BLUE
+                    else -> Color.BLACK
+                }
+            )
 
-        if (tempMonth != date.month) {
-            binding.itemDayText.alpha = 0.4f
+            if (tempMonth != date.month) {
+                binding.itemDayText.alpha = 0.4f
+            }
         }
     }
 
