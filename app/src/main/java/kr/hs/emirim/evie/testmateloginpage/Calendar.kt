@@ -23,26 +23,26 @@ class Calendar : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
-// 뷰 바인딩 클래스 가져오기
-        val binding = ActivityCalendarBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-// 뷰 바인딩 클래스에서 RecyclerView에 대한 참조 가져오기
-        val calendarCustomRecyclerView = binding.calendarCustom
-
-// 어댑터 및 레이아웃 매니저 초기화
-        val monthListAdapter = AdapterMonth()
-        val monthListManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        calendarCustomRecyclerView.layoutManager = monthListManager
-        calendarCustomRecyclerView.adapter = monthListAdapter
-
-// 스크롤 위치 설정 (예: 중간 위치)
-        val initialScrollPosition = Int.MAX_VALUE / 2
-        calendarCustomRecyclerView.scrollToPosition(initialScrollPosition)
-
-// PagerSnapHelper 연결
-        val snap = PagerSnapHelper()
-        snap.attachToRecyclerView(calendarCustomRecyclerView)
+//// 뷰 바인딩 클래스 가져오기
+//        val binding = ActivityCalendarBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+//
+//// 뷰 바인딩 클래스에서 RecyclerView에 대한 참조 가져오기
+//        val calendarCustomRecyclerView = binding.calendarCustom
+//
+//// 어댑터 및 레이아웃 매니저 초기화
+//        val monthListAdapter = AdapterMonth()
+//        val monthListManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        calendarCustomRecyclerView.layoutManager = monthListManager
+//        calendarCustomRecyclerView.adapter = monthListAdapter
+//
+//// 스크롤 위치 설정 (예: 중간 위치)
+//        val initialScrollPosition = Int.MAX_VALUE / 2
+//        calendarCustomRecyclerView.scrollToPosition(initialScrollPosition)
+//
+//// PagerSnapHelper 연결
+//        val snap = PagerSnapHelper()
+//        snap.attachToRecyclerView(calendarCustomRecyclerView)
 
         navHome = findViewById(R.id.nav_home)
         navWrong = findViewById(R.id.nav_wrong)
