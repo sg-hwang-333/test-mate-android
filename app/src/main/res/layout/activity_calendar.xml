@@ -13,19 +13,31 @@
 
     <!--Calendar-->
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
-            android:id="@+id/calendar_custom"
-            android:layout_width="match_parent"
+        <TextView
+            android:text="2023년 9월"
+            android:textSize="@dimen/B24"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black.800"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <ImageView
+            android:src="@drawable/Calendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+
+<!--            android:id="@+id/calendar_custom"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
 
     </LinearLayout>
 
