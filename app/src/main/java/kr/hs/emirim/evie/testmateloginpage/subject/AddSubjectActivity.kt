@@ -57,6 +57,8 @@ class AddSubjectActivity : AppCompatActivity() {
         finish()
     }
 }
+
+// 다이얼로그로 띄우는 코드
 //class AddSubjectActivity : DialogFragment() {
 //
 //    private var _binding: ActivityEditSubjectsBinding? = null

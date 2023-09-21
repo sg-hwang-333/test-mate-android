@@ -9,7 +9,6 @@ class DataSource(resources: Resources) {
     private val subjectsLiveData = MutableLiveData(initialFlowerList)
 
     fun addSubject(subject: Subject) {
-        // TODO: api 연동해서 DB 에 저장해야 함
         val currentList = subjectsLiveData.value
         if (currentList == null) {
             subjectsLiveData.postValue(listOf(subject))
@@ -21,7 +20,6 @@ class DataSource(resources: Resources) {
     }
 
     fun removeSubject(subject: Subject) {
-        // TODO: api 연동해서 DB 에 저장해야 함
         val currentList = subjectsLiveData.value
         if (currentList != null) {
             val updatedList = currentList.toMutableList()

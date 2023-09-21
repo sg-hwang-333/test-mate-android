@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login_page)
         supportActionBar?.hide()
 
+        //api 연결을 위한 Retrofit 라이브러리 사용
         var retrofit = Retrofit.Builder()
             .baseUrl("http://3.36.171.123:8086")
             .addConverterFactory(GsonConverterFactory.create())
