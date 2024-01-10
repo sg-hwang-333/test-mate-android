@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.login.LoginActivity
 
-
 class SignUpActivity : AppCompatActivity() {
 
     lateinit var btnJoin : android.widget.Button
