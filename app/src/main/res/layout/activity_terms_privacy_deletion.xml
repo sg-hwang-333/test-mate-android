@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
+                android:paddingLeft="25dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="이용약관"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"/>
+                <ImageView
+                    android:id="@+id/backBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/before_btn"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_medium"
+                android:text="제5조(개인정보의 파기절차 및 파기방법)
+\n① < 시험메이트 > 은(는) 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.
+\n② 정보주체로부터 동의받은 개인정보 보유기간이 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관장소를 달리하여 보존합니다.
+\n1. 법령 근거 : 회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별․인증, 회원자격 유지․관리, 서비스 부정이용 방지를 목적으로 개인정보를 처리합니다.
+\n2. 보존하는 개인정보 항목 : 이메일, 비밀번호, 이름, 학년정보
+\n③ 개인정보 파기의 절차 및 방법은 다음과 같습니다.
+\n1. 파기절차
+\n< 시험메이트 > 은(는) 파기 사유가 발생한 개인정보를 선정하고, < 시험메이트 > 의 개인정보 보호책임자의 승인을 받아 개인정보를 파기합니다.
+\n2. 파기방법
+\n전자적 파일 형태의 정보는 기록을 재생할 수 없는 기술적 방법을 사용합니다"
+                android:textColor="@color/black.300"
+                android:textSize="@dimen/M14" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

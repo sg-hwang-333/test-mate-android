@@ -20,28 +20,25 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_marginBottom="50dp"
-                android:paddingLeft="12dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp">
-
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
+                android:paddingLeft="25dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/join"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"/>
                 <ImageView
-                    android:id="@+id/before"
+                    android:id="@+id/backBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/before_btn" />
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:gravity="center"
-                    android:text="회원가입"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:src="@drawable/before_btn"
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
 
             <LinearLayout
