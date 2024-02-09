@@ -74,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
 
        val facilityList = arrayOf("선택하세요")
 
-        spinner = findViewById(R.id.spinner)
+//        spinner = findViewById(R.id.spinner)
 
        val facilityListWithUserGrade = mutableListOf(*facilityList, grade)
        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, facilityListWithUserGrade)

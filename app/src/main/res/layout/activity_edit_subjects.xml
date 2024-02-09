@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:background="@color/white"
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="24dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="312dp"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center_vertical">
     <LinearLayout
-        android:layout_marginTop="32dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="30dp">
@@ -33,7 +32,6 @@
             android:layout_width="24dp"
             android:layout_height="24dp"/>
     </LinearLayout>
-
     <TextView
         android:layout_marginTop="40dp"
         android:text="과목이름"
@@ -53,9 +51,7 @@
         android:paddingTop="13dp"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:inputType="text"
-        android:maxLines="1"
-        android:imeOptions="actionDone"/>
+        android:singleLine="true"/>
     <TextView
         android:layout_marginBottom="8dp"
         android:layout_marginTop="20dp"
@@ -79,6 +75,7 @@
             android:orientation="vertical"
             android:columnCount="2"
             android:rowCount="3"
+            android:paddingLeft="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageButton
@@ -124,10 +121,8 @@
                 android:src="@drawable/book_black"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
-
         </GridLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_marginTop="32dp"
         android:orientation="horizontal"
@@ -148,7 +143,6 @@
             android:textSize="@dimen/M16"
             android:gravity="center"
             android:stateListAnimator="@null"/>
-
         <android.widget.Button
             android:id="@+id/subjectConfirmBtn"
             android:layout_width="70dp"
@@ -159,6 +153,5 @@
             android:textSize="@dimen/M16"
             android:gravity="center"
             android:stateListAnimator="@null"/>
-
     </LinearLayout>
 </LinearLayout>

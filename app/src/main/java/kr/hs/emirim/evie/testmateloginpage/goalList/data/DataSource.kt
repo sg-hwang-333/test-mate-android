@@ -26,7 +26,6 @@ class DataSource(resources: Resources) {
 
     fun addGoal(goal: Goal) {
 //        goal.id += 1
-        // TODO: api 연동해서 DB 에 저장해야 함
         val currentList = goalsLiveData.value
         if (currentList == null) {
             goalsLiveData.postValue(listOf(goal))
@@ -38,7 +37,6 @@ class DataSource(resources: Resources) {
     }
 
     fun removeGoal(goal: Goal) {
-        // TODO: api 연동해서 DB 에 저장해야 함
         val currentList = goalsLiveData.value
         if (currentList != null) {
             val updatedList = currentList.toMutableList()

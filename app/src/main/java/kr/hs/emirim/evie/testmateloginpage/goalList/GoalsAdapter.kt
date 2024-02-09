@@ -44,12 +44,6 @@ class GoalsAdapter(private val onClick: (Goal) -> Unit) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalViewHolder {
-//        val layoutResId = if (viewType == 1) {
-//            R.layout.goal_layout_checked // goalCheckBox가 true인 경우에는 다른 레이아웃 사용
-//        } else {
-//            R.layout.goal_layout // 그 외에는 기존 레이아웃 사용
-//        }
-
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.goal_layout, parent, false)
 
