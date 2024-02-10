@@ -202,9 +202,18 @@
 
                 </LinearLayout>
 
-
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/btn_gray"
+        android:backgroundTint="@color/green.300"
+        android:text="다음"
+        android:textColor="@color/white"/>
 </LinearLayout>
