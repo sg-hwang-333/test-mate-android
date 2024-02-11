@@ -16,11 +16,16 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.DefaultValueFormatter
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
 import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityCalendarBinding
 import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityHomeBinding
+import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainSubjectsViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
@@ -31,15 +36,28 @@ import kr.hs.emirim.evie.testmateloginpage.subject.SubjectsListViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 
 class HomeActivity : AppCompatActivity() {
-    lateinit var navHome : ImageButton
-    lateinit var navGoal : ImageButton
-    lateinit var navCal : ImageButton
+    // 시험기록 데이터 생성
+    val testRecordDataList: List<TestData> = listOf(
+        TestData("1학년 2학기 기말",75),
+        TestData("1학년 2학기 중간",60),
+        TestData("1학년 1학기 기말",80),
+        TestData("1학년 1학기 중간",100),
+        TestData("@학년 @학기 중간",89),
+        TestData("@학년 @학기 중간",91),
+        TestData("@학년 @학기 중간",78),
+        TestData("@학년 @학기 중간",96)
+    )
 
-    lateinit var navWrong : ImageButton
+    lateinit var navHome: ImageButton
+    lateinit var navGoal: ImageButton
+    lateinit var navCal: ImageButton
 
-    lateinit var addSubjectBtn : ImageButton
+    lateinit var navWrong: ImageButton
 
-    lateinit var userGrade : TextView
+    lateinit var addSubjectBtn: ImageButton
+    lateinit var editTestRecordBtn: ImageButton
+
+    lateinit var userGrade: TextView
     lateinit var spinner: Spinner
 
     lateinit var toggle: ImageButton
@@ -53,12 +71,46 @@ class HomeActivity : AppCompatActivity() {
         GoalMainViewModelFactory(this)
     }
 
-    private lateinit var binding : ActivityHomeBinding
+    private lateinit var binding: ActivityHomeBinding
     private lateinit var drawerLayout: DrawerLayout
-   override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val linechart = findViewById<LineChart>(R.id.test_record_chart)
+        val xAxis = linechart.xAxis
+
+        val entries: MutableList<Entry> = mutableListOf() // Entry : 데이터 포인트를 나타내는 클래스
+        for (i in testRecordDataList.indices){
+            entries.add(Entry(i.toFloat(), testRecordDataList[i].score.toFloat()))
+        }
+        val lineDataSet = LineDataSet(entries,"entries")
+
+        lineDataSet.apply {
+            color = resources.getColor(R.color.black, null)
+            circleRadius = 5f
+            lineWidth = 3f
+            setCircleColor(resources.getColor(R.color.purple_700, null))
+            circleHoleColor = resources.getColor(R.color.purple_700, null)
+            setDrawHighlightIndicators(false)
+            setDrawValues(true) // 숫자표시
+            valueTextColor = resources.getColor(R.color.black, null)
+            valueFormatter = DefaultValueFormatter(0)  // 소숫점 자릿수 설정
+            valueTextSize = 10f
+        }
+
+        //차트 전체 설정
+        linechart.apply {
+            axisRight.isEnabled = false   //y축 사용여부
+            axisLeft.isEnabled = false
+            legend.isEnabled = false    //legend 사용여부
+            description.isEnabled = false //주석
+            isDragXEnabled = true   // x 축 드래그 여부
+            isScaleYEnabled = false //y축 줌 사용여부
+            isScaleXEnabled = false //x축 줌 사용여부
+        }
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
-       val view = binding.root
+        val view = binding.root
         setContentView(view)
         supportActionBar?.hide()
 
@@ -72,24 +124,29 @@ class HomeActivity : AppCompatActivity() {
         val pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
         val grade = pre.getString("usergrade", "고등학교 2학년 ") // 기본값 설정
 
-       val facilityList = arrayOf("선택하세요")
+        val facilityList = arrayOf("선택하세요")
 
 //        spinner = findViewById(R.id.spinner)
 
-       val facilityListWithUserGrade = mutableListOf(*facilityList, grade)
-       val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, facilityListWithUserGrade)
+        val facilityListWithUserGrade = mutableListOf(*facilityList, grade)
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_dropdown_item,
+            facilityListWithUserGrade
+        )
 // 스피너에 어댑터 설정
-       spinner.adapter = adapter
+        spinner.adapter = adapter
 
 
         userGrade = findViewById<TextView>(R.id.userGrade)
-        userGrade.text = grade+"국어"
+        userGrade.text = grade + "국어"
 
         addSubjectBtn = findViewById(R.id.addSubjectBtn)
         val subjectsAdapter = SubjectHomeAdapter { subject -> adapterOnClick(subject) } // TODO
         val recyclerView: RecyclerView = findViewById(R.id.subjectRecyclerView)
 
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) // 수평 레이아웃 방향 설정
+        recyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) // 수평 레이아웃 방향 설정
         recyclerView.adapter = subjectsAdapter
 
         subjectsListViewModel.subjectsLiveData.observe(
@@ -111,6 +168,12 @@ class HomeActivity : AppCompatActivity() {
 //           val dialog = AddSubjectActivity()
 //           dialog.show(supportFragmentManager, "CustomDialog")
 //       }
+
+        editTestRecordBtn = findViewById(R.id.edit_test_record_btn)
+        editTestRecordBtn.setOnClickListener {
+
+        }
+
 
         navHome = findViewById(R.id.nav_home)
         navWrong = findViewById(R.id.nav_wrong)
@@ -137,23 +200,23 @@ class HomeActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
-   } // onCreate
+    } // onCreate
 
-   private fun adapterOnClick(subject: Subject) {
+    private fun adapterOnClick(subject: Subject) {
         // TODO : 과목별 화면으로 이동
-   }
+    }
 
-   override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-       super.onActivityResult(requestCode, resultCode, intentData)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intentData)
 
-       /* Inserts flower into viewModel. */
-       if (resultCode == Activity.RESULT_OK) {
-           intentData?.let { data ->
-               val subjectName = data.getStringExtra(SUBJECT_NAME)
+        /* Inserts flower into viewModel. */
+        if (resultCode == Activity.RESULT_OK) {
+            intentData?.let { data ->
+                val subjectName = data.getStringExtra(SUBJECT_NAME)
 
-               subjectsListViewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
-               goalMainSubjectsViewModel.insertSubject(subjectName)
-           }
-       }
-   }
+                subjectsListViewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
+                goalMainSubjectsViewModel.insertSubject(subjectName)
+            }
+        }
+    }
 }
