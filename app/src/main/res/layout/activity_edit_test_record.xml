@@ -35,11 +35,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
         <HorizontalScrollView
             android:id="@+id/scroll_view_graph"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="250dp"
             android:scrollbars="horizontal"
             android:fillViewport="true">
             <LinearLayout
