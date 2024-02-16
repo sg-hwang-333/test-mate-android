@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
@@ -17,9 +18,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.DefaultValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
@@ -36,17 +40,6 @@ import kr.hs.emirim.evie.testmateloginpage.subject.SubjectsListViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 
 class HomeActivity : AppCompatActivity() {
-    // 시험기록 데이터 생성
-    val testRecordDataList: List<TestData> = listOf(
-        TestData("1학년 2학기 기말",75),
-        TestData("1학년 2학기 중간",60),
-        TestData("1학년 1학기 기말",80),
-        TestData("1학년 1학기 중간",100),
-        TestData("@학년 @학기 중간",89),
-        TestData("@학년 @학기 중간",91),
-        TestData("@학년 @학기 중간",78),
-        TestData("@학년 @학기 중간",96)
-    )
 
     lateinit var navHome: ImageButton
     lateinit var navGoal: ImageButton
@@ -76,38 +69,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val linechart = findViewById<LineChart>(R.id.test_record_chart)
-        val xAxis = linechart.xAxis
 
-        val entries: MutableList<Entry> = mutableListOf() // Entry : 데이터 포인트를 나타내는 클래스
-        for (i in testRecordDataList.indices){
-            entries.add(Entry(i.toFloat(), testRecordDataList[i].score.toFloat()))
-        }
-        val lineDataSet = LineDataSet(entries,"entries")
-
-        lineDataSet.apply {
-            color = resources.getColor(R.color.black, null)
-            circleRadius = 5f
-            lineWidth = 3f
-            setCircleColor(resources.getColor(R.color.purple_700, null))
-            circleHoleColor = resources.getColor(R.color.purple_700, null)
-            setDrawHighlightIndicators(false)
-            setDrawValues(true) // 숫자표시
-            valueTextColor = resources.getColor(R.color.black, null)
-            valueFormatter = DefaultValueFormatter(0)  // 소숫점 자릿수 설정
-            valueTextSize = 10f
-        }
-
-        //차트 전체 설정
-        linechart.apply {
-            axisRight.isEnabled = false   //y축 사용여부
-            axisLeft.isEnabled = false
-            legend.isEnabled = false    //legend 사용여부
-            description.isEnabled = false //주석
-            isDragXEnabled = true   // x 축 드래그 여부
-            isScaleYEnabled = false //y축 줌 사용여부
-            isScaleXEnabled = false //x축 줌 사용여부
-        }
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
@@ -201,6 +163,8 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
     } // onCreate
+
+
 
     private fun adapterOnClick(subject: Subject) {
         // TODO : 과목별 화면으로 이동
