@@ -78,16 +78,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:paddingTop="20dp"
                 android:paddingBottom="20dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:background="@drawable/bg_white_view">
-                <ImageView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/score_graph"
-                    android:scaleType="fitCenter"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
+                    <HorizontalScrollView
+                        android:id="@+id/scroll_view_graph"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scrollbars="horizontal"
+                        android:fillViewport="true">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <com.github.mikephil.charting.charts.LineChart
+                                android:id="@+id/test_record_chart"
+                                android:layout_width="1000dp"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

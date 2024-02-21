@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="30dp">
+        android:layout_margin="10dp">
         <HorizontalScrollView
             android:id="@+id/scroll_view_graph"
             android:layout_width="match_parent"
@@ -52,6 +52,55 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
         </HorizontalScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시험점수 추가"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black.800"
+            android:layout_marginTop="40dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_view"
+                android:hint="시험이름을 입력해주세요"
+                android:textColorHint="@color/black.200_1"
+                android:textSize="@dimen/R14"
+                android:padding="15dp"
+                android:layout_weight="1"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_view"
+                android:hint="점수"
+                android:textColorHint="@color/black.200_1"
+                android:textSize="@dimen/R14"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"/>
+        </LinearLayout>
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_gray_view"
+            android:outlineProvider="none"
+            android:layout_marginTop="10dp"/>
+
     </LinearLayout>
 
 

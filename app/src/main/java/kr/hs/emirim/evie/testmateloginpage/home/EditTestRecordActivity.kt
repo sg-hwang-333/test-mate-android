@@ -29,8 +29,10 @@ class EditTestRecordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_test_record)
 
+        // 성적 그래프
         val linechart = findViewById<LineChart>(R.id.test_record_chart)
         val xAxis = linechart.xAxis
+        val yAxisLeft = linechart.axisLeft
 
         val entries: MutableList<Entry> = mutableListOf() // Entry : 데이터 포인트를 나타내는 클래스
         for (i in testRecordDataList.indices){
@@ -38,8 +40,18 @@ class EditTestRecordActivity : AppCompatActivity() {
         }
         val lineDataSet = LineDataSet(entries,"entries")
 
+        // X축 구분선 색상 설정
+            xAxis.apply {
+                gridColor = resources.getColor(R.color.black_100, null) // 원하는 색상으로 변경
+            }
+
+        // Y축 구분선 색상 설정
+        yAxisLeft.apply {
+            gridColor = resources.getColor(R.color.black_100, null) // 원하는 색상으로 변경
+        }
+
         lineDataSet.apply {
-            color = resources.getColor(R.color.green_500, null) // 선 색깔
+            color = resources.getColor(R.color.green_500, null) // 그래프 선 색깔
             circleRadius = 5f
             lineWidth = 3f
             setCircleColor(resources.getColor(R.color.green_500, null))
@@ -53,8 +65,8 @@ class EditTestRecordActivity : AppCompatActivity() {
 
         //차트 전체 설정
         linechart.apply {
-            axisRight.isEnabled = false   //y축 사용여부
-            axisLeft.isEnabled = false
+            axisRight.isEnabled = true   //y축 사용여부
+            axisLeft.isEnabled = true
             legend.isEnabled = false    //legend 사용여부
             description.isEnabled = false //주석
             isDragXEnabled = true   // x 축 드래그 여부
@@ -88,6 +100,7 @@ class EditTestRecordActivity : AppCompatActivity() {
             notifyDataSetChanged() //데이터 갱신
             invalidate() // view갱신
         }
+        // 성적 그래프
     }
 
     fun changeTestDateText(dataList: List<TestData>): List<String> {
