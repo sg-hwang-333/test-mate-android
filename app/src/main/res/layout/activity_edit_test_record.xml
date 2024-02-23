@@ -60,6 +60,8 @@
         android:orientation="vertical"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
+
+        <!-- 시험점수 추가 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,6 +102,29 @@
             android:background="@drawable/btn_gray_view"
             android:outlineProvider="none"
             android:layout_marginTop="10dp"/>
+
+        <!-- 시험날짜 설정 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시험 시작 날짜"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black.800"
+            android:layout_marginTop="40dp"
+            />
+        <Button
+            android:id="@+id/btn_test_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_view"
+            android:text="날짜를 선택해주세요"
+            android:textColor="@color/black.200_1"
+            android:padding="15dp"
+            android:outlineProvider="none"
+            android:drawableRight="@drawable/arrow"
+            android:layout_marginTop="12dp"
+            android:gravity="left"/>
 
     </LinearLayout>
 
