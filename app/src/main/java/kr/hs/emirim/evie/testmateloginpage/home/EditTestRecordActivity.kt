@@ -2,7 +2,11 @@ package kr.hs.emirim.evie.testmateloginpage.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import android.widget.HorizontalScrollView
+import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -101,6 +105,13 @@ class EditTestRecordActivity : AppCompatActivity() {
             invalidate() // view갱신
         }
         // 성적 그래프
+
+        val BtnTestDate = findViewById<Button>(R.id.btn_test_date)
+
+        BtnTestDate.setOnClickListener {
+            val newFragment: DialogFragment = DatePickerFragment()
+            newFragment.show(supportFragmentManager, "datePicker")
+        }
     }
 
     fun changeTestDateText(dataList: List<TestData>): List<String> {
@@ -116,5 +127,19 @@ class EditTestRecordActivity : AppCompatActivity() {
             return xAxisData[(value).toInt()]
         }
 
+    }
+
+//    fun showDatePicker(view: View) {
+//        val newFragment: DialogFragment = DatePickerFragment()
+//        newFragment.show(supportFragmentManager, "datePicker")
+//    }
+
+    fun processDatePickerResult(year: Int, month: Int, day: Int) {
+        val monthString = (month + 1).toString()
+        val dayString = day.toString()
+        val yearString = year.toString()
+        val dateMessage = "$monthString/$dayString/$yearString"
+
+        Toast.makeText(this, "Date: $dateMessage", Toast.LENGTH_SHORT).show()
     }
 }
