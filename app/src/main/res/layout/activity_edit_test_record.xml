@@ -31,102 +31,196 @@
             android:textSize="20dp"
             android:textStyle="bold" />
     </RelativeLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-        <HorizontalScrollView
-            android:id="@+id/scroll_view_graph"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scrollbars="horizontal"
-            android:fillViewport="true">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/test_record_chart"
-                    android:layout_width="1000dp"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-        </HorizontalScrollView>
-    </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <!-- 시험점수 추가 -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="시험점수 추가"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black.800"
-            android:layout_marginTop="40dp"
-            />
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="12dp">
-            <EditText
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_white_view"
-                android:hint="시험이름을 입력해주세요"
-                android:textColorHint="@color/black.200_1"
-                android:textSize="@dimen/R14"
-                android:padding="15dp"
-                android:layout_weight="1"/>
-            <EditText
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+                <HorizontalScrollView
+                    android:id="@+id/scroll_view_graph"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scrollbars="horizontal"
+                    android:fillViewport="true">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/test_record_chart"
+                            android:layout_width="1000dp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_white_view"
-                android:hint="점수"
-                android:textColorHint="@color/black.200_1"
-                android:textSize="@dimen/R14"
-                android:padding="15dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="3"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <!-- 시험점수 추가 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="시험점수 추가"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black.800"
+                    android:layout_marginTop="40dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_white_view"
+                        android:hint="시험이름을 입력해주세요"
+                        android:textColorHint="@color/black.200_1"
+                        android:textSize="@dimen/R14"
+                        android:padding="15dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:maxLines="1"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_white_view"
+                        android:hint="점수"
+                        android:textColorHint="@color/black.200_1"
+                        android:textSize="@dimen/R14"
+                        android:padding="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="3"
+                        android:singleLine="true"
+                        android:maxLines="1"/>
+                </LinearLayout>
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_gray_view"
+                    android:outlineProvider="none"
+                    android:layout_marginTop="10dp"/>
+
+                <!-- 시험날짜 설정 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="시험 시작 날짜"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black.800"
+                    android:layout_marginTop="40dp"
+                    />
+                <Button
+                    android:id="@+id/btn_test_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white_view"
+                    android:text="날짜를 선택해주세요"
+                    android:textColor="@color/black.200_1"
+                    android:padding="15dp"
+                    android:outlineProvider="none"
+                    android:drawableRight="@drawable/arrow"
+                    android:layout_marginTop="12dp"
+                    android:gravity="left"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="목표점수"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black.800"
+                    android:layout_marginTop="40dp"
+                    />
+                <TextView
+                    android:id="@+id/target_score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="95점"
+                    android:textSize="35sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black.800"
+                    android:gravity="center"
+                    />
+                <SeekBar
+                    android:id="@+id/target_score_seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:thumb="@drawable/seekbar_thumb"
+                    android:progressDrawable="@drawable/seekbar_bar"
+                    android:max="100"
+                    android:progress="50"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="시험 난이도"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black.800"
+                    android:layout_marginTop="40dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:isIndicator="false"
+                        android:numStars="5"
+                        android:rating="4"
+                        style="?android:attr/ratingBarStyleIndicator"
+                        android:theme="@style/RatingBar"
+                        android:max="5"
+                        android:layout_marginVertical="20dp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_white_view"
+                        android:hint="시험 난이도에 대해 어떻게 생각하는지 적어주세요 \n\n"
+                        android:textColorHint="@color/black.200_1"
+                        android:textSize="@dimen/R14"
+                        android:padding="15dp"
+                        android:gravity="left"
+                        />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/buttonSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="확인"
+                    android:textSize="@dimen/R14"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_green_view"
+                    android:outlineProvider="none"
+                    android:padding="15dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginBottom="60dp"/>
+
+            </LinearLayout>
         </LinearLayout>
-        <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_gray_view"
-            android:outlineProvider="none"
-            android:layout_marginTop="10dp"/>
+    </ScrollView>
 
-        <!-- 시험날짜 설정 -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="시험 시작 날짜"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black.800"
-            android:layout_marginTop="40dp"
-            />
-        <Button
-            android:id="@+id/btn_test_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_view"
-            android:text="날짜를 선택해주세요"
-            android:textColor="@color/black.200_1"
-            android:padding="15dp"
-            android:outlineProvider="none"
-            android:drawableRight="@drawable/arrow"
-            android:layout_marginTop="12dp"
-            android:gravity="left"/>
-
-    </LinearLayout>
 
 
 
