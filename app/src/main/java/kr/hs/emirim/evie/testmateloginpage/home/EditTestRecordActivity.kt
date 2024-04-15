@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.HorizontalScrollView
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.mikephil.charting.charts.LineChart
@@ -32,6 +33,14 @@ class EditTestRecordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_test_record)
+
+        // 이전 페이지 버튼
+        var beforeBtn = findViewById<ImageView>(R.id.backBtn)
+
+        beforeBtn.setOnClickListener{
+            onBackPressed();
+        }
+
 
         // 성적 그래프
         val linechart = findViewById<LineChart>(R.id.test_record_chart)
@@ -104,13 +113,21 @@ class EditTestRecordActivity : AppCompatActivity() {
             notifyDataSetChanged() //데이터 갱신
             invalidate() // view갱신
         }
-        // 성적 그래프
+        // 성적 그래프 end
 
-        val BtnTestDate = findViewById<Button>(R.id.btn_test_date)
+        // 시험 날짜 설정 버튼
+        val BtnSetTestDate = findViewById<Button>(R.id.btn_test_date)
 
-        BtnTestDate.setOnClickListener {
+        BtnSetTestDate.setOnClickListener {
             val newFragment: DialogFragment = DatePickerFragment()
             newFragment.show(supportFragmentManager, "datePicker")
+        }
+
+        // 저장 버튼
+        val BtnSave = findViewById<Button>(R.id.buttonSave)
+
+        BtnSave.setOnClickListener {
+
         }
     }
 
@@ -128,11 +145,6 @@ class EditTestRecordActivity : AppCompatActivity() {
         }
 
     }
-
-//    fun showDatePicker(view: View) {
-//        val newFragment: DialogFragment = DatePickerFragment()
-//        newFragment.show(supportFragmentManager, "datePicker")
-//    }
 
     fun processDatePickerResult(year: Int, month: Int, day: Int) {
         val monthString = (month + 1).toString()
