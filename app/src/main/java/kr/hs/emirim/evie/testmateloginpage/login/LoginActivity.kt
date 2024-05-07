@@ -10,11 +10,13 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kr.hs.emirim.evie.testmateloginpage.GuideActivity1
 import kr.hs.emirim.evie.testmateloginpage.LoginResponse
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.SignUpActivity
 import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
+import kr.hs.emirim.evie.testmateloginpage.signup.signup
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
         //api 연결을 위한 Retrofit 라이브러리 사용
         var retrofit = Retrofit.Builder()
-            .baseUrl("http://3.36.171.123:8086")
+            .baseUrl("http://192.168.1.247:8086")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -68,7 +70,9 @@ class LoginActivity : AppCompatActivity() {
             var txtEmail = editEmail.text.toString()
             var txtPass = editPass.text.toString()
 
-            val call = loginService.requestLogin(mapOf("email" to txtEmail, "password" to txtPass)) // 보내야 하는 정보를 가지고 있는 객체
+            val loginData = LoginRequest(txtEmail, txtPass)
+            val call = loginService.requestLogin(loginData)
+            // 보내야 하는 정보를 가지고 있는 객체
             call.enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) { // response = 응답메세지(성공 or 실패)
                     val code = response.code()
@@ -80,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
 
                         val result : LoginResponse = response.body() as LoginResponse
-                        Log.d("mytag", response.code().toString() + "  " + result.message)
+                        Log.d("logintag", response.code().toString() + " : 성공했습니다. " + result.message)
                     } else {
 //                        Toast.makeText(this@LoginActivity, "로그인 실패 (아이디, 패스워드 확인 필요)", Toast.LENGTH_LONG).show()
                         checkUser.visibility = View.VISIBLE
@@ -88,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Log.d("mytag", "fail " + t.message)
+                    Log.d("logintag", "fail " + t.message)
                 }
 
             })
