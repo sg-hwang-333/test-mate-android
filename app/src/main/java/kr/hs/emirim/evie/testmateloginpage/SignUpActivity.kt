@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.login.LoginActivity
 import kr.hs.emirim.evie.testmateloginpage.signup.SignUpRequest
@@ -82,12 +83,7 @@ class SignUpActivity : AppCompatActivity() {
         checkDuplication.setOnClickListener {
             val userId = textUserId.text.toString()
 
-            val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.247:8086")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            val service = retrofit.create(TMService::class.java)
+            val service = RetrofitClient.create()
 
             val call = service.checkUserId(userId)
             call.enqueue(object : Callback<UserCheckResponse> {
@@ -127,12 +123,7 @@ class SignUpActivity : AppCompatActivity() {
 
             val signUpReq = SignUpRequest(userId, name, email, selectedGradeIndex, password)
 
-            val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.247:8086")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            val service = retrofit.create(TMService::class.java)
+            val service = RetrofitClient.create()
 
             val call = service.signUp(signUpReq)
             call.enqueue(object : Callback<SignUpResponse> {

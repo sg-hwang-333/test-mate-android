@@ -14,14 +14,11 @@ import kr.hs.emirim.evie.testmateloginpage.GuideActivity1
 import kr.hs.emirim.evie.testmateloginpage.LoginResponse
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.SignUpActivity
-import kr.hs.emirim.evie.testmateloginpage.TMService
-import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
-import kr.hs.emirim.evie.testmateloginpage.signup.signup
+import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
+import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class LoginActivity : AppCompatActivity() {
@@ -40,13 +37,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login_page)
         supportActionBar?.hide()
 
-        //api 연결을 위한 Retrofit 라이브러리 사용
-        var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.247:8086")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        var loginService = retrofit.create(TMService::class.java)
+        val loginService = RetrofitClient.create()
 
         imageButton = findViewById(R.id.visible_btn)
         editPass = findViewById(R.id.edit_pw)
@@ -79,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                     if(code == 200) {
                         checkUser.visibility = View.INVISIBLE
 
-                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        val intent = Intent(this@LoginActivity, GoalMainListActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(intent)
 
