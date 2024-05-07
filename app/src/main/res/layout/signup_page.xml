@@ -43,13 +43,13 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:scrollbars="none"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:scrollbars="none">
 
                 <TextView
                     android:layout_width="39dp"
@@ -67,36 +67,50 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/signup_email"
-                        android:textColorHint="@color/black.200_1"
-                        android:layout_weight="20"
+                        android:id="@+id/signup_id"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:autofillHints=""
+                        android:background="@drawable/bg_white_view"
+                        android:drawableRight="@drawable/x_circle_icon"
                         android:drawablePadding="8dp"
-                        android:hint="아이디를 입력해주세요"
-                        android:padding="12dp"
-                        android:textSize="14sp"
-                        android:inputType="text"
-                        android:imeOptions="actionDone"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
-                        tools:ignore="RtlSymmetry,TextFields"
-                        android:background="@drawable/bg_white_view"
-                        android:autofillHints=""
-                        android:drawableRight="@drawable/x_circle_icon"
-                        android:layout_width="0dp"/>
+                        android:hint="아이디를 입력해주세요"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black.200_1"
+                        android:textSize="14sp"
+                        tools:ignore="RtlSymmetry,TextFields" />
+
                     <View
                         android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5" />
+
                     <Button
+                        android:id="@+id/btn_check"
                         android:layout_width="94dp"
                         android:layout_height="wrap_content"
-                        android:text="중복확인"
+                        android:backgroundTint="@color/black.100"
                         android:paddingTop="13dp"
                         android:paddingBottom="13dp"
-                        android:backgroundTint="@color/black.100"
+                        android:text="중복확인"
                         android:textColor="@color/black.300" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewDuplicateCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아이디 중복확인을 진행해주세요"
+                    android:textColor="@color/red_1"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+
 
 
                 <TextView
@@ -114,20 +128,20 @@
                     android:background="@drawable/bg_white_view">
 
                     <EditText
-                        android:textColorHint="@color/black.200_1"
                         android:id="@+id/signup_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:drawableRight="@drawable/eye"
                         android:drawablePadding="8dp"
-                        android:hint="비밀번호를 입력해 주세요"
-                        android:padding="12dp"
-                        android:textSize="14dp"
-                        android:inputType="text"
-                        android:imeOptions="actionDone"
                         android:focusable="true"
-                        android:focusableInTouchMode="true"/>
+                        android:focusableInTouchMode="true"
+                        android:hint="비밀번호를 입력해 주세요"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black.200_1"
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -137,20 +151,20 @@
                     android:background="@drawable/bg_white_view">
 
                     <EditText
-                        android:textColorHint="@color/black.200_1"
                         android:id="@+id/signup_password_ok"
                         android:layout_width="match_parent"
                         android:layout_height="46dp"
                         android:background="@null"
                         android:drawableRight="@drawable/eye"
                         android:drawablePadding="8dp"
-                        android:hint="비밀번호를 한번 더 입력해 주세요"
-                        android:padding="12dp"
-                        android:textSize="14dp"
-                        android:inputType="text"
-                        android:imeOptions="actionDone"
                         android:focusable="true"
-                        android:focusableInTouchMode="true"/>
+                        android:focusableInTouchMode="true"
+                        android:hint="비밀번호를 한번 더 입력해 주세요"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black.200_1"
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <TextView
@@ -168,45 +182,47 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:textColorHint="@color/black.200_1"
                         android:id="@+id/signup_email_first"
-                        android:layout_weight="5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="5"
                         android:background="@drawable/bg_white_view"
                         android:drawablePadding="8dp"
-                        android:hint="이메일"
-                        android:padding="12dp"
-                        android:textSize="14dp"
-                        android:inputType="text"
-                        android:imeOptions="actionDone"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
+                        android:hint="이메일"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black.200_1"
+                        android:textSize="14dp"
                         tools:ignore="TextFields" />
+
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="@color/black.300"
-                        android:text="\@"/>
+                        android:text="\@"
+                        android:textColor="@color/black.300" />
+
                     <EditText
-                        android:textColorHint="@color/black.200_1"
                         android:id="@+id/signup_email_second"
-                        android:layout_weight="5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="5"
                         android:background="@drawable/bg_white_view"
-                        android:drawablePadding="8dp"
-                        android:hint="직접입력"
-                        android:padding="12dp"
-                        android:textSize="14dp"
                         android:drawableRight="@drawable/arrow_200_1"
-                        android:inputType="text"
-                        android:imeOptions="actionDone"
+                        android:drawablePadding="8dp"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
+                        android:hint="직접입력"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black.200_1"
+                        android:textSize="14dp"
                         tools:ignore="TextFields" />
                 </LinearLayout>
 
@@ -226,19 +242,19 @@
                     android:gravity="center">
 
                     <EditText
-                        android:textColorHint="@color/black.200_1"
                         android:id="@+id/signup_name"
                         android:layout_width="match_parent"
                         android:layout_height="46dp"
                         android:background="@null"
                         android:drawablePadding="8dp"
-                        android:hint="이름을 입력해 주세요"
-                        android:padding="12dp"
-                        android:textSize="14dp"
-                        android:inputType="text"
-                        android:imeOptions="actionDone"
                         android:focusable="true"
-                        android:focusableInTouchMode="true"/>
+                        android:focusableInTouchMode="true"
+                        android:hint="이름을 입력해 주세요"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:textColorHint="@color/black.200_1"
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <TextView
@@ -250,15 +266,15 @@
 
                 <android.widget.Button
                     android:id="@+id/signup_grade"
-                    android:textColorHint="@color/black.200_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/bg_white_view"
                     android:drawableRight="@drawable/arrow_200_1"
                     android:gravity="left"
                     android:hint="학년정보를 선택해 주세요"
-                    android:layout_marginTop="8dp"
                     android:padding="12dp"
+                    android:textColorHint="@color/black.200_1"
                     android:textSize="14dp" />
             </LinearLayout>
 
@@ -270,7 +286,7 @@
                 android:background="@drawable/rectangle_round"
                 android:backgroundTint="@color/black.100"
                 android:includeFontPadding="false"
-                android:text="@string/join"
+                android:text="가입하기"
                 android:textColor="@color/black.300"
                 android:textSize="16sp"
                 android:layout_marginLeft="30dp"
