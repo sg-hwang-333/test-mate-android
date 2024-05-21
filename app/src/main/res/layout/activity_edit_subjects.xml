@@ -65,6 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/book_img"
             android:background="@drawable/bg_book_image"
             android:backgroundTint="@color/bookBgColor"
             android:src="@drawable/book_red"
@@ -79,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageButton
+                android:id="@+id/red"
                 android:layout_marginRight="6dp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
@@ -86,6 +88,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
+                android:id="@+id/green"
                 android:layout_marginTop="6dp"
                 android:layout_marginRight="6dp"
                 android:scaleType="centerCrop"
@@ -94,6 +97,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
+                android:id="@+id/purple"
                 android:layout_marginTop="6dp"
                 android:layout_marginRight="6dp"
                 android:scaleType="centerCrop"
@@ -102,12 +106,14 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
+                android:id="@+id/yellow"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
                 android:src="@drawable/book_yellow"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
+                android:id="@+id/blue"
                 android:layout_marginTop="6dp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
@@ -115,6 +121,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
+                android:id="@+id/black"
                 android:layout_marginTop="6dp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
