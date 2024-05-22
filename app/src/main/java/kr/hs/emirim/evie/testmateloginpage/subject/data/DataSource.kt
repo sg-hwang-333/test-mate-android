@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class DataSource(resources: Resources) {
-    private val initialFlowerList = getInitialSubjects()
-    private val subjectsLiveData = MutableLiveData(initialFlowerList)
+    private val initialSubjectList = getInitialSubjects()
+    private val subjectsLiveData = MutableLiveData(initialSubjectList)
 
     fun addSubject(subject: Subject) {
         val currentList = subjectsLiveData.value
@@ -36,6 +36,7 @@ class DataSource(resources: Resources) {
         Subject(
             id = 1,
             name = "국어",
+            image = "book_red"
             )
 //        Subject(
 //            id = 2,

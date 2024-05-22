@@ -14,11 +14,11 @@ class SubjectsListViewModel(val dataSource: DataSource) : ViewModel() {
     val subjectsLiveData = dataSource.getSubjectList()
 
 //    val image = dataSource.getRandomFlowerImageAsset()
-    fun insertSubject(subjectName : String?) {
+    fun insertSubject(subjectName : String?, subjectImage : String?) {
         val newSubject = Subject(
             Random.nextLong(),
             subjectName,
-//            image
+            subjectImage
         )
 
         dataSource.addSubject(newSubject)
