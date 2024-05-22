@@ -3,17 +3,11 @@ package kr.hs.emirim.evie.testmateloginpage.goalList.data
 import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import android.util.Log
-import kr.hs.emirim.evie.testmateloginpage.GoalListResponse
 import kr.hs.emirim.evie.testmateloginpage.TMService
-import kr.hs.emirim.evie.testmateloginpage.goalList.GoalsAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DataSource(resources: Resources) {
+class GoalListDataEdit(resources: Resources) {
     private val initialGoalList = getInitialGoals()
     private val goalsLiveData = MutableLiveData(initialGoalList)
 
@@ -97,11 +91,11 @@ class DataSource(resources: Resources) {
     )
 
     companion object { // 데이터를 관리하고 제공하는 데 사용되는 클래스의 인스턴스를 만들지 않고도 호출하게 함
-        private var INSTANCE: DataSource? = null
+        private var INSTANCE: GoalListDataEdit? = null
 
-        fun getDataSource(resources: Resources): DataSource {
-            return synchronized(DataSource::class) {
-                val newInstance = INSTANCE ?: DataSource(resources)
+        fun getDataSource(resources: Resources): GoalListDataEdit {
+            return synchronized(GoalListDataEdit::class) {
+                val newInstance = INSTANCE ?: GoalListDataEdit(resources)
                 INSTANCE = newInstance
                 newInstance
             }
