@@ -4,7 +4,7 @@ import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-class DataSource(resources: Resources) {
+class SubjectDataEdit(resources: Resources) {
     private val initialSubjectList = getInitialSubjects()
     private val subjectsLiveData = MutableLiveData(initialSubjectList)
 
@@ -56,11 +56,11 @@ class DataSource(resources: Resources) {
 //        )
     )
     companion object { // 데이터를 관리하고 제공하는 데 사용되는 클래스의 인스턴스를 만들지 않고도 호출하게 함
-        private var INSTANCE: DataSource? = null
+        private var INSTANCE: SubjectDataEdit? = null
 
-        fun getDataSource(resources: Resources): DataSource {
-            return synchronized(DataSource::class) {
-                val newInstance = INSTANCE ?: DataSource(resources)
+        fun getDataSource(resources: Resources): SubjectDataEdit {
+            return synchronized(SubjectDataEdit::class) {
+                val newInstance = INSTANCE ?: SubjectDataEdit(resources)
                 INSTANCE = newInstance
                 newInstance
             }
