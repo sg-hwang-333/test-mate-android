@@ -4,14 +4,14 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-import kr.hs.emirim.evie.testmateloginpage.subject.data.DataSource
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectDataEdit
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 import kotlin.random.Random
 
 
-class SubjectsListViewModel(val dataSource: DataSource) : ViewModel() {
+class SubjectsListViewModel(val subjectDataEdit: SubjectDataEdit) : ViewModel() {
 
-    val subjectsLiveData = dataSource.getSubjectList()
+    val subjectsLiveData = subjectDataEdit.getSubjectList()
 
 //    val image = dataSource.getRandomFlowerImageAsset()
     fun insertSubject(subjectName : String?, subjectImage : String?) {
@@ -21,11 +21,11 @@ class SubjectsListViewModel(val dataSource: DataSource) : ViewModel() {
             subjectImage
         )
 
-        dataSource.addSubject(newSubject)
+        subjectDataEdit.addSubject(newSubject)
     }
 
     fun removeSubject(subject: Subject) {
-        dataSource.removeSubject(subject)
+        subjectDataEdit.removeSubject(subject)
     }
 
     fun getSubjectCount(): Int {
@@ -40,7 +40,7 @@ class SubjectsListViewModelFactory(private val context: Context) : ViewModelProv
         if (modelClass.isAssignableFrom(SubjectsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return SubjectsListViewModel(
-                dataSource = DataSource.getDataSource(context.resources)
+                subjectDataEdit = SubjectDataEdit.getDataSource(context.resources)
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
