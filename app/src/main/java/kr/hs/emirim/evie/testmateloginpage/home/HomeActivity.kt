@@ -28,6 +28,7 @@ import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainSubjectsViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
+import kr.hs.emirim.evie.testmateloginpage.subject.BOOK_TAG
 import kr.hs.emirim.evie.testmateloginpage.subject.SUBJECT_NAME
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectHomeAdapter
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectsListViewModel
@@ -114,6 +115,7 @@ class HomeActivity : AppCompatActivity() {
         userGrade = findViewById<TextView>(R.id.userGrade)
         userGrade.text = grade + "국어"
 
+    // 과목 추가
         addSubjectBtn = findViewById(R.id.addSubjectBtn)
         val subjectsAdapter = SubjectHomeAdapter { subject -> adapterOnClick(subject) } // TODO
         val recyclerView: RecyclerView = findViewById(R.id.subjectRecyclerView)
@@ -185,13 +187,14 @@ class HomeActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
 
-        /* Inserts flower into viewModel. */
+        /* Inserts subject into viewModel. */
         if (resultCode == Activity.RESULT_OK) {
             intentData?.let { data ->
                 val subjectName = data.getStringExtra(SUBJECT_NAME)
+                val subjectImage = data.getStringExtra(BOOK_TAG)
 
-                subjectsListViewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
-                goalMainSubjectsViewModel.insertSubject(subjectName)
+                subjectsListViewModel.insertSubject(subjectName, subjectImage) ///////////////////////////////////////// insertFlower
+//                goalMainSubjectsViewModel.insertSubject(subjectName, subjectImage)
             }
         }
     }

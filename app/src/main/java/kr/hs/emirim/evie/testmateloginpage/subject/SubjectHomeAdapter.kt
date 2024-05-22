@@ -1,12 +1,17 @@
 package kr.hs.emirim.evie.testmateloginpage.subject
 
+import android.content.Context
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +26,7 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
     inner class SubjectHomeHolder(itemView: View, val onClick: (Subject) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val subjectTextView: TextView = itemView.findViewById(R.id.subjectName)
+        val subjectImageView: ImageView = itemView.findViewById(R.id.subjectImage)
         var currentSubject: Subject? = null
 
         private lateinit var subjectEditBtn: Button
@@ -33,11 +39,15 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
             }
         }
 
+
         /* UI에 정보 바인딩(넣는 메서드) */
         fun bind(subject: Subject) {
             currentSubject = subject
 
             subjectTextView.setText(subject.name)
+            val resourceId = getResource(subject.image, itemView.context)
+            subjectImageView.setImageResource(resourceId)
+//            subject.image?.let { subjectImageView.setImageResource(getResource(subject.image, "com.Package.name")) }
         }
 
     }
@@ -63,7 +73,18 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
 //        }
 //    }
 
+    private fun getResource(resName: String?, context: Context) : Int {
+        val resContext = context.createPackageContext(context.packageName, 0)
+        val res: Resources = resContext.resources
+
+        val id = res.getIdentifier(resName, "drawable", context.packageName)
+        return id
+//            ContextCompat.getDrawable(context, R.drawable.book_red)
+    }
+
 }
+
+
 
 object SubjectDiffCallback : DiffUtil.ItemCallback<Subject>() {
     override fun areItemsTheSame(oldItem: Subject, newItem: Subject): Boolean {
