@@ -194,7 +194,6 @@ class HomeActivity : AppCompatActivity() {
                 val subjectImage = data.getStringExtra(BOOK_TAG)
 
                 subjectsListViewModel.insertSubject(subjectName, subjectImage) ///////////////////////////////////////// insertFlower
-//                goalMainSubjectsViewModel.insertSubject(subjectName, subjectImage)
             }
         }
     }

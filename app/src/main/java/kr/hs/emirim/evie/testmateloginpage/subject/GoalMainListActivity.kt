@@ -1,5 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage.subject
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -98,17 +99,18 @@ class GoalMainListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, intentData)
-//
-//        /* Inserts flower into viewModel. */
-//        if (resultCode == Activity.RESULT_OK) {
-//            intentData?.let { data ->
-//                val subjectName = data.getStringExtra(SUBJECT_NAME) // t
-//
-//                goalMainSubjectsViewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
-//            }
-//        }
-//    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intentData)
+
+        /* Inserts flower into viewModel. */
+        if (resultCode == Activity.RESULT_OK) {
+            intentData?.let { data ->
+                val subjectName = data.getStringExtra(SUBJECT_NAME)
+                val subjectImage = data.getStringExtra(BOOK_TAG)
+
+                goalMainSubjectsViewModel.insertSubject(subjectName, subjectImage) ///////////////////////////////////////// insertFlower
+            }
+        }
+    }
 
 }

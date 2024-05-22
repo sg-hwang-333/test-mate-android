@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kotlin.random.Random
 
-import kr.hs.emirim.evie.testmateloginpage.goalList.data.DataSource
+import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalListDataEdit
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 
 
-class GoalsListViewModel(val dataSource: DataSource) : ViewModel() {
+class GoalsListViewModel(val goalListDataEdit: GoalListDataEdit) : ViewModel() {
 
-    val goalsLiveData = dataSource.getGoalList()
+    val goalsLiveData = goalListDataEdit.getGoalList()
 
     fun insertGoal() {
         val newGoal = Goal(
@@ -20,11 +20,11 @@ class GoalsListViewModel(val dataSource: DataSource) : ViewModel() {
             false
         )
 
-        dataSource.addGoal(newGoal)
+        goalListDataEdit.addGoal(newGoal)
     }
 
     fun removeGoal(goal : Goal) {
-        dataSource.removeGoal(goal)
+        goalListDataEdit.removeGoal(goal)
     }
 
     fun getGoalCount(): Int {
@@ -39,7 +39,7 @@ class GoalsListViewModelFactory(private val context: Context) : ViewModelProvide
         if (modelClass.isAssignableFrom(GoalsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return GoalsListViewModel(
-                dataSource = DataSource.getDataSource(context.resources)
+                goalListDataEdit = GoalListDataEdit.getDataSource(context.resources)
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
