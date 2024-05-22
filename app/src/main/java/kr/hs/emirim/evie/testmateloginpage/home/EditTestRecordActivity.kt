@@ -8,8 +8,11 @@ import android.widget.Button
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.RatingBar
+import android.widget.SeekBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.findNavController
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -32,6 +35,8 @@ class EditTestRecordActivity : AppCompatActivity() {
         TestData("@학년 @학기 중간",78),
         TestData("@학년 @학기 중간",96)
     )
+
+    lateinit var targetScore : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_test_record)
@@ -58,6 +63,25 @@ class EditTestRecordActivity : AppCompatActivity() {
             val newFragment: DialogFragment = DatePickerFragment()
             newFragment.show(supportFragmentManager, "datePicker")
         }
+
+        // 목표 점수
+        val targetScoreSeekbar = findViewById<SeekBar>(R.id.target_score_seekbar)
+        targetScore = findViewById<TextView>(R.id.target_score)
+
+        targetScoreSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                // SeekBar의 값이 변경될 때 호출되는 메서드
+                targetScore.text = "$progress 점"
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // 사용자가 SeekBar를 터치할 때 호출되는 메서드
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // 사용자가 SeekBar를 터치를 끝낼 때 호출되는 메서드
+            }
+        })
 
         // 시험 난이도 RatingBar
         val RatingBarTestDifficulty = findViewById<RatingBar>(R.id.ratingTestDifficulty)
