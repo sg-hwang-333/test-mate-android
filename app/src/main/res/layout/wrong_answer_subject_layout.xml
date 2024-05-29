@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="12dp">
+    <android.widget.Button
+        android:id="@+id/wrongAnswerSubject"
+        android:background="@color/white"
+        android:outlineProvider="none"
+        android:text="수학"
+        android:textSize="@dimen/M16"
+        android:textColor="@color/black.300"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="50dp"
+        android:maxWidth="100dp"
+        />
+</androidx.cardview.widget.CardView>
+
+<!-- android:textColor="@color/green.500", android:background="@drawable/bottom_border"-->
