@@ -14,7 +14,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerNoteActivity
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
@@ -60,7 +60,7 @@ class GoalMainListActivity : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note::class.java)
+            val intent = Intent(this, WrongAnswerNoteActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }

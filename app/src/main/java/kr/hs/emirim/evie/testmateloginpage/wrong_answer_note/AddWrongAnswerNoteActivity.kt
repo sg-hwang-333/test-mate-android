@@ -1,19 +1,17 @@
-package kr.hs.emirim.evie.testmateloginpage
+package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.example.myapplication.Calendar
+import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
-class Wrong_answer_note_add : AppCompatActivity() {
+class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
     lateinit var addBtn : android.widget.Button
 
@@ -51,7 +49,7 @@ class Wrong_answer_note_add : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note::class.java)
+            val intent = Intent(this, WrongAnswerNoteActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }

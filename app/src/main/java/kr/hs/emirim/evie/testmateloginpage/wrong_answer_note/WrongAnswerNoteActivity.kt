@@ -49,7 +49,7 @@ class WrongAnswerNoteActivity : AppCompatActivity() {
         spinner = findViewById(R.id.spinnerWrong)
 
         val facilityListWithUserGrade = mutableListOf(*facilityList, grade)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, facilityListWithUserGrade)
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, facilityListWithUserGrade)
         // 스피너에 어댑터 설정
         spinner.adapter = adapter
 
