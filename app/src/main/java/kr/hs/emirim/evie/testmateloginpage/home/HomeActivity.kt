@@ -1,7 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage.home
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -9,20 +8,15 @@ import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import com.github.mikephil.charting.charts.LineChart
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
-import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityCalendarBinding
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerNoteActivity
 import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityHomeBinding
 import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainSubjectsViewModel
@@ -110,13 +104,10 @@ class HomeActivity : AppCompatActivity() {
         )
 // 스피너에 어댑터 설정
         spinner.adapter = adapter
-
-
         userGrade = findViewById<TextView>(R.id.userGrade)
         userGrade.text = grade + "국어"
 
-    // 과목 추가
-        addSubjectBtn = findViewById(R.id.addSubjectBtn)
+    // subjectRecyclerView
         val subjectsAdapter = SubjectHomeAdapter { subject -> adapterOnClick(subject) } // TODO
         val recyclerView: RecyclerView = findViewById(R.id.subjectRecyclerView)
 
@@ -133,6 +124,8 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
+    // 과목 추가
+        addSubjectBtn = findViewById(R.id.addSubjectBtn)
         addSubjectBtn.setOnClickListener {
             val intent = Intent(this@HomeActivity, AddSubjectActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -164,7 +157,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note::class.java)
+            val intent = Intent(this, WrongAnswerNoteActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
