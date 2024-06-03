@@ -2,6 +2,7 @@ package kr.hs.emirim.evie.testmateloginpage
 
 import kr.hs.emirim.evie.testmateloginpage.login.LoginRequest
 import kr.hs.emirim.evie.testmateloginpage.signup.SignUpRequest
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerListResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -30,4 +31,7 @@ interface TMService {
 
     @DELETE("/goal/delete")
     fun requestGoalDelete(@Body goalListData : Map<String, Long>) : Call<GoalListResponse>
+
+    @GET("/api/note/filter")
+    fun getNotesByGradeSubject(@Query("grade") grade: Int, @Query("subjectId") subjectId : Int) : Call<List<WrongAnswerListResponse>>
 }

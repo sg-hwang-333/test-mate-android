@@ -49,7 +49,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-            val intent = Intent(this, WrongAnswerNoteActivity::class.java)
+            val intent = Intent(this, WrongAnswerListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
