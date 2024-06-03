@@ -32,6 +32,5 @@ interface TMService {
     @DELETE("/goal/delete")
     fun requestGoalDelete(@Body goalListData : Map<String, Long>) : Call<GoalListResponse>
 
-    @GET("/api/note/filter")
-    fun getNotesByGradeSubject(@Query("grade") grade: Int, @Query("subjectId") subjectId : Int) : Call<List<WrongAnswerListResponse>>
+
 }

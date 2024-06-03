@@ -17,7 +17,7 @@ class WrongAnswerRepository(resources: Resources) {
     var wrongAnswerList = MutableLiveData<List<WrongAnswerListResponse>>()
 
     fun fetchWrongAnswers(grade: Int, subjectId: Int) {
-        val apiService = RetrofitClient.create()
+        val apiService = RetrofitClient.create(WrongAnswerAPIService::class.java)
         val call = apiService.getNotesByGradeSubject(grade, subjectId)
         call.enqueue(object : Callback<List<WrongAnswerListResponse>> {
             override fun onResponse(call: Call<List<WrongAnswerListResponse>>, response: Response<List<WrongAnswerListResponse>>) {
