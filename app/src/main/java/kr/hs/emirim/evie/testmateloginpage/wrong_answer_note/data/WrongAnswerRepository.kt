@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectDataEdit
@@ -16,9 +17,32 @@ class WrongAnswerRepository(resources: Resources) {
     private val subjectsLiveData = MutableLiveData(initialSubjectList)
     var wrongAnswerList = MutableLiveData<List<WrongAnswerListResponse>>()
 
+    val wrongAnswerAPIService = RetrofitClient.create(WrongAnswerAPIService::class.java)
+    val subjectAPIService = RetrofitClient.create(TMService::class.java)
+
+    fun fetchSubjectsByGrade(grade: Int) : Int{
+        subjectAPIService.getSubjectsByGrade(grade).enqueue(object : Callback<List<Subject>> {
+            override fun onResponse(call: Call<List<Subject>>, response: Response<List<Subject>>) {
+                if (response.isSuccessful) {
+                    val subjectList = response.body()
+                    subjectList?.let {
+                        for (subject in it) {
+                            Log.d("Subject", "ID: ${subject.subjectId}, Name: ${subject.subjectName}, Image: ${subject.img}")
+                        }
+                    }
+                } else {
+                    Log.e("API Error", "Error: ${response.code()}")
+                }
+            }
+            override fun onFailure(call: Call<List<Subject>>, t: Throwable) {
+                Log.e("Network Error", "Error: ${t.message}")
+            }
+        })
+        return subjectList.subjectId
+    }
+
     fun fetchWrongAnswers(grade: Int, subjectId: Int) {
-        val apiService = RetrofitClient.create(WrongAnswerAPIService::class.java)
-        val call = apiService.getNotesByGradeSubject(grade, subjectId)
+        val call = wrongAnswerAPIService.getNotesByGradeSubject(grade, subjectId)
         call.enqueue(object : Callback<List<WrongAnswerListResponse>> {
             override fun onResponse(call: Call<List<WrongAnswerListResponse>>, response: Response<List<WrongAnswerListResponse>>) {
                 if (response.isSuccessful) {
