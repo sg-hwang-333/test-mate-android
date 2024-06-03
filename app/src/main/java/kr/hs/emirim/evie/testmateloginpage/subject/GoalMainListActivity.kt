@@ -17,7 +17,8 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
+import kr.hs.emirim.evie.testmateloginpage.TMService
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
@@ -32,7 +33,7 @@ class GoalMainListActivity : AppCompatActivity() {
     private lateinit var navCal: ImageButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var gradeTagSpinner: Spinner
-    private val apiService = RetrofitClient.create()
+    private val apiService = RetrofitClient.create(TMService::class.java)
     private var selectedGradeIndex: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +59,7 @@ class GoalMainListActivity : AppCompatActivity() {
     private fun setupListeners() {
         // 클릭 리스너 설정
         navHome.setOnClickListener { navigateTo(HomeActivity::class.java) }
-        navWrong.setOnClickListener { navigateTo(Wrong_answer_note::class.java) }
+        navWrong.setOnClickListener { navigateTo(WrongAnswerListActivity::class.java) }
         navGoal.setOnClickListener { /* 현재 액티비티에 남아있도록*/ }
         navCal.setOnClickListener { navigateTo(Calendar::class.java) }
 
@@ -78,9 +79,8 @@ class GoalMainListActivity : AppCompatActivity() {
     }
 
     fun fetchSubjectsByGrade(grade: Int) {
-        val service = RetrofitClient.create()
 
-        service.getSubjectsByGrade(grade).enqueue(object : Callback<List<Subject>> {
+        apiService.getSubjectsByGrade(grade).enqueue(object : Callback<List<Subject>> {
             override fun onResponse(call: Call<List<Subject>>, response: Response<List<Subject>>) {
                 if (response.isSuccessful) {
                     val subjectList = response.body()
