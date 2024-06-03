@@ -34,8 +34,9 @@ class DataSource(resources: Resources) {
 
     private fun getInitialSubjects() = listOf(
         Subject(
-            id = 1,
-            name = "국어",
+            subjectId = 1,
+            subjectName = "국어",
+            img = "s"
             )
 //        Subject(
 //            id = 2,

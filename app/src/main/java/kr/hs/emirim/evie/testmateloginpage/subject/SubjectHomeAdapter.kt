@@ -37,7 +37,7 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
         fun bind(subject: Subject) {
             currentSubject = subject
 
-            subjectTextView.setText(subject.name)
+            subjectTextView.setText(subject.subjectName)
         }
 
     }
@@ -71,6 +71,6 @@ object SubjectDiffCallback : DiffUtil.ItemCallback<Subject>() {
     }
 
     override fun areContentsTheSame(oldItem: Subject, newItem: Subject): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.subjectId == newItem.subjectId
     }
 }

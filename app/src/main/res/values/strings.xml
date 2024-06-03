@@ -152,5 +152,17 @@
     <!-- 학습목표 -->
     <string name="goalTitle">학습목표 제목</string>
     <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- 학년 태그 -->
+    <string-array name="middle_school_grades">
+        <item>중학교 1학년</item>
+        <item>중학교 2학년</item>
+        <item>중학교 3학년</item>
+        <item>고등학교 1학년</item>
+        <item>고등학교 2학년</item>
+        <item>고등학교 3학년</item>
+    </string-array>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

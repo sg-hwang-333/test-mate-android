@@ -5,110 +5,126 @@ import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
+import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
-
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 class GoalMainListActivity : AppCompatActivity() {
-    lateinit var navHome : ImageButton
-    lateinit var navWrong : ImageButton
-    lateinit var navGoal : ImageButton
-    lateinit var navCal : ImageButton
-
-    private val goalMainSubjectsViewModel by viewModels<GoalMainSubjectsViewModel> {
-        GoalMainViewModelFactory(this)
-    }
+    private lateinit var navHome: ImageButton
+    private lateinit var navWrong: ImageButton
+    private lateinit var navGoal: ImageButton
+    private lateinit var navCal: ImageButton
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var gradeTagSpinner: Spinner
+    private val apiService = RetrofitClient.create()
+    private var selectedGradeIndex: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.goal_main_page)
         supportActionBar?.hide()
 
-        val goalSubjectTabAdapter = GoalSubjectTabAdapter { subject -> adapterOnClick(subject) } // TODO
-        val recyclerView: RecyclerView = findViewById(R.id.goalMainRecyclerView)
+        initView()
+        setupListeners()
+        fetchSubjectsByGrade(selectedGradeIndex)
+    }
 
-        recyclerView.adapter = goalSubjectTabAdapter
-
-        goalMainSubjectsViewModel.goalSubjectsLiveData.observe(
-            // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
-            this,
-        ) {
-            it?.let { // goalsLiveData의 값이 null이 아닐 때 중괄호 코드 실행
-                goalSubjectTabAdapter.submitList(it as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
-            }
-        }
-
-
+    private fun initView() {
+        // UI 요소 초기화
         navHome = findViewById(R.id.nav_home)
         navWrong = findViewById(R.id.nav_wrong)
         navGoal = findViewById(R.id.nav_goal)
         navCal = findViewById(R.id.nav_cal)
+        recyclerView = findViewById(R.id.goalMainRecyclerView)
+        gradeTagSpinner = findViewById(R.id.grade_tag)
+    }
 
-        navHome.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
-        }
-        navWrong.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
-        }
-        navGoal.setOnClickListener {
-            val intent = Intent(this, GoalMainListActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
-        }
-        navCal.setOnClickListener {
-            val intent = Intent(this, Calendar::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
+    private fun setupListeners() {
+        // 클릭 리스너 설정
+        navHome.setOnClickListener { navigateTo(HomeActivity::class.java) }
+        navWrong.setOnClickListener { navigateTo(Wrong_answer_note::class.java) }
+        navGoal.setOnClickListener { /* 현재 액티비티에 남아있도록*/ }
+        navCal.setOnClickListener { navigateTo(Calendar::class.java) }
+
+        // 스피너 리스너 설정
+        gradeTagSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // 선택된 항목의 인덱스 저장 및 과목 리스트 갱신
+                selectedGradeIndex = position + 1
+                fetchSubjectsByGrade(selectedGradeIndex)
+                Log.d("grade", selectedGradeIndex.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // 선택된 항목이 없을 때의 동작
+            }
         }
     }
 
-    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action === MotionEvent.ACTION_DOWN) {
-            val v = currentFocus
-            if (v is EditText) {
-                val outRect = Rect()
-                v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    v.clearFocus()
-                    val imm: InputMethodManager =
-                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
+    fun fetchSubjectsByGrade(grade: Int) {
+        val service = RetrofitClient.create()
+
+        service.getSubjectsByGrade(grade).enqueue(object : Callback<List<Subject>> {
+            override fun onResponse(call: Call<List<Subject>>, response: Response<List<Subject>>) {
+                if (response.isSuccessful) {
+                    val subjectList = response.body()
+                    subjectList?.let {
+                        for (subject in it) {
+                            Log.d("Subject", "ID: ${subject.subjectId}, Name: ${subject.subjectName}, Image: ${subject.img}")
+                        }
+                    }
+                } else {
+                    Log.e("API Error", "Error: ${response.code()}")
                 }
             }
-        }
-        return super.dispatchTouchEvent(event)
+
+            override fun onFailure(call: Call<List<Subject>>, t: Throwable) {
+                Log.e("Network Error", "Error: ${t.message}")
+            }
+        })
+    }
+
+
+    private fun updateRecyclerView(subjectList: List<Subject>) {
+        // RecyclerView 업데이트
+        val adapter = GoalSubjectTabAdapter { adapterOnClick(it) }
+        recyclerView.adapter = adapter
+        adapter.submitList(subjectList)
     }
 
     private fun adapterOnClick(subject: Subject) {
-        val intent = Intent(this, GoalListActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        // 과목 클릭 시 액티비티 이동
+        navigateTo(GoalListActivity::class.java)
+    }
+
+    private fun navigateTo(destination: Class<*>) {
+        // 다른 액티비티로 이동하는 함수
+        val intent = Intent(this, destination)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, intentData)
-//
-//        /* Inserts flower into viewModel. */
-//        if (resultCode == Activity.RESULT_OK) {
-//            intentData?.let { data ->
-//                val subjectName = data.getStringExtra(SUBJECT_NAME) // t
-//
-//                goalMainSubjectsViewModel.insertSubject(subjectName) ///////////////////////////////////////// insertFlower
-//            }
-//        }
-//    }
-
+    private fun handleErrorResponse(responseCode: Int) {
+        // 에러 응답 코드 처리
+        when (responseCode) {
+            // 특정한 에러 코드 처리 또는 일반적인 에러 메시지 표시
+            else -> Log.e("APIError", "Error: $responseCode")
+        }
+    }
 }

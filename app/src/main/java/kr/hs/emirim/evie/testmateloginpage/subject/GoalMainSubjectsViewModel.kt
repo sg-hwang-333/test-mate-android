@@ -18,7 +18,7 @@ class GoalMainSubjectsViewModel(val dataSource: DataSource) : ViewModel() {
         val newSubject = Subject(
             Random.nextLong(),
             subjectName,
-//            image
+            img = "e"
         )
 
         dataSource.addSubject(newSubject)

@@ -18,7 +18,7 @@ class SubjectsListViewModel(val dataSource: DataSource) : ViewModel() {
         val newSubject = Subject(
             Random.nextLong(),
             subjectName,
-//            image
+            img = null
         )
 
         dataSource.addSubject(newSubject)

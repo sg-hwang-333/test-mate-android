@@ -31,7 +31,7 @@ class GoalSubjectTabAdapter(private val onClick: (Subject) -> Unit) :
         fun bind(subject: Subject) {
             currentSubject = subject
 
-            subjectTextView.text = subject.name
+            subjectTextView.text = subject.subjectName
         }
 
     }
@@ -56,6 +56,6 @@ object GoalSubjectDiffCallback : DiffUtil.ItemCallback<Subject>() {
     }
 
     override fun areContentsTheSame(oldItem: Subject, newItem: Subject): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.subjectId == newItem.subjectId
     }
 }

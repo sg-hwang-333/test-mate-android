@@ -7,6 +7,7 @@
     app:cardCornerRadius="8dp"
     android:background="@drawable/bg_white_view">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,8 +21,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/book_blue" />
 
@@ -30,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <TextView
                     android:id="@+id/subjectName"
@@ -41,6 +43,8 @@
                     android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="bold"
+                    android:text="국어"
+                    android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"/>
 
                 <TextView
@@ -48,23 +52,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:includeFontPadding="false"
-                    android:text="고등학교 1학년 기말고사"
+                    android:text="최근 | 2학기 기말고사"
                     android:textColor="#6D6D6D"
                     android:textSize="10sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/rectangle_round_1"
-                    android:includeFontPadding="false"
-                    android:padding="7dp"
-                    android:text="진행사항 1/5"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>
