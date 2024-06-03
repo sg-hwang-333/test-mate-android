@@ -14,6 +14,7 @@ import kr.hs.emirim.evie.testmateloginpage.GuideActivity1
 import kr.hs.emirim.evie.testmateloginpage.LoginResponse
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.SignUpActivity
+import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import retrofit2.Call
@@ -37,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login_page)
         supportActionBar?.hide()
 
-        val loginService = RetrofitClient.create()
+        val loginService = RetrofitClient.create(TMService::class.java)
 
         imageButton = findViewById(R.id.visible_btn)
         editPass = findViewById(R.id.edit_pw)

@@ -18,6 +18,7 @@ data class WrongAnswer(
 
 
 interface WrongAnswerAPIService {
+
     @GET("/api/note/filter")
-    fun getNotesByGradeSubject(@Query("grade") grade: Int, @Query("subjectId") subjectId : Int) : Call<WrongAnswerListResponse>
+    fun getNotesByGradeSubject(@Query("grade") grade: Int, @Query("subjectId") subjectId : Int) : Call<List<WrongAnswerListResponse>>
 }

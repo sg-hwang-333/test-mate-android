@@ -16,6 +16,7 @@ import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectAdapter
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectsViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerAPIService
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerListResponse
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerRepository
 
@@ -38,8 +39,6 @@ class WrongAnswerListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wrong_answer_note)
-
-        val APIService = RetrofitClient.create()
 
         // 학년 spiner api 연동
         val pre = getSharedPreferences("UserInfo", MODE_PRIVATE)

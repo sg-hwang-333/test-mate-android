@@ -83,7 +83,7 @@ class SignUpActivity : AppCompatActivity() {
         checkDuplication.setOnClickListener {
             val userId = textUserId.text.toString()
 
-            val service = RetrofitClient.create()
+            val service = RetrofitClient.create(TMService::class.java)
 
             val call = service.checkUserId(userId)
             call.enqueue(object : Callback<UserCheckResponse> {
@@ -123,7 +123,7 @@ class SignUpActivity : AppCompatActivity() {
 
             val signUpReq = SignUpRequest(userId, name, email, selectedGradeIndex, password)
 
-            val service = RetrofitClient.create()
+            val service = RetrofitClient.create(TMService::class.java)
 
             val call = service.signUp(signUpReq)
             call.enqueue(object : Callback<SignUpResponse> {
