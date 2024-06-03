@@ -37,7 +37,7 @@ class DataSource(resources: Resources) {
             subjectId = 1,
             subjectName = "국어",
             img = "s"
-            )
+        )
 //        Subject(
 //            id = 2,
 //            name = "수학",

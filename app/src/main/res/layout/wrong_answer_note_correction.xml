@@ -200,16 +200,7 @@
                         android:textSize="@dimen/M14"
                         android:gravity="center"
                         android:stateListAnimator="@null"/>
-                    <android.widget.Button
-                        android:layout_marginRight="8dp"
-                        android:layout_width="71dp"
-                        android:layout_height="34dp"
-                        android:text="@string/scope_2"
-                        android:textColor="@color/black.300"
-                        android:background="@drawable/bg_white_view"
-                        android:textSize="@dimen/M14"
-                        android:gravity="center"
-                        android:stateListAnimator="@null"/>
+
                     <android.widget.Button
                         android:layout_marginRight="8dp"
                         android:layout_width="71dp"
@@ -262,6 +253,17 @@
                         android:gravity="center"
                         android:stateListAnimator="@null"/>
                 </LinearLayout>
+
+                <android.widget.Button
+                    android:layout_width="71dp"
+                    android:layout_height="34dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/bg_white_view"
+                    android:gravity="center"
+                    android:stateListAnimator="@null"
+                    android:text="@string/scope_2"
+                    android:textColor="@color/black.300"
+                    android:textSize="@dimen/M14" />
 
             </LinearLayout>
             </LinearLayout>
