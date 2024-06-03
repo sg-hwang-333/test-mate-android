@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectDataEdit
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswer
 import kotlin.random.Random
 
 
