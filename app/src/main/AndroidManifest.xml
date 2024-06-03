@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
         android:usesCleartextTraffic="true"
@@ -16,18 +16,30 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".home.EditTestRecordActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".FindPwCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FindIdCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FindIdPasswordActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".GuideActivity1"
             android:exported="true" />
         <activity
             android:name=".goalList.GoalListActivity"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".subject.AddSubjectActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
             android:name=".subject.GoalMainListActivity"
             android:exported="true" />
@@ -35,43 +47,33 @@
             android:name=".SignUpActivity"
             android:exported="true"
             android:label="@string/title_activity_sign_up"
-            android:theme="@style/Theme.TestmateLoginPage.NoActionBar" >
-
-        </activity>
+            android:theme="@style/Theme.TestmateLoginPage.NoActionBar" />
         <activity
             android:name=".login.LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
+            android:exported="true">
+
+            <!-- 여기 intent-filter -->
+        </activity>
+        <activity
+            android:name=".home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
-            android:name=".home.HomeActivity"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".Wrong_answer_note"
-            android:exported="true">
-
-        </activity>
+            android:name=".wrong_answer_note.WrongAnswerNoteActivity"
+            android:exported="true" />
         <activity
             android:name="com.example.myapplication.Calendar"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
-            android:name=".Wrong_answer_note_add"
-            android:exported="true">
-
-        </activity>
+            android:name=".wrong_answer_note.AddWrongAnswerNoteActivity"
+            android:exported="true" />
     </application>
 </manifest>

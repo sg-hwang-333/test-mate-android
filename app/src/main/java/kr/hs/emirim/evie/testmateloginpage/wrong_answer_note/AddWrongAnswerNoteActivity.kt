@@ -1,50 +1,43 @@
-package kr.hs.emirim.evie.testmateloginpage
+package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.Spinner
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Calendar
+import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
-class Wrong_answer_note : AppCompatActivity() {
+class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
-    lateinit var addPage : Button
+    lateinit var addBtn : android.widget.Button
 
     lateinit var navHome : ImageButton
     lateinit var navWrong : ImageButton
     lateinit var navGoal : ImageButton
     lateinit var navCal : ImageButton
-
-    lateinit var spinner: Spinner
-
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_wrong_answer_note)
+        setContentView(R.layout.activity_wrong_answer_note_add)
 
-        val pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
-        val grade = pre.getString("usergrade", "고등학교 2학년 ") // 기본값 설정
+        var beforeBtn = findViewById<ImageView>(R.id.before)
+//        var WrongList = findViewById<LinearLayout>(R.id.wrong)
 
-        val facilityList = arrayOf("고등학교 2학년")
-
-        spinner = findViewById(R.id.spinnerWrong)
-
-        val facilityListWithUserGrade = mutableListOf(*facilityList, grade)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, facilityListWithUserGrade)
-        // 스피너에 어댑터 설정
-        spinner.adapter = adapter
-
-        addPage = findViewById(R.id.addBtn)
-        addPage.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note_add::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
+        beforeBtn.setOnClickListener{
+            onBackPressed();
         }
 
+        addBtn = findViewById(R.id.addBtn)
+        addBtn.setOnClickListener {
+//            WrongList.visibility = View.VISIBLE
+            onBackPressed()
+        }
+
+// navgation
         navHome = findViewById(R.id.nav_home)
         navWrong = findViewById(R.id.nav_wrong)
         navGoal = findViewById(R.id.nav_goal)
@@ -56,7 +49,7 @@ class Wrong_answer_note : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note::class.java)
+            val intent = Intent(this, WrongAnswerListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }

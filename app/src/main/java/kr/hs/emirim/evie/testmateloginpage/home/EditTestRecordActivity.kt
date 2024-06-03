@@ -2,12 +2,17 @@ package kr.hs.emirim.evie.testmateloginpage.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
+import android.widget.RatingBar
+import android.widget.SeekBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.findNavController
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -30,6 +35,8 @@ class EditTestRecordActivity : AppCompatActivity() {
         TestData("@학년 @학기 중간",78),
         TestData("@학년 @학기 중간",96)
     )
+
+    lateinit var targetScore : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_test_record)
@@ -44,76 +51,10 @@ class EditTestRecordActivity : AppCompatActivity() {
 
         // 성적 그래프
         val linechart = findViewById<LineChart>(R.id.test_record_chart)
-        val xAxis = linechart.xAxis
-        val yAxisLeft = linechart.axisLeft
-
-        val entries: MutableList<Entry> = mutableListOf() // Entry : 데이터 포인트를 나타내는 클래스
-        for (i in testRecordDataList.indices){
-            entries.add(Entry(i.toFloat(), testRecordDataList[i].score.toFloat()))
-        }
-        val lineDataSet = LineDataSet(entries,"entries")
-
-        // X축 구분선 색상 설정
-            xAxis.apply {
-                gridColor = resources.getColor(R.color.black_100, null) // 원하는 색상으로 변경
-            }
-
-        // Y축 구분선 색상 설정
-        yAxisLeft.apply {
-            gridColor = resources.getColor(R.color.black_100, null) // 원하는 색상으로 변경
-        }
-
-        lineDataSet.apply {
-            color = resources.getColor(R.color.green_500, null) // 그래프 선 색깔
-            circleRadius = 5f
-            lineWidth = 3f
-            setCircleColor(resources.getColor(R.color.green_500, null))
-            circleHoleColor = resources.getColor(R.color.green_500, null)
-            setDrawHighlightIndicators(false)
-            setDrawValues(true) // 숫자표시
-            valueTextColor = resources.getColor(R.color.black, null)
-            valueFormatter = DefaultValueFormatter(0)  // 소숫점 자릿수 설정
-            valueTextSize = 10f
-        }
-
-        //차트 전체 설정
-        linechart.apply {
-            axisRight.isEnabled = true   //y축 사용여부
-            axisLeft.isEnabled = true
-            legend.isEnabled = false    //legend 사용여부
-            description.isEnabled = false //주석
-            isDragXEnabled = true   // x 축 드래그 여부
-            isScaleYEnabled = false //y축 줌 사용여부
-            isScaleXEnabled = false //x축 줌 사용여부
-        }
-
-        //X축 설정
-        xAxis.apply {
-            setDrawGridLines(false)
-            setDrawAxisLine(true)
-            setDrawLabels(true)
-            position = XAxis.XAxisPosition.BOTTOM
-            valueFormatter = XAxisCustomFormatter(changeTestDateText(testRecordDataList))
-            textColor = resources.getColor(R.color.black, null)
-            textSize = 10f
-            labelRotationAngle = 0f
-            setLabelCount(10, true)
-        }
-
         val horizontalScrollView = findViewById<HorizontalScrollView>(R.id.scroll_view_graph)
-        horizontalScrollView.post{
-            horizontalScrollView.scrollTo(
-                linechart.width,
-                0
-            )
-        }
+        val scoreChart = ScoreChart(linechart, horizontalScrollView, this) // MPAndroidChart 커스텀 클래스
+        scoreChart.setupChart(testRecordDataList)
 
-        linechart.apply {
-            data = LineData(lineDataSet)
-            notifyDataSetChanged() //데이터 갱신
-            invalidate() // view갱신
-        }
-        // 성적 그래프 end
 
         // 시험 날짜 설정 버튼
         val BtnSetTestDate = findViewById<Button>(R.id.btn_test_date)
@@ -123,27 +64,38 @@ class EditTestRecordActivity : AppCompatActivity() {
             newFragment.show(supportFragmentManager, "datePicker")
         }
 
+        // 목표 점수
+        val targetScoreSeekbar = findViewById<SeekBar>(R.id.target_score_seekbar)
+        targetScore = findViewById<TextView>(R.id.target_score)
+
+        targetScoreSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                // SeekBar의 값이 변경될 때 호출되는 메서드
+                targetScore.text = "$progress 점"
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // 사용자가 SeekBar를 터치할 때 호출되는 메서드
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // 사용자가 SeekBar를 터치를 끝낼 때 호출되는 메서드
+            }
+        })
+
+        // 시험 난이도 RatingBar
+        val RatingBarTestDifficulty = findViewById<RatingBar>(R.id.ratingTestDifficulty)
+        RatingBarTestDifficulty.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            // 등급을 로그에 출력
+            Log.d("Rating", "Current rating: $rating")
+        }
+
         // 저장 버튼
         val BtnSave = findViewById<Button>(R.id.buttonSave)
 
         BtnSave.setOnClickListener {
 
         }
-    }
-
-    fun changeTestDateText(dataList: List<TestData>): List<String> {
-        val dataTextList = ArrayList<String>()
-        for (i in dataList.indices) {
-            dataTextList.add(dataList[i].testDate)
-        }
-        return dataTextList
-    }
-
-    class XAxisCustomFormatter(val xAxisData: List<String>) : ValueFormatter() {
-        override fun getFormattedValue(value: Float): String {
-            return xAxisData[(value).toInt()]
-        }
-
     }
 
     fun processDatePickerResult(year: Int, month: Int, day: Int) {
