@@ -12,29 +12,49 @@
         layout="@layout/header" />
 
     <!--Calendar-->
-    <LinearLayout
-        android:layout_marginTop="20dp"
+<!--    <LinearLayout-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_marginLeft="24dp"-->
+<!--        android:layout_marginRight="24dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:orientation="vertical">-->
+<!--        <TextView-->
+<!--            android:text="2023년 9월"-->
+<!--            android:textSize="@dimen/B24"-->
+<!--            android:fontFamily="@font/notosanskr_bold"-->
+<!--            android:textColor="@color/black.800"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            android:id="@+id/calendar_custom"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+<!--    </LinearLayout>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_weight="1"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical">
-        <TextView
-            android:text="2023년 9월"
-            android:textSize="@dimen/B24"
-            android:fontFamily="@font/notosanskr_bold"
-            android:textColor="@color/black.800"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:id="@+id/calendar_layout"
+        android:orientation="vertical"
+        android:background="@color/white">
+
 
         <androidx.recyclerview.widget.RecyclerView
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:id="@+id/calendar_custom"
+            android:id="@+id/cal_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/calendar_layout">
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--navbar-->
     <LinearLayout

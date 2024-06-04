@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 
-class signup : AppCompatActivity() {
+class Signup : AppCompatActivity() {
     lateinit var backBtn : ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +16,7 @@ class signup : AppCompatActivity() {
         backBtn = findViewById(R.id.backBtn)
 
         backBtn.setOnClickListener {
-            val intent = Intent(this, signup_privacy::class.java)
+            val intent = Intent(this, Signup_privacy::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
