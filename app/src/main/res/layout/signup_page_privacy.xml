@@ -124,6 +124,7 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"/>
                         <TextView
+                            android:id="@+id/collection"
                             android:layout_marginLeft="4dp"
                             android:gravity="center"
                             android:textColor="@color/black.300"
@@ -164,6 +165,7 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"/>
                         <TextView
+                            android:id="@+id/deletion"
                             android:layout_marginLeft="4dp"
                             android:gravity="center"
                             android:textColor="@color/black.300"
