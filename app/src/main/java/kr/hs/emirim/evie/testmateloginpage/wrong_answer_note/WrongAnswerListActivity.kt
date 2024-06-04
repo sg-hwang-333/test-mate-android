@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.hs.emirim.evie.testmateloginpage.NavigationButtons
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
@@ -22,7 +23,7 @@ import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerRep
 
 class WrongAnswerListActivity : AppCompatActivity() {
 
-    lateinit var addPage : Button
+    lateinit var addPage : FloatingActionButton
 
     lateinit var spinner: Spinner
 
@@ -53,6 +54,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
         // 스피너에 어댑터 설정
         spinner.adapter = adapter
 
+        // 오답노트 추가 버튼
         addPage = findViewById(R.id.addBtn)
         addPage.setOnClickListener {
             val intent = Intent(this, AddWrongAnswerNoteActivity::class.java)
@@ -72,7 +74,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this
         ) {
-            it?.let { // goalsLiveData의 값이 null이 아닐 때 중괄호 코드 실행
+            it?.let {
                 subjectAdapter.submitList(it as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
             }
         }
