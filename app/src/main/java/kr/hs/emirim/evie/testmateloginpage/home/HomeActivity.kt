@@ -16,7 +16,7 @@ import com.example.myapplication.Calendar
 import com.github.mikephil.charting.charts.LineChart
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerNoteActivity
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityHomeBinding
 import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainSubjectsViewModel
@@ -157,7 +157,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-            val intent = Intent(this, WrongAnswerNoteActivity::class.java)
+            val intent = Intent(this, WrongAnswerListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }

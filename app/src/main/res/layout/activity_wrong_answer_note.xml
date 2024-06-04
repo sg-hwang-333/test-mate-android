@@ -1,116 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".wrong_answer_note.WrongAnswerNoteActivity"
-    android:orientation="vertical"
+    tools:context=".wrong_answer_note.WrongAnswerListActivity"
     android:background="@color/white">
 
     <!--  header   -->
     <include
         android:id="@+id/toolbar_title"
-        layout="@layout/header" />
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-
-
-    <!--   scrollview   -->
-
-
-    <LinearLayout
-        android:layout_weight="1"
+    <!-- RecyclerView와 Spinner를 감싸는 레이아웃 -->
+    <RelativeLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginTop="24dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_below="@id/toolbar_title"
+        android:layout_above="@id/nav_bar">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/wrongAnswerSubjectRecyclerView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:nestedScrollingEnabled="true"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_alignParentStart="true"/>
+
+        <!-- spinner -->
         <LinearLayout
-            android:layout_marginTop="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/wrongAnswerSubjectRecyclerView"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:nestedScrollingEnabled="true"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-
-        </LinearLayout>
-
-        <!--  spinner  -->
-        <LinearLayout
+            android:id="@+id/spinner_layout"
             android:background="@drawable/dialog_radius"
-            android:layout_marginTop="24dp"
             android:layout_width="173dp"
             android:layout_height="36dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_below="@id/wrongAnswerSubjectRecyclerView"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
+
             <Spinner
                 android:id="@+id/spinnerWrong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
         </LinearLayout>
+
+        <!-- RecyclerView를 감싸는 ScrollView -->
         <ScrollView
-            android:layout_weight="1"
+            android:id="@+id/recyclerView_scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_title">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/wrongAnswerObjectRecyclerView"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:nestedScrollingEnabled="true"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/spinner_layout"
+            android:layout_marginBottom="5dp">
 
             <LinearLayout
-                android:layout_marginTop="32dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <android.widget.Button
-                    android:id="@+id/addBtn"
-                    android:layout_gravity="center"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/wrongAnswerObjectRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:text="@string/add"
-                    android:textColor="@color/white"
-                    android:background="@drawable/bg_green_view"
-                    android:fontFamily="@font/notosanskr_medium"
-                    android:textSize="@dimen/M16"/>
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="true"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
             </LinearLayout>
-        </LinearLayout>
+
         </ScrollView>
 
+    </RelativeLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/nav_bar"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/add_icon"
+        app:backgroundTint="@color/green.500"/>
 
-    </LinearLayout>
-
-
-    <!--navbar-->
+    <!-- Navbar -->
     <LinearLayout
+        android:id="@+id/nav_bar"
         android:elevation="10dp"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         tools:ignore="MissingConstraints">
 
         <ImageButton
@@ -120,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/home_off" />
+
         <ImageButton
             android:id="@+id/nav_wrong"
             android:background="@android:color/transparent"
@@ -127,6 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/note_on" />
+
         <ImageButton
             android:id="@+id/nav_goal"
             android:background="@android:color/transparent"
@@ -134,6 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/goal_off" />
+
         <ImageButton
             android:id="@+id/nav_cal"
             android:background="@android:color/transparent"
@@ -143,4 +134,5 @@
             android:src="@drawable/cal_off" />
 
     </LinearLayout>
-</LinearLayout>
+
+</RelativeLayout>

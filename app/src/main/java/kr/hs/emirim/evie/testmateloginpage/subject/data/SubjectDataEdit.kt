@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class SubjectDataEdit(resources: Resources) {
-    private val initialSubjectList = getInitialSubjects()
-    private val subjectsLiveData = MutableLiveData(initialSubjectList)
+    private val initialFlowerList = getInitialSubjects()
+    private val subjectsLiveData = MutableLiveData(initialFlowerList)
 
     fun addSubject(subject: Subject) {
         val currentList = subjectsLiveData.value
@@ -34,9 +34,9 @@ class SubjectDataEdit(resources: Resources) {
 
     private fun getInitialSubjects() = listOf(
         Subject(
-            id = 1,
-            name = "국어",
-            image = "book_red"
+            subjectId = 1,
+            subjectName = "국어",
+            img = "s"
             )
 //        Subject(
 //            id = 2,

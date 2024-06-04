@@ -25,6 +25,7 @@
             android:paddingLeft="24dp"
             android:paddingRight="20dp">
 
+            <include layout="@layout/grade_tag" />
 
             <ScrollView
                 android:layout_width="match_parent"
