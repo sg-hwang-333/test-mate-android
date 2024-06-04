@@ -2,9 +2,12 @@ package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +20,7 @@ import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectAdapter
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectsViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil.Companion.gradeSpinner
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerAPIService
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerListResponse
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerRepository
@@ -42,17 +46,24 @@ class WrongAnswerListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_wrong_answer_note)
 
         // 학년 spiner api 연동
-        val pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
-        val grade = pre.getString("usergrade", "고등학교 2학년 ") // 기본값 설정
+        spinner = gradeSpinner(this, R.id.spinnerWrong)
+        spinner.setSelection(2)
+        var selectedPosition = spinner.selectedItemPosition + 1// grade 인덱스 (ex. 3)
+        var selectedItem = spinner.getItemAtPosition(selectedPosition).toString() // grade 문자열 (ex. 고등학교 2학년)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                selectedPosition = position + 1
+                // 선택된 항목에 대한 처리 작업 수행
+//                Toast.makeText(context, "선택된 항목: $selectedItem", Toast.LENGTH_SHORT).show()
+                listViewModel.getLists(selectedPosition, 1, selectedItem)
+            }
 
-        val facilityList = arrayOf("고등학교 2학년")
-
-        spinner = findViewById(R.id.spinnerWrong)
-
-        val facilityListWithUserGrade = mutableListOf(*facilityList, grade)
-        val adapter = ArrayAdapter(this, R.layout.spinner_item, facilityListWithUserGrade)
-        // 스피너에 어댑터 설정
-        spinner.adapter = adapter
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // 아무 것도 선택되지 않았을 때 처리할 작업
+            }
+        }
 
         // 오답노트 추가 버튼
         addPage = findViewById(R.id.addBtn)
@@ -96,7 +107,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             }
         }
 
-        listViewModel.getLists(3, 1)
+        listViewModel.getLists(3, 1, selectedItem)
 
         // 네비게이션
         navigationButtons = NavigationButtons(this)

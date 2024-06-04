@@ -47,8 +47,8 @@
 
             <Spinner
                 android:id="@+id/spinnerWrong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
@@ -58,8 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/spinner_layout"
-            android:layout_marginBottom="5dp"
-            android:layout_above="@id/addBtn">
+            android:layout_marginBottom="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
