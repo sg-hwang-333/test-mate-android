@@ -15,9 +15,11 @@ class WrongAnswerListViewModel(val wrongAnswerRepository: WrongAnswerRepository)
 
     val wrongAnswerListData = wrongAnswerRepository.getNoteList()
 
-    fun getLists(grade: Int, subjectId: Int){
-        return wrongAnswerRepository.fetchWrongAnswers(grade, subjectId)
+    fun getLists(grade: Int, subjectId: Int, gradeString: String){
+        return wrongAnswerRepository.fetchWrongAnswers(grade, subjectId, gradeString)
     }
+
+
 
     fun insertSubject(subjectName : String?, subjectImage : String?) {
         val newSubject = Subject(
@@ -26,11 +28,11 @@ class WrongAnswerListViewModel(val wrongAnswerRepository: WrongAnswerRepository)
             subjectImage
         )
 
-        wrongAnswerRepository.addSubject(newSubject)
+//        wrongAnswerRepository.addSubject(newSubject)
     }
 
     fun removeSubject(subject: Subject) {
-        wrongAnswerRepository.removeSubject(subject)
+//        wrongAnswerRepository.removeSubject(subject)
     }
 
 
