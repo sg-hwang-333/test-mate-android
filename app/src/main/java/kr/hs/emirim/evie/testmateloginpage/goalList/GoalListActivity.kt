@@ -13,9 +13,9 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Calendar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity

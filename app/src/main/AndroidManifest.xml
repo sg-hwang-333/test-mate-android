@@ -48,6 +48,10 @@
             android:exported="true"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.TestmateLoginPage.NoActionBar" />
+        <activity android:name=".signup.Signup" />
+        <activity android:name=".signup.Signup_privacy" />
+        <activity android:name=".signup.terms_privacy_collection" />
+        <activity android:name=".signup.terms_privacy_deletion" />
         <activity
             android:name=".login.LoginActivity"
             android:exported="true" />

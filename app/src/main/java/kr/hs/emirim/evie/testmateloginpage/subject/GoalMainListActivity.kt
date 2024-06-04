@@ -15,9 +15,9 @@ import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.TMService
+import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
