@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,15 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.hs.emirim.evie.testmateloginpage.NavigationButtons
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
+import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
+import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectAdapter
-import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectViewModel
-import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectsViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil.Companion.gradeSpinner
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerAPIService
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerListResponse
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerRepository
 
 class WrongAnswerListActivity : AppCompatActivity() {
 
@@ -31,8 +25,8 @@ class WrongAnswerListActivity : AppCompatActivity() {
 
     lateinit var spinner: Spinner
 
-    private val subjectViewModel by viewModels<WrongAnswerSubjectViewModel> {
-        WrongAnswerSubjectsViewModelFactory(this)
+    private val subjectViewModel by viewModels<SubjectViewModel> {
+        SubjectViewModelFactory(this)
     }
 
     private val listViewModel by viewModels<WrongAnswerListViewModel> {
@@ -81,7 +75,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) // 수평 레이아웃 방향 설정
         subjectRecyclerView.adapter = subjectAdapter
 
-        subjectViewModel.subjectsLiveData.observe(
+        subjectViewModel.subjectListData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this
         ) {

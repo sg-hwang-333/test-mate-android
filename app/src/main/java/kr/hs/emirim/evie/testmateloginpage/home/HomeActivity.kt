@@ -19,14 +19,12 @@ import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityHomeBinding
 import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
-import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainSubjectsViewModel
-import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
 import kr.hs.emirim.evie.testmateloginpage.subject.BOOK_TAG
 import kr.hs.emirim.evie.testmateloginpage.subject.SUBJECT_NAME
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectHomeAdapter
-import kr.hs.emirim.evie.testmateloginpage.subject.SubjectsListViewModel
-import kr.hs.emirim.evie.testmateloginpage.subject.SubjectsListViewModelFactory
+import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
+import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 
 class HomeActivity : AppCompatActivity() {
@@ -57,13 +55,13 @@ class HomeActivity : AppCompatActivity() {
     lateinit var toggle: ImageButton
 
     private val newSubjectActivityRequestCode = 1
-    private val subjectsListViewModel by viewModels<SubjectsListViewModel> {
-        SubjectsListViewModelFactory(this)
+    private val subjectsListViewModel by viewModels<SubjectViewModel> {
+        SubjectViewModelFactory(this)
     }
 
-    private val goalMainSubjectsViewModel by viewModels<GoalMainSubjectsViewModel> {
-        GoalMainViewModelFactory(this)
-    }
+//    private val goalMainSubjectsViewModel by viewModels<SubjectsListViewModel> {
+//        GoalMainViewModelFactory(this)
+//    }
 
     private lateinit var binding: ActivityHomeBinding
 //    private lateinit var drawerLayout: DrawerLayout
@@ -115,7 +113,7 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) // 수평 레이아웃 방향 설정
         recyclerView.adapter = subjectsAdapter
 
-        subjectsListViewModel.subjectsLiveData.observe(
+        subjectsListViewModel.subjectListData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this
         ) {

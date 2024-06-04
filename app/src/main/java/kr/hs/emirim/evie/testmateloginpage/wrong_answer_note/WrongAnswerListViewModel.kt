@@ -1,13 +1,11 @@
 package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerListResponse
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerRepository
+import kr.hs.emirim.evie.testmateloginpage.api.WrongAnswerRepository
 import kotlin.random.Random
 
 
