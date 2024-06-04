@@ -16,7 +16,7 @@ class terms_privacy_deletion : AppCompatActivity() {
         backBtn = findViewById(R.id.backBtn)
 
         backBtn.setOnClickListener {
-            val intent = Intent(this, signup_privacy::class.java)
+            val intent = Intent(this, Signup_privacy::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
