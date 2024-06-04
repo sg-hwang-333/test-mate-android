@@ -1,16 +1,13 @@
-package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data
+package kr.hs.emirim.evie.testmateloginpage.api
 
 import android.content.res.Resources
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerListResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -129,7 +126,6 @@ class WrongAnswerRepository(resources: Resources) {
 //    )
     companion object { // 데이터를 관리하고 제공하는 데 사용되는 클래스의 인스턴스를 만들지 않고도 호출하게 함
         private var INSTANCE: WrongAnswerRepository? = null
-
         fun getDataSource(resources: Resources): WrongAnswerRepository {
             return synchronized(WrongAnswerRepository::class) {
                 val newInstance = INSTANCE ?: WrongAnswerRepository(resources)

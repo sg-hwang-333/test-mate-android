@@ -1,19 +1,13 @@
 package kr.hs.emirim.evie.testmateloginpage.subject
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
