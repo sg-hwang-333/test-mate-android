@@ -7,6 +7,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +16,19 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.api.UserRepository
 import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityEditSubjectsBinding
+import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
+import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
 
 const val SUBJECT_NAME = "새로운 과목"
 const val BOOK_TAG = "이미지 주소" // R.drawable.book_red
@@ -30,11 +39,17 @@ class AddSubjectActivity : AppCompatActivity() {
     lateinit var bookImg : ImageView
     var bookImgPath : String? = "book_red"
 
+    private val subjectViewModel by viewModels<SubjectViewModel> {
+        SubjectViewModelFactory(this)
+    }
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_subjects)
+        setContentView(R.layout.activity_add_subjects)
         supportActionBar?.hide()
+
+//        val currentUser : UserDetailsResponse? = UserRepository.getUsersData();
 
         addSubjectName = findViewById(R.id.subjectName)
 
@@ -43,8 +58,12 @@ class AddSubjectActivity : AppCompatActivity() {
             finish()
         }
 
-        findViewById<Button>(R.id.subjectConfirmBtn).setOnClickListener {
-            addSubject()
+        findViewById<Button>(R.id.subjectAddBtn).setOnClickListener {
+            Log.d("retrofit", CurrentUser.userDetails!!.grade.toString())
+            Log.d("retrofit", addSubjectName.text.toString())
+            Log.d("retrofit", bookImgPath!!)
+            val requestSubject = Subject(CurrentUser.userDetails!!.grade, addSubjectName.text.toString(), bookImgPath)
+            subjectViewModel.addList(requestSubject)
         }
 //        addSubjectName = findViewById(R.id.subjectName)
 
@@ -73,10 +92,6 @@ class AddSubjectActivity : AppCompatActivity() {
             bookImg.setImageResource(R.drawable.book_black)
             bookImgPath = "book_black"
         }
-    }
-
-    private fun getImageResource(): Int? { // 이미지 리소스 가져
-        return bookImg.tag as? Int
     }
 
     private fun addSubject() {

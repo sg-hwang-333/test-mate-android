@@ -1,11 +1,13 @@
 package kr.hs.emirim.evie.testmateloginpage.subject
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kr.hs.emirim.evie.testmateloginpage.api.SubjectRepository
 
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
 import kotlin.random.Random
 
 
@@ -13,19 +15,23 @@ class SubjectViewModel(val subjectRepository: SubjectRepository) : ViewModel() {
 
     val subjectListData = subjectRepository.getSubjectList()
 
-//    fun getLists(grade: Int, subjectId: Int, gradeString: String){
-//        return subjectRepository.fetchWrongAnswers(grade, subjectId, gradeString)
-//    }
-
-    fun insertSubject(subjectName : String?, subjectImage : String?) {
-        val newSubject = Subject(
-            Random.nextLong(),
-            subjectName,
-            subjectImage
-        )
-
-//        subjectListData.addSubject(newSubject)
+    fun getLists() : MutableLiveData<List<Subject>> {
+        return subjectListData
     }
+
+    fun addList(subject: Subject){
+        return subjectRepository.fetchSubject(subject)
+    }
+
+//    fun insertSubject(grade : Int, subjectName : String?, subjectImage : String?) {
+//        val newSubject = Subject(
+//            grade,
+//            subjectName,
+//            subjectImage
+//        )
+//
+//        subjectListData.addSubject(newSubject)
+//    }
 //    fun removeSubject(subject: Subject) {
 //        subjectListData.removeSubject(subject)
 //    }

@@ -15,7 +15,7 @@
         android:layout_height="30dp">
         <TextView
             android:layout_gravity="center"
-            android:text="과목 편집"
+            android:text="과목 추가"
             android:textStyle="bold"
             android:textSize="20dp"
             android:textColor="@color/black.800"
@@ -142,21 +142,10 @@
             android:layout_width="0dp"
             android:layout_height="42dp"/>
         <android.widget.Button
-            android:id="@+id/subjectDeleteBtn"
-            android:layout_marginRight="8dp"
+            android:id="@+id/subjectAddBtn"
             android:layout_width="70dp"
             android:layout_height="42dp"
-            android:text="@string/delete"
-            android:textColor="@color/red_1"
-            android:background="@drawable/border_delete_view"
-            android:textSize="@dimen/M16"
-            android:gravity="center"
-            android:stateListAnimator="@null"/>
-        <android.widget.Button
-            android:id="@+id/subjectConfirmBtn"
-            android:layout_width="70dp"
-            android:layout_height="42dp"
-            android:text="확인"
+            android:text="추가"
             android:textColor="@color/white"
             android:background="@drawable/bg_green_view"
             android:textSize="@dimen/M16"

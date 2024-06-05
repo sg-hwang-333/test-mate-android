@@ -19,6 +19,7 @@ import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityHomeBinding
 import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
+import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
 import kr.hs.emirim.evie.testmateloginpage.subject.BOOK_TAG
 import kr.hs.emirim.evie.testmateloginpage.subject.SUBJECT_NAME
@@ -26,6 +27,7 @@ import kr.hs.emirim.evie.testmateloginpage.subject.SubjectHomeAdapter
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
 
 class HomeActivity : AppCompatActivity() {
     // 시험기록 데이터 생성
@@ -175,17 +177,21 @@ class HomeActivity : AppCompatActivity() {
         // TODO : 과목별 화면으로 이동
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-
-        /* Inserts subject into viewModel. */
-        if (resultCode == Activity.RESULT_OK) {
-            intentData?.let { data ->
-                val subjectName = data.getStringExtra(SUBJECT_NAME)
-                val subjectImage = data.getStringExtra(BOOK_TAG)
-
-                subjectsListViewModel.insertSubject(subjectName, subjectImage) ///////////////////////////////////////// insertFlower
-            }
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, intentData)
+//
+//        /* Inserts subject into viewModel. */
+//        if (resultCode == Activity.RESULT_OK) {
+//            intentData?.let { data ->
+//                val subjectName = data.getStringExtra(SUBJECT_NAME)
+//                val subjectImage = data.getStringExtra(BOOK_TAG)
+//
+//                val newSubject = Subject(
+//                    CurrentUser.userDetails!!.grade, subjectName, subjectImage
+//                )
+//
+//                subjectsListViewModel.addList(newSubject) ///////////////////////////////////////// insertFlower
+//            }
+//        }
+//    }
 }
