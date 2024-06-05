@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import kr.hs.emirim.evie.testmateloginpage.api.SubjectRepository
 
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
-import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
-import kotlin.random.Random
 
 
 class SubjectViewModel(val subjectRepository: SubjectRepository) : ViewModel() {
