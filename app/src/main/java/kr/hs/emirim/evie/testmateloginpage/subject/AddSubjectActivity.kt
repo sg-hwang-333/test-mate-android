@@ -3,32 +3,22 @@ package kr.hs.emirim.evie.testmateloginpage.subject
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
-import com.google.android.material.textfield.TextInputEditText
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.api.UserRepository
-import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityEditSubjectsBinding
+import kr.hs.emirim.evie.testmateloginpage.api.SubjectAPIService
+import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
-import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 const val SUBJECT_NAME = "새로운 과목"
 const val BOOK_TAG = "이미지 주소" // R.drawable.book_red
@@ -39,9 +29,9 @@ class AddSubjectActivity : AppCompatActivity() {
     lateinit var bookImg : ImageView
     var bookImgPath : String? = "book_red"
 
-    private val subjectViewModel by viewModels<SubjectViewModel> {
-        SubjectViewModelFactory(this)
-    }
+//    private val subjectViewModel by viewModels<SubjectViewModel> {
+//        SubjectViewModelFactory(this)
+//    }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,11 +49,18 @@ class AddSubjectActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.subjectAddBtn).setOnClickListener {
-            Log.d("retrofit", CurrentUser.userDetails!!.grade.toString())
-            Log.d("retrofit", addSubjectName.text.toString())
+            val grade = CurrentUser.userDetails!!.grade
+            val subjectName = addSubjectName.text.toString()
+            Log.d("retrofit", grade.toString())
+            Log.d("retrofit", subjectName)
             Log.d("retrofit", bookImgPath!!)
-            val requestSubject = Subject(CurrentUser.userDetails!!.grade, addSubjectName.text.toString(), bookImgPath)
-            subjectViewModel.addList(requestSubject)
+
+            if (subjectName.isNotEmpty()) {
+                val newSubject = Subject(grade, subjectName, bookImgPath)
+                addSubject(newSubject)
+            } else {
+                Log.d("AddSubjectActivity", "Subject name cannot be empty")
+            }
         }
 //        addSubjectName = findViewById(R.id.subjectName)
 
@@ -94,19 +91,41 @@ class AddSubjectActivity : AppCompatActivity() {
         }
     }
 
-    private fun addSubject() {
-        val resultIntent = Intent()
+//    private fun addSubject() {
+//        val resultIntent = Intent()
+//
+//        if (addSubjectName.text.isNullOrEmpty()) {
+//            setResult(Activity.RESULT_CANCELED, resultIntent)
+//        } else {
+//            val name = addSubjectName.text.toString()
+//            resultIntent.putExtra(SUBJECT_NAME, name)
+//            resultIntent.putExtra(BOOK_TAG, bookImgPath)
+//
+//            setResult(Activity.RESULT_OK, resultIntent)
+//        }
+//        finish()
+//    }
 
-        if (addSubjectName.text.isNullOrEmpty()) {
-            setResult(Activity.RESULT_CANCELED, resultIntent)
-        } else {
-            val name = addSubjectName.text.toString()
-            resultIntent.putExtra(SUBJECT_NAME, name)
-            resultIntent.putExtra(BOOK_TAG, bookImgPath)
+    private fun addSubject(subject: Subject) {
+        val subjectAPIService = RetrofitClient.create(SubjectAPIService::class.java, this)
+        val call = subjectAPIService.createSubject(subject)
+        call.enqueue(object : Callback<SubjectResponse> {
+            override fun onResponse(call: Call<SubjectResponse>, response: Response<SubjectResponse>) {
+                if (response.isSuccessful) {
+                    val resultIntent = Intent()
+                    resultIntent.putExtra(SUBJECT_NAME, subject.subjectName)
+                    resultIntent.putExtra(BOOK_TAG, subject.img)
+                    setResult(Activity.RESULT_OK, resultIntent)
+                    finish()
+                } else {
+                    Log.d("AddSubjectActivity", "Failed to add subject. Error code: ${response.code()}")
+                }
+            }
 
-            setResult(Activity.RESULT_OK, resultIntent)
-        }
-        finish()
+            override fun onFailure(call: Call<SubjectResponse>, t: Throwable) {
+                Log.d("AddSubjectActivity", "Failed to add subject. Error message: ${t.message}")
+            }
+        })
     }
 }
 

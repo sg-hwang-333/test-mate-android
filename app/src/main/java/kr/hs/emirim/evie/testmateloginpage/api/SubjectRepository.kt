@@ -4,9 +4,7 @@ import android.content.res.Resources
 import androidx.lifecycle.MutableLiveData
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
-import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerListResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,6 +13,7 @@ import retrofit2.Response
 class SubjectRepository(resources: Resources) {
     var subjectListData = MutableLiveData<List<Subject>>()
 
+    // Context를 사용하여 RetrofitClient를 생성
     val subjectAPIService = RetrofitClient.create(SubjectAPIService::class.java)
 
     fun getSubjectList(): MutableLiveData<List<Subject>> {
@@ -28,19 +27,16 @@ class SubjectRepository(resources: Resources) {
                 if (response.isSuccessful) {
                     val newSubject: Subject? = subject
                     newSubject?.let {
-                        // subjectList에 subject 추가
                         val updatedList = subjectListData.value.orEmpty().toMutableList()
                         updatedList.add(it)
                         subjectListData.postValue(updatedList)
                     }
                 } else {
-                    // 서버로부터 응답이 실패한 경우 처리
                     println("Failed to get notes. Error code: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<SubjectResponse>, t: Throwable) {
-                // API 호출 실패 시 처리
                 println("Failed to get notes. Error message: ${t.message}")
             }
         })
