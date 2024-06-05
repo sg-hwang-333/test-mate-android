@@ -80,7 +80,7 @@ class GoalMainListActivity : AppCompatActivity() {
                     val subjectList = response.body()
                     subjectList?.let {
                         for (subject in it) {
-                            Log.d("Subject", "ID: ${subject.subjectId}, Name: ${subject.subjectName}, Image: ${subject.img}")
+//                            Log.d("Subject", "ID: ${subject.subjectId}, Name: ${subject.subjectName}, Image: ${subject.img}")
                         }
                     }
                 } else {

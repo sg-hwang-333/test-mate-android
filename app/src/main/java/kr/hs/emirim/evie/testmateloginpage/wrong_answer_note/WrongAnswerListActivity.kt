@@ -75,6 +75,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) // 수평 레이아웃 방향 설정
         subjectRecyclerView.adapter = subjectAdapter
 
+//        subjectViewModel.getLists() // list 가져오기
         subjectViewModel.subjectListData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this

@@ -68,6 +68,6 @@ object SubjectDiffCallback : DiffUtil.ItemCallback<Subject>() {
     }
 
     override fun areContentsTheSame(oldItem: Subject, newItem: Subject): Boolean {
-        return oldItem.subjectId == newItem.subjectId
+        return oldItem.subjectName == newItem.subjectName
     }
 }

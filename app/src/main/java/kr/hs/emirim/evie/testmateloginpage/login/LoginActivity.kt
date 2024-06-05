@@ -17,10 +17,14 @@ import kr.hs.emirim.evie.testmateloginpage.SignUpActivity
 import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
+import kr.hs.emirim.evie.testmateloginpage.userData.UserDetailsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+object CurrentUser {
+    var userDetails: UserDetailsResponse? = null
+}
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var imageButton: ImageButton
@@ -70,6 +74,9 @@ class LoginActivity : AppCompatActivity() {
                     val code = response.code()
                     if(code == 200) {
                         checkUser.visibility = View.INVISIBLE
+
+                        // 로그인 성공 시 사용자 정보를 CurrentUser 객체에 저장
+                        CurrentUser.userDetails = response.body()!!.userDetails
 
                         val intent = Intent(this@LoginActivity, GoalMainListActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

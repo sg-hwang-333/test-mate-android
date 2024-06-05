@@ -19,19 +19,19 @@ class WrongAnswerListViewModel(val wrongAnswerRepository: WrongAnswerRepository)
 
 
 
-    fun insertSubject(subjectName : String?, subjectImage : String?) {
-        val newSubject = Subject(
-            Random.nextLong(),
-            subjectName,
-            subjectImage
-        )
-
+//    fun insertSubject(subjectName : String?, subjectImage : String?) {
+//        val newSubject = Subject(
+//            Random.nextLong(),
+//            subjectName,
+//            subjectImage
+//        )
+//
 //        wrongAnswerRepository.addSubject(newSubject)
-    }
+//    }
 
-    fun removeSubject(subject: Subject) {
+//    fun removeSubject(subject: Subject) {
 //        wrongAnswerRepository.removeSubject(subject)
-    }
+//    }
 
 
 }
