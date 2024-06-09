@@ -98,7 +98,8 @@
                         android:paddingTop="13dp"
                         android:paddingBottom="13dp"
                         android:text="중복확인"
-                        android:textColor="@color/black.300" />
+                        android:textColor="@color/black.300"
+                        android:stateListAnimator="@null"/>
                 </LinearLayout>
 
                 <TextView
@@ -266,16 +267,17 @@
 
                 <android.widget.Button
                     android:id="@+id/signup_grade"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_white_view"
                     android:drawableRight="@drawable/arrow_200_1"
-                    android:gravity="left"
+                    android:gravity="left |center_vertical"
                     android:hint="학년정보를 선택해 주세요"
                     android:padding="12dp"
                     android:textColorHint="@color/black.200_1"
-                    android:textSize="14dp" />
+                    android:textSize="14dp"/>
             </LinearLayout>
 
             <android.widget.Button
