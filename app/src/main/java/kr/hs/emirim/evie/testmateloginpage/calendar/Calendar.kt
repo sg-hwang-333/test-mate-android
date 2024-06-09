@@ -1,24 +1,23 @@
-package com.example.myapplication
+package kr.hs.emirim.evie.testmateloginpage.calendar
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import kr.hs.emirim.evie.testmateloginpage.AdapterMonth
+import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.Wrong_answer_note
-import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityCalendarBinding
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerNoteActivity
 
-class Calendar : AppCompatActivity() {
+class Calendar<CalendarBinding> : AppCompatActivity() {
 
     lateinit var navHome : ImageButton
     lateinit var navWrong : ImageButton
     lateinit var navGoal : ImageButton
     lateinit var navCal : ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
@@ -44,6 +43,8 @@ class Calendar : AppCompatActivity() {
 //        val snap = PagerSnapHelper()
 //        snap.attachToRecyclerView(calendarCustomRecyclerView)
 
+
+
         navHome = findViewById(R.id.nav_home)
         navWrong = findViewById(R.id.nav_wrong)
         navGoal = findViewById(R.id.nav_goal)
@@ -55,7 +56,7 @@ class Calendar : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-            val intent = Intent(this, Wrong_answer_note::class.java)
+            val intent = Intent(this, WrongAnswerNoteActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
@@ -71,4 +72,5 @@ class Calendar : AppCompatActivity() {
         }
 
     }
+
 }

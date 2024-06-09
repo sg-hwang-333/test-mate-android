@@ -1,7 +1,9 @@
 package kr.hs.emirim.evie.testmateloginpage.login
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -10,17 +12,18 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kr.hs.emirim.evie.testmateloginpage.GuideActivity1
 import kr.hs.emirim.evie.testmateloginpage.LoginResponse
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.SignUpActivity
-import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.userData.UserDetailsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kr.hs.emirim.evie.testmateloginpage.TMService
+import kr.hs.emirim.evie.testmateloginpage.api.UserAPIService
+import kr.hs.emirim.evie.testmateloginpage.comm.SessionManager
 
 object CurrentUser {
     var userDetails: UserDetailsResponse? = null
@@ -33,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
     private var isImageVisible = false
     lateinit var checkUser : TextView
     lateinit var signupBtn : TextView
+    private lateinit var sharedPreferences: SharedPreferences
 
     lateinit var submitBtn : android.widget.Button
 
@@ -48,6 +52,15 @@ class LoginActivity : AppCompatActivity() {
         editPass = findViewById(R.id.edit_pw)
         editEmail = findViewById(R.id.edit_email)
         checkUser = findViewById(R.id.warning_message)
+
+        // SharedPreferences 초기화
+        sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+
+        // 이전에 저장된 세션 정보가 있으면 자동 로그인 수행
+        val savedSession = sharedPreferences.getString("sessionId", null)
+        if (savedSession != null) {
+            // TODO: 이전에 저장된 세션 정보로 자동 로그인 요청 수행
+        }
 
         imageButton.setOnClickListener {
             isImageVisible = !isImageVisible
@@ -68,15 +81,30 @@ class LoginActivity : AppCompatActivity() {
 
             val loginData = LoginRequest(txtEmail, txtPass)
             val call = loginService.requestLogin(loginData)
-            // 보내야 하는 정보를 가지고 있는 객체
             call.enqueue(object : Callback<LoginResponse> {
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) { // response = 응답메세지(성공 or 실패)
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     val code = response.code()
                     if(code == 200) {
                         checkUser.visibility = View.INVISIBLE
 
                         // 로그인 성공 시 사용자 정보를 CurrentUser 객체에 저장
                         CurrentUser.userDetails = response.body()!!.userDetails
+
+                        // SharedPreferences에 세션 정보 저장
+//                        val sessionId = response.headers()["Set-Cookie"]
+//                        if (sessionId != null) {
+//                            with(sharedPreferences.edit()) {
+//                                putString("sessionId", sessionId)
+//                                apply()
+//                                Log.d("sessionId", sessionId)
+//                            }
+//                        }
+                        val setCookieHeader = response.headers().get("Set-Cookie")
+                        val sessionId = setCookieHeader?.split(";")?.find { it.startsWith("JSESSIONID") }?.split("=")?.get(1)
+                        sessionId?.let {
+                            SessionManager.saveSessionId(this@LoginActivity, it)
+                            Log.d("sessionId", sessionId)
+                        }
 
                         val intent = Intent(this@LoginActivity, GoalMainListActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -85,15 +113,15 @@ class LoginActivity : AppCompatActivity() {
                         val result : LoginResponse = response.body() as LoginResponse
                         Log.d("logintag", response.code().toString() + " : 성공했습니다. " + result.message)
                     } else {
-//                        Toast.makeText(this@LoginActivity, "로그인 실패 (아이디, 패스워드 확인 필요)", Toast.LENGTH_LONG).show()
+                        // 로그인 실패 시
                         checkUser.visibility = View.VISIBLE
                     }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    // 통신 실패 시
                     Log.d("logintag", "fail " + t.message)
                 }
-
             })
         }
 
