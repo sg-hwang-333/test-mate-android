@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerNoteActivity
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 
 class Calendar<CalendarBinding> : AppCompatActivity() {
 
@@ -56,7 +56,7 @@ class Calendar<CalendarBinding> : AppCompatActivity() {
             startActivity(intent)
         }
         navWrong.setOnClickListener {
-            val intent = Intent(this, WrongAnswerNoteActivity::class.java)
+            val intent = Intent(this, WrongAnswerListActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
