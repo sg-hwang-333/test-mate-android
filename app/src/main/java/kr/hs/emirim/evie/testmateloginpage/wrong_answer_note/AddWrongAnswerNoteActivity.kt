@@ -10,7 +10,8 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.Calendar
+import androidx.core.content.ContextCompat
+import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
@@ -29,12 +30,16 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
     var arrGrade = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
 
-    private var selectedReason: String? = null
+    private lateinit var selectedReason: String
+    private lateinit var selectedScope: String
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wrong_answer_note_add)
+
+        selectedReason = "실수"
+        selectedScope = "추가자료"
 
         var beforeBtn = findViewById<ImageView>(R.id.before)
 //        var WrongList = findViewById<LinearLayout>(R.id.wrong)
@@ -65,11 +70,23 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         val buttonTimeout: Button = findViewById(R.id.timeout_btn)
         val buttonLackConcept: Button = findViewById(R.id.lack_concept_btn)
 
-        val buttons = listOf(buttonMistake, buttonTimeout, buttonLackConcept)
+        val reasonButtons = listOf(buttonMistake, buttonTimeout, buttonLackConcept)
 
-        buttonMistake.setOnClickListener { handleButtonClick(buttonMistake, buttons) }
-        buttonTimeout.setOnClickListener { handleButtonClick(buttonTimeout, buttons) }
-        buttonLackConcept.setOnClickListener { handleButtonClick(buttonLackConcept, buttons) }
+        buttonMistake.setOnClickListener { handleReasonButtonClick(buttonMistake, reasonButtons) }
+        buttonTimeout.setOnClickListener { handleReasonButtonClick(buttonTimeout, reasonButtons) }
+        buttonLackConcept.setOnClickListener { handleReasonButtonClick(buttonLackConcept, reasonButtons) }
+
+        val buttonScope1: Button = findViewById(R.id.scope_btn1)
+        val buttonScope2: Button = findViewById(R.id.scope_btn2)
+        val buttonScope3: Button = findViewById(R.id.scope_btn3)
+        val buttonScope4: Button = findViewById(R.id.scope_btn4)
+
+        val scopeButtons = listOf(buttonScope1, buttonScope2, buttonScope3, buttonScope4)
+
+        buttonScope1.setOnClickListener { handleScopeButtonClick(buttonScope1, scopeButtons) }
+        buttonScope2.setOnClickListener { handleScopeButtonClick(buttonScope2, scopeButtons) }
+        buttonScope3.setOnClickListener { handleScopeButtonClick(buttonScope3, scopeButtons) }
+        buttonScope4.setOnClickListener { handleScopeButtonClick(buttonScope4, scopeButtons) }
 
         addBtn = findViewById(R.id.addBtn)
         addBtn.setOnClickListener {
@@ -105,16 +122,29 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleButtonClick(selectedButton: Button, buttons: List<Button>) {
+    private fun handleReasonButtonClick(selectedButton: Button, buttons: List<Button>) {
         for (button in buttons) {
             if (button == selectedButton) {
                 button.setBackgroundResource(R.drawable.bg_green_view)
-                button.setTextColor(resources.getColor(R.color.white))
+                button.setTextColor(ContextCompat.getColor(this, R.color.white))
                 selectedReason = button.text.toString()
                 Log.d("wrongAnswer", selectedReason!!)
             } else {
                 button.setBackgroundResource(R.drawable.bg_white_view)
-                button.setTextColor(resources.getColor(R.color.black_300))
+                button.setTextColor(ContextCompat.getColor(this, R.color.black_300))
+            }
+        }
+    }
+
+    private fun handleScopeButtonClick(selectedButton: Button, buttons: List<Button>) {
+        for (button in buttons) {
+            if (button == selectedButton) {
+                button.setBackgroundResource(R.drawable.bg_green_view)
+                button.setTextColor(ContextCompat.getColor(this, R.color.white))
+                selectedScope = button.text.toString()
+            } else {
+                button.setBackgroundResource(R.drawable.bg_white_view)
+                button.setTextColor(ContextCompat.getColor(this, R.color.black_300))
             }
         }
     }
