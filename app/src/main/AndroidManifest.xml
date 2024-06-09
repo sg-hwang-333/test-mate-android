@@ -50,7 +50,13 @@
             android:theme="@style/Theme.TestmateLoginPage.NoActionBar" />
         <activity
             android:name=".login.LoginActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -60,20 +66,18 @@
         <activity
             android:name=".home.HomeActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".wrong_answer_note.WrongAnswerNoteActivity"
+            android:name=".wrong_answer_note.WrongAnswerListActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.myapplication.Calendar"
+            android:name=".calendar.Calendar"
             android:exported="true" />
         <activity
             android:name=".wrong_answer_note.AddWrongAnswerNoteActivity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
     </application>
 </manifest>

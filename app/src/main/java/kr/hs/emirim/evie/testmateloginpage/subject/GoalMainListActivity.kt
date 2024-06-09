@@ -9,7 +9,7 @@ import android.widget.AdapterView
 import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Calendar
+import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity

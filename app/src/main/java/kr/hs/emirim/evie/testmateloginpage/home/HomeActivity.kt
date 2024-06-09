@@ -12,7 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Calendar
+import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import com.github.mikephil.charting.charts.LineChart
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
