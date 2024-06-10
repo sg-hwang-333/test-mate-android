@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.util.ImgResourceStringToInt.Companion.getResourceId
 
 
 class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
@@ -18,9 +20,8 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
     inner class SubjectHomeHolder(itemView: View, val onClick: (Subject) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val subjectTextView: TextView = itemView.findViewById(R.id.subjectName)
+        val subjectImageView: ImageView = itemView.findViewById(R.id.subjectImage)
         var currentSubject: Subject? = null
-
-        private lateinit var subjectEditBtn: Button
 
         init {
             itemView.setOnClickListener {
@@ -35,6 +36,7 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
             currentSubject = subject
 
             subjectTextView.setText(subject.subjectName)
+            subjectImageView.setImageResource(getResourceId(subject.img, itemView.context))
         }
 
     }
@@ -50,15 +52,6 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
         val subject = getItem(position)
         holder.bind(subject)
     }
-
-//    override fun getItemViewType(position: Int): Int {
-//        val goal = getItem(position)
-//        return if (goal.checked) {
-//            1 // goalCheckBox가 true인 경우
-//        } else {
-//            0 // 그 외의 경우
-//        }
-//    }
 
 }
 

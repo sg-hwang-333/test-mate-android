@@ -1,8 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage.subject
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -12,15 +10,8 @@ import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.api.SubjectAPIService
-import kr.hs.emirim.evie.testmateloginpage.api.SubjectRepository
-import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
-import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 const val SUBJECT_NAME = "새로운 과목"
 const val BOOK_TAG = "이미지 주소" // R.drawable.book_red
@@ -57,13 +48,12 @@ class AddSubjectActivity : AppCompatActivity() {
 
             if (subjectName.isNotEmpty()) {
                 val newSubject = Subject(grade, subjectName, bookImgPath)
-                subjectViewModel.addList(newSubject)
+                subjectViewModel.createSubject(newSubject)
                 finish()
             } else {
                 Log.d("AddSubjectActivity", "Subject name cannot be empty")
             }
         }
-//        addSubjectName = findViewById(R.id.subjectName)
 
         bookImg = findViewById(R.id.book_img)
         findViewById<ImageButton>(R.id.red).setOnClickListener {
@@ -92,33 +82,3 @@ class AddSubjectActivity : AppCompatActivity() {
         }
     }
 }
-
-// 다이얼로그로 띄우는 코드
-//class AddSubjectActivity : DialogFragment() {
-//
-//    private var _binding: ActivityEditSubjectsBinding? = null
-//    private val binding get() = _binding!!
-//
-//    private lateinit var addSubjectName: EditText
-//    lateinit var finishBtn : androidx.appcompat.widget.AppCompatImageButton
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        _binding = ActivityEditSubjectsBinding.inflate(inflater, container, false)
-//        val view = binding.root
-//        dialog?.window?.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
-//        dialog?.setCancelable(true)
-//        return view
-//    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//    }
-//}

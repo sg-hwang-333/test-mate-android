@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.hs.emirim.evie.testmateloginpage.NavigationButtons
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectAdapter
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil.Companion.gradeSpinner
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerListResponse
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNote
 
 class WrongAnswerListActivity : AppCompatActivity() {
 
@@ -41,17 +42,15 @@ class WrongAnswerListActivity : AppCompatActivity() {
 
         // 학년 spiner api 연동
         spinner = gradeSpinner(this, R.id.spinnerWrong)
-        spinner.setSelection(2)
-        var selectedPosition = spinner.selectedItemPosition + 1// grade 인덱스 (ex. 3)
+        spinner.setSelection(CurrentUser.userDetails!!.grade.toInt() - 1)
+        var selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
         var selectedItem = spinner.getItemAtPosition(selectedPosition).toString() // grade 문자열 (ex. 고등학교 2학년)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
-                val selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedPosition = position + 1
-                // 선택된 항목에 대한 처리 작업 수행
-//                Toast.makeText(context, "선택된 항목: $selectedItem", Toast.LENGTH_SHORT).show()
-                listViewModel.getLists(selectedPosition, 1, selectedItem)
+
+                listViewModel.readNoteList(selectedPosition, 1)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -68,14 +67,14 @@ class WrongAnswerListActivity : AppCompatActivity() {
         }
 
         // 과목 버튼 recyclerView
-        val subjectAdapter = WrongAnswerSubjectAdapter { subject -> adapterOnClick(subject) }
+        val subjectAdapter = WrongAnswerSubjectAdapter { subject -> subjectAdapterOnClick(subject) }
         val subjectRecyclerView: RecyclerView = findViewById(R.id.wrongAnswerSubjectRecyclerView)
 
         subjectRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) // 수평 레이아웃 방향 설정
         subjectRecyclerView.adapter = subjectAdapter
 
-//        subjectViewModel.getLists() // list 가져오기
+        subjectViewModel.readSubjectList(CurrentUser.userDetails!!.grade.toInt()) // list 가져오기
         subjectViewModel.subjectListData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this
@@ -86,7 +85,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
         }
 
         // 오답노트 recyclerView
-        val listAdapter = WrongAnswerListAdapter { list -> adapterOnClick(list) }
+        val listAdapter = WrongAnswerListAdapter { list -> noteAdapterOnClick(list) }
         val listRecyclerView: RecyclerView = findViewById(R.id.wrongAnswerObjectRecyclerView)
 
         listRecyclerView.layoutManager =
@@ -98,50 +97,21 @@ class WrongAnswerListActivity : AppCompatActivity() {
             this
         ) {
             it?.let { // goalsLiveData의 값이 null이 아닐 때 중괄호 코드 실행
-                listAdapter.submitList(it as MutableList<WrongAnswerListResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+                listAdapter.submitList(it as MutableList<WrongAnswerNote>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
             }
         }
-
-        listViewModel.getLists(3, 1, selectedItem)
 
         // 네비게이션
         navigationButtons = NavigationButtons(this)
         navigationButtons.initialize(this)
     }
 
-    private fun adapterOnClick(subject: Subject) {
-        // TODO : 과목별 데이터 불러오기
+    private fun subjectAdapterOnClick(subject: Subject) {
+
+        listViewModel.readNoteList(CurrentUser.userDetails!!.grade.toInt(), 1)
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, intentData)
-//
-//        /* Inserts subject into viewModel. */
-//        if (resultCode == Activity.RESULT_OK) {
-//            intentData?.let { data ->
-//                val subjectName = data.getStringExtra(SUBJECT_NAME)
-//                val subjectImage = data.getStringExtra(BOOK_TAG)
-//
-//                wrongAnswerSubjectViewModel.insertSubject(subjectName, subjectImage) ///////////////////////////////////////// insertFlower
-//            }
-//        }
-//    }
-
-    private fun adapterOnClick(list: WrongAnswerListResponse) {
+    private fun noteAdapterOnClick(list : WrongAnswerNote) {
         // TODO : 해당 오답노트 로딩 화면으로 이동
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, intentData)
-//
-//        /* Inserts subject into viewModel. */
-//        if (resultCode == Activity.RESULT_OK) {
-//            intentData?.let { data ->
-//                val subjectName = data.getStringExtra(SUBJECT_NAME)
-//                val subjectImage = data.getStringExtra(BOOK_TAG)
-//
-//                wrongAnswerSubjectViewModel.insertSubject(subjectName, subjectImage) ///////////////////////////////////////// insertFlower
-//            }
-//        }
-//    }
 }
