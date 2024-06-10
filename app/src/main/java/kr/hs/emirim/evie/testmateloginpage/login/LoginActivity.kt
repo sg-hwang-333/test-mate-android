@@ -24,6 +24,7 @@ import retrofit2.Response
 import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.api.UserAPIService
 import kr.hs.emirim.evie.testmateloginpage.comm.SessionManager
+import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 
 object CurrentUser {
     var userDetails: UserDetailsResponse? = null
@@ -106,7 +107,7 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("sessionId", sessionId)
                         }
 
-                        val intent = Intent(this@LoginActivity, GoalMainListActivity::class.java)
+                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(intent)
 
