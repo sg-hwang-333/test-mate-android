@@ -66,27 +66,29 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             dlg.create().show()
         }
 
-        val buttonMistake: Button = findViewById(R.id.mistake_btn)
-        val buttonTimeout: Button = findViewById(R.id.timeout_btn)
-        val buttonLackConcept: Button = findViewById(R.id.lack_concept_btn)
+        // 오답이유 버튼들
+        val reasonButtons = listOf(
+            findViewById<Button>(R.id.mistake_btn),
+            findViewById<Button>(R.id.timeout_btn),
+            findViewById<Button>(R.id.lack_concept_btn)
+        )
 
-        val reasonButtons = listOf(buttonMistake, buttonTimeout, buttonLackConcept)
+        // 문제 범위
+        val scopeButtons = listOf(
+            findViewById<Button>(R.id.scope_btn1),
+            findViewById<Button>(R.id.scope_btn2),
+            findViewById<Button>(R.id.scope_btn3),
+            findViewById<Button>(R.id.scope_btn4)
+        )
 
-        buttonMistake.setOnClickListener { handleReasonButtonClick(buttonMistake, reasonButtons) }
-        buttonTimeout.setOnClickListener { handleReasonButtonClick(buttonTimeout, reasonButtons) }
-        buttonLackConcept.setOnClickListener { handleReasonButtonClick(buttonLackConcept, reasonButtons) }
+        initializeButtonListeners(reasonButtons) { selectedButton ->
+            selectedReason = selectedButton.text.toString()
+            Log.d("wrongAnswer", selectedReason)
+        }
 
-        val buttonScope1: Button = findViewById(R.id.scope_btn1)
-        val buttonScope2: Button = findViewById(R.id.scope_btn2)
-        val buttonScope3: Button = findViewById(R.id.scope_btn3)
-        val buttonScope4: Button = findViewById(R.id.scope_btn4)
-
-        val scopeButtons = listOf(buttonScope1, buttonScope2, buttonScope3, buttonScope4)
-
-        buttonScope1.setOnClickListener { handleScopeButtonClick(buttonScope1, scopeButtons) }
-        buttonScope2.setOnClickListener { handleScopeButtonClick(buttonScope2, scopeButtons) }
-        buttonScope3.setOnClickListener { handleScopeButtonClick(buttonScope3, scopeButtons) }
-        buttonScope4.setOnClickListener { handleScopeButtonClick(buttonScope4, scopeButtons) }
+        initializeButtonListeners(scopeButtons) { selectedButton ->
+            selectedScope = selectedButton.text.toString()
+        }
 
         addBtn = findViewById(R.id.addBtn)
         addBtn.setOnClickListener {
@@ -136,12 +138,20 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleScopeButtonClick(selectedButton: Button, buttons: List<Button>) {
-        for (button in buttons) {
+    private fun initializeButtonListeners(buttons: List<Button>, onSelect: (Button) -> Unit) {
+        buttons.forEach { button ->
+            button.setOnClickListener {
+                handleButtonClick(button, buttons, onSelect)
+            }
+        }
+    }
+
+    private fun handleButtonClick(selectedButton: Button, buttons: List<Button>, onSelect: (Button) -> Unit) {
+        buttons.forEach { button ->
             if (button == selectedButton) {
                 button.setBackgroundResource(R.drawable.bg_green_view)
                 button.setTextColor(ContextCompat.getColor(this, R.color.white))
-                selectedScope = button.text.toString()
+                onSelect(button)
             } else {
                 button.setBackgroundResource(R.drawable.bg_white_view)
                 button.setTextColor(ContextCompat.getColor(this, R.color.black_300))

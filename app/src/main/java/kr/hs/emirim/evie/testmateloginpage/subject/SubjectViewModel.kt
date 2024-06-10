@@ -1,7 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage.subject
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kr.hs.emirim.evie.testmateloginpage.api.SubjectRepository
@@ -13,26 +12,13 @@ class SubjectViewModel(val subjectRepository: SubjectRepository) : ViewModel() {
 
     val subjectListData = subjectRepository.getSubjectList()
 
-    fun getLists() : MutableLiveData<List<Subject>> {
-        return subjectListData
+    fun readSubjectList(grade: Int) {
+        subjectRepository.getSubjects(grade)
     }
 
-    fun addList(subject: Subject){
-        subjectRepository.fetchSubject(subject)
+    fun createSubject(subject: Subject) {
+        subjectRepository.postSubject(subject)
     }
-
-//    fun insertSubject(grade : Int, subjectName : String?, subjectImage : String?) {
-//        val newSubject = Subject(
-//            grade,
-//            subjectName,
-//            subjectImage
-//        )
-//
-//        subjectListData.addSubject(newSubject)
-//    }
-//    fun removeSubject(subject: Subject) {
-//        subjectListData.removeSubject(subject)
-//    }
 }
 
 //WrongAnswerSubjectViewModel 인스턴스를 생성하는 역할

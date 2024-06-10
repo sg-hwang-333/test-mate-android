@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.util.ImgResourceStringToInt
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerListResponse
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNote
 
 
-class WrongAnswerListAdapter(private val onClick: (WrongAnswerListResponse) -> Unit) :
-    ListAdapter<WrongAnswerListResponse, WrongAnswerListAdapter.WrongAnswerListHolder>(WrongAnswerListDiffCallback) {
+class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote) -> Unit) :
+    ListAdapter<WrongAnswerNote, WrongAnswerListAdapter.WrongAnswerListHolder>(WrongAnswerListDiffCallback) {
 
-    inner class WrongAnswerListHolder(itemView: View, val onClick: (WrongAnswerListResponse) -> Unit) :
+    inner class WrongAnswerListHolder(itemView: View, val onClick: (WrongAnswerNote) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val listGrade: TextView = itemView.findViewById(R.id.wan_list_grade)
         val listTitle: TextView = itemView.findViewById(R.id.wan_list_title)
         val listReason: android.widget.Button = itemView.findViewById(R.id.wan_list_reason)
         val listImg: ImageView = itemView.findViewById(R.id.wan_list_img)
-        var currentWANList: WrongAnswerListResponse? = null
+        var currentWANList: WrongAnswerNote? = null
 
         init {
             itemView.setOnClickListener {
@@ -33,7 +33,7 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerListResponse) -> U
         }
 
         /* UI에 정보 바인딩(넣는 메서드) */
-        fun bind(response: WrongAnswerListResponse) {
+        fun bind(response: WrongAnswerNote) {
             currentWANList = response
             listGrade.setText(response.grade.toString())
             listTitle.setText(response.title)
@@ -59,12 +59,12 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerListResponse) -> U
 
 }
 
-object WrongAnswerListDiffCallback : DiffUtil.ItemCallback<WrongAnswerListResponse>() {
-    override fun areItemsTheSame(oldItem: WrongAnswerListResponse, newItem: WrongAnswerListResponse): Boolean {
+object WrongAnswerListDiffCallback : DiffUtil.ItemCallback<WrongAnswerNote>() {
+    override fun areItemsTheSame(oldItem: WrongAnswerNote, newItem: WrongAnswerNote): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: WrongAnswerListResponse, newItem: WrongAnswerListResponse): Boolean {
+    override fun areContentsTheSame(oldItem: WrongAnswerNote, newItem: WrongAnswerNote): Boolean {
         return oldItem.noteId == newItem.noteId
     }
 }
