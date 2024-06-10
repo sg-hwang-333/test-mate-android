@@ -18,7 +18,7 @@ class SubjectViewModel(val subjectRepository: SubjectRepository) : ViewModel() {
     }
 
     fun addList(subject: Subject){
-        return subjectRepository.fetchSubject(subject)
+        subjectRepository.fetchSubject(subject)
     }
 
 //    fun insertSubject(grade : Int, subjectName : String?, subjectImage : String?) {
@@ -42,7 +42,7 @@ class SubjectViewModelFactory(private val context: Context) : ViewModelProvider.
         if (modelClass.isAssignableFrom(SubjectViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return SubjectViewModel(
-                subjectRepository = SubjectRepository.getDataSource(context.resources)
+                subjectRepository = SubjectRepository.getDataSource(context.resources, context)
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
