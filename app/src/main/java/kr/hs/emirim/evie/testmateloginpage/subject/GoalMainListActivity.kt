@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageButton
 import android.widget.Spinner
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
@@ -16,11 +17,17 @@ import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActi
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
+import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModel
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModelFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 class GoalMainListActivity : AppCompatActivity() {
+    lateinit var spinner: Spinner
+
     private lateinit var navHome: ImageButton
     private lateinit var navWrong: ImageButton
     private lateinit var navGoal: ImageButton
@@ -30,10 +37,32 @@ class GoalMainListActivity : AppCompatActivity() {
     private val apiService = RetrofitClient.create(TMService::class.java)
     private var selectedGradeIndex: Int = 1
 
+    private val listViewModel by viewModels<WrongAnswerListViewModel> {
+        WrongAnswerListViewModelFactory(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.goal_main_page)
         supportActionBar?.hide()
+
+        // 학년 spiner api 연동
+        spinner = SpinnerUtil.gradeSpinner(this, R.id.spinnerWrong)
+        spinner.setSelection(CurrentUser.userDetails!!.grade.toInt() - 1)
+        var selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
+        var selectedItem = spinner.getItemAtPosition(selectedPosition).toString() // grade 문자열 (ex. 고등학교 2학년)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
+                selectedPosition = position + 1
+
+                listViewModel.readNoteList(selectedPosition, 1)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // 아무 것도 선택되지 않았을 때 처리할 작업
+            }
+        }
 
         initView()
         setupListeners()
@@ -47,7 +76,7 @@ class GoalMainListActivity : AppCompatActivity() {
         navGoal = findViewById(R.id.nav_goal)
         navCal = findViewById(R.id.nav_cal)
         recyclerView = findViewById(R.id.goalMainRecyclerView)
-        gradeTagSpinner = findViewById(R.id.grade_tag)
+
     }
 
     private fun setupListeners() {
@@ -56,20 +85,6 @@ class GoalMainListActivity : AppCompatActivity() {
         navWrong.setOnClickListener { navigateTo(WrongAnswerListActivity::class.java) }
         navGoal.setOnClickListener { /* 현재 액티비티에 남아있도록*/ }
         navCal.setOnClickListener { navigateTo(Calendar::class.java) }
-
-        // 스피너 리스너 설정
-        gradeTagSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                // 선택된 항목의 인덱스 저장 및 과목 리스트 갱신
-                selectedGradeIndex = position + 1
-                fetchSubjectsByGrade(selectedGradeIndex)
-                Log.d("grade", selectedGradeIndex.toString())
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // 선택된 항목이 없을 때의 동작
-            }
-        }
     }
 
     fun fetchSubjectsByGrade(grade: Int) {
