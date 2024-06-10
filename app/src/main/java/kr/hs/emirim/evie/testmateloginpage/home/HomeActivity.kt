@@ -3,12 +3,15 @@ package kr.hs.emirim.evie.testmateloginpage.home
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,18 +31,21 @@ import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
+import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModel
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModelFactory
 
 class HomeActivity : AppCompatActivity() {
     // 시험기록 데이터 생성
     val testRecordDataList: List<TestData> = listOf(
-        TestData("1학년 2학기 기말",75),
-        TestData("1학년 2학기 중간",60),
-        TestData("1학년 1학기 기말",80),
-        TestData("1학년 1학기 중간",100),
-        TestData("@학년 @학기 중간",89),
-        TestData("@학년 @학기 중간",91),
-        TestData("@학년 @학기 중간",78),
-        TestData("@학년 @학기 중간",96)
+        TestData("1학년 2학기 기말", 75),
+        TestData("1학년 2학기 중간", 60),
+        TestData("1학년 1학기 기말", 80),
+        TestData("1학년 1학기 중간", 100),
+        TestData("@학년 @학기 중간", 89),
+        TestData("@학년 @학기 중간", 91),
+        TestData("@학년 @학기 중간", 78),
+        TestData("@학년 @학기 중간", 96)
     )
 
     lateinit var navHome: ImageButton
@@ -61,12 +67,13 @@ class HomeActivity : AppCompatActivity() {
         SubjectViewModelFactory(this)
     }
 
-//    private val goalMainSubjectsViewModel by viewModels<SubjectsListViewModel> {
-//        GoalMainViewModelFactory(this)
-//    }
+    private val listViewModel by viewModels<WrongAnswerListViewModel> {
+        WrongAnswerListViewModelFactory(this)
+    }
 
     private lateinit var binding: ActivityHomeBinding
-//    private lateinit var drawerLayout: DrawerLayout
+
+    //    private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -89,25 +96,30 @@ class HomeActivity : AppCompatActivity() {
 //
 //       }
 
-        val pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
-        val grade = pre.getString("usergrade", "고등학교 2학년 ") // 기본값 설정
+        spinner = SpinnerUtil.gradeSpinner(this, R.id.spinnerWrong)
+        spinner.setSelection(CurrentUser.userDetails!!.grade.toInt() - 1)
+        var selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
+        var selectedItem =
+            spinner.getItemAtPosition(selectedPosition).toString() // grade 문자열 (ex. 고등학교 2학년)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
+                selectedPosition = position + 1
 
-        val facilityList = arrayOf("선택하세요")
+                listViewModel.readNoteList(selectedPosition, 1)
+            }
 
-        spinner = findViewById(R.id.spinner)
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // 아무 것도 선택되지 않았을 때 처리할 작업
+            }
+        }
 
-        val facilityListWithUserGrade = mutableListOf(*facilityList, grade)
-        val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            facilityListWithUserGrade
-        )
-// 스피너에 어댑터 설정
-        spinner.adapter = adapter
-        userGrade = findViewById<TextView>(R.id.userGrade)
-        userGrade.text = grade + "국어"
-
-    // subjectRecyclerView
+        // subjectRecyclerView
         val subjectsAdapter = SubjectHomeAdapter { subject -> adapterOnClick(subject) } // TODO
         val recyclerView: RecyclerView = findViewById(R.id.subjectRecyclerView)
 
@@ -124,7 +136,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-    // 과목 추가
+        // 과목 추가
         addSubjectBtn = findViewById(R.id.addSubjectBtn)
         addSubjectBtn.setOnClickListener {
             val intent = Intent(this@HomeActivity, AddSubjectActivity::class.java)
