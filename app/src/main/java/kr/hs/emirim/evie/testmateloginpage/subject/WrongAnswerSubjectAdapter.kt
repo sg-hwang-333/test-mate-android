@@ -21,16 +21,16 @@ class WrongAnswerSubjectAdapter(private val onClick: (Subject, Int) -> Unit) :
 
     inner class WrongAnswerSubjectHolder(itemView: View, val onClick: (Subject, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
-        val subjectTextView: TextView = itemView.findViewById(R.id.wrongAnswerSubject)
+        val subjectView: Button = itemView.findViewById(R.id.wrongAnswerSubject)
         var currentSubject: Subject? = null
 
 //        private lateinit var subjectEditBtn: Button
 
         init {
-            itemView.setOnClickListener {
-                currentSubject?.let {
-                    onClick(it, absoluteAdapterPosition)
-                    updateSelectedPosition(absoluteAdapterPosition)
+            subjectView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onClick(getItem(position), position)
                 }
             }
         }
@@ -38,18 +38,17 @@ class WrongAnswerSubjectAdapter(private val onClick: (Subject, Int) -> Unit) :
 
         /* UI에 정보 바인딩(넣는 메서드) */
         fun bind(subject: Subject, isSelected: Boolean) {
-            currentSubject = subject
+            subjectView.text = subject.subjectName
+            updateUI(isSelected)
+        }
 
-            subjectTextView.setText(subject.subjectName)
-
-//            Log.d("WANsubjectBtn", isSelected)
-
+        private fun updateUI(isSelected: Boolean) {
             if (isSelected) {
-                itemView.setBackgroundResource(R.drawable.btn_border_bottom_green)
-                subjectTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.green_500))
+                subjectView.setBackgroundResource(R.drawable.btn_border_bottom_green)
+                subjectView.setTextColor(ContextCompat.getColor(subjectView.context, R.color.green_500))
             } else {
-                itemView.setBackgroundResource(0)
-                subjectTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.black_300))
+                subjectView.setBackgroundResource(0)
+                subjectView.setTextColor(ContextCompat.getColor(subjectView.context, R.color.black_300))
             }
         }
 
