@@ -17,7 +17,7 @@ class WrongAnswerRepository(resources: Resources) {
     val subjectAPIService = RetrofitClient.create(TMService::class.java)
 
     fun getNotesByGradeSubject(grade: Int, subjectId: Int) {
-        val call = wrongAnswerAPIService.getNotesByGradeSubject(grade, subjectId)
+        val call = wrongAnswerAPIService.getNoteListByGradeSubject(grade, subjectId)
         call.enqueue(object : Callback<List<WrongAnswerNote>> {
             override fun onResponse(call: Call<List<WrongAnswerNote>>, response: Response<List<WrongAnswerNote>>) {
                 if (response.isSuccessful) {

@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface WrongAnswerAPIService {
 
     @GET("/api/note/filter")
-    fun getNotesByGradeSubject(@Query("grade") grade: Int, @Query("subjectId") subjectId : Int) : Call<List<WrongAnswerNote>>
+    fun getNoteListByGradeSubject(@Query("grade") grade: Int, @Query("subjectId") subjectId : Int) : Call<List<WrongAnswerNote>>
 
     @POST("/api/note")
     fun postNote(@Body wrongAnswerNote : WrongAnswerNote) : Call<MessageResponse>
