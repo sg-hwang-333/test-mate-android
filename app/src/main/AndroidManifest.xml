@@ -49,6 +49,15 @@
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.TestmateLoginPage.NoActionBar" />
         <activity
+            android:name=".signup.Signup_privacy"
+            android:exported="true" />
+        <activity
+            android:name=".signup.terms_privacy_deletion"
+            android:exported="true" />
+        <activity
+            android:name=".signup.terms_privacy_collection"
+            android:exported="true" />
+        <activity
             android:name=".login.LoginActivity"
             android:exported="true">
             <intent-filter>
