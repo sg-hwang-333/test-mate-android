@@ -14,17 +14,15 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.LoginResponse
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.SignUpActivity
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
-import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.userData.UserDetailsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kr.hs.emirim.evie.testmateloginpage.TMService
-import kr.hs.emirim.evie.testmateloginpage.api.UserAPIService
 import kr.hs.emirim.evie.testmateloginpage.comm.SessionManager
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
+import kr.hs.emirim.evie.testmateloginpage.signup.Signup_privacy
 
 object CurrentUser {
     var userDetails: UserDetailsResponse? = null
@@ -128,7 +126,7 @@ class LoginActivity : AppCompatActivity() {
 
         signupBtn = findViewById(R.id.signup_btn)
         signupBtn.setOnClickListener {
-            val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+            val intent = Intent(this@LoginActivity, Signup_privacy::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
