@@ -35,6 +35,8 @@ class WrongAnswerListActivity : AppCompatActivity() {
     }
 
     private lateinit var navigationButtons: NavigationButtons
+    private lateinit var subjectAdapter: WrongAnswerSubjectAdapter
+    private lateinit var listAdapter: WrongAnswerListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +69,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
         }
 
         // 과목 버튼 recyclerView
-        val subjectAdapter = WrongAnswerSubjectAdapter { subject -> subjectAdapterOnClick(subject) }
+        subjectAdapter = WrongAnswerSubjectAdapter { subject, position -> subjectAdapterOnClick(subject, position) }
         val subjectRecyclerView: RecyclerView = findViewById(R.id.wrongAnswerSubjectRecyclerView)
 
         subjectRecyclerView.layoutManager =
@@ -85,7 +87,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
         }
 
         // 오답노트 recyclerView
-        val listAdapter = WrongAnswerListAdapter { list -> noteAdapterOnClick(list) }
+        listAdapter = WrongAnswerListAdapter { list -> noteAdapterOnClick(list) }
         val listRecyclerView: RecyclerView = findViewById(R.id.wrongAnswerObjectRecyclerView)
 
         listRecyclerView.layoutManager =
@@ -106,8 +108,8 @@ class WrongAnswerListActivity : AppCompatActivity() {
         navigationButtons.initialize(this)
     }
 
-    private fun subjectAdapterOnClick(subject: Subject) {
-
+    private fun subjectAdapterOnClick(subject: Subject, position: Int) {
+        subjectAdapter.updateSelectedPosition(position)
         listViewModel.readNoteList(CurrentUser.userDetails!!.grade.toInt(), 1)
     }
 

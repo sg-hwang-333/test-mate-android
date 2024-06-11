@@ -42,12 +42,11 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         selectedScope = "추가자료"
 
         var beforeBtn = findViewById<ImageView>(R.id.before)
-//        var WrongList = findViewById<LinearLayout>(R.id.wrong)
-
         beforeBtn.setOnClickListener{
             onBackPressed();
         }
 
+        // spinner
         btnGradeDialog = findViewById(R.id.signup_grade)
         pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
         val editor = pre.edit()
@@ -73,7 +72,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             findViewById<Button>(R.id.lack_concept_btn)
         )
 
-        // 문제 범위
+        // 문제 범위 버튼들
         val scopeButtons = listOf(
             findViewById<Button>(R.id.scope_btn1),
             findViewById<Button>(R.id.scope_btn2),
