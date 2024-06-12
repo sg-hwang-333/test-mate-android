@@ -2,6 +2,7 @@ package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
@@ -51,8 +52,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
                 selectedPosition = position + 1
-
-                listViewModel.readNoteList(selectedPosition, 1)
+                subjectViewModel.readSubjectList(selectedPosition)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -113,7 +113,8 @@ class WrongAnswerListActivity : AppCompatActivity() {
 
     private fun subjectAdapterOnClick(subject: SubjectResponse, position: Int) {
         subjectAdapter.updateSelectedPosition(position)
-        listViewModel.readNoteList(CurrentUser.userDetails!!.grade.toInt(), 1)
+        listViewModel.readNoteList(CurrentUser.userDetails!!.grade.toInt(), subject.subjectId)
+        Log.d("subjectAdapterOnClick", subject.subjectId.toString())
     }
 
     private fun noteAdapterOnClick(list : WrongAnswerNote) {
