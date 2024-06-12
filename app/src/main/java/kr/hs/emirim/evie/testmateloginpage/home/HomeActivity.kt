@@ -104,7 +104,8 @@
                     // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
                     selectedPosition = position + 1
 
-                    listViewModel.readNoteList(selectedPosition, 1)
+                    subjectsListViewModel.readSubjectList(selectedPosition)
+
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -125,7 +126,7 @@
                 this
             ) { map ->
                 map?.let {
-                    val subjectsForSelectedGrade = it[CurrentUser.userDetails!!.grade.toInt()]
+                    val subjectsForSelectedGrade = it[selectedPosition]
                     subjectsForSelectedGrade?.let { subjects ->
                         subjectsAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
                     }

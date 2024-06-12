@@ -52,8 +52,7 @@ class GoalMainListActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
                 selectedPosition = position + 1
-
-//                listViewModel.readNoteList(selectedPosition, 1) TODO : GoalModel 가져와야 함
+                subjectViewModel.readSubjectList(selectedPosition)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -78,7 +77,7 @@ class GoalMainListActivity : AppCompatActivity() {
             this
         ) { map ->
             map?.let {
-                val subjectsForSelectedGrade = it[CurrentUser.userDetails!!.grade.toInt()]
+                val subjectsForSelectedGrade = it[selectedPosition]
                 subjectsForSelectedGrade?.let { subjects ->
                     subjectAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
                 }
