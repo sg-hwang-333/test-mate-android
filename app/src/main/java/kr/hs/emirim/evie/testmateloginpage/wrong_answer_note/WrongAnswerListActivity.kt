@@ -82,7 +82,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             this
         ) { map ->
             map?.let {
-                val subjectsForSelectedGrade = it[CurrentUser.userDetails!!.grade.toInt()]
+                val subjectsForSelectedGrade = it[selectedPosition]
                 subjectsForSelectedGrade?.let { subjects ->
                     subjectAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
                 }
