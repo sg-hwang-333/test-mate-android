@@ -11,7 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
 
 const val SUBJECT_NAME = "새로운 과목"
 const val BOOK_TAG = "이미지 주소" // R.drawable.book_red
@@ -47,7 +47,7 @@ class AddSubjectActivity : AppCompatActivity() {
             Log.d("retrofit", bookImgPath!!)
 
             if (subjectName.isNotEmpty()) {
-                val newSubject = Subject(grade, subjectName, bookImgPath)
+                val newSubject = SubjectRequest(grade, subjectName, bookImgPath)
                 subjectViewModel.createSubject(newSubject)
                 finish()
             } else {

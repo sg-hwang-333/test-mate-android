@@ -4,9 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 import kr.hs.emirim.evie.testmateloginpage.api.WrongAnswerRepository
-import kotlin.random.Random
 
 
 class WrongAnswerListViewModel(val wrongAnswerRepository: WrongAnswerRepository) : ViewModel() {

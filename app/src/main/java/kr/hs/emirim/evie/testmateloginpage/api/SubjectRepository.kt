@@ -5,7 +5,7 @@ import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,12 +13,12 @@ import retrofit2.Response
 
 
 class SubjectRepository(resources: Resources, context: Context) {
-    var subjectListData = MutableLiveData<Map<Int, List<Subject>>>()
+    var subjectListData = MutableLiveData<Map<Int, List<SubjectResponse>>>()
 
     // Context를 사용하여 RetrofitClient를 생성
     val subjectAPIService : SubjectAPIService
 
-    fun getSubjectList(): MutableLiveData<Map<Int, List<Subject>>> {
+    fun getSubjectList(): MutableLiveData<Map<Int, List<SubjectResponse>>> {
         return subjectListData
     }
 
@@ -26,17 +26,17 @@ class SubjectRepository(resources: Resources, context: Context) {
         subjectAPIService = RetrofitClient.create(SubjectAPIService::class.java, context)
     }
 
-    fun postSubject(subject: Subject) {
+    fun postSubject(subject: SubjectRequest) {
         val call = subjectAPIService.postSubject(subject)
-        call.enqueue(object : Callback<SubjectResponse> {
-            override fun onResponse(call: Call<SubjectResponse>, response: Response<SubjectResponse>) {
+        call.enqueue(object : Callback<MessageResponse> {
+            override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
                 if (response.isSuccessful) {
                     println("Failed to get notes. Error code: ${response.code()}")
                 } else {
                     println("Failed to get notes. Error code: ${response.code()}")
                 }
             }
-            override fun onFailure(call: Call<SubjectResponse>, t: Throwable) {
+            override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
                 println("Failed to get notes. Error message: ${t.message}")
             }
         })
@@ -44,8 +44,8 @@ class SubjectRepository(resources: Resources, context: Context) {
 
     fun getSubjects(grade : Int) {
         val call = subjectAPIService.getSubjects(grade)
-        call.enqueue(object : Callback<List<Subject>> {
-            override fun onResponse(call: Call<List<Subject>>, response: Response<List<Subject>>) {
+        call.enqueue(object : Callback<List<SubjectResponse>> {
+            override fun onResponse(call: Call<List<SubjectResponse>>, response: Response<List<SubjectResponse>>) {
                 if (response.isSuccessful) {
                     val subjectList = response.body()
                     subjectList?.let {
@@ -59,7 +59,7 @@ class SubjectRepository(resources: Resources, context: Context) {
                 }
             }
 
-            override fun onFailure(call: Call<List<Subject>>, t: Throwable) {
+            override fun onFailure(call: Call<List<SubjectResponse>>, t: Throwable) {
                 Log.e("API Error", "Failed to fetch subject info. Error message: ${t.message}")
             }
         })

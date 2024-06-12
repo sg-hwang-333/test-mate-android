@@ -1,17 +1,14 @@
     package kr.hs.emirim.evie.testmateloginpage.home
 
-    import android.app.Activity
     import android.content.Intent
     import android.os.Bundle
     import android.view.View
     import android.widget.AdapterView
-    import android.widget.ArrayAdapter
     import android.widget.HorizontalScrollView
     import android.widget.ImageButton
     import android.widget.Spinner
     import android.widget.TextView
     import androidx.activity.viewModels
-    import androidx.appcompat.app.AlertDialog
     import androidx.appcompat.app.AppCompatActivity
     import androidx.recyclerview.widget.LinearLayoutManager
     import androidx.recyclerview.widget.RecyclerView
@@ -24,13 +21,10 @@
     import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
     import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
     import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
-    import kr.hs.emirim.evie.testmateloginpage.subject.BOOK_TAG
-    import kr.hs.emirim.evie.testmateloginpage.subject.SUBJECT_NAME
     import kr.hs.emirim.evie.testmateloginpage.subject.SubjectHomeAdapter
     import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
     import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
-    import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
-    import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
+    import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
     import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil
     import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModel
     import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModelFactory
@@ -133,7 +127,7 @@
                 map?.let {
                     val subjectsForSelectedGrade = it[CurrentUser.userDetails!!.grade.toInt()]
                     subjectsForSelectedGrade?.let { subjects ->
-                        subjectsAdapter.submitList(subjects as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+                        subjectsAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
                     }
                 }
             }
@@ -187,7 +181,7 @@
             }
         } // onCreate
 
-        fun adapterOnClick(subject: Subject) {
+        fun adapterOnClick(subject: SubjectResponse) {
             // TODO : 과목별 화면으로 이동
         }
 
