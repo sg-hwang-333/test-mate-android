@@ -19,20 +19,10 @@
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@id/toolbar_title"
         android:layout_above="@id/nav_bar">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/wrongAnswerSubjectRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:nestedScrollingEnabled="true"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_alignParentStart="true"/>
 
         <!-- spinner -->
         <LinearLayout
@@ -40,10 +30,10 @@
             android:background="@drawable/dialog_radius"
             android:layout_width="173dp"
             android:layout_height="36dp"
-            android:layout_below="@id/wrongAnswerSubjectRecyclerView"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center">
+            android:layout_marginBottom="6dp"
+            android:gravity="center"
+            android:layout_alignParentTop="true"> <!-- 위치 조정 -->
 
             <Spinner
                 android:id="@+id/spinnerWrong"
@@ -52,12 +42,22 @@
 
         </LinearLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/wrongAnswerSubjectRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="true"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_below="@id/spinner_layout"
+            android:layout_alignParentStart="true"/>
+
         <!-- RecyclerView를 감싸는 ScrollView -->
         <ScrollView
             android:id="@+id/recyclerView_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/spinner_layout"
+            android:layout_below="@id/wrongAnswerSubjectRecyclerView"
             android:layout_marginBottom="5dp">
 
             <LinearLayout
