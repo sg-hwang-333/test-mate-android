@@ -16,7 +16,7 @@ import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectAdapter
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil.Companion.gradeSpinner
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNote
 
@@ -84,7 +84,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             map?.let {
                 val subjectsForSelectedGrade = it[CurrentUser.userDetails!!.grade.toInt()]
                 subjectsForSelectedGrade?.let { subjects ->
-                    subjectAdapter.submitList(subjects as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+                    subjectAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
                 }
             }
         }
@@ -111,7 +111,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
         navigationButtons.initialize(this)
     }
 
-    private fun subjectAdapterOnClick(subject: Subject, position: Int) {
+    private fun subjectAdapterOnClick(subject: SubjectResponse, position: Int) {
         subjectAdapter.updateSelectedPosition(position)
         listViewModel.readNoteList(CurrentUser.userDetails!!.grade.toInt(), 1)
     }

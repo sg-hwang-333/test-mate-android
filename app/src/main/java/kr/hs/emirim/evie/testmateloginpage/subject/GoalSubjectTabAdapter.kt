@@ -9,21 +9,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 import kr.hs.emirim.evie.testmateloginpage.util.ImgResourceStringToInt
 
 
-class GoalSubjectTabAdapter(private val onClick: (Subject, Int) -> Unit) :
-    ListAdapter<Subject, GoalSubjectTabAdapter.GoalSubjectTabHolder>(GoalSubjectDiffCallback) {
+class GoalSubjectTabAdapter(private val onClick: (SubjectResponse, Int) -> Unit) :
+    ListAdapter<SubjectResponse, GoalSubjectTabAdapter.GoalSubjectTabHolder>(GoalSubjectDiffCallback) {
 
     private var selectedPosition: Int = RecyclerView.NO_POSITION
 
-    inner class GoalSubjectTabHolder(itemView: View, val onClick: (Subject, Int) -> Unit) :
+    inner class GoalSubjectTabHolder(itemView: View, val onClick: (SubjectResponse, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val subjectTextView: TextView = itemView.findViewById(R.id.subjectName)
         val subjectImageView: ImageView = itemView.findViewById(R.id.subjectImage)
 
-        var currentSubject: Subject? = null
+        var currentSubject: SubjectResponse? = null
 
         init {
             itemView.setOnClickListener {
@@ -35,7 +35,7 @@ class GoalSubjectTabAdapter(private val onClick: (Subject, Int) -> Unit) :
         }
 
         /* UI에 정보 바인딩(넣는 메서드) */
-        fun bind(subject: Subject) {
+        fun bind(subject: SubjectResponse) {
             currentSubject = subject
 
             subjectTextView.text = subject.subjectName
@@ -67,12 +67,12 @@ class GoalSubjectTabAdapter(private val onClick: (Subject, Int) -> Unit) :
 
 }
 
-object GoalSubjectDiffCallback : DiffUtil.ItemCallback<Subject>() {
-    override fun areItemsTheSame(oldItem: Subject, newItem: Subject): Boolean {
+object GoalSubjectDiffCallback : DiffUtil.ItemCallback<SubjectResponse>() {
+    override fun areItemsTheSame(oldItem: SubjectResponse, newItem: SubjectResponse): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Subject, newItem: Subject): Boolean {
+    override fun areContentsTheSame(oldItem: SubjectResponse, newItem: SubjectResponse): Boolean {
         return oldItem.subjectName == newItem.subjectName
     }
 }

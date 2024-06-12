@@ -13,19 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.TMService
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
-import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModel
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModelFactory
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 class GoalMainListActivity : AppCompatActivity() {
     lateinit var spinner: Spinner
 
@@ -85,7 +80,7 @@ class GoalMainListActivity : AppCompatActivity() {
             map?.let {
                 val subjectsForSelectedGrade = it[CurrentUser.userDetails!!.grade.toInt()]
                 subjectsForSelectedGrade?.let { subjects ->
-                    subjectAdapter.submitList(subjects as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+                    subjectAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
                 }
             }
         }
@@ -109,7 +104,7 @@ class GoalMainListActivity : AppCompatActivity() {
         navCal.setOnClickListener { navigateTo(Calendar::class.java) }
     }
 
-    private fun subjectAdapterOnClick(subject: Subject, position: Int) {
+    private fun subjectAdapterOnClick(subject: SubjectResponse, position: Int) {
         subjectAdapter.updateSelectedPosition(position)
     }
 
@@ -143,7 +138,7 @@ class GoalMainListActivity : AppCompatActivity() {
 //        adapter.submitList(subjectList)
 //    }
 
-    private fun adapterOnClick(subject: Subject) {
+    private fun adapterOnClick(subject: SubjectResponse) {
         // 과목 클릭 시 액티비티 이동
         navigateTo(GoalListActivity::class.java)
     }
