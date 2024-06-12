@@ -13,12 +13,12 @@ import retrofit2.Response
 
 
 class SubjectRepository(resources: Resources, context: Context) {
-    var subjectListData = MutableLiveData<List<Subject>>()
+    var subjectListData = MutableLiveData<Map<Int, List<Subject>>>()
 
     // Context를 사용하여 RetrofitClient를 생성
     val subjectAPIService : SubjectAPIService
 
-    fun getSubjectList(): MutableLiveData<List<Subject>> {
+    fun getSubjectList(): MutableLiveData<Map<Int, List<Subject>>> {
         return subjectListData
     }
 
@@ -49,7 +49,10 @@ class SubjectRepository(resources: Resources, context: Context) {
                 if (response.isSuccessful) {
                     val subjectList = response.body()
                     subjectList?.let {
-                        subjectListData.postValue(it) // 받은 과목 정보를 MutableLiveData에 저장
+                        val currentMap = subjectListData.value.orEmpty().toMutableMap()
+                        currentMap[grade] = it
+                        Log.d("currentMap", currentMap.toString())
+                        subjectListData.postValue(currentMap) // 받은 과목 정보를 MutableLiveData에 저장
                     }
                 } else {
                     Log.e("API Error", "Failed to fetch subject info. Error code: ${response.code()}")

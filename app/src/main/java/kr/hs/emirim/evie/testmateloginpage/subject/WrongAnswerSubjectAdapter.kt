@@ -22,9 +22,6 @@ class WrongAnswerSubjectAdapter(private val onClick: (Subject, Int) -> Unit) :
     inner class WrongAnswerSubjectHolder(itemView: View, val onClick: (Subject, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val subjectView: Button = itemView.findViewById(R.id.wrongAnswerSubject)
-        var currentSubject: Subject? = null
-
-//        private lateinit var subjectEditBtn: Button
 
         init {
             subjectView.setOnClickListener {
@@ -34,7 +31,6 @@ class WrongAnswerSubjectAdapter(private val onClick: (Subject, Int) -> Unit) :
                 }
             }
         }
-
 
         /* UI에 정보 바인딩(넣는 메서드) */
         fun bind(subject: Subject, isSelected: Boolean) {

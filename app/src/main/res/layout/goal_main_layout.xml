@@ -18,9 +18,11 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/subjectImage"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
@@ -53,7 +55,7 @@
                     android:layout_gravity="center_vertical"
                     android:includeFontPadding="false"
                     android:text="최근 | 2학기 기말고사"
-                    android:textColor="#6D6D6D"
+                    android:textColor="@color/black.300"
                     android:textSize="10sp"
                     android:textStyle="bold"
                     />

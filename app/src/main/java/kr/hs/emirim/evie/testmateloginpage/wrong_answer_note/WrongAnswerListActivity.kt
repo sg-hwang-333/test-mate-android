@@ -80,9 +80,12 @@ class WrongAnswerListActivity : AppCompatActivity() {
         subjectViewModel.subjectListData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this
-        ) {
-            it?.let {
-                subjectAdapter.submitList(it as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+        ) { map ->
+            map?.let {
+                val subjectsForSelectedGrade = it[CurrentUser.userDetails!!.grade.toInt()]
+                subjectsForSelectedGrade?.let { subjects ->
+                    subjectAdapter.submitList(subjects as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+                }
             }
         }
 

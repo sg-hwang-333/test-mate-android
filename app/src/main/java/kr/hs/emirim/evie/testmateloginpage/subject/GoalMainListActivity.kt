@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
@@ -34,12 +35,13 @@ class GoalMainListActivity : AppCompatActivity() {
     private lateinit var navCal: ImageButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var gradeTagSpinner: Spinner
-    private val apiService = RetrofitClient.create(TMService::class.java)
     private var selectedGradeIndex: Int = 1
 
-    private val listViewModel by viewModels<WrongAnswerListViewModel> {
-        WrongAnswerListViewModelFactory(this)
+    private val subjectViewModel by viewModels<SubjectViewModel> {
+        SubjectViewModelFactory(this)
     }
+
+    private lateinit var subjectAdapter: GoalSubjectTabAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +58,7 @@ class GoalMainListActivity : AppCompatActivity() {
                 // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
                 selectedPosition = position + 1
 
-                listViewModel.readNoteList(selectedPosition, 1)
+//                listViewModel.readNoteList(selectedPosition, 1) TODO : GoalModel 가져와야 함
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -66,7 +68,27 @@ class GoalMainListActivity : AppCompatActivity() {
 
         initView()
         setupListeners()
-        fetchSubjectsByGrade(selectedGradeIndex)
+
+        // 버튼 recyclerView
+        subjectAdapter = GoalSubjectTabAdapter { subject, position -> subjectAdapterOnClick(subject, position) }
+        val subjectRecyclerView: RecyclerView = findViewById(R.id.goalMainRecyclerView)
+
+        subjectRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) // 수직 레이아웃 방향 설정
+        subjectRecyclerView.adapter = subjectAdapter
+
+        subjectViewModel.readSubjectList(CurrentUser.userDetails!!.grade.toInt()) // list 가져오기
+        subjectViewModel.subjectListData.observe(
+            // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
+            this
+        ) { map ->
+            map?.let {
+                val subjectsForSelectedGrade = it[CurrentUser.userDetails!!.grade.toInt()]
+                subjectsForSelectedGrade?.let { subjects ->
+                    subjectAdapter.submitList(subjects as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+                }
+            }
+        }
     }
 
     private fun initView() {
@@ -87,35 +109,39 @@ class GoalMainListActivity : AppCompatActivity() {
         navCal.setOnClickListener { navigateTo(Calendar::class.java) }
     }
 
-    fun fetchSubjectsByGrade(grade: Int) {
-
-        apiService.getSubjectsByGrade(grade).enqueue(object : Callback<List<Subject>> {
-            override fun onResponse(call: Call<List<Subject>>, response: Response<List<Subject>>) {
-                if (response.isSuccessful) {
-                    val subjectList = response.body()
-                    subjectList?.let {
-                        for (subject in it) {
-//                            Log.d("Subject", "ID: ${subject.subjectId}, Name: ${subject.subjectName}, Image: ${subject.img}")
-                        }
-                    }
-                } else {
-                    Log.e("API Error", "Error: ${response.code()}")
-                }
-            }
-
-            override fun onFailure(call: Call<List<Subject>>, t: Throwable) {
-                Log.e("Network Error", "Error: ${t.message}")
-            }
-        })
+    private fun subjectAdapterOnClick(subject: Subject, position: Int) {
+        subjectAdapter.updateSelectedPosition(position)
     }
 
+//    fun fetchSubjectsByGrade(grade: Int) {
+//
+//        apiService.getSubjectsByGrade(grade).enqueue(object : Callback<List<Subject>> {
+//            override fun onResponse(call: Call<List<Subject>>, response: Response<List<Subject>>) {
+//                if (response.isSuccessful) {
+//                    val subjectList = response.body()
+//                    subjectList?.let {
+//                        for (subject in it) {
+////                            Log.d("Subject", "ID: ${subject.subjectId}, Name: ${subject.subjectName}, Image: ${subject.img}")
+//                        }
+//                    }
+//                } else {
+//                    Log.e("API Error", "Error: ${response.code()}")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<Subject>>, t: Throwable) {
+//                Log.e("Network Error", "Error: ${t.message}")
+//            }
+//        })
+//    }
 
-    private fun updateRecyclerView(subjectList: List<Subject>) {
-        // RecyclerView 업데이트
-        val adapter = GoalSubjectTabAdapter { adapterOnClick(it) }
-        recyclerView.adapter = adapter
-        adapter.submitList(subjectList)
-    }
+
+//    private fun updateRecyclerView(subjectList: List<Subject>) {
+//        // RecyclerView 업데이트
+//        val adapter = GoalSubjectTabAdapter { adapterOnClick(it) }
+//        recyclerView.adapter = adapter
+//        adapter.submitList(subjectList)
+//    }
 
     private fun adapterOnClick(subject: Subject) {
         // 과목 클릭 시 액티비티 이동
