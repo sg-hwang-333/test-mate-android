@@ -75,18 +75,16 @@
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
+            val binding = ActivityHomeBinding.inflate(layoutInflater)
+            setContentView(binding.root)
             setContentView(R.layout.activity_home)
+            supportActionBar?.hide()
 
             // 성적 그래프
             val linechart = findViewById<LineChart>(R.id.home_test_record_chart)
             val horizontalScrollView = findViewById<HorizontalScrollView>(R.id.home_scroll_view_graph)
             val scoreChart = ScoreChart(linechart, horizontalScrollView, this)
             scoreChart.setupChart(testRecordDataList)
-
-            binding = ActivityHomeBinding.inflate(layoutInflater)
-            val view = binding.root
-            setContentView(view)
-            supportActionBar?.hide()
 
     //       toggle = findViewById(R.id.toggle)
     //       drawerLayout = findViewById(R.id.drawer_layout)
@@ -99,9 +97,9 @@
 
             spinner = SpinnerUtil.gradeSpinner(this, R.id.spinnerWrong)
             spinner.setSelection(CurrentUser.selectGrade!! - 1)
-            var selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
+            selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
             var selectedItem =
-                spinner.getItemAtPosition(selectedPosition).toString() // grade 문자열 (ex. 고등학교 2학년)
+                spinner.getItemAtPosition(selectedPosition!!).toString() // grade 문자열 (ex. 고등학교 2학년)
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -112,7 +110,7 @@
                     // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
                     selectedPosition = position + 1
                     CurrentUser.selectGrade = spinner.selectedItemPosition + 1
-                    subjectsListViewModel.readSubjectList(selectedPosition)
+                    subjectsListViewModel.readSubjectList(selectedPosition!!)
 
                 }
 
@@ -125,6 +123,10 @@
             subjectsAdapter = SubjectHomeAdapter { subject -> adapterOnClick(subject) } // TODO
             val recyclerView: RecyclerView = findViewById(R.id.subjectRecyclerView)
 
+//            binding.subjectRecyclerView.apply {
+//                layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
+//                adapter = subjectsAdapter
+//            }
             recyclerView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) // 수평 레이아웃 방향 설정
             recyclerView.adapter = subjectsAdapter
@@ -144,6 +146,7 @@
             // 과목 추가
             addSubjectBtn = findViewById(R.id.addSubjectBtn)
             addSubjectBtn.setOnClickListener {
+                Log.d("homeLog", "addSubjectBtn 클릭!")
                 val intent = Intent(this@HomeActivity, AddSubjectActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
     //            startActivity(intent)
@@ -197,33 +200,28 @@
                 // AddSubjectActivity가 성공적으로 종료되었을 때
                 // Subject List를 업데이트
                 selectedPosition?.let {
+                    Log.d("homeRestart", "실행요미")
                     subjectsListViewModel.readSubjectList(it)
-                    subjectsListViewModel.subjectListData.observe(this) { map ->
-                        map?.let { subjectsMap ->
-                            val subjectsForSelectedGrade = subjectsMap[it]
-                            subjectsForSelectedGrade?.let { subjects ->
-                                subjectsAdapter.submitList(subjects as MutableList<SubjectResponse>)
-                            }
-                        }
-                    }
                 }
+            } else {
+                Log.d("homeRestart", "Request code or Result code mismatch")
             }
         }
+
+//        override fun onRestart() {
+//            super.onRestart()
 //
-//        override fun onResume() {
-//            super.onResume()
-//
+//            selectedPosition?.let { subjectsListViewModel.readSubjectList(it) }
 //            subjectsListViewModel.subjectListData.observe(
-//                // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
-//                this
+//            // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
+//        this
 //            ) { map ->
-//                map?.let {
-//                    val subjectsForSelectedGrade = it[CurrentUser.selectGrade]
-//                    subjectsForSelectedGrade?.let { subjects ->
-//                        subjectsAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
-//                    }
-//                }
-//            }
+//            map?.let {
+//                val subjectsForSelectedGrade = it[CurrentUser.selectGrade]
+//                subjectsForSelectedGrade?.let { subjects ->
+//                subjectsAdapter.submitList(subjects as MutableList<SubjectResponse>)
+//                    Log.d("homeRestart", "실행요미")}
+//            } }
 //        }
 
         fun adapterOnClick(subject: SubjectResponse) {
