@@ -38,6 +38,8 @@ class GoalMainListActivity : AppCompatActivity() {
 
     private lateinit var subjectAdapter: GoalSubjectTabAdapter
 
+    var selectedPosition : Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.goal_main_page)
@@ -45,15 +47,15 @@ class GoalMainListActivity : AppCompatActivity() {
 
         // 학년 spiner api 연동
         spinner = SpinnerUtil.gradeSpinner(this, R.id.spinnerWrong)
-        spinner.setSelection(CurrentUser.userDetails!!.grade.toInt() - 1)
-        var selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
-        var selectedItem = spinner.getItemAtPosition(selectedPosition).toString() // grade 문자열 (ex. 고등학교 2학년)
+        spinner.setSelection(CurrentUser.selectGrade!! - 1)
+        selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
+        var selectedItem = spinner.getItemAtPosition(selectedPosition!!).toString() // grade 문자열 (ex. 고등학교 2학년)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
                 selectedPosition = position + 1
-
-//                listViewModel.readNoteList(selectedPosition, 1) TODO : GoalModel 가져와야 함
+                CurrentUser.selectGrade = spinner.selectedItemPosition + 1
+                subjectViewModel.readSubjectList(selectedPosition!!)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -78,7 +80,7 @@ class GoalMainListActivity : AppCompatActivity() {
             this
         ) { map ->
             map?.let {
-                val subjectsForSelectedGrade = it[CurrentUser.userDetails!!.grade.toInt()]
+                val subjectsForSelectedGrade = it[selectedPosition]
                 subjectsForSelectedGrade?.let { subjects ->
                     subjectAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
                 }
