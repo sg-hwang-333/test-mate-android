@@ -1,7 +1,9 @@
     package kr.hs.emirim.evie.testmateloginpage.home
 
+    import android.app.Activity
     import android.content.Intent
     import android.os.Bundle
+    import android.util.Log
     import android.view.View
     import android.widget.AdapterView
     import android.widget.HorizontalScrollView
@@ -65,6 +67,10 @@
             WrongAnswerListViewModelFactory(this)
         }
 
+        var selectedPosition : Int? = null
+
+        lateinit var subjectsAdapter : SubjectHomeAdapter
+
         private lateinit var binding: ActivityHomeBinding
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,8 +95,10 @@
     //
     //       }
 
+            Log.d("homeLog", CurrentUser.selectGrade.toString())
+
             spinner = SpinnerUtil.gradeSpinner(this, R.id.spinnerWrong)
-            spinner.setSelection(CurrentUser.userDetails!!.grade.toInt() - 1)
+            spinner.setSelection(CurrentUser.selectGrade!! - 1)
             var selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
             var selectedItem =
                 spinner.getItemAtPosition(selectedPosition).toString() // grade 문자열 (ex. 고등학교 2학년)
@@ -103,7 +111,7 @@
                 ) {
                     // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
                     selectedPosition = position + 1
-
+                    CurrentUser.selectGrade = spinner.selectedItemPosition + 1
                     subjectsListViewModel.readSubjectList(selectedPosition)
 
                 }
@@ -114,7 +122,7 @@
             }
 
             // subjectRecyclerView
-            val subjectsAdapter = SubjectHomeAdapter { subject -> adapterOnClick(subject) } // TODO
+            subjectsAdapter = SubjectHomeAdapter { subject -> adapterOnClick(subject) } // TODO
             val recyclerView: RecyclerView = findViewById(R.id.subjectRecyclerView)
 
             recyclerView.layoutManager =
@@ -181,6 +189,42 @@
                 startActivity(intent)
             }
         } // onCreate
+
+        override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+            super.onActivityResult(requestCode, resultCode, intentData)
+
+            if (requestCode == newSubjectActivityRequestCode && resultCode == Activity.RESULT_OK) {
+                // AddSubjectActivity가 성공적으로 종료되었을 때
+                // Subject List를 업데이트
+                selectedPosition?.let {
+                    subjectsListViewModel.readSubjectList(it)
+                    subjectsListViewModel.subjectListData.observe(this) { map ->
+                        map?.let { subjectsMap ->
+                            val subjectsForSelectedGrade = subjectsMap[it]
+                            subjectsForSelectedGrade?.let { subjects ->
+                                subjectsAdapter.submitList(subjects as MutableList<SubjectResponse>)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+//
+//        override fun onResume() {
+//            super.onResume()
+//
+//            subjectsListViewModel.subjectListData.observe(
+//                // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
+//                this
+//            ) { map ->
+//                map?.let {
+//                    val subjectsForSelectedGrade = it[CurrentUser.selectGrade]
+//                    subjectsForSelectedGrade?.let { subjects ->
+//                        subjectsAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+//                    }
+//                }
+//            }
+//        }
 
         fun adapterOnClick(subject: SubjectResponse) {
             // TODO : 과목별 화면으로 이동
