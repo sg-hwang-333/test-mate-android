@@ -26,6 +26,7 @@ import kr.hs.emirim.evie.testmateloginpage.signup.Signup_privacy
 
 object CurrentUser {
     var userDetails: UserDetailsResponse? = null
+    var selectGrade : Int? = null
 }
 
 class LoginActivity : AppCompatActivity() {
@@ -88,16 +89,8 @@ class LoginActivity : AppCompatActivity() {
 
                         // 로그인 성공 시 사용자 정보를 CurrentUser 객체에 저장
                         CurrentUser.userDetails = response.body()!!.userDetails
+                        CurrentUser.selectGrade = response.body()!!.userDetails.grade
 
-                        // SharedPreferences에 세션 정보 저장
-//                        val sessionId = response.headers()["Set-Cookie"]
-//                        if (sessionId != null) {
-//                            with(sharedPreferences.edit()) {
-//                                putString("sessionId", sessionId)
-//                                apply()
-//                                Log.d("sessionId", sessionId)
-//                            }
-//                        }
                         val setCookieHeader = response.headers().get("Set-Cookie")
                         val sessionId = setCookieHeader?.split(";")?.find { it.startsWith("JSESSIONID") }?.split("=")?.get(1)
                         sessionId?.let {
