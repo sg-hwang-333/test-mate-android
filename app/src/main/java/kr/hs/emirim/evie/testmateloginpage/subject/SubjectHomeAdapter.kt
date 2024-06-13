@@ -3,25 +3,24 @@ package kr.hs.emirim.evie.testmateloginpage.subject
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 import kr.hs.emirim.evie.testmateloginpage.util.ImgResourceStringToInt.Companion.getResourceId
 
 
-class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
-    ListAdapter<Subject, SubjectHomeAdapter.SubjectHomeHolder>(SubjectDiffCallback) {
+class SubjectHomeAdapter(private val onClick: (SubjectResponse) -> Unit) :
+    ListAdapter<SubjectResponse, SubjectHomeAdapter.SubjectHomeHolder>(SubjectDiffCallback) {
 
-    inner class SubjectHomeHolder(itemView: View, val onClick: (Subject) -> Unit) :
+    inner class SubjectHomeHolder(itemView: View, val onClick: (SubjectResponse) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val subjectTextView: TextView = itemView.findViewById(R.id.subjectName)
         val subjectImageView: ImageView = itemView.findViewById(R.id.subjectImage)
-        var currentSubject: Subject? = null
+        var currentSubject: SubjectResponse? = null
 
         init {
             itemView.setOnClickListener {
@@ -32,7 +31,7 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
         }
 
         /* UI에 정보 바인딩(넣는 메서드) */
-        fun bind(subject: Subject) {
+        fun bind(subject: SubjectResponse) {
             currentSubject = subject
 
             subjectTextView.setText(subject.subjectName)
@@ -55,12 +54,12 @@ class SubjectHomeAdapter(private val onClick: (Subject) -> Unit) :
 
 }
 
-object SubjectDiffCallback : DiffUtil.ItemCallback<Subject>() {
-    override fun areItemsTheSame(oldItem: Subject, newItem: Subject): Boolean {
+object SubjectDiffCallback : DiffUtil.ItemCallback<SubjectResponse>() {
+    override fun areItemsTheSame(oldItem: SubjectResponse, newItem: SubjectResponse): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Subject, newItem: Subject): Boolean {
+    override fun areContentsTheSame(oldItem: SubjectResponse, newItem: SubjectResponse): Boolean {
         return oldItem.subjectName == newItem.subjectName
     }
 }

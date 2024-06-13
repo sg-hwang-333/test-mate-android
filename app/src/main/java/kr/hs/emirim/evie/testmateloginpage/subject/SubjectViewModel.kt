@@ -4,8 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kr.hs.emirim.evie.testmateloginpage.api.SubjectRepository
-
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
 
 
 class SubjectViewModel(val subjectRepository: SubjectRepository) : ViewModel() {
@@ -16,7 +15,7 @@ class SubjectViewModel(val subjectRepository: SubjectRepository) : ViewModel() {
         subjectRepository.getSubjects(grade)
     }
 
-    fun createSubject(subject: Subject) {
+    fun createSubject(subject: SubjectRequest) {
         subjectRepository.postSubject(subject)
     }
 }

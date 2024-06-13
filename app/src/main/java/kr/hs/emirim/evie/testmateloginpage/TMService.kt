@@ -2,7 +2,6 @@ package kr.hs.emirim.evie.testmateloginpage
 
 import kr.hs.emirim.evie.testmateloginpage.login.LoginRequest
 import kr.hs.emirim.evie.testmateloginpage.signup.SignUpRequest
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
 import kr.hs.emirim.evie.testmateloginpage.userData.UserDetailsResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -36,8 +35,5 @@ interface TMService {
 
     @DELETE("/goal/delete")
     fun requestGoalDelete(@Body goalListData : Map<String, Long>) : Call<GoalListResponse>
-
-    @GET("/api/subject/{grade}")
-    fun getSubjectsByGrade(@Path("grade") grade: Int): Call<List<Subject>>
 
 }

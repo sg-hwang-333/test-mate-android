@@ -2,6 +2,7 @@ package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
@@ -16,7 +17,7 @@ import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectAdapter
-import kr.hs.emirim.evie.testmateloginpage.subject.data.Subject
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil.Companion.gradeSpinner
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNote
 
@@ -34,6 +35,8 @@ class WrongAnswerListActivity : AppCompatActivity() {
         WrongAnswerListViewModelFactory(this)
     }
 
+    var selectedPosition : Int? = null
+
     private lateinit var navigationButtons: NavigationButtons
     private lateinit var subjectAdapter: WrongAnswerSubjectAdapter
     private lateinit var listAdapter: WrongAnswerListAdapter
@@ -44,15 +47,15 @@ class WrongAnswerListActivity : AppCompatActivity() {
 
         // 학년 spiner api 연동
         spinner = gradeSpinner(this, R.id.spinnerWrong)
-        spinner.setSelection(CurrentUser.userDetails!!.grade.toInt() - 1)
-        var selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
-        var selectedItem = spinner.getItemAtPosition(selectedPosition).toString() // grade 문자열 (ex. 고등학교 2학년)
+        spinner.setSelection(CurrentUser.selectGrade!! - 1)
+        selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
+        var selectedItem = spinner.getItemAtPosition(selectedPosition!!).toString() // grade 문자열 (ex. 고등학교 2학년)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
                 selectedPosition = position + 1
-
-                listViewModel.readNoteList(selectedPosition, 1)
+                CurrentUser.selectGrade = spinner.selectedItemPosition + 1
+                subjectViewModel.readSubjectList(selectedPosition!!)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -80,9 +83,12 @@ class WrongAnswerListActivity : AppCompatActivity() {
         subjectViewModel.subjectListData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this
-        ) {
-            it?.let {
-                subjectAdapter.submitList(it as MutableList<Subject>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+        ) { map ->
+            map?.let {
+                val subjectsForSelectedGrade = it[selectedPosition]
+                subjectsForSelectedGrade?.let { subjects ->
+                    subjectAdapter.submitList(subjects as MutableList<SubjectResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+                }
             }
         }
 
@@ -108,9 +114,10 @@ class WrongAnswerListActivity : AppCompatActivity() {
         navigationButtons.initialize(this)
     }
 
-    private fun subjectAdapterOnClick(subject: Subject, position: Int) {
+    private fun subjectAdapterOnClick(subject: SubjectResponse, position: Int) {
         subjectAdapter.updateSelectedPosition(position)
-        listViewModel.readNoteList(CurrentUser.userDetails!!.grade.toInt(), 1)
+        listViewModel.readNoteList(CurrentUser.userDetails!!.grade.toInt(), subject.subjectId)
+        Log.d("subjectAdapterOnClick", subject.subjectId.toString())
     }
 
     private fun noteAdapterOnClick(list : WrongAnswerNote) {
