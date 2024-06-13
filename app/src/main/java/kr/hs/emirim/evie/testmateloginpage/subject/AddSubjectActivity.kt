@@ -1,6 +1,7 @@
 package kr.hs.emirim.evie.testmateloginpage.subject
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 
 const val SUBJECT_NAME = "새로운 과목"
 const val BOOK_TAG = "이미지 주소" // R.drawable.book_red
@@ -40,7 +42,7 @@ class AddSubjectActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.subjectAddBtn).setOnClickListener {
-            val grade = CurrentUser.userDetails!!.grade
+            val grade = CurrentUser.selectGrade
             val subjectName = addSubjectName.text.toString()
             Log.d("retrofit", grade.toString())
             Log.d("retrofit", subjectName)
@@ -49,6 +51,7 @@ class AddSubjectActivity : AppCompatActivity() {
             if (subjectName.isNotEmpty()) {
                 val newSubject = SubjectRequest(grade, subjectName, bookImgPath)
                 subjectViewModel.createSubject(newSubject)
+                setResult(Activity.RESULT_OK)
                 finish()
             } else {
                 Log.d("AddSubjectActivity", "Subject name cannot be empty")
