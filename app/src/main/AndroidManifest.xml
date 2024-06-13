@@ -60,11 +60,7 @@
         <activity
             android:name=".login.LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SplashActivity"
@@ -87,6 +83,15 @@
             android:name=".wrong_answer_note.AddWrongAnswerNoteActivity"
             android:exported="true">
 
+        </activity>
+        <activity
+            android:name=".ReadWrongAnswerNoteActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 </manifest>

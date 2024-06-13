@@ -31,4 +31,6 @@
     <color name="black.200_1">#E1E1E1</color>
 
     <color name="bookBgColor">#FFC364</color>
+
+    <color name="Transparency">#00000000</color>
 </resources>
