@@ -35,6 +35,12 @@
             android:name=".GuideActivity1"
             android:exported="true" />
         <activity
+            android:name=".GuideActivity2"
+            android:exported="true" />
+        <activity
+            android:name=".GuideActivity3"
+            android:exported="true" />
+        <activity
             android:name=".goalList.GoalListActivity"
             android:exported="true" />
         <activity
@@ -67,6 +73,11 @@
             android:exported="true">
 
             <!-- 여기 intent-filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".home.HomeActivity"
@@ -87,11 +98,6 @@
         <activity
             android:name=".ReadWrongAnswerNoteActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 </manifest>

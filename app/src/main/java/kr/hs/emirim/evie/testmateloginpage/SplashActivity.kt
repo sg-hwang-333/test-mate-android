@@ -12,7 +12,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.splash_page)
         supportActionBar?.hide() // Android 앱의 액션바(작업 표시줄)를 숨기는 코드
 
-        val i = Intent(this, LoginActivity::class.java)
+        val i = Intent(this, GuideActivity1::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         //Android 앱 구성 요소 간의 통신을 위해 사용되는 객체
         //액티비티 전환, 데이터 공유, 서비스 시작 등에 사용
