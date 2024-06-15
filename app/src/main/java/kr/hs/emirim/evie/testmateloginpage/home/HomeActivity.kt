@@ -25,6 +25,8 @@
     import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
     import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityHomeBinding
     import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectInfoResponse
+    import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectTop3RangeResponse
+    import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectTop3ReasonResponse
     import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
     import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
     import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
@@ -54,6 +56,11 @@
         private lateinit var levelTextView: RatingBar
         private lateinit var goalScoreTextView: TextView
         private lateinit var failTextView: TextView
+
+        // 홈 -> 문제가 잘 나오는 곳 TOP3
+        private lateinit var top1range: TextView
+        private lateinit var top2range: TextView
+        private lateinit var top3range: TextView
 
         lateinit var navHome: ImageButton
         lateinit var navGoal: ImageButton
@@ -92,12 +99,16 @@
             supportActionBar?.hide()
 
             // findViewById를 사용하여 레이아웃 파일에서 뷰를 가져와 변수에 할당
-//            subjectIdTextView = findViewById(R.id.exam_record)
+            // 홈 -> 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
             dateTextView = findViewById(R.id.dday)
             levelTextView = findViewById(R.id.level)
             goalScoreTextView = findViewById(R.id.goal_score)
 //            failTextView = findViewById(R.id.fail)
-//            examsRecyclerView = findViewById(R.id.examsRecyclerView)
+
+            // 홈 -> 문제가 잘 나오는 곳 TOP3
+            top1range = findViewById(R.id.top1)
+            top2range = findViewById(R.id.top2)
+            top3range = findViewById(R.id.top3)
 
             // Context를 사용하여 RetrofitClient를 생성
 
@@ -105,7 +116,8 @@
             homeAPIService = RetrofitClient.create(HomeAPIService::class.java, this)
 
             val subjectId = 1 // TODO : 실제로는 이 값을 동적으로 설정해야 함 -> 스피너에 있는 subjectId
-            fetchSubjectData(subjectId)
+            fetchSubjectData(subjectId) // 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
+            fetchTop3RangeData(subjectId) // 문제가 잘 나오는 곳 TOP3
 
 
 
@@ -187,8 +199,6 @@
     //            startActivity(intent)
                 startActivityForResult(intent, newSubjectActivityRequestCode)
             }
-
-
             navHome = findViewById(R.id.nav_home)
             navWrong = findViewById(R.id.nav_wrong)
             navGoal = findViewById(R.id.nav_goal)
@@ -251,6 +261,40 @@
             }
         }
 
+        // 홈 -> 문제가 잘 나오는 곳 TOP3 API 불러오기
+        private fun fetchTop3RangeData(subjectId: Int) {
+            try {
+                val call = homeAPIService.getTop3ranges(subjectId)
+                Log.d("fetchSubjectData", "Fetching data for subjectId: $subjectId")
+
+                call.enqueue(object : Callback<HomeSubjectTop3RangeResponse> {
+                    override fun onResponse(
+                        call: Call<HomeSubjectTop3RangeResponse>,
+                        response: Response<HomeSubjectTop3RangeResponse>
+                    ) {
+                        Log.d("fetchSubjectData", "API call successful, Response code: ${response.code()}")
+                        if (response.isSuccessful) {
+                            val top3range = response.body()
+                            Log.i("fetchSubjectData", "Response body: $top3range")
+                            top3range?.let {
+                                HomeSubjectInfoupdateUI(top3range)
+                            }
+                        } else {
+                            Log.e("fetchSubjectData", "Failed to get subject data. Error code: ${response.code()}")
+                            Toast.makeText(this@HomeActivity, "과목 정보를 불러오는데 실패했습니다!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<HomeSubjectTop3RangeResponse>, t: Throwable) {
+                        Log.e("fetchSubjectData", "API call failed: ${t.message}", t)
+                        Toast.makeText(this@HomeActivity, t.message, Toast.LENGTH_SHORT).show()
+                    }
+                })
+            } catch (e: Exception) {
+                Log.e("fetchSubjectData", "Exception during API call", e)
+            }
+        }
+
         // 홈 -> 시험 과목 정보 부분 UI 업데이트
         @RequiresApi(Build.VERSION_CODES.O)
         private fun HomeSubjectInfoupdateUI(subjectResponse: HomeSubjectInfoResponse?) {
@@ -271,6 +315,16 @@
             }
         }
 
+        // 홈 -> 문제가 잘 나오는 곳 TOP3
+        private fun HomeSubjectInfoupdateUI(top3rangeResponse: HomeSubjectTop3RangeResponse?){
+            top3rangeResponse?.let {
+                top1range.text = it.get(0)
+                top2range.text = it.get(1)
+                top3range.text = it.get(2)
+            }
+        }
+
+        // 날짜 -> D-DAY로 바꾸는 함수
         @RequiresApi(Build.VERSION_CODES.O)
         fun calculateDday(targetDate: String): String {
             // 현재 날짜 구하기
