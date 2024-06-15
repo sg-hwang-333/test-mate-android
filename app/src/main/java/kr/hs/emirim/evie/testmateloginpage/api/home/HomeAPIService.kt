@@ -1,10 +1,14 @@
 package kr.hs.emirim.evie.testmateloginpage.api.home
 
+import kr.hs.emirim.evie.testmateloginpage.api.MessageResponse
 import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectInfoResponse
 import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectTop3RangeResponse
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectUpdateRequest
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.PATCH
 
 interface HomeAPIService {
 
@@ -20,4 +24,10 @@ interface HomeAPIService {
     @GET("/api/note/top3reasons/{subjectId}")
     fun getTop3reasons(@Path("subjectId") subjectId: Int): Call<List<List<Any>>>
 
+    // 홈 -> 시험 기록
+    @PATCH("/api/subject/record/{subjectId}")
+    fun updateSubjectRecord(
+        @Path("subjectId") subjectId: Int,
+        @Body updateRequest: SubjectUpdateRequest
+    ): Call<MessageResponse>
 }

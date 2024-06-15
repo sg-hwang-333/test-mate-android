@@ -106,12 +106,14 @@
             setContentView(R.layout.activity_home)
             supportActionBar?.hide()
 
+            // RetrofitClient를 사용하여 homeAPIService 초기화
+            homeAPIService = RetrofitClient.create(HomeAPIService::class.java, this)
+
             // findViewById를 사용하여 레이아웃 파일에서 뷰를 가져와 변수에 할당
             // 홈 -> 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
             dateTextView = findViewById(R.id.dday)
             levelTextView = findViewById(R.id.level)
             goalScoreTextView = findViewById(R.id.goal_score)
-//            failTextView = findViewById(R.id.fail)
 
             // 홈 -> 문제가 잘 나오는 곳 TOP3
             top1range = findViewById(R.id.top1)
@@ -126,10 +128,6 @@
             top2reasonPercent = findViewById(R.id.reason2Percentage)
             top3reasonPercent = findViewById(R.id.reason3Percentage)
 
-            // Context를 사용하여 RetrofitClient를 생성
-
-            // RetrofitClient를 사용하여 homeAPIService 초기화
-            homeAPIService = RetrofitClient.create(HomeAPIService::class.java, this)
 
             val subjectId = 1 // TODO : 실제로는 이 값을 동적으로 설정해야 함 -> 스피너에 있는 subjectId
             fetchSubjectData(subjectId) // 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
@@ -208,6 +206,7 @@
             //           dialog.show(supportFragmentManager, "CustomDialog")
             //       }
 
+            // 시험 기록 버튼 누르면 -> 시험 기록 페이지로 가도록 하는 버튼 클릭 리스터
             editTestRecordBtn = findViewById(R.id.edit_test_record_btn)
             editTestRecordBtn.setOnClickListener {
                 val intent = Intent(this@HomeActivity, EditTestRecordActivity::class.java)
@@ -215,7 +214,6 @@
                 //            startActivity(intent)
                 startActivityForResult(intent, newSubjectActivityRequestCode)
             }
-
 
             setNavListeners() // 네비게이션ㄱ 바
         } // onCreate
