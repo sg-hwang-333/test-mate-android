@@ -16,6 +16,7 @@ class RetrofitClient {
         fun <T> create(service: Class<T>, context: Context? = null): T {
             val clientBuilder = OkHttpClient.Builder() // OkHttpClient.Builder 인스턴스 생성
 
+
             // context가 null이 아닌 경우에만 세션 ID를 추가
             context?.let { // context가 null이 아닌 경우 실행
                 val sessionId = SessionManager.getSessionId(it) // SessionManager를 사용하여 세션 ID 가져오기

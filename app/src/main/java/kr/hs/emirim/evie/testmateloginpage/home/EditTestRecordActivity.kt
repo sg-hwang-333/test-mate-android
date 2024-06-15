@@ -21,20 +21,14 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.DefaultValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectInfoResponse
 import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
 
 class EditTestRecordActivity : AppCompatActivity() {
-    // 시험기록 데이터 생성
-    val testRecordDataList: List<TestData> = listOf(
-        TestData("1학년 2학기 기말",75),
-        TestData("1학년 2학기 중간",60),
-        TestData("1학년 1학기 기말",80),
-        TestData("1학년 1학기 중간",100),
-        TestData("@학년 @학기 중간",89),
-        TestData("@학년 @학기 중간",91),
-        TestData("@학년 @학기 중간",78),
-        TestData("@학년 @학기 중간",96)
+    // 시험기록 데이터 생성 : 홈 과목 정보 안에 있는 Exam으로 설정
+    var testRecordDataList: MutableList<HomeSubjectInfoResponse.Exam> = mutableListOf(
     )
+
 
     lateinit var targetScore : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
