@@ -199,31 +199,9 @@
     //            startActivity(intent)
                 startActivityForResult(intent, newSubjectActivityRequestCode)
             }
-            navHome = findViewById(R.id.nav_home)
-            navWrong = findViewById(R.id.nav_wrong)
-            navGoal = findViewById(R.id.nav_goal)
-            navCal = findViewById(R.id.nav_cal)
 
-            navHome.setOnClickListener {
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent)
-            }
-            navWrong.setOnClickListener {
-                val intent = Intent(this, WrongAnswerListActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent)
-            }
-            navGoal.setOnClickListener {
-                val intent = Intent(this, GoalMainListActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent)
-            }
-            navCal.setOnClickListener {
-                val intent = Intent(this, Calendar::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent)
-            }
+
+            setNavListeners() // 네비게이션ㄱ 바
         } // onCreate
 
         // 홈 -> 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소) 불러오기
@@ -399,4 +377,31 @@
     //            }
     //        }
     //    }
+
+    // 화면 아래 하단에 위치한 네비게이션 바 함수
+    private fun setNavListeners() {
+        navHome = findViewById(R.id.nav_home)
+        navWrong = findViewById(R.id.nav_wrong)
+        navGoal = findViewById(R.id.nav_goal)
+        navCal = findViewById(R.id.nav_cal)
+
+        navHome.setOnClickListener {
+            startNewActivity(HomeActivity::class.java)
+        }
+        navWrong.setOnClickListener {
+            startNewActivity(WrongAnswerListActivity::class.java)
+        }
+        navGoal.setOnClickListener {
+            startNewActivity(GoalMainListActivity::class.java)
+        }
+        navCal.setOnClickListener {
+            startNewActivity(Calendar::class.java)
+        }
+    }
+
+        private fun startNewActivity(cls: Class<*>) {
+            val intent = Intent(this, cls)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
     }
