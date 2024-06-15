@@ -10,26 +10,33 @@
     import android.widget.ImageButton
     import android.widget.Spinner
     import android.widget.TextView
+    import android.widget.Toast
     import androidx.activity.viewModels
     import androidx.appcompat.app.AppCompatActivity
     import androidx.recyclerview.widget.LinearLayoutManager
     import androidx.recyclerview.widget.RecyclerView
-    import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
     import com.github.mikephil.charting.charts.LineChart
-    import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
     import kr.hs.emirim.evie.testmateloginpage.R
-    import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
+    import kr.hs.emirim.evie.testmateloginpage.api.home.HomeAPIService
+    import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
+    import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
     import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityHomeBinding
+    import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectInfoResponse
     import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
     import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
     import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
+    import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
     import kr.hs.emirim.evie.testmateloginpage.subject.SubjectHomeAdapter
     import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
     import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
     import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
     import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil
+    import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
     import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModel
     import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModelFactory
+    import retrofit2.Call
+    import retrofit2.Callback
+    import retrofit2.Response
 
     class HomeActivity : AppCompatActivity() {
         // 시험기록 데이터 생성
@@ -44,21 +51,26 @@
             TestData("@학년 @학기 중간", 96)
         )
 
+//        private lateinit var subjectIdTextView: TextView
+        private lateinit var dateTextView: TextView
+//        private lateinit var levelTextView: TextView
+//        private lateinit var goalScoreTextView: TextView
+//        private lateinit var failTextView: TextView
+//        private lateinit var examsRecyclerView: RecyclerView
+
         lateinit var navHome: ImageButton
         lateinit var navGoal: ImageButton
         lateinit var navCal: ImageButton
-
         lateinit var navWrong: ImageButton
-
         lateinit var addSubjectBtn: ImageButton
         lateinit var editTestRecordBtn: ImageButton
-
         lateinit var userGrade: TextView
         lateinit var spinner: Spinner
-
         lateinit var toggle: ImageButton
+        lateinit var subjectsAdapter : SubjectHomeAdapter
 
         private val newSubjectActivityRequestCode = 1
+
         private val subjectsListViewModel by viewModels<SubjectViewModel> {
             SubjectViewModelFactory(this)
         }
@@ -69,16 +81,34 @@
 
         var selectedPosition : Int? = null
 
-        lateinit var subjectsAdapter : SubjectHomeAdapter
-
         private lateinit var binding: ActivityHomeBinding
 
+        // Retrofit 서비스 인스턴스
+        private lateinit var homeAPIService: HomeAPIService
+
+        // onCreate 메서드는 액티비티가 처음 생성될 때 호출
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             val binding = ActivityHomeBinding.inflate(layoutInflater)
             setContentView(binding.root)
             setContentView(R.layout.activity_home)
             supportActionBar?.hide()
+
+            // findViewById를 사용하여 레이아웃 파일에서 뷰를 가져와 변수에 할당
+//            subjectIdTextView = findViewById(R.id.subjectIdTextView)
+            dateTextView = findViewById(R.id.dday)
+//            levelTextView = findViewById(R.id.level)
+//            goalScoreTextView = findViewById(R.id.goal_score)
+//            failTextView = findViewById(R.id.fail)
+//            examsRecyclerView = findViewById(R.id.examsRecyclerView)
+
+            // Context를 사용하여 RetrofitClient를 생성
+
+            // RetrofitClient를 사용하여 homeAPIService 초기화
+            homeAPIService = RetrofitClient.create(HomeAPIService::class.java, this)
+
+            val subjectId = 1 // TODO : 실제로는 이 값을 동적으로 설정해야 함 -> 스피너에 있는 subjectId
+            fetchSubjectData(subjectId)
 
             // 성적 그래프
             val linechart = findViewById<LineChart>(R.id.home_test_record_chart)
@@ -192,6 +222,43 @@
                 startActivity(intent)
             }
         } // onCreate
+
+        private fun fetchSubjectData(subjectId: Int) {
+            try {
+                val call = homeAPIService.getHomeSubjectInfo(subjectId)
+                Log.d("fetchSubjectData", "Fetching data for subjectId: $subjectId")
+
+                call.enqueue(object : Callback<HomeSubjectInfoResponse> {
+                    override fun onResponse(
+                        call: Call<HomeSubjectInfoResponse>,
+                        response: Response<HomeSubjectInfoResponse>
+                    ) {
+                        Log.d("fetchSubjectData", "API call successful, Response code: ${response.code()}")
+                        if (response.isSuccessful) {
+                            val subjectResponse = response.body()
+                            Log.i("fetchSubjectData", "Response body: $subjectResponse")
+                            subjectResponse?.let {
+                                // UI 업데이트
+                                dateTextView.text = it.date
+//                                levelRatingBar.rating = it.level.toFloat() // RatingBar는 float 타입으로 설정
+//                                goalScoreTextView.text = "목표점수 ${it.goalScore}점"
+
+                            }
+                        } else {
+                            Log.e("fetchSubjectData", "Failed to get subject data. Error code: ${response.code()}")
+                            Toast.makeText(this@HomeActivity, "과목 정보를 불러오는데 실패했습니다!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<HomeSubjectInfoResponse>, t: Throwable) {
+                        Log.e("fetchSubjectData", "API call failed: ${t.message}", t)
+                        Toast.makeText(this@HomeActivity, t.message, Toast.LENGTH_SHORT).show()
+                    }
+                })
+            } catch (e: Exception) {
+                Log.e("fetchSubjectData", "Exception during API call", e)
+            }
+        }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
             super.onActivityResult(requestCode, resultCode, intentData)

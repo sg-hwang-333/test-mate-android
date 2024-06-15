@@ -18,7 +18,7 @@ interface HomeAPIService {
     fun getTop3ranges(@Path("subjectId") subjectId: Int): Call<HomeSubjectTop3RangeResponse>
 
     // 홈 -> 오답 실수 TOP3 퍼센트
-    @GET("/api/note/top3reasons/:subjectId")
+    @GET("/api/note/top3reasons/{subjectId}")
     fun getTop3reasons(@Path("subjectId") subjectId: Int): Call<HomeSubjectTop3ReasonResponse>
 
 }
