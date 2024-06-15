@@ -191,6 +191,7 @@
                         style="?android:attr/ratingBarStyleIndicator"
                         android:theme="@style/RatingBar"
                         android:max="5"
+                        android:stepSize="1"
                         android:layout_marginVertical="20dp"
                         />
                     <EditText
