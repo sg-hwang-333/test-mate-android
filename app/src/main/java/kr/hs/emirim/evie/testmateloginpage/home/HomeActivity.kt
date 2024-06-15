@@ -9,6 +9,7 @@
     import android.widget.AdapterView
     import android.widget.HorizontalScrollView
     import android.widget.ImageButton
+    import android.widget.ProgressBar
     import android.widget.RatingBar
     import android.widget.Spinner
     import android.widget.TextView
@@ -26,7 +27,6 @@
     import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityHomeBinding
     import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectInfoResponse
     import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectTop3RangeResponse
-    import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectTop3ReasonResponse
     import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
     import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
     import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
@@ -62,6 +62,14 @@
         private lateinit var top2range: TextView
         private lateinit var top3range: TextView
 
+        // 홈 -> 오답 실수 퍼센트 TOP3
+        private lateinit var top1reason: TextView
+        private lateinit var top2reason: TextView
+        private lateinit var top3reason: TextView
+        private lateinit var top1reasonPercent: ProgressBar
+        private lateinit var top2reasonPercent: ProgressBar
+        private lateinit var top3reasonPercent: ProgressBar
+
         lateinit var navHome: ImageButton
         lateinit var navGoal: ImageButton
         lateinit var navCal: ImageButton
@@ -71,7 +79,7 @@
         lateinit var userGrade: TextView
         lateinit var spinner: Spinner
         lateinit var toggle: ImageButton
-        lateinit var subjectsAdapter : SubjectHomeAdapter
+        lateinit var subjectsAdapter: SubjectHomeAdapter
 
         private val newSubjectActivityRequestCode = 1
 
@@ -83,7 +91,7 @@
             WrongAnswerListViewModelFactory(this)
         }
 
-        var selectedPosition : Int? = null
+        var selectedPosition: Int? = null
 
         private lateinit var binding: ActivityHomeBinding
 
@@ -110,6 +118,14 @@
             top2range = findViewById(R.id.top2)
             top3range = findViewById(R.id.top3)
 
+            // 홈 -> 오답 실수 퍼센트 TOP3
+            top1reason = findViewById(R.id.reason1)
+            top2reason = findViewById(R.id.reason2)
+            top3reason = findViewById(R.id.reason3)
+            top1reasonPercent = findViewById(R.id.reason1Percentage)
+            top2reasonPercent = findViewById(R.id.reason2Percentage)
+            top3reasonPercent = findViewById(R.id.reason3Percentage)
+
             // Context를 사용하여 RetrofitClient를 생성
 
             // RetrofitClient를 사용하여 homeAPIService 초기화
@@ -118,15 +134,15 @@
             val subjectId = 1 // TODO : 실제로는 이 값을 동적으로 설정해야 함 -> 스피너에 있는 subjectId
             fetchSubjectData(subjectId) // 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
             fetchTop3RangeData(subjectId) // 문제가 잘 나오는 곳 TOP3
+            fetchTop3ReasonData(subjectId) // 오답 실수 TOP3 퍼센트
 
 
-
-    //       toggle = findViewById(R.id.toggle)
-    //       drawerLayout = findViewById(R.id.drawer_layout)
-    //       toggle.setOnClickListener {
-    //           drawerLayout.openDrawer(GravityCompat.START)
-    //
-    //       }
+            //       toggle = findViewById(R.id.toggle)
+            //       drawerLayout = findViewById(R.id.drawer_layout)
+            //       toggle.setOnClickListener {
+            //           drawerLayout.openDrawer(GravityCompat.START)
+            //
+            //       }
 
             Log.d("homeLog", CurrentUser.selectGrade.toString())
 
@@ -184,19 +200,19 @@
                 Log.d("homeLog", "addSubjectBtn 클릭!")
                 val intent = Intent(this@HomeActivity, AddSubjectActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-    //            startActivity(intent)
+                //            startActivity(intent)
                 startActivityForResult(intent, newSubjectActivityRequestCode)
             }
-    //       binding.addSubjectBtn.setOnClickListener {
-    //           val dialog = AddSubjectActivity()
-    //           dialog.show(supportFragmentManager, "CustomDialog")
-    //       }
+            //       binding.addSubjectBtn.setOnClickListener {
+            //           val dialog = AddSubjectActivity()
+            //           dialog.show(supportFragmentManager, "CustomDialog")
+            //       }
 
             editTestRecordBtn = findViewById(R.id.edit_test_record_btn)
             editTestRecordBtn.setOnClickListener {
                 val intent = Intent(this@HomeActivity, EditTestRecordActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-    //            startActivity(intent)
+                //            startActivity(intent)
                 startActivityForResult(intent, newSubjectActivityRequestCode)
             }
 
@@ -216,7 +232,10 @@
                         call: Call<HomeSubjectInfoResponse>,
                         response: Response<HomeSubjectInfoResponse>
                     ) {
-                        Log.d("fetchSubjectData", "API call successful, Response code: ${response.code()}")
+                        Log.d(
+                            "fetchSubjectData",
+                            "API call successful, Response code: ${response.code()}"
+                        )
                         if (response.isSuccessful) {
                             val subjectResponse = response.body()
                             Log.i("fetchSubjectData", "Response body: $subjectResponse")
@@ -224,8 +243,15 @@
                                 HomeSubjectInfoupdateUI(subjectResponse)
                             }
                         } else {
-                            Log.e("fetchSubjectData", "Failed to get subject data. Error code: ${response.code()}")
-                            Toast.makeText(this@HomeActivity, "과목 정보를 불러오는데 실패했습니다!", Toast.LENGTH_SHORT).show()
+                            Log.e(
+                                "fetchSubjectData",
+                                "Failed to get subject data. Error code: ${response.code()}"
+                            )
+                            Toast.makeText(
+                                this@HomeActivity,
+                                "과목 정보를 불러오는데 실패했습니다!",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
@@ -250,7 +276,10 @@
                         call: Call<HomeSubjectTop3RangeResponse>,
                         response: Response<HomeSubjectTop3RangeResponse>
                     ) {
-                        Log.d("fetchSubjectData", "API call successful, Response code: ${response.code()}")
+                        Log.d(
+                            "fetchSubjectData",
+                            "API call successful, Response code: ${response.code()}"
+                        )
                         if (response.isSuccessful) {
                             val top3range = response.body()
                             Log.i("fetchSubjectData", "Response body: $top3range")
@@ -258,8 +287,15 @@
                                 HomeSubjectInfoupdateUI(top3range)
                             }
                         } else {
-                            Log.e("fetchSubjectData", "Failed to get subject data. Error code: ${response.code()}")
-                            Toast.makeText(this@HomeActivity, "과목 정보를 불러오는데 실패했습니다!", Toast.LENGTH_SHORT).show()
+                            Log.e(
+                                "fetchSubjectData",
+                                "Failed to get subject data. Error code: ${response.code()}"
+                            )
+                            Toast.makeText(
+                                this@HomeActivity,
+                                "과목 정보를 불러오는데 실패했습니다!",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
@@ -273,13 +309,47 @@
             }
         }
 
+        // 홈 -> 오답 실수 퍼센트 TOP3 API 호출 및 UI 업데이트
+        private fun fetchTop3ReasonData(subjectId: Int) {
+            try {
+                val call = homeAPIService.getTop3reasons(subjectId)
+                Log.d("fetchTop3ReasonData", "Fetching data for subjectId: $subjectId")
+
+                call.enqueue(object : Callback<List<List<Any>>> {
+                    override fun onResponse(
+                        call: Call<List<List<Any>>>,
+                        response: Response<List<List<Any>>>
+                    ) {
+                        Log.d("fetchTop3ReasonData", "API call successful, Response code: ${response.code()}")
+                        if (response.isSuccessful) {
+                            val top3reasonList = response.body()
+                            Log.i("fetchTop3ReasonData", "Response body: $top3reasonList")
+                            top3reasonList?.let {
+                                HomeSubjectInfoupdateUI(top3reasonList)
+                            }
+                        } else {
+                            Log.e("fetchTop3ReasonData", "Failed to get data. Error code: ${response.code()}")
+                            Toast.makeText(this@HomeActivity, "데이터를 불러오는데 실패했습니다!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<List<Any>>>, t: Throwable) {
+                        Log.e("fetchTop3ReasonData", "API call failed: ${t.message}", t)
+                        Toast.makeText(this@HomeActivity, t.message, Toast.LENGTH_SHORT).show()
+                    }
+                })
+            } catch (e: Exception) {
+                Log.e("fetchTop3ReasonData", "Exception during API call", e)
+            }
+        }
+
         // 홈 -> 시험 과목 정보 부분 UI 업데이트
         @RequiresApi(Build.VERSION_CODES.O)
         private fun HomeSubjectInfoupdateUI(subjectResponse: HomeSubjectInfoResponse?) {
             subjectResponse?.let {
                 var date = calculateDday(it.date)
                 dateTextView.text = date
-                levelTextView.rating =  it.level.toFloat() // RatingBar는 float 타입으로 설정
+                levelTextView.rating = it.level.toFloat() // RatingBar는 float 타입으로 설정
                 goalScoreTextView.text = "목표점수 ${it.goalScore}점"
 
                 testRecordDataList.clear() // 기존 데이터를 지우고 새로운 데이터로 업데이트
@@ -287,20 +357,61 @@
 
                 // 성적 그래프
                 val linechart = findViewById<LineChart>(R.id.home_test_record_chart)
-                val horizontalScrollView = findViewById<HorizontalScrollView>(R.id.home_scroll_view_graph)
+                val horizontalScrollView =
+                    findViewById<HorizontalScrollView>(R.id.home_scroll_view_graph)
                 val scoreChart = ScoreChart(linechart, horizontalScrollView, this)
                 scoreChart.setupChart(testRecordDataList)
             }
         }
 
-        // 홈 -> 문제가 잘 나오는 곳 TOP3
-        private fun HomeSubjectInfoupdateUI(top3rangeResponse: HomeSubjectTop3RangeResponse?){
+        // 홈 -> 문제가 잘 나오는 곳 TOP3 UI 업데이트
+        private fun HomeSubjectInfoupdateUI(top3rangeResponse: HomeSubjectTop3RangeResponse?) {
             top3rangeResponse?.let {
                 top1range.text = it.get(0)
                 top2range.text = it.get(1)
                 top3range.text = it.get(2)
             }
         }
+
+        // 홈 -> 오답 실수 퍼센트 TOP3 UI 업데이트
+        private fun HomeSubjectInfoupdateUI(top3reasonList: List<List<Any>>?) {
+            top3reasonList?.let {
+                // 첫 번째 요소 처리
+                if (top3reasonList.size > 0) {
+                    val reason1 = top3reasonList[0][0] as String
+                    val percent1 = (top3reasonList[0][1] as Double).toInt()
+                    top1reason.text = "$reason1 ${percent1}%"
+                    top1reasonPercent.progress = percent1
+                } else {
+                    top1reason.text = "없음"
+                    top1reasonPercent.progress = 0
+                }
+
+                // 두 번째 요소 처리
+                if (top3reasonList.size > 1) {
+                    val reason2 = top3reasonList[1][0] as String
+                    val percent2 = (top3reasonList[1][1] as Double).toInt()
+                    top2reason.text = "$reason2 ${percent2}%"
+                    top2reasonPercent.progress = percent2
+                } else {
+                    top2reason.text = "없음"
+                    top2reasonPercent.progress = 0
+                }
+
+                // 세 번째 요소 처리
+                if (top3reasonList.size > 2) {
+                    val reason3 = top3reasonList[2][0] as String
+                    val percent3 = (top3reasonList[2][1] as Double).toInt()
+                    top3reason.text = "$reason3 ${percent3}%"
+                    top3reasonPercent.progress = percent3
+                } else {
+                    top3reason.text = "없음"
+                    top3reasonPercent.progress = 0
+                }
+            }
+        }
+
+        // TODO : 실패요소 체크 하는 기능 추가
 
         // 날짜 -> D-DAY로 바꾸는 함수
         @RequiresApi(Build.VERSION_CODES.O)
@@ -360,44 +471,44 @@
             // TODO : 과목별 화면으로 이동
         }
 
-    //    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-    //        super.onActivityResult(requestCode, resultCode, intentData)
-    //
-    //        /* Inserts subject into viewModel. */
-    //        if (resultCode == Activity.RESULT_OK) {
-    //            intentData?.let { data ->
-    //                val subjectName = data.getStringExtra(SUBJECT_NAME)
-    //                val subjectImage = data.getStringExtra(BOOK_TAG)
-    //
-    //                val newSubject = Subject(
-    //                    CurrentUser.userDetails!!.grade, subjectName, subjectImage
-    //                )
-    //
-    //                subjectsListViewModel.addList(newSubject) ///////////////////////////////////////// insertFlower
-    //            }
-    //        }
-    //    }
+        //    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+        //        super.onActivityResult(requestCode, resultCode, intentData)
+        //
+        //        /* Inserts subject into viewModel. */
+        //        if (resultCode == Activity.RESULT_OK) {
+        //            intentData?.let { data ->
+        //                val subjectName = data.getStringExtra(SUBJECT_NAME)
+        //                val subjectImage = data.getStringExtra(BOOK_TAG)
+        //
+        //                val newSubject = Subject(
+        //                    CurrentUser.userDetails!!.grade, subjectName, subjectImage
+        //                )
+        //
+        //                subjectsListViewModel.addList(newSubject) ///////////////////////////////////////// insertFlower
+        //            }
+        //        }
+        //    }
 
-    // 화면 아래 하단에 위치한 네비게이션 바 함수
-    private fun setNavListeners() {
-        navHome = findViewById(R.id.nav_home)
-        navWrong = findViewById(R.id.nav_wrong)
-        navGoal = findViewById(R.id.nav_goal)
-        navCal = findViewById(R.id.nav_cal)
+        // 화면 아래 하단에 위치한 네비게이션 바 함수
+        private fun setNavListeners() {
+            navHome = findViewById(R.id.nav_home)
+            navWrong = findViewById(R.id.nav_wrong)
+            navGoal = findViewById(R.id.nav_goal)
+            navCal = findViewById(R.id.nav_cal)
 
-        navHome.setOnClickListener {
-            startNewActivity(HomeActivity::class.java)
+            navHome.setOnClickListener {
+                startNewActivity(HomeActivity::class.java)
+            }
+            navWrong.setOnClickListener {
+                startNewActivity(WrongAnswerListActivity::class.java)
+            }
+            navGoal.setOnClickListener {
+                startNewActivity(GoalMainListActivity::class.java)
+            }
+            navCal.setOnClickListener {
+                startNewActivity(Calendar::class.java)
+            }
         }
-        navWrong.setOnClickListener {
-            startNewActivity(WrongAnswerListActivity::class.java)
-        }
-        navGoal.setOnClickListener {
-            startNewActivity(GoalMainListActivity::class.java)
-        }
-        navCal.setOnClickListener {
-            startNewActivity(Calendar::class.java)
-        }
-    }
 
         private fun startNewActivity(cls: Class<*>) {
             val intent = Intent(this, cls)

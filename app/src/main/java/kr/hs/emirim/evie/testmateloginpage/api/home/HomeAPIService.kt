@@ -2,7 +2,6 @@ package kr.hs.emirim.evie.testmateloginpage.api.home
 
 import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectInfoResponse
 import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectTop3RangeResponse
-import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectTop3ReasonResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.Call
@@ -19,6 +18,6 @@ interface HomeAPIService {
 
     // 홈 -> 오답 실수 TOP3 퍼센트
     @GET("/api/note/top3reasons/{subjectId}")
-    fun getTop3reasons(@Path("subjectId") subjectId: Int): Call<HomeSubjectTop3ReasonResponse>
+    fun getTop3reasons(@Path("subjectId") subjectId: Int): Call<List<List<Any>>>
 
 }
