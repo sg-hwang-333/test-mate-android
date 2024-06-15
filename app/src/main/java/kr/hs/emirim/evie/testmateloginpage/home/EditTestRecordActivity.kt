@@ -1,41 +1,29 @@
 package kr.hs.emirim.evie.testmateloginpage.home
 
 import android.annotation.SuppressLint
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.findNavController
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.DefaultValueFormatter
-import com.github.mikephil.charting.formatter.ValueFormatter
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.api.MessageResponse
 import kr.hs.emirim.evie.testmateloginpage.api.home.HomeAPIService
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectInfoResponse
-import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
+import kr.hs.emirim.evie.testmateloginpage.subject.data.ExamUpdate
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectUpdateRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
 
 class EditTestRecordActivity : AppCompatActivity() {
     // 시험기록 데이터 생성 : 홈 과목 정보 안에 있는 Exam으로 설정
@@ -109,7 +97,7 @@ class EditTestRecordActivity : AppCompatActivity() {
         }
 
         BtnSave.setOnClickListener {
-
+            UpdateSubjectInfo(1)
         }
     }
 
@@ -178,6 +166,45 @@ class EditTestRecordActivity : AppCompatActivity() {
 
             // TODO : 시험 점수 리스트 추가하기
 
+        }
+    }
+
+    fun UpdateSubjectInfo(subjectId : Int) {
+//        val updatedExams = testRecordDataList.map { exam ->
+//            ExamUpdate(exam.examName, exam.examScore)
+//        }
+
+        val updatedExams: List<ExamUpdate> = listOf()  // 빈 리스트 생성
+//        val updatedExams = mutableListOf<ExamUpdate>()
+        // Prepare request body
+        val requestBody = SubjectUpdateRequest(
+            exams = updatedExams,
+            date = BtnSetTestDate.text.toString(),
+            goalScore = targetScoreSeekbar.progress.toInt(),
+            level = RatingBarTestDifficulty.rating.toInt(),
+            comment = ""
+        )
+
+        // Call PATCH API
+        try {
+            val call = homeAPIService.updateSubjectRecord(subjectId, requestBody)
+            call.enqueue(object : Callback<MessageResponse> {
+                override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@EditTestRecordActivity, "Data saved successfully", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@EditTestRecordActivity, "Failed to save data", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                    Log.e("patchSubjectRecord", "API call failed: ${t.message}", t)
+                    Toast.makeText(this@EditTestRecordActivity, "Failed to save data", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } catch (e: Exception) {
+            Log.e("patchSubjectRecord", "Exception during API call", e)
+            Toast.makeText(this@EditTestRecordActivity, "Failed to save data", Toast.LENGTH_SHORT).show()
         }
     }
 

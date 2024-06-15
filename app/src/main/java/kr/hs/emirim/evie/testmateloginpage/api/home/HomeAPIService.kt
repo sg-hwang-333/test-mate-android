@@ -1,5 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage.api.home
 
+import kr.hs.emirim.evie.testmateloginpage.api.MessageResponse
 import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectInfoResponse
 import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectTop3RangeResponse
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectUpdateRequest
@@ -28,5 +29,5 @@ interface HomeAPIService {
     fun updateSubjectRecord(
         @Path("subjectId") subjectId: Int,
         @Body updateRequest: SubjectUpdateRequest
-    ): Call<Void>
+    ): Call<MessageResponse>
 }
