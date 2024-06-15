@@ -165,6 +165,7 @@
                         android:layout_toRightOf="@id/text"
                         android:isIndicator="true"
                         android:rating="4"
+                        android:stepSize="1"
                         android:theme="@style/RatingBar" />
 
                     <LinearLayout

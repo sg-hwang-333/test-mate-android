@@ -2,16 +2,19 @@
 
     import android.app.Activity
     import android.content.Intent
+    import android.os.Build
     import android.os.Bundle
     import android.util.Log
     import android.view.View
     import android.widget.AdapterView
     import android.widget.HorizontalScrollView
     import android.widget.ImageButton
+    import android.widget.RatingBar
     import android.widget.Spinner
     import android.widget.TextView
     import android.widget.Toast
     import androidx.activity.viewModels
+    import androidx.annotation.RequiresApi
     import androidx.appcompat.app.AppCompatActivity
     import androidx.recyclerview.widget.LinearLayoutManager
     import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +25,6 @@
     import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
     import kr.hs.emirim.evie.testmateloginpage.databinding.ActivityHomeBinding
     import kr.hs.emirim.evie.testmateloginpage.home.data.HomeSubjectInfoResponse
-    import kr.hs.emirim.evie.testmateloginpage.home.data.TestData
     import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
     import kr.hs.emirim.evie.testmateloginpage.subject.AddSubjectActivity
     import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
@@ -37,26 +39,21 @@
     import retrofit2.Call
     import retrofit2.Callback
     import retrofit2.Response
+    import java.time.LocalDate
+    import java.time.format.DateTimeFormatter
+    import java.time.temporal.ChronoUnit
 
     class HomeActivity : AppCompatActivity() {
-        // 시험기록 데이터 생성
-        val testRecordDataList: List<TestData> = listOf(
-            TestData("1학년 2학기 기말", 75),
-            TestData("1학년 2학기 중간", 60),
-            TestData("1학년 1학기 기말", 80),
-            TestData("1학년 1학기 중간", 100),
-            TestData("@학년 @학기 중간", 89),
-            TestData("@학년 @학기 중간", 91),
-            TestData("@학년 @학기 중간", 78),
-            TestData("@학년 @학기 중간", 96)
-        )
 
-//        private lateinit var subjectIdTextView: TextView
+        // 시험기록 데이터 생성 : 홈 과목 정보 안에 있는 Exam으로 설정
+        var testRecordDataList: MutableList<HomeSubjectInfoResponse.Exam> = mutableListOf()
+
+        // 홈 -> 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
+        private lateinit var subjectIdTextView: TextView
         private lateinit var dateTextView: TextView
-//        private lateinit var levelTextView: TextView
-//        private lateinit var goalScoreTextView: TextView
-//        private lateinit var failTextView: TextView
-//        private lateinit var examsRecyclerView: RecyclerView
+        private lateinit var levelTextView: RatingBar
+        private lateinit var goalScoreTextView: TextView
+        private lateinit var failTextView: TextView
 
         lateinit var navHome: ImageButton
         lateinit var navGoal: ImageButton
@@ -95,10 +92,10 @@
             supportActionBar?.hide()
 
             // findViewById를 사용하여 레이아웃 파일에서 뷰를 가져와 변수에 할당
-//            subjectIdTextView = findViewById(R.id.subjectIdTextView)
+//            subjectIdTextView = findViewById(R.id.exam_record)
             dateTextView = findViewById(R.id.dday)
-//            levelTextView = findViewById(R.id.level)
-//            goalScoreTextView = findViewById(R.id.goal_score)
+            levelTextView = findViewById(R.id.level)
+            goalScoreTextView = findViewById(R.id.goal_score)
 //            failTextView = findViewById(R.id.fail)
 //            examsRecyclerView = findViewById(R.id.examsRecyclerView)
 
@@ -110,11 +107,7 @@
             val subjectId = 1 // TODO : 실제로는 이 값을 동적으로 설정해야 함 -> 스피너에 있는 subjectId
             fetchSubjectData(subjectId)
 
-            // 성적 그래프
-            val linechart = findViewById<LineChart>(R.id.home_test_record_chart)
-            val horizontalScrollView = findViewById<HorizontalScrollView>(R.id.home_scroll_view_graph)
-            val scoreChart = ScoreChart(linechart, horizontalScrollView, this)
-            scoreChart.setupChart(testRecordDataList)
+
 
     //       toggle = findViewById(R.id.toggle)
     //       drawerLayout = findViewById(R.id.drawer_layout)
@@ -223,12 +216,14 @@
             }
         } // onCreate
 
+        // 홈 -> 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소) 불러오기
         private fun fetchSubjectData(subjectId: Int) {
             try {
                 val call = homeAPIService.getHomeSubjectInfo(subjectId)
                 Log.d("fetchSubjectData", "Fetching data for subjectId: $subjectId")
 
                 call.enqueue(object : Callback<HomeSubjectInfoResponse> {
+                    @RequiresApi(Build.VERSION_CODES.O)
                     override fun onResponse(
                         call: Call<HomeSubjectInfoResponse>,
                         response: Response<HomeSubjectInfoResponse>
@@ -238,11 +233,7 @@
                             val subjectResponse = response.body()
                             Log.i("fetchSubjectData", "Response body: $subjectResponse")
                             subjectResponse?.let {
-                                // UI 업데이트
-                                dateTextView.text = it.date
-//                                levelRatingBar.rating = it.level.toFloat() // RatingBar는 float 타입으로 설정
-//                                goalScoreTextView.text = "목표점수 ${it.goalScore}점"
-
+                                HomeSubjectInfoupdateUI(subjectResponse)
                             }
                         } else {
                             Log.e("fetchSubjectData", "Failed to get subject data. Error code: ${response.code()}")
@@ -258,6 +249,48 @@
             } catch (e: Exception) {
                 Log.e("fetchSubjectData", "Exception during API call", e)
             }
+        }
+
+        // 홈 -> 시험 과목 정보 부분 UI 업데이트
+        @RequiresApi(Build.VERSION_CODES.O)
+        private fun HomeSubjectInfoupdateUI(subjectResponse: HomeSubjectInfoResponse?) {
+            subjectResponse?.let {
+                var date = calculateDday(it.date)
+                dateTextView.text = date
+                levelTextView.rating =  it.level.toFloat() // RatingBar는 float 타입으로 설정
+                goalScoreTextView.text = "목표점수 ${it.goalScore}점"
+
+                testRecordDataList.clear() // 기존 데이터를 지우고 새로운 데이터로 업데이트
+                testRecordDataList.addAll(it.exams) // testRecordDataList에 exams 정보 넣기
+
+                // 성적 그래프
+                val linechart = findViewById<LineChart>(R.id.home_test_record_chart)
+                val horizontalScrollView = findViewById<HorizontalScrollView>(R.id.home_scroll_view_graph)
+                val scoreChart = ScoreChart(linechart, horizontalScrollView, this)
+                scoreChart.setupChart(testRecordDataList)
+            }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun calculateDday(targetDate: String): String {
+            // 현재 날짜 구하기
+            val currentDate = LocalDate.now()
+
+            // 문자열 형식으로 된 targetDate를 LocalDate로 변환
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val date = LocalDate.parse(targetDate, formatter)
+
+            // 날짜 차이 계산
+            val daysDifference = ChronoUnit.DAYS.between(currentDate, date)
+
+            // 디데이 메시지 생성
+            val ddayMessage = when {
+                daysDifference > 0 -> "D-${daysDifference}"
+                daysDifference < 0 -> "D+${-daysDifference}"
+                else -> "D-day"
+            }
+
+            return ddayMessage
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
