@@ -16,6 +16,8 @@ import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNot
 class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote) -> Unit) :
     ListAdapter<WrongAnswerNote, WrongAnswerListAdapter.WrongAnswerListHolder>(WrongAnswerListDiffCallback) {
 
+    val gradeStringList = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
+
     inner class WrongAnswerListHolder(itemView: View, val onClick: (WrongAnswerNote) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val listGrade: TextView = itemView.findViewById(R.id.wan_list_grade)
@@ -35,7 +37,7 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote) -> Unit) :
         /* UI에 정보 바인딩(넣는 메서드) */
         fun bind(response: WrongAnswerNote) {
             currentWANList = response
-            listGrade.setText(response.grade.toString())
+            listGrade.setText(gradeStringList[response.grade.toInt() - 1])
             listTitle.setText(response.title)
             listReason.setText(response.reason)
 
