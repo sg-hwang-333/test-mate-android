@@ -42,6 +42,12 @@ class WrongAnswerRepository(resources: Resources) {
         return wrongAnswerListData
     }
 
+    fun clearNotesByGrade(grade: Int) {
+        val currentList = wrongAnswerListData.value.orEmpty().toMutableList()
+        val updatedList = currentList.filter { it.grade.toInt() == grade }
+        wrongAnswerListData.postValue(updatedList)
+    }
+
 
     companion object { // 데이터를 관리하고 제공하는 데 사용되는 클래스의 인스턴스를 만들지 않고도 호출하게 함
         private var INSTANCE: WrongAnswerRepository? = null

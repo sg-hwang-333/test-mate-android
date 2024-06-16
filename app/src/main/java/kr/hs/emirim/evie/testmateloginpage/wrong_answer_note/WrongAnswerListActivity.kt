@@ -56,6 +56,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
                 selectedPosition = position + 1
                 CurrentUser.selectGrade = spinner.selectedItemPosition + 1
                 subjectViewModel.readSubjectList(selectedPosition!!)
+//                listViewModel.clearList(selectedPosition!!)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {

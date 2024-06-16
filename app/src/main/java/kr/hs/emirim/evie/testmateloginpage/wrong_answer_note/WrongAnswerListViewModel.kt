@@ -15,6 +15,10 @@ class WrongAnswerListViewModel(val wrongAnswerRepository: WrongAnswerRepository)
         return wrongAnswerRepository.getNotesByGradeSubject(grade, subjectId)
     }
 
+    fun clearList(grade : Int) {
+        wrongAnswerRepository.clearNotesByGrade(grade)
+    }
+
 }
 
 //WrongAnswerSubjectViewModel 인스턴스를 생성하는 역할
