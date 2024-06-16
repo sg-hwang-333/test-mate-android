@@ -99,5 +99,9 @@
             android:name=".ReadWrongAnswerNoteActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".alarm.AlarmActivity"
+            android:exported="true">
+        </activity>
     </application>
 </manifest>

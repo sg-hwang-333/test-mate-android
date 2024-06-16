@@ -4,7 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true">
+
+
+    <include
+        android:id="@+id/toolbar_title"
+        layout="@layout/header" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,9 +24,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/toolbar_title"
-                layout="@layout/header" />
 
             <!-- spinner -->
             <LinearLayout
@@ -62,8 +66,8 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/add_image"
-                    android:scaleType="fitCenter"/>
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/add_image" />
 
             </LinearLayout>
 
@@ -156,8 +160,8 @@
                         android:textSize="14sp" />
 
                     <RatingBar
-                        style="?android:attr/ratingBarStyleSmall"
                         android:id="@+id/level"
+                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -461,14 +465,14 @@
 
     </ScrollView>
 
-    <!--navbar-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:elevation="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:focusable="true">
 
         <ImageButton
             android:id="@+id/nav_home"
@@ -476,7 +480,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/home_on" />
+            android:src="@drawable/home_on"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <ImageButton
             android:id="@+id/nav_wrong"
@@ -484,7 +490,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/note_off" />
+            android:src="@drawable/note_off"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <ImageButton
             android:id="@+id/nav_goal"
@@ -492,7 +500,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/goal_off" />
+            android:src="@drawable/goal_off"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <ImageButton
             android:id="@+id/nav_cal"
@@ -500,8 +510,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/cal_off" />
-
+            android:src="@drawable/cal_off"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
-
 </LinearLayout>
