@@ -1,14 +1,22 @@
     package kr.hs.emirim.evie.testmateloginpage.home
 
     import android.app.Activity
+    import android.content.Context
     import android.content.Intent
+    import android.graphics.Point
+    import android.hardware.display.DisplayManager
     import android.os.Build
     import android.os.Bundle
+    import android.util.DisplayMetrics
     import android.util.Log
+    import android.view.Display
     import android.view.View
+    import android.view.WindowManager
     import android.widget.AdapterView
+    import android.widget.FrameLayout
     import android.widget.HorizontalScrollView
     import android.widget.ImageButton
+    import android.widget.LinearLayout
     import android.widget.ProgressBar
     import android.widget.RatingBar
     import android.widget.Spinner
@@ -17,9 +25,11 @@
     import androidx.activity.viewModels
     import androidx.annotation.RequiresApi
     import androidx.appcompat.app.AppCompatActivity
+    import androidx.drawerlayout.widget.DrawerLayout
     import androidx.recyclerview.widget.LinearLayoutManager
     import androidx.recyclerview.widget.RecyclerView
     import com.github.mikephil.charting.charts.LineChart
+    import com.google.api.Distribution.BucketOptions.Linear
     import kr.hs.emirim.evie.testmateloginpage.R
     import kr.hs.emirim.evie.testmateloginpage.api.home.HomeAPIService
     import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
@@ -80,6 +90,11 @@
         lateinit var spinner: Spinner
         lateinit var toggle: ImageButton
         lateinit var subjectsAdapter: SubjectHomeAdapter
+
+
+        private lateinit var drawerLayout: LinearLayout
+        private lateinit var toggleButton: ImageButton
+
 
         private val newSubjectActivityRequestCode = 1
 
@@ -192,6 +207,7 @@
                 }
             }
 
+
             // 과목 추가
             addSubjectBtn = findViewById(R.id.addSubjectBtn)
             addSubjectBtn.setOnClickListener {
@@ -214,6 +230,33 @@
                 //            startActivity(intent)
                 startActivityForResult(intent, newSubjectActivityRequestCode)
             }
+
+            // 햄버거 버튼 토글
+            drawerLayout = findViewById(R.id.drawer_layout)
+            toggleButton = findViewById(R.id.toggle)
+            val drawer_cancel = findViewById<ImageButton>(R.id.drawer_cancel)
+
+            toggleButton.setOnClickListener {
+                if (drawerLayout.visibility == View.INVISIBLE) {
+                    drawerLayout.visibility = View.VISIBLE
+                    val layoutParams = drawerLayout.layoutParams
+                    layoutParams.height = resources.getDimensionPixelSize(R.dimen.drawer_height_visible)
+                    drawerLayout.layoutParams = layoutParams
+                } else {
+                    // 드로어 레이아웃을 가시하지 않은 상태로 변경하고 높이를 0으로 설정
+                    drawerLayout.visibility = View.INVISIBLE
+                    val layoutParams = drawerLayout.layoutParams
+                    layoutParams.height = 0
+                    drawerLayout.layoutParams = layoutParams
+                }
+            }
+            drawer_cancel.setOnClickListener {
+                drawerLayout.visibility = View.INVISIBLE
+                val layoutParams = drawerLayout.layoutParams
+                layoutParams.height = 0
+                drawerLayout.layoutParams = layoutParams
+            }
+
 
             setNavListeners() // 네비게이션ㄱ 바
         } // onCreate
@@ -513,4 +556,5 @@
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
+
     }

@@ -73,6 +73,7 @@
             android:exported="true">
 
             <!-- 여기 intent-filter -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -89,7 +90,9 @@
             android:exported="true" />
         <activity
             android:name=".calendar.Calendar"
-            android:exported="true" />
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".wrong_answer_note.AddWrongAnswerNoteActivity"
             android:exported="true">
