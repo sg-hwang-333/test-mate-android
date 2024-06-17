@@ -13,12 +13,13 @@ import kr.hs.emirim.evie.testmateloginpage.util.ImgResourceStringToInt
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNote
 
 
-class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote) -> Unit) :
+class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote, Int) -> Unit) :
     ListAdapter<WrongAnswerNote, WrongAnswerListAdapter.WrongAnswerListHolder>(WrongAnswerListDiffCallback) {
 
     val gradeStringList = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
+    private var selectedPosition: Int = RecyclerView.NO_POSITION
 
-    inner class WrongAnswerListHolder(itemView: View, val onClick: (WrongAnswerNote) -> Unit) :
+    inner class WrongAnswerListHolder(itemView: View, val onClick: (WrongAnswerNote, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val listGrade: TextView = itemView.findViewById(R.id.wan_list_grade)
         val listTitle: TextView = itemView.findViewById(R.id.wan_list_title)
@@ -28,8 +29,9 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote) -> Unit) :
 
         init {
             itemView.setOnClickListener {
-                currentWANList?.let {
-                    onClick(it)
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onClick(getItem(position), position)
                 }
             }
         }
@@ -44,7 +46,6 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote) -> Unit) :
             // String 타입 이미지 주소를 int로 전환해 setImageResource
             listImg.setImageResource(ImgResourceStringToInt.getResourceId(response.imgs, itemView.context))
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WrongAnswerListHolder {
@@ -57,6 +58,13 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote) -> Unit) :
     override fun onBindViewHolder(holder: WrongAnswerListHolder, position: Int) {
         val wrongAnswer = getItem(position)
         holder.bind(wrongAnswer)
+    }
+
+    fun updateSelectedPosition(position: Int) {
+        val previousPosition = selectedPosition
+        selectedPosition = position
+        notifyItemChanged(previousPosition)
+        notifyItemChanged(selectedPosition)
     }
 
 }
