@@ -1,6 +1,7 @@
 package kr.hs.emirim.evie.testmateloginpage.alarm
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +13,8 @@ import kr.hs.emirim.evie.testmateloginpage.R
 class AlarmActivity : AppCompatActivity() {
 
     private val alarmViewModel: AlarmViewModel by viewModels { AlarmViewModelFactory(this) }
-    private lateinit var newAlarmAdapter: AlarmAdapter
-    private lateinit var recentAlarmAdapter: AlarmAdapter
+    private lateinit var newAlarmAdapter: NewAlarmAdapter
+    private lateinit var recentAlarmAdapter: RecentAlarmAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +24,8 @@ class AlarmActivity : AppCompatActivity() {
         val newAlarmRecyclerView = findViewById<RecyclerView>(R.id.newAlarmRecyclerView)
         val recentAlarmRecyclerView = findViewById<RecyclerView>(R.id.recentAlarmRecyclerView)
 
-        newAlarmAdapter = AlarmAdapter(this)
-        recentAlarmAdapter = AlarmAdapter(this)
+        newAlarmAdapter = NewAlarmAdapter(this)
+        recentAlarmAdapter = RecentAlarmAdapter(this)
 
         newAlarmRecyclerView.layoutManager = LinearLayoutManager(this)
         newAlarmRecyclerView.adapter = newAlarmAdapter
@@ -33,17 +34,19 @@ class AlarmActivity : AppCompatActivity() {
         recentAlarmRecyclerView.adapter = recentAlarmAdapter
 
         // ViewModel에서 데이터 가져오기 및 관찰
-        alarmViewModel.getNewAlarms(USER_ID).observe(this, Observer { alarms ->
+        alarmViewModel.getNewAlarms().observe(this, Observer { alarms ->
+            Log.d("AlarmActivity", "New Alarms observed: $alarms")
             newAlarmAdapter.submitList(alarms)
         })
 
-        alarmViewModel.getRecentAlarms(USER_ID).observe(this, Observer { alarms ->
+        alarmViewModel.getRecentAlarms().observe(this, Observer { alarms ->
+            Log.d("AlarmActivity", "Recent Alarms observed: $alarms")
             recentAlarmAdapter.submitList(alarms)
         })
 
         // 데이터 로드
-        alarmViewModel.fetchNewAlarms(USER_ID)
-        alarmViewModel.fetchRecentAlarms(USER_ID)
+        alarmViewModel.fetchNewAlarms()
+        alarmViewModel.fetchRecentAlarms()
 
         // 뒤로가기 버튼 설정
         val backBtn = findViewById<ImageView>(R.id.backBtn)
@@ -51,9 +54,4 @@ class AlarmActivity : AppCompatActivity() {
             finish()
         }
     }
-
-    companion object {
-        const val USER_ID = 1L // 사용자 ID는 실제 사용 환경에 맞게 설정
-    }
-
 }

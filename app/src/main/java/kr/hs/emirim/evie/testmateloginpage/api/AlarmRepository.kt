@@ -1,7 +1,9 @@
 package kr.hs.emirim.evie.testmateloginpage.api
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import kr.hs.emirim.evie.testmateloginpage.alarm.data.Alarm
+import kr.hs.emirim.evie.testmateloginpage.alarm.data.NewAlarm
+import kr.hs.emirim.evie.testmateloginpage.alarm.data.RecentAlarm
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -9,55 +11,59 @@ import retrofit2.Response
 
 class AlarmRepository {
 
-    var newAlarmListData = MutableLiveData<List<Alarm>>()
-    var recentAlarmListData = MutableLiveData<List<Alarm>>()
+    var newAlarmListData = MutableLiveData<List<NewAlarm>>()
+    var recentAlarmListData = MutableLiveData<List<RecentAlarm>>()
     private val alarmService = RetrofitClient.create(AlarmService::class.java)
 
-    fun getNewAlarm(userId: Long) {
-        val call = alarmService.getNewAlarm(userId)
-        call.enqueue(object : Callback<List<Alarm>> {
-            override fun onResponse(call: Call<List<Alarm>>, response: Response<List<Alarm>>) {
+    fun getNewAlarm() {
+        val call = alarmService.getNewAlarm()
+        Log.d("AlarmRepository", "Sending request to /api/alarm/new")
+        call.enqueue(object : Callback<List<NewAlarm>> {
+            override fun onResponse(call: Call<List<NewAlarm>>, response: Response<List<NewAlarm>>) {
                 if (response.isSuccessful) {
-                    val alarms: List<Alarm>? = response.body()
+                    val alarms: List<NewAlarm>? = response.body()
                     alarms?.let {
                         newAlarmListData.postValue(it)
+                        Log.d("AlarmRepository", "New Alarms fetched successfully: $alarms")
                     }
                 } else {
-                    println("Failed to get new alarms. Error code: ${response.code()}")
+                    Log.e("AlarmRepository", "Failed to fetch new alarms. Error code: ${response.code()}, Error message: ${response.message()}, Error body: ${response.errorBody()?.string()}")
                 }
             }
 
-            override fun onFailure(call: Call<List<Alarm>>, t: Throwable) {
-                println("Failed to get new alarms. Error message: ${t.message}")
+            override fun onFailure(call: Call<List<NewAlarm>>, t: Throwable) {
+                Log.e("AlarmRepository", "Failed to fetch new alarms. Error message: ${t.message}")
             }
         })
     }
 
-    fun getRecentAlarms(userId: Long) {
-        val call = alarmService.getRecentAlarms(userId)
-        call.enqueue(object : Callback<List<Alarm>> {
-            override fun onResponse(call: Call<List<Alarm>>, response: Response<List<Alarm>>) {
+    fun getRecentAlarms() {
+        val call = alarmService.getRecentAlarm()
+        Log.d("AlarmRepository", "Sending request to /api/alarm/recent")
+        call.enqueue(object : Callback<List<RecentAlarm>> {
+            override fun onResponse(call: Call<List<RecentAlarm>>, response: Response<List<RecentAlarm>>) {
                 if (response.isSuccessful) {
-                    val alarms: List<Alarm>? = response.body()
+                    val alarms: List<RecentAlarm>? = response.body()
                     alarms?.let {
                         recentAlarmListData.postValue(it)
+                        Log.d("AlarmRepository", "Recent Alarms fetched successfully: $alarms")
                     }
                 } else {
-                    println("Failed to get recent alarms. Error code: ${response.code()}")
+                    Log.e("AlarmRepository", "Failed to fetch new alarms. Error code: ${response.code()}, Error message: ${response.message()}, Error body: ${response.errorBody()?.string()}")
                 }
             }
 
-            override fun onFailure(call: Call<List<Alarm>>, t: Throwable) {
-                println("Failed to get recent alarms. Error message: ${t.message}")
+            override fun onFailure(call: Call<List<RecentAlarm>>, t: Throwable) {
+                Log.e("AlarmRepository", "Failed to fetch recent alarms. Error message: ${t.message}")
             }
         })
     }
 
-    fun getNewAlarmList(): MutableLiveData<List<Alarm>> {
+    fun getNewAlarmList(): MutableLiveData<List<NewAlarm>> {
         return newAlarmListData
     }
 
-    fun getRecentAlarmList(): MutableLiveData<List<Alarm>> {
+    fun getRecentAlarmList(): MutableLiveData<List<RecentAlarm>> {
         return recentAlarmListData
     }
 

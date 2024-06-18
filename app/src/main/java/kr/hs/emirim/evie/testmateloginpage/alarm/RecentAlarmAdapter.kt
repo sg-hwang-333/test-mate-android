@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.alarm.data.Alarm
+import kr.hs.emirim.evie.testmateloginpage.alarm.data.RecentAlarm
 
-class AlarmAdapter(private val context: Context) : ListAdapter<Alarm, AlarmAdapter.AlarmViewHolder>(AlarmDiffCallback()) {
+class RecentAlarmAdapter(private val context: Context) :
+    ListAdapter<RecentAlarm, RecentAlarmAdapter.AlarmViewHolder>(RecentAlarmDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.alarm_page, parent, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.item_alarm, parent, false)
         return AlarmViewHolder(view)
     }
 
@@ -24,22 +26,22 @@ class AlarmAdapter(private val context: Context) : ListAdapter<Alarm, AlarmAdapt
     }
 
     inner class AlarmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val subjectTextView: TextView = itemView.findViewById(R.id.subjectName)
-        val dateTextView: TextView = itemView.findViewById(R.id.datePicker)
+        private val subjectTextView: TextView = itemView.findViewById(R.id.subject)
+        private val dateTextView: TextView = itemView.findViewById(R.id.date)
 
-        fun bind(alarm: Alarm) {
+        fun bind(alarm: RecentAlarm) {
             subjectTextView.text = alarm.subject
-            dateTextView.text = alarm.date
+            dateTextView.text = alarm.date.toString()
         }
     }
 }
 
-class AlarmDiffCallback : DiffUtil.ItemCallback<Alarm>() {
-    override fun areItemsTheSame(oldItem: Alarm, newItem: Alarm): Boolean {
-        return oldItem.calendarId == newItem.calendarId
+class RecentAlarmDiffCallback : DiffUtil.ItemCallback<RecentAlarm>() {
+    override fun areItemsTheSame(oldItem: RecentAlarm, newItem: RecentAlarm): Boolean {
+        return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Alarm, newItem: Alarm): Boolean {
+    override fun areContentsTheSame(oldItem: RecentAlarm, newItem: RecentAlarm): Boolean {
         return oldItem == newItem
     }
 }
