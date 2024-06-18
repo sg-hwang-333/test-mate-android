@@ -16,5 +16,8 @@
     <dimen name="R12">12dp</dimen>
     <dimen name="R14">14dp</dimen>
 
+    <dimen name="dp5">5dp</dimen>
+
     <dimen name="drawer_height_visible">700dp</dimen>
+    <dimen name="image_size_104dp">104dp</dimen>
 </resources>

@@ -59,36 +59,10 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNoteResponse, Int)
                 .load(imageUrl)
                 .placeholder(R.drawable.placeholder) // 로딩 중 표시할 이미지
                 .error(R.drawable.img_error) // 에러 시 표시할 이미지
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(e: GlideException?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                        Log.e("Glide", "Image load failed", e)
-                        Log.d("Glide", imageUrl)
-                        return false // false를 반환하여 Glide가 기본적으로 설정한 에러 이미지를 표시하지 않도록 합니다.
-                    }
-
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                        // 이미지가 성공적으로 로드되었을 때 처리할 로직
-                        return false
-                    }
-                })
                 .into(listImg)
         }
 
-        // 이미지 리스트 생성 메서드
-        fun parseImageListUrl(imageUrlString: String): List<String> {
-            // 문자열에서 대괄호와 쉼표를 제거합니다.
-            val cleanedString = imageUrlString
-                .replace("[", "")
-                .replace("]", "")
-                .replace(",", "")
-
-            // 공백을 기준으로 잘라서 배열로 만듭니다.
-            val imageUrlArray = cleanedString.split(" ")
-
-            // 결과를 반환합니다.
-            return imageUrlArray
-        }
-
+        // 이미지 리스트 생성 후 첫번째 사진 반환 메서드
         fun getImageFirstUrl(imageUrlString: String): String? {
             // 문자열에서 대괄호와 쉼표를 제거합니다.
             val cleanedString = imageUrlString
@@ -103,7 +77,6 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNoteResponse, Int)
             return imageUrlArray.firstOrNull()
         }
     }
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WrongAnswerListHolder {
