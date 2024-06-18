@@ -31,6 +31,7 @@
     import com.github.mikephil.charting.charts.LineChart
     import com.google.api.Distribution.BucketOptions.Linear
     import kr.hs.emirim.evie.testmateloginpage.R
+    import kr.hs.emirim.evie.testmateloginpage.alarm.AlarmActivity
     import kr.hs.emirim.evie.testmateloginpage.api.home.HomeAPIService
     import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
     import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
@@ -59,6 +60,9 @@
 
         // 시험기록 데이터 생성 : 홈 과목 정보 안에 있는 Exam으로 설정
         var testRecordDataList: MutableList<HomeSubjectInfoResponse.Exam> = mutableListOf()
+
+        //알람
+        private lateinit var bellBtn : ImageButton
 
         // 홈 -> 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
         private lateinit var subjectIdTextView: TextView
@@ -207,6 +211,13 @@
                 }
             }
 
+            bellBtn = findViewById(R.id.bell)
+            bellBtn.setOnClickListener {
+                Log.d("homeLog", "addSubjectBtn 클릭!")
+                val intent = Intent(this@HomeActivity, AlarmActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                startActivityForResult(intent, newSubjectActivityRequestCode)
+            }
 
             // 과목 추가
             addSubjectBtn = findViewById(R.id.addSubjectBtn)
@@ -556,5 +567,4 @@
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
-
     }
