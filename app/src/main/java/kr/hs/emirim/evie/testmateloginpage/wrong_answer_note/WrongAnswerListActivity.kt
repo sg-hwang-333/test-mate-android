@@ -13,19 +13,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.hs.emirim.evie.testmateloginpage.NavigationButtons
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.ReadWrongAnswerNoteActivity
 import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModel
 import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectAdapter
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil.Companion.gradeSpinner
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNote
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNoteResponse
 
 class WrongAnswerListActivity : AppCompatActivity() {
 
     lateinit var addPage : FloatingActionButton
 
     lateinit var spinner: Spinner
+
+    var currentSubject = 1
 
     private val subjectViewModel by viewModels<SubjectViewModel> {
         SubjectViewModelFactory(this)
@@ -56,6 +59,8 @@ class WrongAnswerListActivity : AppCompatActivity() {
                 selectedPosition = position + 1
                 CurrentUser.selectGrade = spinner.selectedItemPosition + 1
                 subjectViewModel.readSubjectList(selectedPosition!!)
+                listViewModel.clearList(selectedPosition!!)
+                listViewModel.readNoteList(CurrentUser.selectGrade!!, currentSubject)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -72,7 +77,12 @@ class WrongAnswerListActivity : AppCompatActivity() {
         }
 
         // 과목 버튼 recyclerView
-        subjectAdapter = WrongAnswerSubjectAdapter { subject, position -> subjectAdapterOnClick(subject, position) }
+        subjectAdapter = WrongAnswerSubjectAdapter(object : (SubjectResponse, Int) -> Unit {
+            override fun invoke(subject: SubjectResponse, position: Int) {
+                currentSubject = subject.subjectId
+                subjectAdapterOnClick(subject, position)
+            }
+        })
         val subjectRecyclerView: RecyclerView = findViewById(R.id.wrongAnswerSubjectRecyclerView)
 
         subjectRecyclerView.layoutManager =
@@ -93,7 +103,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
         }
 
         // 오답노트 recyclerView
-        listAdapter = WrongAnswerListAdapter { list -> noteAdapterOnClick(list) }
+        listAdapter = WrongAnswerListAdapter { list, position -> noteAdapterOnClick(list, position) }
         val listRecyclerView: RecyclerView = findViewById(R.id.wrongAnswerObjectRecyclerView)
 
         listRecyclerView.layoutManager =
@@ -105,7 +115,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             this
         ) {
             it?.let { // goalsLiveData의 값이 null이 아닐 때 중괄호 코드 실행
-                listAdapter.submitList(it as MutableList<WrongAnswerNote>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+                listAdapter.submitList(it as MutableList<WrongAnswerNoteResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
             }
         }
 
@@ -116,11 +126,17 @@ class WrongAnswerListActivity : AppCompatActivity() {
 
     private fun subjectAdapterOnClick(subject: SubjectResponse, position: Int) {
         subjectAdapter.updateSelectedPosition(position)
-        listViewModel.readNoteList(CurrentUser.userDetails!!.grade.toInt(), subject.subjectId)
+        listViewModel.readNoteList(CurrentUser.selectGrade!!, subject.subjectId)
         Log.d("subjectAdapterOnClick", subject.subjectId.toString())
     }
 
-    private fun noteAdapterOnClick(list : WrongAnswerNote) {
-        // TODO : 해당 오답노트 로딩 화면으로 이동
+    private fun noteAdapterOnClick(list : WrongAnswerNoteResponse, position: Int) {
+        listAdapter.updateSelectedPosition(position)
+        val intent = Intent(this, ReadWrongAnswerNoteActivity::class.java)
+        intent.putExtra("selectedNote", list)
+        intent.putExtra("selectedPosition", position)
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent)
     }
 }

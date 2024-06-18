@@ -43,310 +43,307 @@
                         android:src="@drawable/before_btn" />
                 </RelativeLayout>
 
-                <LinearLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:orientation="vertical"
-                    >
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:gravity="left"
-                        android:text="1. 다음중 삼각형 ABC의 넓이를 구하시오"
-                        android:textStyle="bold"
-                        android:textColor="@color/black.700"
-                        android:textSize="@dimen/M18" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:text="고등학교 1학년"
-                        android:textColor="@color/black.300"
-                        android:textSize="@dimen/R12" />
-
+                    android:layout_height="match_parent">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:orientation="horizontal">
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:orientation="vertical"
+                        >
+
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:id="@+id/note_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:gravity="left"
+                            android:text="1. 다음중 삼각형 ABC의 넓이를 구하시오"
+                            android:textStyle="bold"
+                            android:textColor="@color/black.700"
+                            android:textSize="@dimen/M18" />
+
+
+                        <TextView
+                            android:id="@+id/note_grade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="고등학교 1학년"
+                            android:textColor="@color/black.300"
+                            android:textSize="@dimen/R12" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="문제 &amp; 풀이"
+                            android:layout_marginTop="24dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="문제 &amp; 풀이"
+                                android:textColor="@color/black.800"
+                                android:textSize="@dimen/M14"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="전체보기"
+                                    android:textColor="@color/black.300"
+                                    android:textSize="@dimen/R12" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="4dp"
+                                    android:src="@drawable/view_all" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center_horizontal"
+                            android:textColorHint="@color/black.200_1">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:src="@drawable/problem1"
+                                android:adjustViewBounds="true"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="2dp"
+                                android:background="@drawable/wrong_problem"/>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:src="@drawable/problem2"
+                                android:adjustViewBounds="true"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginEnd="2dp"
+                                android:background="@drawable/wrong_problem"/>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:src="@drawable/problem3"
+                                android:adjustViewBounds="true"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginEnd="4dp"
+                                android:background="@drawable/wrong_problem"/>
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:text="시험 스타일"
                             android:textColor="@color/black.800"
                             android:textSize="@dimen/M14"/>
+
+                        <TextView
+                            android:id="@+id/note_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/bg_white_view"
+                            android:gravity="top"
+                            android:text="기본 개념을 응용하여 3차 연산까지 들어가야하는
+문제를 출제해 주셔서 시간, 실수에 쫓기지 않고
+시간내에 알맞게 풀어야한다."
+                            android:padding="16dp"
+                            android:textColorHint="@color/black.800"
+                            android:textSize="@dimen/M14"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"/>
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:gravity="center">
+                            android:layout_marginTop="40dp"
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="전체보기"
-                                android:textColor="@color/black.300"
-                                android:textSize="@dimen/R12" />
+                                android:layout_gravity="center"
+                                android:text="오답이유"
+                                android:textColor="@color/black.800"
+                                android:textSize="@dimen/M14"/>
 
-                            <ImageView
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal">
+
+                            <android.widget.Button
+                                android:id="@+id/mistake_btn"
+                                android:layout_width="58dp"
+                                android:layout_height="34dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/bg_green_view"
+                                android:gravity="center"
+                                android:stateListAnimator="@null"
+                                android:text="@string/reason_mistake"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/M14" />
+
+                            <android.widget.Button
+                                android:id="@+id/timeout_btn"
+                                android:layout_width="87dp"
+                                android:layout_height="34dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/bg_white_view"
+                                android:gravity="center"
+                                android:stateListAnimator="@null"
+                                android:text="@string/reason_timeout"
+                                android:textColor="@color/black.300"
+                                android:textSize="@dimen/M14" />
+
+                            <android.widget.Button
+                                android:id="@+id/lack_concept_btn"
+                                android:layout_width="87dp"
+                                android:layout_height="34dp"
+                                android:background="@drawable/bg_white_view"
+                                android:gravity="center"
+                                android:stateListAnimator="@null"
+                                android:text="@string/reason_lackconcept"
+                                android:textColor="@color/black.300"
+                                android:textSize="@dimen/M14" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:orientation="horizontal">
+
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
-                                android:src="@drawable/view_all" />
+                                android:layout_gravity="center"
+                                android:text="문제 범위"
+                                android:textColor="@color/black.800"
+                                android:textSize="@dimen/M14"/>
+
                         </LinearLayout>
-                    </LinearLayout>
 
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:gravity="center_horizontal"
-                        android:textColorHint="@color/black.200_1">
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:src="@drawable/problem1"
-                            android:adjustViewBounds="true"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginEnd="2dp"
-                            android:background="@drawable/wrong_problem"/>
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:src="@drawable/problem2"
-                            android:adjustViewBounds="true"
-                            android:layout_marginStart="2dp"
-                            android:layout_marginEnd="2dp"
-                            android:background="@drawable/wrong_problem"/>
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:src="@drawable/problem3"
-                            android:adjustViewBounds="true"
-                            android:layout_marginStart="2dp"
-                            android:layout_marginEnd="4dp"
-                            android:background="@drawable/wrong_problem"/>
-
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
-                        android:text="시험 스타일"
-                        android:textColor="@color/black.800"
-                        android:textSize="@dimen/M14"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="16dp"
-                        android:background="@drawable/bg_white_view"
-                        android:gravity="top"
-                        android:text="기본 개념을 응용하여 3차 연산까지 들어가야하는
-문제를 출제해 주셔서 시간, 실수에 쫓기지 않고
-시간내에 알맞게 풀어야한다."
-                        android:padding="16dp"
-                        android:textColorHint="@color/black.800"
-                        android:textSize="@dimen/M14" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="오답이유"
-                            android:textColor="@color/black.800"
-                            android:textSize="@dimen/M14"/>
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="7dp"
-                            android:src="@drawable/ion_edit" />
-                    </LinearLayout>
+                            <android.widget.Button
+                                android:id="@+id/scope_btn1"
+                                android:layout_width="71dp"
+                                android:layout_height="34dp"
+                                android:layout_gravity="right"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/bg_green_view"
+                                android:gravity="center"
+                                android:stateListAnimator="@null"
+                                android:text="추가자료"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/M14" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
+                            <android.widget.Button
+                                android:id="@+id/scope_btn2"
+                                android:layout_width="71dp"
+                                android:layout_height="34dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/bg_white_view"
+                                android:gravity="center"
+                                android:stateListAnimator="@null"
+                                android:text="@string/scope_2"
+                                android:textColor="@color/black.300"
+                                android:textSize="@dimen/M14" />
 
-                        <android.widget.Button
-                            android:id="@+id/mistake_btn"
-                            android:layout_width="58dp"
-                            android:layout_height="34dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/bg_green_view"
-                            android:gravity="center"
-                            android:stateListAnimator="@null"
-                            android:text="@string/reason_mistake"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/M14" />
+                            <android.widget.Button
+                                android:id="@+id/scope_btn3"
+                                android:layout_width="71dp"
+                                android:layout_height="34dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/bg_white_view"
+                                android:gravity="center"
+                                android:stateListAnimator="@null"
+                                android:text="@string/scope_3"
+                                android:textColor="@color/black.300"
+                                android:textSize="@dimen/M14" />
 
-                        <android.widget.Button
-                            android:id="@+id/timeout_btn"
-                            android:layout_width="87dp"
-                            android:layout_height="34dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/bg_white_view"
-                            android:gravity="center"
-                            android:stateListAnimator="@null"
-                            android:text="@string/reason_timeout"
-                            android:textColor="@color/black.300"
-                            android:textSize="@dimen/M14" />
+                            <android.widget.Button
+                                android:id="@+id/scope_btn4"
+                                android:layout_width="71dp"
+                                android:layout_height="34dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/bg_white_view"
+                                android:gravity="center"
+                                android:stateListAnimator="@null"
+                                android:text="@string/scope_4"
+                                android:textColor="@color/black.300"
+                                android:textSize="@dimen/M14" />
 
-                        <android.widget.Button
-                            android:id="@+id/lack_concept_btn"
-                            android:layout_width="87dp"
-                            android:layout_height="34dp"
-                            android:background="@drawable/bg_white_view"
-                            android:gravity="center"
-                            android:stateListAnimator="@null"
-                            android:text="@string/reason_lackconcept"
-                            android:textColor="@color/black.300"
-                            android:textSize="@dimen/M14" />
-                    </LinearLayout>
+                        </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="문제 범위"
-                            android:textColor="@color/black.800"
-                            android:textSize="@dimen/M14"/>
+                            android:layout_marginTop="40dp"
+                            android:layout_marginBottom="14dp"
+                            android:gravity="end">
 
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="7dp"
-                            android:src="@drawable/ion_edit" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
-
-                        <android.widget.Button
-                            android:id="@+id/scope_btn1"
-                            android:layout_width="71dp"
-                            android:layout_height="34dp"
-                            android:layout_gravity="right"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/bg_green_view"
-                            android:gravity="center"
-                            android:stateListAnimator="@null"
-                            android:text="추가자료"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/M14" />
-
-                        <android.widget.Button
-                            android:id="@+id/scope_btn2"
-                            android:layout_width="71dp"
-                            android:layout_height="34dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/bg_white_view"
-                            android:gravity="center"
-                            android:stateListAnimator="@null"
-                            android:text="@string/scope_2"
-                            android:textColor="@color/black.300"
-                            android:textSize="@dimen/M14" />
-
-                        <android.widget.Button
-                            android:id="@+id/scope_btn3"
-                            android:layout_width="71dp"
-                            android:layout_height="34dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/bg_white_view"
-                            android:gravity="center"
-                            android:stateListAnimator="@null"
-                            android:text="@string/scope_3"
-                            android:textColor="@color/black.300"
-                            android:textSize="@dimen/M14" />
-
-                        <android.widget.Button
-                            android:id="@+id/scope_btn4"
-                            android:layout_width="71dp"
-                            android:layout_height="34dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/bg_white_view"
-                            android:gravity="center"
-                            android:stateListAnimator="@null"
-                            android:text="@string/scope_4"
-                            android:textColor="@color/black.300"
-                            android:textSize="@dimen/M14" />
+                            <android.widget.Button
+                                android:id="@+id/deleteBtn"
+                                style="?android:attr/borderlessButtonStyle"
+                                android:layout_width="70dp"
+                                android:layout_height="42dp"
+                                android:fontFamily="@font/notosanskr_medium"
+                                android:text="삭제"
+                                android:layout_marginRight="8dp"
+                                android:textColor="@color/red_1"
+                                android:textSize="@dimen/M16"
+                                android:background="@drawable/delete_btn"/>
+                            <android.widget.Button
+                                android:id="@+id/editBtn"
+                                style="?android:attr/borderlessButtonStyle"
+                                android:layout_width="70dp"
+                                android:layout_height="42dp"
+                                android:background="@drawable/bg_green_view"
+                                android:fontFamily="@font/notosanskr_medium"
+                                android:text="수정"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/M16" />
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginBottom="14dp"
-                        android:gravity="end">
-
-                        <android.widget.Button
-                            android:id="@+id/deleteBtn"
-                            style="?android:attr/borderlessButtonStyle"
-                            android:layout_width="70dp"
-                            android:layout_height="42dp"
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:text="삭제"
-                            android:layout_marginRight="8dp"
-                            android:textColor="@color/red_1"
-                            android:textSize="@dimen/M16"
-                            android:background="@drawable/delete_btn"/>
-                        <android.widget.Button
-                            android:id="@+id/addBtn"
-                            style="?android:attr/borderlessButtonStyle"
-                            android:layout_width="70dp"
-                            android:layout_height="42dp"
-                            android:background="@drawable/bg_green_view"
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:text="수정"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/M16" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
+                </ScrollView>
             </LinearLayout>
     </LinearLayout>
 
