@@ -1,31 +1,15 @@
 package kr.hs.emirim.evie.testmateloginpage
 
-import android.annotation.SuppressLint
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
-import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
-import kr.hs.emirim.evie.testmateloginpage.login.LoginActivity
-import kr.hs.emirim.evie.testmateloginpage.signup.SignUpRequest
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNote
-
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import kr.hs.emirim.evie.testmateloginpage.api.WrongAnswerRepository
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNoteResponse
 
 class ReadWrongAnswerNoteActivity : AppCompatActivity() {
     private lateinit var before: ImageView
@@ -44,11 +28,15 @@ class ReadWrongAnswerNoteActivity : AppCompatActivity() {
 
     val gradeStringList = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
 
+    private val wrongAnswerRepository by lazy {
+        WrongAnswerRepository.getDataSource(resources)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wrong_answer_note_detail)
 
-        val selectedNote = intent.getSerializableExtra("selectedNote") as? WrongAnswerNote
+        val selectedNote = intent.getSerializableExtra("selectedNote") as? WrongAnswerNoteResponse
         val selectedPosition = intent.getIntExtra("selectedPosition", -1)
 
         initializeViews() // view findViewById
@@ -58,15 +46,19 @@ class ReadWrongAnswerNoteActivity : AppCompatActivity() {
             finish()
         }
 
-        // TODO : selectedNote의 noteId로 api 연동
+        // 오답노트 detail api 연동
         selectedNote?.let {
-            noteTitle.text = it.title
-            noteGrade.text = gradeStringList[it.grade - 1]
-            noteContent.text = it.styles
+            lifecycleScope.launch {
+                val noteDetail = wrongAnswerRepository.getNoteDetail(selectedNote.noteId)
+                noteDetail?.let {
+                    noteTitle.text = it.title
+                    noteGrade.text = gradeStringList[it.grade - 1]
+                    noteContent.text = it.styles
 
-            reasonBtns(selectedNote.reason)
-            rangeBtns(selectedNote.range)
-
+                    reasonBtns(it.reason)
+                    rangeBtns(it.range)
+                }
+            }
         }
 
 

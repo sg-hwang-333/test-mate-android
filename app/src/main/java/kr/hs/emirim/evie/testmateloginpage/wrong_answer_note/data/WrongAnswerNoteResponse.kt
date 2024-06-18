@@ -1,9 +1,8 @@
 package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data
 
-import android.os.Parcelable
 import java.io.Serializable
 
-data class WrongAnswerNote(
+data class WrongAnswerNoteResponse(
     val noteId : Long,
     val subjectId : Int,
     val grade : Int,

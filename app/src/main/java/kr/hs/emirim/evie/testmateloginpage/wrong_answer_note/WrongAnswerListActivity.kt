@@ -20,8 +20,7 @@ import kr.hs.emirim.evie.testmateloginpage.subject.SubjectViewModelFactory
 import kr.hs.emirim.evie.testmateloginpage.subject.WrongAnswerSubjectAdapter
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil.Companion.gradeSpinner
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNote
-import javax.security.auth.Subject
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNoteResponse
 
 class WrongAnswerListActivity : AppCompatActivity() {
 
@@ -116,7 +115,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             this
         ) {
             it?.let { // goalsLiveData의 값이 null이 아닐 때 중괄호 코드 실행
-                listAdapter.submitList(it as MutableList<WrongAnswerNote>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
+                listAdapter.submitList(it as MutableList<WrongAnswerNoteResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
             }
         }
 
@@ -131,7 +130,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
         Log.d("subjectAdapterOnClick", subject.subjectId.toString())
     }
 
-    private fun noteAdapterOnClick(list : WrongAnswerNote, position: Int) {
+    private fun noteAdapterOnClick(list : WrongAnswerNoteResponse, position: Int) {
         listAdapter.updateSelectedPosition(position)
         val intent = Intent(this, ReadWrongAnswerNoteActivity::class.java)
         intent.putExtra("selectedNote", list)
