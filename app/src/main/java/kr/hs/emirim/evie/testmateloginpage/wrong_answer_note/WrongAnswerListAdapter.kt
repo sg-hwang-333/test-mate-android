@@ -10,22 +10,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.util.ImgResourceStringToInt
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNote
+import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNoteResponse
 
 
-class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote, Int) -> Unit) :
-    ListAdapter<WrongAnswerNote, WrongAnswerListAdapter.WrongAnswerListHolder>(WrongAnswerListDiffCallback) {
+class WrongAnswerListAdapter(private val onClick: (WrongAnswerNoteResponse, Int) -> Unit) :
+    ListAdapter<WrongAnswerNoteResponse, WrongAnswerListAdapter.WrongAnswerListHolder>(WrongAnswerListDiffCallback) {
 
     val gradeStringList = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
     private var selectedPosition: Int = RecyclerView.NO_POSITION
 
-    inner class WrongAnswerListHolder(itemView: View, val onClick: (WrongAnswerNote, Int) -> Unit) :
+    inner class WrongAnswerListHolder(itemView: View, val onClick: (WrongAnswerNoteResponse, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val listGrade: TextView = itemView.findViewById(R.id.wan_list_grade)
         val listTitle: TextView = itemView.findViewById(R.id.wan_list_title)
         val listReason: android.widget.Button = itemView.findViewById(R.id.wan_list_reason)
         val listImg: ImageView = itemView.findViewById(R.id.wan_list_img)
-        var currentWANList: WrongAnswerNote? = null
+        var currentWANList: WrongAnswerNoteResponse? = null
 
         init {
             itemView.setOnClickListener {
@@ -37,7 +37,7 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote, Int) -> Unit
         }
 
         /* UI에 정보 바인딩(넣는 메서드) */
-        fun bind(response: WrongAnswerNote) {
+        fun bind(response: WrongAnswerNoteResponse) {
             currentWANList = response
             listGrade.setText(gradeStringList[response.grade.toInt() - 1])
             listTitle.setText(response.title)
@@ -69,12 +69,12 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNote, Int) -> Unit
 
 }
 
-object WrongAnswerListDiffCallback : DiffUtil.ItemCallback<WrongAnswerNote>() {
-    override fun areItemsTheSame(oldItem: WrongAnswerNote, newItem: WrongAnswerNote): Boolean {
+object WrongAnswerListDiffCallback : DiffUtil.ItemCallback<WrongAnswerNoteResponse>() {
+    override fun areItemsTheSame(oldItem: WrongAnswerNoteResponse, newItem: WrongAnswerNoteResponse): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: WrongAnswerNote, newItem: WrongAnswerNote): Boolean {
+    override fun areContentsTheSame(oldItem: WrongAnswerNoteResponse, newItem: WrongAnswerNoteResponse): Boolean {
         return oldItem.noteId == newItem.noteId
     }
 }
