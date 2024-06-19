@@ -11,8 +11,10 @@ import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kr.hs.emirim.evie.testmateloginpage.GoalSelectSemesterActivity
 import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.ReadWrongAnswerNoteActivity
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.goalList.GoalListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
@@ -108,6 +110,12 @@ class GoalMainListActivity : AppCompatActivity() {
 
     private fun subjectAdapterOnClick(subject: SubjectResponse, position: Int) {
         subjectAdapter.updateSelectedPosition(position)
+        val intent = Intent(this, GoalSelectSemesterActivity::class.java)
+        intent.putExtra("selectedNote", subject)
+        intent.putExtra("selectedPosition", position)
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent)
     }
 
 //    fun fetchSubjectsByGrade(grade: Int) {

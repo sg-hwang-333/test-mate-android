@@ -29,7 +29,8 @@
             android:textSize="14dp"
             android:inputType="text"
             android:maxLines="1"
-            android:imeOptions="actionDone"/>
+            android:imeOptions="actionDone"
+            android:enabled="false"/>
 
 
         <androidx.appcompat.widget.AppCompatCheckBox
