@@ -39,6 +39,7 @@ class AddSubjectActivity : AppCompatActivity() {
         finishBtn = findViewById(R.id.finish_edit_subject)
         finishBtn.setOnClickListener{
             finish()
+            overridePendingTransition(0, 0)
         }
 
         findViewById<Button>(R.id.subjectAddBtn).setOnClickListener {

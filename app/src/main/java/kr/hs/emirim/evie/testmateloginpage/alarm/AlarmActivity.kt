@@ -52,6 +52,7 @@ class AlarmActivity : AppCompatActivity() {
         val backBtn = findViewById<ImageView>(R.id.backBtn)
         backBtn.setOnClickListener {
             finish()
+            overridePendingTransition(0, 0)
         }
     }
 }
