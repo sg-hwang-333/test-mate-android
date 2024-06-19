@@ -1,13 +1,17 @@
 package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -32,6 +36,14 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
     private lateinit var selectedReason: String
     private lateinit var selectedScope: String
+
+    private lateinit var uploadLayout: LinearLayout
+    private lateinit var imageLayout: LinearLayout
+    private lateinit var imageView: ImageView
+    private lateinit var uploadBtnFirstLayout: Button
+    private lateinit var uploadImgBtnSecondLayout: Button
+
+    private val PICK_IMAGE_REQUEST = 1
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,6 +107,19 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        uploadLayout = findViewById(R.id.upload_layout)
+        imageLayout = findViewById(R.id.image_layout)
+        imageView = findViewById(R.id.imageView)
+        uploadBtnFirstLayout = findViewById(R.id.upload_btn_first_layout)
+        uploadImgBtnSecondLayout = findViewById(R.id.upload_img_btn_second_layout)
+
+        uploadBtnFirstLayout.setOnClickListener {
+            openFileChooser()
+        }
+
+        uploadImgBtnSecondLayout.setOnClickListener {
+        }
+
 // navgation
         navHome = findViewById(R.id.nav_home)
         navWrong = findViewById(R.id.nav_wrong)
@@ -154,6 +179,32 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             } else {
                 button.setBackgroundResource(R.drawable.bg_white_view)
                 button.setTextColor(ContextCompat.getColor(this, R.color.black_300))
+            }
+        }
+    }
+    private fun openFileChooser() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "이미지 선택"), PICK_IMAGE_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+            val imageUri = data.data
+
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+                imageView.setImageBitmap(bitmap)
+
+                // 이미지를 보여주는 LinearLayout 표시 및 업로드 LinearLayout 숨김
+                imageLayout.visibility = View.VISIBLE
+                uploadLayout.visibility = View.GONE
+
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

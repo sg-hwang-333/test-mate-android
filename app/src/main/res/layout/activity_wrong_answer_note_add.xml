@@ -119,6 +119,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/upload_layout"
                         android:layout_marginTop="15dp"
                         android:background="@drawable/bg_green_dotted_view"
                         android:gravity="center_horizontal"
@@ -141,9 +142,38 @@
                             android:textSize="10sp"
                             android:layout_marginTop="5dp"/>
                         <android.widget.Button
-                            android:id="@+id/upload_img_btn"
+                            android:id="@+id/upload_btn_first_layout"
                             android:layout_gravity="center"
                             android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:text="업로드"
+                            android:textColor="@color/white"
+                            android:background="@drawable/bg_green_view"
+                            android:textSize="@dimen/R14"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_marginTop="20dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/image_layout"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center_horizontal"
+                        android:textColorHint="@color/black.200_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:src="@drawable/after"
+                            android:layout_gravity="left"
+                            android:layout_width="104dp"
+                            android:layout_height="104dp"/>
+
+                        <Button
+                            android:id="@+id/upload_img_btn_second_layout"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:text="업로드"
                             android:textColor="@color/white"
