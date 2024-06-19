@@ -19,11 +19,18 @@ import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
+import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 
 class GoalListActivity : AppCompatActivity() {
+    private lateinit var headerTitleTextView: TextView
+
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
+
+    private lateinit var textViewTitle : TextView
+    private lateinit var goalGrade : TextView
     lateinit var goalEditBtn : android.widget.Button
     lateinit var goalDeleteBtn : android.widget.Button
 
@@ -35,17 +42,31 @@ class GoalListActivity : AppCompatActivity() {
         GoalsListViewModelFactory(this)
     }
 
+    private lateinit var currentSubject : SubjectResponse
+
+    val gradeStringList = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.goal_list_page)
         supportActionBar?.hide()
 
-        var beforeBtn = findViewById<ImageView>(R.id.before)
+        currentSubject = intent.getSerializableExtra("currentSubject") as SubjectResponse
 
-        beforeBtn.setOnClickListener{
-            onBackPressed();
+        headerTitleTextView = findViewById(R.id.header_title)
+        textViewTitle = findViewById(R.id.textViewTitle)
+        goalGrade = findViewById(R.id.goal_grade)
+
+        // 뒤로가기 버튼
+        findViewById<ImageView>(R.id.before).setOnClickListener{
+            finish()
+            overridePendingTransition(0, 0)
         }
+
+        headerTitleTextView.text = currentSubject.subjectName + " 학습목표"
+        textViewTitle.text = currentSubject.subjectName + " 학습목표 설정하기"
+        goalGrade.text = gradeStringList[CurrentUser.selectGrade!!.toInt() - 1]
 
         bottomSheetView = layoutInflater.inflate(R.layout.goal_bottom_sheet, null)
         bottomSheetDialog = BottomSheetDialog(this)
@@ -124,7 +145,7 @@ class GoalListActivity : AppCompatActivity() {
     private fun adapterOnClick(goal: Goal) {
         clickedGoal = goal
 
-        val goalDescription = findViewById<EditText>(R.id.goal_description)
+//        val goalDescription = findViewById<EditText>(R.id.goal_description)
 
         // TODO : goal(현재 클릭된)에 focus가도록
         if(goal.description != null)bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText(goal.description.toString())

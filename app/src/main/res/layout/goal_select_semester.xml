@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!-- header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:layout_marginBottom="50dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:id="@+id/before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/before_btn" />
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="국어 학습목표"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </RelativeLayout>   <!-- header -->
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="4dp"
+        android:text="학기 선택"
+        android:textColor="#2C2C2C"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <!-- 여기부터 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+                <Button
+                    android:id="@+id/semester1"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1학기 중간고사"
+                    android:textSize="@dimen/R14"
+                    android:textColor="@color/black.800"
+                    android:background="@drawable/bg_white_view"
+                    android:outlineProvider="none"
+                    android:padding="15dp"
+                    android:layout_marginTop="15dp"/>
+
+                <Button
+                    android:id="@+id/semester2"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1학기 기말고사"
+                    android:textSize="@dimen/R14"
+                    android:textColor="@color/black.800"
+                    android:background="@drawable/bg_white_view"
+                    android:outlineProvider="none"
+                    android:padding="15dp"
+                    android:layout_marginTop="15dp"/>
+
+                <Button
+                    android:id="@+id/semester3"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2학기 중간고사"
+                    android:textSize="@dimen/R14"
+                    android:textColor="@color/black.800"
+                    android:background="@drawable/bg_white_view"
+                    android:outlineProvider="none"
+                    android:padding="15dp"
+                    android:layout_marginTop="15dp"/>
+
+                <Button
+                    android:id="@+id/semester4"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2학기 기말고사"
+                    android:textSize="@dimen/R14"
+                    android:textColor="@color/black.800"
+                    android:background="@drawable/bg_white_view"
+                    android:outlineProvider="none"
+                    android:padding="15dp"
+                    android:layout_marginTop="15dp"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
