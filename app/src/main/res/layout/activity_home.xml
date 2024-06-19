@@ -28,7 +28,7 @@
             <!-- spinner -->
             <LinearLayout
                 android:id="@+id/spinner_layout"
-                android:layout_width="173dp"
+                android:layout_width="176dp"
                 android:layout_height="36dp"
                 android:layout_below="@id/wrongAnswerSubjectRecyclerView"
                 android:layout_marginLeft="20dp"
