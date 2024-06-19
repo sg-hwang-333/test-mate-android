@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalRequest
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalResponse
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
@@ -69,7 +70,6 @@ class GoalListActivity : AppCompatActivity() {
         }
 
         headerTitleTextView.text = currentSubject.subjectName + " 학습목표"
-        textViewTitle.text = currentSubject.subjectName + " 학습목표 설정하기"
         goalGrade.text = gradeStringList[CurrentUser.selectGrade!!.toInt() - 1] + " " + semesterStringList[currentSemester - 1]
 
         bottomSheetView = layoutInflater.inflate(R.layout.goal_bottom_sheet, null)
@@ -96,7 +96,7 @@ class GoalListActivity : AppCompatActivity() {
         goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
         goalDeleteBtn = bottomSheetView.findViewById<Button>(R.id.bsv_delete_btn)
 
-        goalsListViewModel.readGoalList(currentSubject, currentSemester)
+        goalsListViewModel.readGoalList(currentSubject.subjectId, currentSemester)
         goalsListViewModel.goalsLiveData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this,
@@ -169,7 +169,19 @@ class GoalListActivity : AppCompatActivity() {
     }
 
     private fun btnModifyOnClick() {
-//        goalsListViewModel.insertGoal()
+        val newGoal = GoalRequest(
+            // 필요한 필드 값 설정
+            goal = "수정하기로 목표를 수정해보세요", // 예시 값
+            subjectId = currentSubject.subjectId,
+            semester = currentSemester,
+            completed = false
+        )
+
+        // ViewModel에 새로운 목표 추가 요청
+        goalsListViewModel.createGoal(newGoal)
+
+        // RecyclerView에 새로운 목표 추가
+        goalsListViewModel.readGoalList(currentSubject.subjectId, currentSemester)
     }
 
 }

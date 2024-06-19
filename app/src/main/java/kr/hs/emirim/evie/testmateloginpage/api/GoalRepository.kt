@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalRequest
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalResponse
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
@@ -29,8 +30,8 @@ class GoalRepository(resources: Resources, context: Context) {
         return goalListData
     }
 
-    fun getGoalListBySemester(subject: SubjectResponse, semester : Int) {
-        val call = goalListService.getGoalListBySemester(subject.subjectId, semester)
+    fun getGoalListBySemester(subjectId: Int, semester : Int) {
+        val call = goalListService.getGoalListBySemester(subjectId, semester)
         call.enqueue(object : Callback<List<GoalResponse>> {
             override fun onResponse(call: Call<List<GoalResponse>>, response: Response<List<GoalResponse>>) {
                 if (response.isSuccessful) {
@@ -43,6 +44,23 @@ class GoalRepository(resources: Resources, context: Context) {
                 }
             }
             override fun onFailure(call: Call<List<GoalResponse>>, t: Throwable) {
+                println("Failed to get notes. Error message: ${t.message}")
+            }
+        })
+    }
+
+    fun postGoal(goal : GoalRequest, callback: (Boolean) -> Unit) {
+        val call = goalListService.postGoal(goal)
+        call.enqueue(object : Callback<MessageResponse> {
+            override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
+                if (response.isSuccessful) {
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            }
+            override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                callback(false)
                 println("Failed to get notes. Error message: ${t.message}")
             }
         })
