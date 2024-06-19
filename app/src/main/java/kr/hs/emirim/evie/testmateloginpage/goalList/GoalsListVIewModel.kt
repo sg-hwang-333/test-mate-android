@@ -3,28 +3,21 @@ package kr.hs.emirim.evie.testmateloginpage.goalList
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kotlin.random.Random
+import kr.hs.emirim.evie.testmateloginpage.api.GoalRepository
 
-import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalListDataEdit
-import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 
 
-class GoalsListViewModel(val goalListDataEdit: GoalListDataEdit) : ViewModel() {
+class GoalsListViewModel(val goalRepository: GoalRepository) : ViewModel() {
 
-    val goalsLiveData = goalListDataEdit.getGoalList()
+    val goalsLiveData = goalRepository.getGoalList()
 
-    fun insertGoal() {
-        val newGoal = Goal(
-            Random.nextLong(),
-            null,
-            false
-        )
-
-        goalListDataEdit.addGoal(newGoal)
+    fun readGoalList(subject: SubjectResponse, semester : Int) {
+        goalRepository.getGoalListBySemester(subject, semester)
     }
 
-    fun removeGoal(goal : Goal) {
-        goalListDataEdit.removeGoal(goal)
+    fun removeGoal(subjectId : Int, semester : Int) {
+//        goalRepository.getGoalListBySemester()
     }
 
     fun getGoalCount(): Int {
@@ -39,7 +32,7 @@ class GoalsListViewModelFactory(private val context: Context) : ViewModelProvide
         if (modelClass.isAssignableFrom(GoalsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return GoalsListViewModel(
-                goalListDataEdit = GoalListDataEdit.getDataSource(context.resources)
+                goalRepository = GoalRepository.getDataSource(context.resources, context)
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

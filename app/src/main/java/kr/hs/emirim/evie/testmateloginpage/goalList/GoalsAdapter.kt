@@ -13,16 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalResponse
 
 
-class GoalsAdapter(private val onClick: (Goal) -> Unit) :
-    ListAdapter<Goal, GoalsAdapter.GoalViewHolder>(GoalDiffCallback) {
+class GoalsAdapter(private val onClick: (GoalResponse) -> Unit) :
+    ListAdapter<GoalResponse, GoalsAdapter.GoalViewHolder>(GoalDiffCallback) {
 
-    inner class GoalViewHolder(itemView: View, val onClick: (Goal) -> Unit) :
+    inner class GoalViewHolder(itemView: View, val onClick: (GoalResponse) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val goalEditText: EditText = itemView.findViewById(R.id.goal_description)
         val goalCheckBox: AppCompatCheckBox = itemView.findViewById(R.id.goal_checked)
-        var currentGoal: Goal? = null
+        var currentGoal: GoalResponse? = null
 
         private lateinit var goalEditBtn: Button
 
@@ -35,10 +36,10 @@ class GoalsAdapter(private val onClick: (Goal) -> Unit) :
         }
 
         /* UI에 정보 바인딩(넣는 메서드) */
-        fun bind(goal: Goal) {
+        fun bind(goal: GoalResponse) {
             currentGoal = goal
-            goalEditText.setText(goal.description)
-            goalCheckBox.isChecked = goal.checked
+            goalEditText.setText(goal.goal)
+            goalCheckBox.isChecked = goal.completed
         }
 
     }
@@ -65,12 +66,12 @@ class GoalsAdapter(private val onClick: (Goal) -> Unit) :
 
 }
 
-object GoalDiffCallback : DiffUtil.ItemCallback<Goal>() {
-    override fun areItemsTheSame(oldItem: Goal, newItem: Goal): Boolean {
+object GoalDiffCallback : DiffUtil.ItemCallback<GoalResponse>() {
+    override fun areItemsTheSame(oldItem: GoalResponse, newItem: GoalResponse): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Goal, newItem: Goal): Boolean {
-        return oldItem.id == newItem.id
+    override fun areContentsTheSame(oldItem: GoalResponse, newItem: GoalResponse): Boolean {
+        return oldItem.goalId == newItem.goalId
     }
 }
