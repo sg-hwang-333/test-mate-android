@@ -18,8 +18,6 @@ data class LoginResponse(
 data class SignUpResponse(val message: String)
 data class UserCheckResponse(val message: String)
 
-data class GoalListResponse(val message : String)
-
 interface TMService {
     @POST("/api/login")
     fun requestLogin(@Body loginData: LoginRequest) : Call<LoginResponse>
@@ -29,11 +27,4 @@ interface TMService {
 
     @GET("/api/user-check")
     fun checkUserId(@Query("userId") userId: String): Call<UserCheckResponse>
-
-    @GET("/goal/get")
-    fun requestGoalGet(@Body goalListData : Map<String, Long>) : Call<GoalListResponse>
-
-    @DELETE("/goal/delete")
-    fun requestGoalDelete(@Body goalListData : Map<String, Long>) : Call<GoalListResponse>
-
 }
