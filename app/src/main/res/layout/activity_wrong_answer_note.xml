@@ -28,11 +28,11 @@
         <LinearLayout
             android:id="@+id/spinner_layout"
             android:background="@drawable/dialog_radius"
-            android:layout_width="173dp"
+            android:layout_width="176dp"
             android:layout_height="36dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="6dp"
-            android:gravity="center"
+            android:gravity="left"
             android:layout_alignParentTop="true"> <!-- 위치 조정 -->
 
             <Spinner
