@@ -106,5 +106,9 @@
             android:name=".alarm.AlarmActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".GoalSelectSemesterActivity"
+            android:exported="true">
+        </activity>
     </application>
 </manifest>
