@@ -49,6 +49,7 @@ import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModel
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModelFactory
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -70,6 +71,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var levelTextView: RatingBar
     private lateinit var goalScoreTextView: TextView
     private lateinit var failTextView: TextView
+    private lateinit var gradeSubject: TextView
 
     // 홈 -> 문제가 잘 나오는 곳 TOP3
     private lateinit var top1range: TextView
@@ -118,6 +120,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var homeAPIService: HomeAPIService
 
     var subjectId = 1
+    var selectedText = ""
 
     // onCreate 메서드는 액티비티가 처음 생성될 때 호출
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -135,6 +138,7 @@ class HomeActivity : AppCompatActivity() {
         dateTextView = findViewById(R.id.dday)
         levelTextView = findViewById(R.id.level)
         goalScoreTextView = findViewById(R.id.goal_score)
+        gradeSubject = findViewById(R.id.userGrade)
 
         // 홈 -> 문제가 잘 나오는 곳 TOP3
         top1range = findViewById(R.id.top1)
@@ -181,7 +185,7 @@ class HomeActivity : AppCompatActivity() {
                 selectedPosition = position + 1
                 CurrentUser.selectGrade = spinner.selectedItemPosition + 1
                 subjectsListViewModel.readSubjectList(selectedPosition!!)
-
+                selectedText = parent?.getItemAtPosition(position).toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -272,6 +276,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun adapterOnClick(subject: SubjectResponse) {
         Log.d("adapterOnClick", subject.subjectId.toString())
+        gradeSubject.setText(selectedText + " " + subject.subjectName)
         subjectId = subject.subjectId
         fetchSubjectData(subjectId) // 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
         fetchTop3RangeData(subjectId) // 문제가 잘 나오는 곳 TOP3
