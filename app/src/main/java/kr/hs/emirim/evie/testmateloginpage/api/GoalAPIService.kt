@@ -21,6 +21,6 @@ interface GoalAPIService {
     @PATCH("/api/goals/{goalId}")
     fun patchGoal(@Path("goalId") goalId : Int, @Body goal : GoalPatchRequest) : Call<GoalResponse>
 
-    @DELETE("/goal/delete")
-    fun requestGoalDelete(@Body goalListData : Map<String, Long>) : Call<GoalResponse>
+    @DELETE("/api/goals/{goalId}")
+    fun deleteGoal(@Path("goalId") goalId : Int) : Call<MessageResponse>
 }

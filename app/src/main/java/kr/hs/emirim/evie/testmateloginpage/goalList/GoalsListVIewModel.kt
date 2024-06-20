@@ -32,20 +32,20 @@ class GoalsListViewModel(val goalRepository: GoalRepository) : ViewModel() {
     fun updateGoal(goalId : Int, goal: GoalPatchRequest) {
         goalRepository.patchGoal(goalId, goal) { isSuccess, response ->
             if (isSuccess) {
-                readGoalList(response.subjectId, response.semester)
             } else {
                 // 실패 시 처리 (예: 에러 메시지 표시)
             }
         }
     }
 
-    fun removeGoal(subjectId : Int, semester : Int) {
-//        goalRepository.getGoalListBySemester()
-    }
-
-    fun getGoalCount(): Int {
-        val goalList = goalsLiveData.value
-        return goalList?.size ?: 0
+    fun removeGoal(goalId: Int, callback: (Boolean) -> Unit) {
+        goalRepository.deleteGoal(goalId) { isSuccess ->
+            if (isSuccess) {
+                callback(true)
+            } else {
+                callback(false)
+            }
+        }
     }
 }
 
