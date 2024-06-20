@@ -1,5 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage.goalList
 
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
@@ -7,6 +8,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.AppCompatCheckBox
@@ -22,29 +25,16 @@ import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalResponse
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.toGoalPatchRequest
 
 
-class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUpdate: (GoalPatchRequest) -> Unit) :
+class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUpdate: (Int, GoalPatchRequest) -> Unit) :
     ListAdapter<GoalResponse, GoalsAdapter.GoalViewHolder>(GoalDiffCallback) {
 
-    inner class GoalViewHolder(itemView: View, val onClick: (GoalResponse) -> Unit, val onUpdate: (GoalPatchRequest) -> Unit) :
+    inner class GoalViewHolder(itemView: View, val onClick: (GoalResponse) -> Unit, val onUpdate: (Int, GoalPatchRequest) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val goalEditText: EditText = itemView.findViewById(R.id.goal_description)
         val goalCheckBox: AppCompatCheckBox = itemView.findViewById(R.id.goal_checked)
         var currentGoal: GoalResponse? = null
 
         private lateinit var goalEditBtn: Button
-
-        private val handler = Handler(Looper.getMainLooper())
-        private var lastTextEditTime: Long = 0
-
-        private val saveGoalRunnable = Runnable {
-            currentGoal?.let {
-                val goalPatchRequest = it.toGoalPatchRequest()
-                if (System.currentTimeMillis() >= lastTextEditTime + 2000) {
-                    it.goal = goalEditText.text.toString()
-                    onUpdate(goalPatchRequest)
-                }
-            }
-        }
 
         init {
             itemView.setOnClickListener {
@@ -53,18 +43,21 @@ class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUp
                 }
             }
 
-            goalEditText.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            goalEditText.setOnEditorActionListener { v, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    currentGoal?.let {
+                        it.goal = goalEditText.text.toString()
+                        val goalPatchRequest = it.toGoalPatchRequest()
+                        onUpdate(it.goalId, goalPatchRequest)
+                    }
+                    goalEditText.clearFocus() // 포커스 없애기
+                    closeKeyboard(goalEditText) // 키보드 닫기
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    handler.removeCallbacks(saveGoalRunnable)
+                    return@setOnEditorActionListener true
+                } else {
+                    false
                 }
-
-                override fun afterTextChanged(s: Editable?) {
-                    lastTextEditTime = System.currentTimeMillis()
-                    handler.postDelayed(saveGoalRunnable, 2000) // 2초 후에 실행
-                }
-            })
+            }
         }
 
         /* UI에 정보 바인딩(넣는 메서드) */
@@ -72,6 +65,11 @@ class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUp
             currentGoal = goal
             goalEditText.setText(goal.goal)
             goalCheckBox.isChecked = goal.completed
+        }
+
+        private fun closeKeyboard(view: View) {
+            val imm = itemView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
 
     }

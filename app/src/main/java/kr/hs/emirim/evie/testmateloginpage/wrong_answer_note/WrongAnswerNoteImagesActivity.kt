@@ -26,8 +26,8 @@ class WrongAnswerNoteImagesActivity : AppCompatActivity() {
 
         before = findViewById(R.id.backBtn)
         before.setOnClickListener {
-            // Handle back button click
             finish()
+            overridePendingTransition(0, 0)
         }
 
         imgContainer = findViewById(R.id.image_container)

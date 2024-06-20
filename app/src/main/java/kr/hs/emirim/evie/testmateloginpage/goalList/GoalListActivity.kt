@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
@@ -51,6 +55,8 @@ class GoalListActivity : AppCompatActivity() {
     val gradeStringList = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
     val semesterStringList = arrayOf("1학기 중간고사", "1학기 기말고사", "2학기 중간고사", "2학기 기말고사")
 
+    lateinit var goalsAdapter : GoalsAdapter
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +83,7 @@ class GoalListActivity : AppCompatActivity() {
         bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(bottomSheetView)
 
-        val goalsAdapter = GoalsAdapter({ goal -> adapterOnClick(goal) }, { updatedGoal -> updateGoal(updatedGoal) })
+        goalsAdapter = GoalsAdapter({ goal -> adapterOnClick(goal) }, { goalId, updatedGoal -> updateGoal(goalId, updatedGoal) })
         val recyclerView: RecyclerView = findViewById(R.id.goalRecyclerView)
         recyclerView.adapter = goalsAdapter
 
@@ -149,12 +155,27 @@ class GoalListActivity : AppCompatActivity() {
 
     }
 
-    private fun updateGoal(updatedGoal: GoalPatchRequest) {
+    private fun observeGoalsLiveData() {
+        goalsListViewModel.goalsLiveData.observe(this) { goals ->
+            goals?.let {
+                goalsAdapter.submitList(it as MutableList<GoalResponse>)
+            }
+        }
+    }
+
+    private fun updateGoal(goalId : Int, updatedGoal: GoalPatchRequest) {
         val goalPatchRequest = GoalPatchRequest(
             goal = updatedGoal.goal,
             completed = updatedGoal.completed
         )
-        goalsListViewModel.updateGoal(goalPatchRequest)
+
+        // 코루틴을 이용하여 비동기적으로 처리
+        GlobalScope.launch(Dispatchers.Main) {
+            // 비동기로 업데이트 실행
+            goalsListViewModel.updateGoal(goalId, goalPatchRequest)
+            goalsListViewModel.readGoalList(currentSubject.subjectId, currentSemester)
+
+        }
     }
 
     private fun adapterOnClick(goal: GoalResponse) {

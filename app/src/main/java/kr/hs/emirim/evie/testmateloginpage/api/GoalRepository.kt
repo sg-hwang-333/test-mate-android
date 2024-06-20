@@ -67,8 +67,8 @@ class GoalRepository(resources: Resources, context: Context) {
         })
     }
 
-    fun patchGoal(goal: GoalPatchRequest, callback: (Boolean, GoalResponse) -> Unit) {
-        val call = goalListService.patchGoal(goal)
+    fun patchGoal(goalId : Int, goal: GoalPatchRequest, callback: (Boolean, GoalResponse) -> Unit) {
+        val call = goalListService.patchGoal(goalId, goal)
         call.enqueue(object : Callback<GoalResponse> {
             override fun onResponse(call: Call<GoalResponse>, response: Response<GoalResponse>) {
                 if (response.isSuccessful) {
