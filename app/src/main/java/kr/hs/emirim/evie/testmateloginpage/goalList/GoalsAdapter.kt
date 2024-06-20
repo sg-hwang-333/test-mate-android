@@ -66,8 +66,7 @@ class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUp
                     it.completed = isChecked
                     val goalPatchRequest = it.toGoalPatchRequest()
                     onUpdate(it.goalId, goalPatchRequest)
-                    goalLayout.setBackgroundResource(R.drawable.bg_green_stroke_view)
-                    goalEditText.setTextColor(itemView.context.getColor(R.color.green_500))
+                    updateUI(it.completed)
                 }
             }
         }
@@ -107,16 +106,6 @@ class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUp
     override fun onBindViewHolder(holder: GoalViewHolder, position: Int) {
         holder.bind(getItem(position)) // getItem(position) : 현재 아이템
     }
-
-//    override fun getItemViewType(position: Int): Int {
-//        val goal = getItem(position)
-//        return if (goal.checked) {
-//            1 // goalCheckBox가 true인 경우
-//        } else {
-//            0 // 그 외의 경우
-//        }
-//    }
-
 }
 
 object GoalDiffCallback : DiffUtil.ItemCallback<GoalResponse>() {
