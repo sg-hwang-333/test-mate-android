@@ -117,6 +117,8 @@
         // Retrofit 서비스 인스턴스
         private lateinit var homeAPIService: HomeAPIService
 
+        var subjectId = 1
+
         // onCreate 메서드는 액티비티가 처음 생성될 때 호출
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -148,7 +150,7 @@
             top3reasonPercent = findViewById(R.id.reason3Percentage)
 
 
-            val subjectId = 1 // TODO : 실제로는 이 값을 동적으로 설정해야 함 -> 스피너에 있는 subjectId
+             // TODO : 실제로는 이 값을 동적으로 설정해야 함 -> 스피너에 있는 subjectId
             fetchSubjectData(subjectId) // 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
             fetchTop3RangeData(subjectId) // 문제가 잘 나오는 곳 TOP3
             fetchTop3ReasonData(subjectId) // 오답 실수 TOP3 퍼센트
@@ -164,7 +166,7 @@
             Log.d("homeLog", CurrentUser.selectGrade.toString())
 
             spinner = SpinnerUtil.gradeSpinner(this, R.id.spinnerWrong)
-            spinner.setSelection(CurrentUser.selectGrade!! - 1)
+            spinner.setSelection((CurrentUser.selectGrade ?: 1) - 1)
             selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
             var selectedItem =
                 spinner.getItemAtPosition(selectedPosition!!).toString() // grade 문자열 (ex. 고등학교 2학년)
@@ -191,10 +193,6 @@
             subjectsAdapter = SubjectHomeAdapter { subject -> adapterOnClick(subject) } // TODO
             val recyclerView: RecyclerView = findViewById(R.id.subjectRecyclerView)
 
-//            binding.subjectRecyclerView.apply {
-//                layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
-//                adapter = subjectsAdapter
-//            }
             recyclerView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) // 수평 레이아웃 방향 설정
             recyclerView.adapter = subjectsAdapter
@@ -271,6 +269,14 @@
 
             setNavListeners() // 네비게이션ㄱ 바
         } // onCreate
+
+        private fun adapterOnClick(subject: SubjectResponse) {
+            Log.d("adapterOnClick", subject.subjectId.toString())
+            subjectId = subject.subjectId
+            fetchSubjectData(subjectId) // 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
+            fetchTop3RangeData(subjectId) // 문제가 잘 나오는 곳 TOP3
+            fetchTop3ReasonData(subjectId) // 오답 실수 TOP3 퍼센트
+        }
 
         // 홈 -> 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소) 불러오기
         private fun fetchSubjectData(subjectId: Int) {
@@ -377,7 +383,7 @@
                             val top3reasonList = response.body()
                             Log.i("fetchTop3ReasonData", "Response body: $top3reasonList")
                             top3reasonList?.let {
-                                HomeSubjectInfoupdateUI(top3reasonList)
+                                HomeSubjectInfoupdateUI(top3reasonList) // TODO :
                             }
                         } else {
                             Log.e("fetchTop3ReasonData", "Failed to get data. Error code: ${response.code()}")
@@ -417,13 +423,31 @@
         }
 
         // 홈 -> 문제가 잘 나오는 곳 TOP3 UI 업데이트
-        private fun HomeSubjectInfoupdateUI(top3rangeResponse: HomeSubjectTop3RangeResponse?) {
+        private fun HomeSubjectInfoupdateUI(top3rangeResponse: List<String>?) {
             top3rangeResponse?.let {
-                top1range.text = it.get(0)
-                top2range.text = it.get(1)
-                top3range.text = it.get(2)
+                // 첫 번째 요소 처리
+                if (top3rangeResponse.size > 0) {
+                    top1range.text = it[0]
+                } else {
+                    top1range.text = "없음"
+                }
+
+                // 두 번째 요소 처리
+                if (top3rangeResponse.size > 1) {
+                    top2range.text = it[1]
+                } else {
+                    top2range.text = "없음"
+                }
+
+                // 세 번째 요소 처리
+                if (top3rangeResponse.size > 2) {
+                    top3range.text = it[2]
+                } else {
+                    top3range.text = "없음"
+                }
             }
         }
+
 
         // 홈 -> 오답 실수 퍼센트 TOP3 UI 업데이트
         private fun HomeSubjectInfoupdateUI(top3reasonList: List<List<Any>>?) {
@@ -502,44 +526,6 @@
                 Log.d("homeRestart", "Request code or Result code mismatch")
             }
         }
-
-//        override fun onRestart() {
-//            super.onRestart()
-//
-//            selectedPosition?.let { subjectsListViewModel.readSubjectList(it) }
-//            subjectsListViewModel.subjectListData.observe(
-//            // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
-//        this
-//            ) { map ->
-//            map?.let {
-//                val subjectsForSelectedGrade = it[CurrentUser.selectGrade]
-//                subjectsForSelectedGrade?.let { subjects ->
-//                subjectsAdapter.submitList(subjects as MutableList<SubjectResponse>)
-//                    Log.d("homeRestart", "실행요미")}
-//            } }
-//        }
-
-        fun adapterOnClick(subject: SubjectResponse) {
-            // TODO : 과목별 화면으로 이동
-        }
-
-        //    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        //        super.onActivityResult(requestCode, resultCode, intentData)
-        //
-        //        /* Inserts subject into viewModel. */
-        //        if (resultCode == Activity.RESULT_OK) {
-        //            intentData?.let { data ->
-        //                val subjectName = data.getStringExtra(SUBJECT_NAME)
-        //                val subjectImage = data.getStringExtra(BOOK_TAG)
-        //
-        //                val newSubject = Subject(
-        //                    CurrentUser.userDetails!!.grade, subjectName, subjectImage
-        //                )
-        //
-        //                subjectsListViewModel.addList(newSubject) ///////////////////////////////////////// insertFlower
-        //            }
-        //        }
-        //    }
 
         // 화면 아래 하단에 위치한 네비게이션 바 함수
         private fun setNavListeners() {
