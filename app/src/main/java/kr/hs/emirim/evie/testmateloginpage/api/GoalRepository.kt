@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalPatchRequest
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalRequest
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalResponse
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
@@ -62,6 +63,23 @@ class GoalRepository(resources: Resources, context: Context) {
             override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
                 callback(false)
                 println("Failed to get notes. Error message: ${t.message}")
+            }
+        })
+    }
+
+    fun patchGoal(goal: GoalPatchRequest, callback: (Boolean, GoalResponse) -> Unit) {
+        val call = goalListService.patchGoal(goal)
+        call.enqueue(object : Callback<GoalResponse> {
+            override fun onResponse(call: Call<GoalResponse>, response: Response<GoalResponse>) {
+                if (response.isSuccessful) {
+                    response.body()?.let { callback(true, it) }
+                } else {
+                    response.body()?.let { callback(false, it) }
+                }
+            }
+
+            override fun onFailure(call: Call<GoalResponse>, t: Throwable) {
+
             }
         })
     }

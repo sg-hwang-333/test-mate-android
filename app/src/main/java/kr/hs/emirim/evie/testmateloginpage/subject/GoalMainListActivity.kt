@@ -31,8 +31,6 @@ class GoalMainListActivity : AppCompatActivity() {
     private lateinit var navGoal: ImageButton
     private lateinit var navCal: ImageButton
     private lateinit var recyclerView: RecyclerView
-    private lateinit var gradeTagSpinner: Spinner
-    private var selectedGradeIndex: Int = 1
 
     private val subjectViewModel by viewModels<SubjectViewModel> {
         SubjectViewModelFactory(this)
@@ -47,11 +45,18 @@ class GoalMainListActivity : AppCompatActivity() {
         setContentView(R.layout.goal_main_page)
         supportActionBar?.hide()
 
+        navHome = findViewById(R.id.nav_home)
+        navWrong = findViewById(R.id.nav_wrong)
+        navGoal = findViewById(R.id.nav_goal)
+        navCal = findViewById(R.id.nav_cal)
+        recyclerView = findViewById(R.id.goalMainRecyclerView)
+
         // 학년 spiner api 연동
         spinner = SpinnerUtil.gradeSpinner(this, R.id.spinnerWrong)
-        spinner.setSelection(CurrentUser.selectGrade!! - 1)
+//        Log.d("GoalMainListActivity", CurrentUser.selectGrade!!.toString())
+        spinner.setSelection((CurrentUser.selectGrade ?: 1) - 1)
         selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
-        var selectedItem = spinner.getItemAtPosition(selectedPosition!!).toString() // grade 문자열 (ex. 고등학교 2학년)
+//        var selectedItem = spinner.getItemAtPosition(selectedPosition!!).toString() // grade 문자열 (ex. 고등학교 2학년)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
@@ -65,7 +70,6 @@ class GoalMainListActivity : AppCompatActivity() {
             }
         }
 
-        initView()
         setupListeners()
 
         // 버튼 recyclerView
@@ -76,7 +80,7 @@ class GoalMainListActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) // 수직 레이아웃 방향 설정
         subjectRecyclerView.adapter = subjectAdapter
 
-        subjectViewModel.readSubjectList(CurrentUser.userDetails!!.grade.toInt()) // list 가져오기
+        subjectViewModel.readSubjectList(CurrentUser.userDetails?.grade?.toInt() ?: 1) // list 가져오기
         subjectViewModel.subjectListData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this
@@ -88,16 +92,6 @@ class GoalMainListActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun initView() {
-        // UI 요소 초기화
-        navHome = findViewById(R.id.nav_home)
-        navWrong = findViewById(R.id.nav_wrong)
-        navGoal = findViewById(R.id.nav_goal)
-        navCal = findViewById(R.id.nav_cal)
-        recyclerView = findViewById(R.id.goalMainRecyclerView)
-
     }
 
     private fun setupListeners() {

@@ -4,6 +4,13 @@ data class GoalResponse(
     val goalId: Int,
     val subjectId: Int,
     val semester: Int,
-    val goal: String,
+    var goal: String,
     val completed: Boolean
 )
+
+fun GoalResponse.toGoalPatchRequest(): GoalPatchRequest {
+    return GoalPatchRequest(
+        goal = this.goal,
+        completed = this.completed
+    )
+}

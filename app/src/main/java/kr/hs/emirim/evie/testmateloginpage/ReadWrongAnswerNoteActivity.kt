@@ -78,8 +78,8 @@ class ReadWrongAnswerNoteActivity : AppCompatActivity() {
         editBtn = findViewById(R.id.editBtn)
 
         before.setOnClickListener {
-            // Handle back button click
             finish()
+            overridePendingTransition(0, 0)
         }
 
 

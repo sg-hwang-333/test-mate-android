@@ -55,7 +55,8 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
         var beforeBtn = findViewById<ImageView>(R.id.before)
         beforeBtn.setOnClickListener{
-            onBackPressed();
+            finish()
+            overridePendingTransition(0, 0)
         }
 
         // spinner
