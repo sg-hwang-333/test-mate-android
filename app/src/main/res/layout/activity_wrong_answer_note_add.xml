@@ -131,13 +131,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="사진이나 이미지를 올려주세요"
+                            android:text="이미지를 업로드해주세요"
                             android:textStyle="bold"
                             android:textColor="@color/black.800"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="이미지를 여러장 등록할 수 있습니다."
+                            android:text="갤러리의 이미지를 업로드할 수 있습니다."
                             android:textColor="@color/black.300"
                             android:textSize="10sp"
                             android:layout_marginTop="5dp"/>
@@ -166,9 +166,10 @@
                         <ImageView
                             android:id="@+id/imageView"
                             android:src="@drawable/after"
-                            android:layout_gravity="left"
-                            android:layout_width="104dp"
-                            android:layout_height="104dp"/>
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scaleType="fitCenter"
+                            android:adjustViewBounds="true"/>
 
                         <Button
                             android:id="@+id/upload_img_btn_second_layout"
