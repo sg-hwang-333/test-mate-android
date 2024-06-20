@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kr.hs.emirim.evie.testmateloginpage.api.GoalRepository
+import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalPatchRequest
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalRequest
 
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
@@ -22,6 +23,16 @@ class GoalsListViewModel(val goalRepository: GoalRepository) : ViewModel() {
             if (isSuccess) {
                 // 성공적으로 목표가 추가되었을 때 목록을 다시 불러옴
                 readGoalList(goal.subjectId, goal.semester)
+            } else {
+                // 실패 시 처리 (예: 에러 메시지 표시)
+            }
+        }
+    }
+
+    fun updateGoal(goal: GoalPatchRequest) {
+        goalRepository.patchGoal(goal) { isSuccess, response ->
+            if (isSuccess) {
+                readGoalList(response.subjectId, response.semester)
             } else {
                 // 실패 시 처리 (예: 에러 메시지 표시)
             }

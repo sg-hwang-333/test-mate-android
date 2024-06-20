@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.Goal
+import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalPatchRequest
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalRequest
 import kr.hs.emirim.evie.testmateloginpage.goalList.data.GoalResponse
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
@@ -76,9 +77,11 @@ class GoalListActivity : AppCompatActivity() {
         bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(bottomSheetView)
 
-        val goalsAdapter = GoalsAdapter { goal -> adapterOnClick(goal) }
+        val goalsAdapter = GoalsAdapter({ goal -> adapterOnClick(goal) }, { updatedGoal -> updateGoal(updatedGoal) })
         val recyclerView: RecyclerView = findViewById(R.id.goalRecyclerView)
         recyclerView.adapter = goalsAdapter
+
+
 
         // TODO : must not be null 에러 고치기, 탭 바 설정
 //        var goalEditText : EditText = recyclerView.findViewById(R.id.goal_description)
@@ -146,6 +149,14 @@ class GoalListActivity : AppCompatActivity() {
 
     }
 
+    private fun updateGoal(updatedGoal: GoalPatchRequest) {
+        val goalPatchRequest = GoalPatchRequest(
+            goal = updatedGoal.goal,
+            completed = updatedGoal.completed
+        )
+        goalsListViewModel.updateGoal(goalPatchRequest)
+    }
+
     private fun adapterOnClick(goal: GoalResponse) {
         clickedGoal = goal
 
@@ -171,7 +182,7 @@ class GoalListActivity : AppCompatActivity() {
     private fun btnModifyOnClick() {
         val newGoal = GoalRequest(
             // 필요한 필드 값 설정
-            goal = "수정하기로 목표를 수정해보세요", // 예시 값
+            goal = "새 목표", // 예시 값
             subjectId = currentSubject.subjectId,
             semester = currentSemester,
             completed = false

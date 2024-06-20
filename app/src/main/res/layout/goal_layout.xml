@@ -25,12 +25,11 @@
             android:layout_centerVertical="true"
             android:textColor="#2C2C2C"
             android:background="@null"
-            android:hint="목표를 클릭해 수정, 삭제하세요!"
+            android:hint="새 목표"
             android:textSize="14dp"
             android:inputType="text"
             android:maxLines="1"
-            android:imeOptions="actionDone"
-            android:enabled="false"/>
+            android:imeOptions="actionDone"/>
 
 
         <androidx.appcompat.widget.AppCompatCheckBox
