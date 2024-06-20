@@ -29,8 +29,8 @@ class GoalsListViewModel(val goalRepository: GoalRepository) : ViewModel() {
         }
     }
 
-    fun updateGoal(goal: GoalPatchRequest) {
-        goalRepository.patchGoal(goal) { isSuccess, response ->
+    fun updateGoal(goalId : Int, goal: GoalPatchRequest) {
+        goalRepository.patchGoal(goalId, goal) { isSuccess, response ->
             if (isSuccess) {
                 readGoalList(response.subjectId, response.semester)
             } else {

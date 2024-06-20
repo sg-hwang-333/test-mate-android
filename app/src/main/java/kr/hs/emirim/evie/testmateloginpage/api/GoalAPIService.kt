@@ -19,7 +19,7 @@ interface GoalAPIService {
     fun postGoal(@Body goal : GoalRequest) : Call<MessageResponse>
 
     @PATCH("/api/goals/{goalId}")
-    fun patchGoal(@Body goal : GoalPatchRequest) : Call<GoalResponse>
+    fun patchGoal(@Path("goalId") goalId : Int, @Body goal : GoalPatchRequest) : Call<GoalResponse>
 
     @DELETE("/goal/delete")
     fun requestGoalDelete(@Body goalListData : Map<String, Long>) : Call<GoalResponse>

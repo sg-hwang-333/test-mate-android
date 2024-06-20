@@ -25,7 +25,7 @@
             android:layout_centerVertical="true"
             android:textColor="#2C2C2C"
             android:background="@null"
-            android:hint="새 목표"
+            android:hint="목표를 수정해보세요"
             android:textSize="14dp"
             android:inputType="text"
             android:maxLines="1"
