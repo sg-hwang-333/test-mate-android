@@ -84,43 +84,22 @@ class GoalRepository(resources: Resources, context: Context) {
         })
     }
 
+    fun deleteGoal(goalId: Int, callback: (Boolean) -> Unit) {
+        val call = goalListService.deleteGoal(goalId)
+        call.enqueue(object : Callback<MessageResponse> {
+            override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
+                if (response.isSuccessful) {
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            }
 
-//    fun removeGoal(goal: Goal) {
-//        val requestBody = mapOf("id" to goal.id) // RemoveRequestBody는 삭제 요청 바디를 나타내는 데이터 클래스입니다.
-//        val call = goalListService.requestGoalDelete(requestBody) // requestRemoveGoal 함수는 API 호출을 나타내며, API 서비스 인터페이스에 정의되어 있어야 합니다.
-//
-//        // API 호출 실행
-//        call.enqueue(object : Callback<GoalListResponse> {
-//            override fun onResponse(call: Call<GoalListResponse>, response: Response<GoalListResponse>) {
-//                val code = response.code()
-//                if(code == 200) {
-//                    // 성공적으로 삭제된 경우
-//                    val apiResponse = response.body()
-////                    if (apiResponse != null && apiResponse.success) {
-////                        // API 응답에서 성공 여부 확인
-////                        // 처리 코드 추가
-////                    } else {
-////                        // 처리 실패
-////                    }
-//                } else {
-//                    Log.d("mytag", "fail at API")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<GoalListResponse>, t: Throwable) {
-//                Log.d("mytag", "fail " + t.message)
-//            }
-//        })
-//    }
-
-    /* Returns flower given an ID. */
-//    fun getGoalForId(id: Long): Goal? {  // 특정 ID에 해당하는 목표 데이터를 가져올
-//        val goals = goalListData.value
-//        if (goals != null) {
-//            return goals.firstOrNull { goal -> goal.goalId == id }
-//        }
-//        return null
-//    }
+            override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                callback(false)
+            }
+        })
+    }
 
 
 

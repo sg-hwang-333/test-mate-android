@@ -38,7 +38,6 @@ class GoalListActivity : AppCompatActivity() {
 
     private lateinit var textViewTitle : TextView
     private lateinit var goalGrade : TextView
-    lateinit var goalEditBtn : android.widget.Button
     lateinit var goalDeleteBtn : android.widget.Button
 
     private lateinit var btnAddGoal : android.widget.Button
@@ -87,22 +86,6 @@ class GoalListActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.goalRecyclerView)
         recyclerView.adapter = goalsAdapter
 
-
-
-        // TODO : must not be null 에러 고치기, 탭 바 설정
-//        var goalEditText : EditText = recyclerView.findViewById(R.id.goal_description)
-//        var goalChecked : AppCompatCheckBox = recyclerView.findViewById(R.id.goal_checked)
-
-
-
-//        goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
-//        goalEditBtn.setOnClickListener {
-//            goalDescription.isFocusable = true
-//            goalDescription.isFocusableInTouchMode = true
-//            goalDescription.requestFocus()
-//        }
-
-        goalEditBtn = bottomSheetView.findViewById<Button>(R.id.bsv_edit_btn)
         goalDeleteBtn = bottomSheetView.findViewById<Button>(R.id.bsv_delete_btn)
 
         goalsListViewModel.readGoalList(currentSubject.subjectId, currentSemester)
@@ -115,8 +98,7 @@ class GoalListActivity : AppCompatActivity() {
             }
         }
 
-//        val list = mutableListOf<Goal>()
-
+        // 목표 추가 버튼
         val modifyButton: Button = findViewById(R.id.buttonModify)
         modifyButton.setOnClickListener {
             btnModifyOnClick()
@@ -124,7 +106,6 @@ class GoalListActivity : AppCompatActivity() {
 
         val listView = findViewById<RecyclerView>(R.id.goalRecyclerView)
         listView.setHasFixedSize(true)
-//        listView.layoutManager =
 
         // navgation
         var navHome : ImageButton = findViewById(R.id.nav_home)
@@ -155,27 +136,13 @@ class GoalListActivity : AppCompatActivity() {
 
     }
 
-    private fun observeGoalsLiveData() {
-        goalsListViewModel.goalsLiveData.observe(this) { goals ->
-            goals?.let {
-                goalsAdapter.submitList(it as MutableList<GoalResponse>)
-            }
-        }
-    }
-
     private fun updateGoal(goalId : Int, updatedGoal: GoalPatchRequest) {
         val goalPatchRequest = GoalPatchRequest(
             goal = updatedGoal.goal,
             completed = updatedGoal.completed
         )
 
-        // 코루틴을 이용하여 비동기적으로 처리
-        GlobalScope.launch(Dispatchers.Main) {
-            // 비동기로 업데이트 실행
-            goalsListViewModel.updateGoal(goalId, goalPatchRequest)
-            goalsListViewModel.readGoalList(currentSubject.subjectId, currentSemester)
-
-        }
+        goalsListViewModel.updateGoal(goalId, goalPatchRequest)
     }
 
     private fun adapterOnClick(goal: GoalResponse) {
@@ -184,18 +151,19 @@ class GoalListActivity : AppCompatActivity() {
 //        val goalDescription = findViewById<EditText>(R.id.goal_description)
 
         // TODO : goal(현재 클릭된)에 focus가도록
-        if(goal.goal != null)bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText(goal.goal.toString())
+        if(goal.goal != "")bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText(goal.goal.toString())
         else bottomSheetView.findViewById<TextView>(R.id.bsv_title).setText("목표를 수정하세요")
 
         bottomSheetDialog.show()
 
-        goalEditBtn.setOnClickListener {
-            bottomSheetDialog.dismiss()
-        }
-
         goalDeleteBtn.setOnClickListener {
-//            goalsAdapter.removeGoal()
-//            goalsListViewModel.removeGoal(goal)
+            goalsListViewModel.removeGoal(goal.goalId) { isSuccess ->
+                if (isSuccess) {
+                    goalsListViewModel.readGoalList(currentSubject.subjectId, currentSemester)
+                } else {
+                }
+            }
+
             bottomSheetDialog.dismiss()
         }
     }
@@ -203,7 +171,7 @@ class GoalListActivity : AppCompatActivity() {
     private fun btnModifyOnClick() {
         val newGoal = GoalRequest(
             // 필요한 필드 값 설정
-            goal = "새 목표", // 예시 값
+            goal = "", // 예시 값
             subjectId = currentSubject.subjectId,
             semester = currentSemester,
             completed = false
