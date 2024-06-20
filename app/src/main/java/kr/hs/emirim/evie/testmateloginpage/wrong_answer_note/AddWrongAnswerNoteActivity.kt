@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -44,6 +45,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
     private lateinit var uploadImgBtnSecondLayout: Button
 
     private val PICK_IMAGE_REQUEST = 1
+    private var imageUri: Uri? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,6 +121,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         }
 
         uploadImgBtnSecondLayout.setOnClickListener {
+            openFileChooser()
         }
 
 // navgation
@@ -194,7 +197,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            val imageUri = data.data
+            imageUri = data.data
 
             try {
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)

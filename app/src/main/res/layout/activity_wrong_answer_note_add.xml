@@ -141,17 +141,18 @@
                             android:textColor="@color/black.300"
                             android:textSize="10sp"
                             android:layout_marginTop="5dp"/>
+
                         <android.widget.Button
                             android:id="@+id/upload_btn_first_layout"
-                            android:layout_gravity="center"
+                            style="?android:attr/borderlessButtonStyle"
                             android:layout_width="80dp"
                             android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/bg_green_view"
                             android:text="업로드"
                             android:textColor="@color/white"
-                            android:background="@drawable/bg_green_view"
-                            android:textSize="@dimen/R14"
-                            style="?android:attr/borderlessButtonStyle"
-                            android:layout_marginTop="20dp"/>
+                            android:textSize="@dimen/R14" />
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/image_layout"
